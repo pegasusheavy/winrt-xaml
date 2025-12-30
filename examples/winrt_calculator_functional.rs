@@ -172,11 +172,11 @@ fn main() -> Result<()> {
     // Display with modern styling
     let display = Arc::new(XamlTextBox::new()?);
     display.set_text("0")?;
-    display.set_size(350.0, 70.0)?;
+    display.set_size(350.0, 80.0)?; // Increased height for padding
     display.set_background(0xFF2D2D2D)?; // Darker gray
     display.set_foreground(0xFF00D4AA)?; // Cyan for display
     display.set_corner_radius(8.0)?;
-    display.set_padding(15.0, 12.0, 15.0, 12.0)?;
+    display.set_padding(15.0, 10.0, 15.0, 10.0)?; // Adjusted padding
     main_panel.add_child(&display.as_uielement())?;
 
     // Button rows
@@ -196,7 +196,7 @@ fn main() -> Result<()> {
             let button = XamlButton::new()?;
             button.set_content(label)?;
             button.set_size(80.0, 64.0)?;
-            
+
             // Style buttons based on type
             match label {
                 "÷" | "×" | "-" | "+" => {

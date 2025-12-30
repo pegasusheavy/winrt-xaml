@@ -121,11 +121,11 @@ fn main() -> Result<()> {
     // Message input with modern styling
     let message_input = Arc::new(XamlTextBox::new()?);
     message_input.set_placeholder("Type a message...")?;
-    message_input.set_size(450.0, 45.0)?;
+    message_input.set_size(450.0, 52.0)?; // Increased height for padding
     message_input.set_background(0xFF2D2D2D)?; // Slightly lighter gray
     message_input.set_foreground(0xFFFFFFFF)?; // White text
     message_input.set_corner_radius(8.0)?; // Rounded corners
-    message_input.set_padding(12.0, 10.0, 12.0, 10.0)?;
+    message_input.set_padding(12.0, 8.0, 12.0, 8.0)?; // Reduced vertical padding
     main_panel.add_child(&message_input.as_uielement())?;
 
     // Button row
