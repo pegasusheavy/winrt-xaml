@@ -187,8 +187,9 @@ fn main() -> Result<()> {
     xaml_source.set_content_element(&main_panel.as_uielement())?;
     println!("   ✅ UI hierarchy built\n");
 
-    // Size the island window
+    // Show and size the island window
     unsafe {
+        let _ = ShowWindow(island_hwnd, SW_SHOW);
         let mut rect = windows::Win32::Foundation::RECT::default();
         let _ = GetClientRect(host_hwnd, &mut rect);
         let _ = SetWindowPos(

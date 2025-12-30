@@ -74,11 +74,12 @@ fn main() -> Result<()> {
 
     xaml_source.set_content_element(&text.as_uielement())?;
 
-    // Size island
+    // Show and size island
     unsafe {
+        let _ = ShowWindow(island_hwnd, SW_SHOW);
         let mut rect = windows::Win32::Foundation::RECT::default();
         let _ = GetClientRect(host_hwnd, &mut rect);
-        let _ = SetWindowPos(island_hwnd, None, 0, 0,
+        let _ = SetWindowPos(island_hwnd, None, 0, 0, 
             rect.right - rect.left, rect.bottom - rect.top,
             SWP_NOZORDER | SWP_NOACTIVATE);
     }
