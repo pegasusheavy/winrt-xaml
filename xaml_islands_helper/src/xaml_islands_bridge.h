@@ -17,6 +17,11 @@ extern "C" {
 typedef void* XamlManagerHandle;
 typedef void* XamlSourceHandle;
 typedef void* XamlButtonHandle;
+typedef void* XamlTextBlockHandle;
+typedef void* XamlTextBoxHandle;
+typedef void* XamlStackPanelHandle;
+typedef void* XamlGridHandle;
+typedef void* XamlUIElementHandle;
 
 // Initialize the XAML framework for the current thread
 // Returns a handle that must be kept alive
@@ -72,6 +77,41 @@ XAML_ISLANDS_API int xaml_source_set_content(
 
 // Get last error message
 XAML_ISLANDS_API const wchar_t* xaml_get_last_error();
+
+// ===== TextBlock APIs =====
+XAML_ISLANDS_API XamlTextBlockHandle xaml_textblock_create();
+XAML_ISLANDS_API void xaml_textblock_destroy(XamlTextBlockHandle textblock);
+XAML_ISLANDS_API int xaml_textblock_set_text(XamlTextBlockHandle textblock, const wchar_t* text);
+XAML_ISLANDS_API int xaml_textblock_set_font_size(XamlTextBlockHandle textblock, double size);
+
+// ===== TextBox APIs =====
+XAML_ISLANDS_API XamlTextBoxHandle xaml_textbox_create();
+XAML_ISLANDS_API void xaml_textbox_destroy(XamlTextBoxHandle textbox);
+XAML_ISLANDS_API int xaml_textbox_set_text(XamlTextBoxHandle textbox, const wchar_t* text);
+XAML_ISLANDS_API int xaml_textbox_set_placeholder(XamlTextBoxHandle textbox, const wchar_t* placeholder);
+XAML_ISLANDS_API int xaml_textbox_set_size(XamlTextBoxHandle textbox, double width, double height);
+
+// ===== StackPanel APIs =====
+XAML_ISLANDS_API XamlStackPanelHandle xaml_stackpanel_create();
+XAML_ISLANDS_API void xaml_stackpanel_destroy(XamlStackPanelHandle panel);
+XAML_ISLANDS_API int xaml_stackpanel_add_child(XamlStackPanelHandle panel, XamlUIElementHandle child);
+XAML_ISLANDS_API int xaml_stackpanel_set_orientation(XamlStackPanelHandle panel, int vertical);
+XAML_ISLANDS_API int xaml_stackpanel_set_spacing(XamlStackPanelHandle panel, double spacing);
+
+// ===== Grid APIs =====
+XAML_ISLANDS_API XamlGridHandle xaml_grid_create();
+XAML_ISLANDS_API void xaml_grid_destroy(XamlGridHandle grid);
+XAML_ISLANDS_API int xaml_grid_add_child(XamlGridHandle grid, XamlUIElementHandle child);
+
+// ===== Generic XAML Source Content APIs =====
+XAML_ISLANDS_API int xaml_source_set_content_generic(XamlSourceHandle source, XamlUIElementHandle element);
+
+// ===== Type Conversion APIs =====
+XAML_ISLANDS_API XamlUIElementHandle xaml_button_as_uielement(XamlButtonHandle button);
+XAML_ISLANDS_API XamlUIElementHandle xaml_textblock_as_uielement(XamlTextBlockHandle textblock);
+XAML_ISLANDS_API XamlUIElementHandle xaml_textbox_as_uielement(XamlTextBoxHandle textbox);
+XAML_ISLANDS_API XamlUIElementHandle xaml_stackpanel_as_uielement(XamlStackPanelHandle panel);
+XAML_ISLANDS_API XamlUIElementHandle xaml_grid_as_uielement(XamlGridHandle grid);
 
 #ifdef __cplusplus
 }

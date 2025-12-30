@@ -104,6 +104,18 @@ path = "examples/winrt_mvp.rs"
 
 [[example]]
 name = "pure_winrt_button"
+
+[[example]]
+name = "winrt_controls_demo"
+
+[[example]]
+name = "winrt_counter"
+
+[[example]]
+name = "winrt_simple_window"
+
+[[example]]
+name = "winrt_calculator"
 path = "examples/pure_winrt_button.rs"
 
 [[bin]]
