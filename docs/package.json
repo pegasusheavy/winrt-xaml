@@ -1,12 +1,16 @@
 {
-  "name": "docs",
-  "version": "0.0.0",
+  "name": "winrt-xaml-docs",
+  "version": "0.1.0",
+  "description": "Documentation website for WinRT-XAML library",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open",
     "build": "ng build",
+    "build:prod": "ng build --configuration production --base-href /winrt-xaml/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "npm run build:prod && npx gh-pages -d dist/docs/browser",
+    "predeploy": "npm run build:prod"
   },
   "prettier": {
     "printWidth": 100,

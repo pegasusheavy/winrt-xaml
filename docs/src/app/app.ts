@@ -7,6 +7,6 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('docs');
+export class AppComponent {
+  title = signal('WinRT-XAML');
 }

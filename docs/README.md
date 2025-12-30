@@ -1,59 +1,79 @@
-# Docs
+# WinRT-XAML Documentation Website
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+This is the official documentation website for the WinRT-XAML library, built with Angular.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Comprehensive Guide**: Complete overview of WinRT-XAML capabilities
+- **Quick Start**: Get up and running in minutes
+- **API Reference**: Detailed documentation for all controls
+- **Examples Gallery**: Browse all example applications
+- **Architecture Diagram**: Understand how WinRT-XAML works under the hood
+- **Responsive Design**: Works on desktop and mobile
 
-```bash
-ng serve
-```
+## Development
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Prerequisites
 
-## Code scaffolding
+- Node.js (v18 or later)
+- pnpm (recommended) or npm
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Install Dependencies
 
 ```bash
-ng generate --help
+cd docs
+pnpm install
 ```
 
-## Building
-
-To build the project run:
+### Run Development Server
 
 ```bash
-ng build
+pnpm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any source files.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Build for Production
 
 ```bash
-ng test
+pnpm run build
 ```
 
-## Running end-to-end tests
+Build artifacts will be stored in the `dist/` directory.
 
-For end-to-end (e2e) testing, run:
+### Deploy to GitHub Pages
 
 ```bash
-ng e2e
+pnpm run deploy
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+This builds the site and deploys it to the `gh-pages` branch.
 
-## Additional Resources
+## Structure
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
+docs/
+├── src/
+│   ├── app/
+│   │   ├── app.html       # Main template
+│   │   ├── app.css        # Styles
+│   │   └── app.ts         # Component logic
+│   ├── index.html         # Entry HTML
+│   └── styles.css         # Global styles
+├── public/
+│   └── favicon.ico        # Site icon
+└── package.json           # Dependencies & scripts
+```
+
+## Contributing
+
+To update the documentation:
+
+1. Edit files in `src/app/`
+2. Test locally with `pnpm start`
+3. Build and verify with `pnpm run build`
+4. Deploy with `pnpm run deploy`
+
+## License
+
+This documentation is part of the WinRT-XAML project and is licensed under MIT or Apache-2.0.
