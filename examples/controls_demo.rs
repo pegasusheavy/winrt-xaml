@@ -1,85 +1,206 @@
-//! Controls demonstration showing various UI controls.
+//! Controls demonstration showing various WinRT UI controls.
 
-use winrt_xaml::prelude::*;
+use winrt_xaml::error::Result;
+use winrt_xaml::xaml_native::*;
+use windows::core::w;
+use windows::Win32::Foundation::{HWND, LPARAM, LRESULT, WPARAM};
+use windows::Win32::UI::WindowsAndMessaging::*;
+use windows::Win32::System::LibraryLoader::GetModuleHandleW;
+use windows::Win32::System::Com::{CoInitializeEx, CoUninitialize, COINIT_APARTMENTTHREADED};
+use std::sync::Arc;
+use std::ptr;
+
+fn create_host_window() -> Result<HWND> {
+    unsafe {
+        let class_name = w!("WinRT_ControlsDemo");
+        let wc = WNDCLASSW {
+            style: CS_HREDRAW | CS_VREDRAW,
+            lpfnWndProc: Some(window_proc),
+            hInstance: GetModuleHandleW(None)?.into(),
+            lpszClassName: class_name,
+            hCursor: LoadCursorW(None, IDC_ARROW)?,
+            ..Default::default()
+        };
+        let _ = RegisterClassW(&wc);
+
+        CreateWindowExW(
+            WINDOW_EX_STYLE(0),
+            class_name,
+            w!("WinRT Controls Demo"),
+            WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+            CW_USEDEFAULT, CW_USEDEFAULT, 600, 700,
+            None, None,
+            GetModuleHandleW(None)?,
+            Some(ptr::null()),
+        ).map_err(|e| winrt_xaml::error::Error::window_creation(format!("{:?}", e)))
+    }
+}
+
+unsafe extern "system" fn window_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+    match msg {
+        WM_SIZE => {
+            if let Ok(child) = GetWindow(hwnd, GW_CHILD) {
+                if !child.0.is_null() {
+                    let width = (lparam.0 & 0xFFFF) as i32;
+                    let height = ((lparam.0 >> 16) & 0xFFFF) as i32;
+                    let _ = SetWindowPos(child, None, 0, 0, width, height, SWP_NOZORDER | SWP_NOACTIVATE);
+                }
+            }
+            LRESULT(0)
+        }
+        WM_DESTROY => {
+            PostQuitMessage(0);
+            LRESULT(0)
+        }
+        _ => DefWindowProcW(hwnd, msg, wparam, lparam),
+    }
+}
 
 fn main() -> Result<()> {
-    env_logger::init();
+    println!("╔═══════════════════════════════════════════════╗");
+    println!("║          WinRT Controls Demo                ║");
+    println!("╚═══════════════════════════════════════════════╝\n");
 
     println!("Creating controls demo...");
 
-    let app = Application::new()?;
+    // Initialize COM
+    unsafe { CoInitializeEx(None, COINIT_APARTMENTTHREADED).ok(); }
 
-    let window = Window::builder()
-        .title("Controls Demo")
-        .size(600, 500)
-        .build()?;
+    // Initialize XAML framework
+    let _manager = XamlManager::new()?;
+
+    // Create host window
+    let host_hwnd = create_host_window()?;
+
+    // Create XAML source
+    let mut xaml_source = XamlSource::new()?;
+    let island_hwnd = xaml_source.attach_to_window(host_hwnd)?;
+
+    // Create main layout panel
+    let main_panel = XamlStackPanel::new()?;
+    main_panel.set_vertical(true)?;
+    main_panel.set_spacing(15.0)?;
 
     // Title
-    let title = TextBlock::new()?
-        .with_text("UI Controls Demonstration")?;
-    title.set_position(150, 20);
-    title.set_size(300, 30);
+    let title = XamlTextBlock::new()?;
+    title.set_text("UI Controls Demonstration")?;
+    title.set_font_size(28.0)?;
+    main_panel.add_child(&title.as_uielement())?;
 
-    // Button
-    let button = Button::new()?
-        .with_content("Click Button")?;
-    button.set_position(50, 70);
-    button.set_size(150, 35);
-    button.click().subscribe(|_| {
+    // Description
+    let desc = XamlTextBlock::new()?;
+    desc.set_text("Showcasing available WinRT XAML controls:")?;
+    desc.set_font_size(14.0)?;
+    main_panel.add_child(&desc.as_uielement())?;
+
+    // Button demo
+    let button_label = XamlTextBlock::new()?;
+    button_label.set_text("Button Control:")?;
+    button_label.set_font_size(16.0)?;
+    main_panel.add_child(&button_label.as_uielement())?;
+
+    let button = XamlButton::new()?;
+    button.set_content("Click Me!")?;
+    button.set_size(200.0, 40.0)?;
+
+    let status = Arc::new(XamlTextBlock::new()?);
+    status.set_text("Not clicked yet")?;
+    status.set_font_size(12.0)?;
+
+    let status_clone = Arc::clone(&status);
+    button.on_click(move || {
+        let _ = status_clone.set_text("Button clicked! ✓");
         println!("Button clicked!");
-    });
+    })?;
 
-    // TextBox
-    let textbox = TextBox::new()?;
-    textbox.set_position(50, 120);
-    textbox.set_size(200, 30);
-    textbox.set_placeholder("Enter text here...");
+    main_panel.add_child(&button.as_uielement())?;
+    main_panel.add_child(&status.as_uielement())?;
 
-    // CheckBox
-    let checkbox = CheckBox::new()?
-        .with_content("Enable feature")?;
-    checkbox.set_position(50, 170);
-    checkbox.set_size(150, 30);
-    checkbox.checked().subscribe(|args| {
-        println!("Checkbox checked: {}", args.is_checked);
-    });
+    // TextBox demo
+    let textbox_label = XamlTextBlock::new()?;
+    textbox_label.set_text("TextBox Control:")?;
+    textbox_label.set_font_size(16.0)?;
+    main_panel.add_child(&textbox_label.as_uielement())?;
 
-    // Slider
-    let slider = Slider::new()?
-        .with_minimum(0.0)
-        .with_maximum(100.0)
-        .with_value(50.0);
-    slider.value_changed().subscribe(|args| {
-        println!("Slider value: {}", args.new_value);
-    });
+    let textbox = XamlTextBox::new()?;
+    textbox.set_placeholder("Enter text here...")?;
+    textbox.set_size(300.0, 32.0)?;
+    main_panel.add_child(&textbox.as_uielement())?;
 
-    // ProgressBar
-    let progress = ProgressBar::new()?
-        .with_value(65.0);
+    // TextBlock demo
+    let textblock_label = XamlTextBlock::new()?;
+    textblock_label.set_text("TextBlock Control (various sizes):")?;
+    textblock_label.set_font_size(16.0)?;
+    main_panel.add_child(&textblock_label.as_uielement())?;
 
-    // ComboBox
-    let combo = ComboBox::new()?;
-    combo.add_item("Option 1")?;
-    combo.add_item("Option 2")?;
-    combo.add_item("Option 3")?;
-    combo.set_selected_index(0);
+    let small_text = XamlTextBlock::new()?;
+    small_text.set_text("Small text (12pt)")?;
+    small_text.set_font_size(12.0)?;
+    main_panel.add_child(&small_text.as_uielement())?;
 
-    // ToggleSwitch
-    let toggle = ToggleSwitch::new()?
-        .with_header("Toggle Setting");
-    // Note: set_position and set_size not available for ToggleSwitch yet
+    let medium_text = XamlTextBlock::new()?;
+    medium_text.set_text("Medium text (16pt)")?;
+    medium_text.set_font_size(16.0)?;
+    main_panel.add_child(&medium_text.as_uielement())?;
 
-    // Status label
-    let status = TextBlock::new()?
-        .with_text("All controls initialized!")?;
-    status.set_position(50, 430);
-    status.set_size(500, 30);
+    let large_text = XamlTextBlock::new()?;
+    large_text.set_text("Large text (24pt)")?;
+    large_text.set_font_size(24.0)?;
+    main_panel.add_child(&large_text.as_uielement())?;
 
-    window.set_content(button)?;
+    // Layout demo
+    let layout_label = XamlTextBlock::new()?;
+    layout_label.set_text("StackPanel Layout (horizontal):")?;
+    layout_label.set_font_size(16.0)?;
+    main_panel.add_child(&layout_label.as_uielement())?;
 
-    // Show the window
-    window.show()?;
+    let h_panel = XamlStackPanel::new()?;
+    h_panel.set_vertical(false)?;
+    h_panel.set_spacing(10.0)?;
 
-    println!("Starting application...");
-    app.run()
+    for i in 1..=3 {
+        let btn = XamlButton::new()?;
+        btn.set_content(&format!("Btn {}", i))?;
+        btn.set_size(80.0, 40.0)?;
+        let idx = i;
+        btn.on_click(move || println!("Button {} clicked", idx))?;
+        h_panel.add_child(&btn.as_uielement())?;
+    }
+
+    main_panel.add_child(&h_panel.as_uielement())?;
+
+    // Set content
+    xaml_source.set_content_element(&main_panel.as_uielement())?;
+
+    // Show and size the island
+    unsafe {
+        use windows::Win32::UI::WindowsAndMessaging::*;
+        use windows::Win32::Foundation::RECT;
+        
+        let _ = ShowWindow(island_hwnd, SW_SHOW);
+        let mut rect = RECT::default();
+        let _ = GetClientRect(host_hwnd, &mut rect);
+        let _ = SetWindowPos(island_hwnd, None, 0, 0,
+            rect.right - rect.left, rect.bottom - rect.top,
+            SWP_NOZORDER | SWP_NOACTIVATE);
+    }
+
+    println!("✅ Controls demo started!");
+    println!("📊 Showcasing:");
+    println!("   • XamlButton with click events");
+    println!("   • XamlTextBox with placeholder");
+    println!("   • XamlTextBlock with various sizes");
+    println!("   • XamlStackPanel layouts (vertical & horizontal)\n");
+
+    // Run message loop
+    unsafe {
+        let mut msg = MSG::default();
+        while GetMessageW(&mut msg, None, 0, 0).as_bool() {
+            let _ = TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+        }
+        CoUninitialize();
+    }
+
+    Ok(())
 }

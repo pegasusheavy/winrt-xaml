@@ -1,146 +1,80 @@
-//! Calculator example demonstrating button grid and state management.
+//! WinRT Functional Calculator Example
+//!
+//! A working calculator with actual button functionality demonstrating:
+//! - Grid layout for button arrangement
+//! - TextBox for display
+//! - Click event handlers
+//! - State management across button clicks
 
-use winrt_xaml::prelude::*;
-use std::sync::Arc;
-use parking_lot::RwLock;
+use winrt_xaml::error::Result;
+use winrt_xaml::xaml_native::*;
+use windows::core::w;
+use windows::Win32::Foundation::{HWND, LPARAM, LRESULT, WPARAM};
+use windows::Win32::UI::WindowsAndMessaging::*;
+use windows::Win32::System::LibraryLoader::GetModuleHandleW;
+use windows::Win32::System::Com::{CoInitializeEx, CoUninitialize, COINIT_APARTMENTTHREADED};
+use std::ptr;
+use std::sync::{Arc, Mutex};
 
-fn main() -> Result<()> {
-    env_logger::init();
+fn create_host_window() -> Result<HWND> {
+    unsafe {
+        let class_name = w!("WinRT_Calculator_Functional");
+        let wc = WNDCLASSW {
+            style: CS_HREDRAW | CS_VREDRAW,
+            lpfnWndProc: Some(window_proc),
+            hInstance: GetModuleHandleW(None)?.into(),
+            lpszClassName: class_name,
+            hCursor: LoadCursorW(None, IDC_ARROW)?,
+            ..Default::default()
+        };
+        let _ = RegisterClassW(&wc);
 
-    println!("Creating calculator...");
-
-    let app = Application::new()?;
-
-    let window = Window::builder()
-        .title("Calculator")
-        .size(350, 500)
-        .build()?;
-
-    // Calculator state
-    let calc_state = Arc::new(RwLock::new(CalculatorState::new()));
-
-    // Display
-    let display = TextBlock::new()?
-        .with_text("0")?;
-    display.set_position(20, 20);
-    display.set_size(310, 50);
-
-    // Number buttons (0-9)
-    let button_positions = [
-        (20, 350, "0"), (20, 290, "1"), (90, 290, "2"), (160, 290, "3"),
-        (20, 230, "4"), (90, 230, "5"), (160, 230, "6"),
-        (20, 170, "7"), (90, 170, "8"), (160, 170, "9"),
-    ];
-
-    for (x, y, label) in button_positions {
-        let button = Button::new()?
-            .with_content(label)?;
-        button.set_position(x, y);
-        button.set_size(60, 50);
-
-        let state_clone = calc_state.clone();
-        let display_clone = display.clone();
-        let digit = label.to_string();
-
-        button.click().subscribe(move |_| {
-            let mut state = state_clone.write();
-            state.append_digit(&digit);
-            let _ = display_clone.set_text(&state.display);
-            println!("Digit: {}", digit);
-        });
+        CreateWindowExW(
+            WINDOW_EX_STYLE(0),
+            class_name,
+            w!("WinRT Calculator (Functional)"),
+            WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+            CW_USEDEFAULT, CW_USEDEFAULT, 400, 650,
+            None, None,
+            GetModuleHandleW(None)?,
+            Some(ptr::null()),
+        ).map_err(|e| winrt_xaml::error::Error::window_creation(format!("{:?}", e)))
     }
-
-    // Operation buttons
-    let ops = [
-        (230, 170, "+"), (230, 230, "-"),
-        (230, 290, "×"), (230, 350, "÷"),
-    ];
-
-    for (x, y, op) in ops {
-        let button = Button::new()?
-            .with_content(op)?;
-        button.set_position(x, y);
-        button.set_size(60, 50);
-
-        let state_clone = calc_state.clone();
-        let display_clone = display.clone();
-        let operation = op.to_string();
-
-        button.click().subscribe(move |_| {
-            let mut state = state_clone.write();
-            state.set_operation(&operation);
-            let _ = display_clone.set_text(&state.display);
-            println!("Operation: {}", operation);
-        });
-    }
-
-    // Equals button
-    let equals = Button::new()?
-        .with_content("=")?;
-    equals.set_position(90, 350);
-    equals.set_size(130, 50);
-
-    let state_clone = calc_state.clone();
-    let display_clone = display.clone();
-    equals.click().subscribe(move |_| {
-        let mut state = state_clone.write();
-        state.calculate();
-        let _ = display_clone.set_text(&state.display);
-        println!("Result: {}", state.display);
-    });
-
-    // Clear button
-    let clear = Button::new()?
-        .with_content("C")?;
-    clear.set_position(20, 110);
-    clear.set_size(130, 50);
-
-    let state_clone = calc_state.clone();
-    let display_clone = display.clone();
-    clear.click().subscribe(move |_| {
-        let mut state = state_clone.write();
-        state.clear();
-        let _ = display_clone.set_text("0");
-        println!("Cleared");
-    });
-
-    // Decimal button
-    let decimal = Button::new()?
-        .with_content(".")?;
-    decimal.set_position(160, 350);
-    decimal.set_size(60, 50);
-
-    let state_clone = calc_state.clone();
-    let display_clone = display.clone();
-    decimal.click().subscribe(move |_| {
-        let mut state = state_clone.write();
-        state.append_decimal();
-        let _ = display_clone.set_text(&state.display);
-    });
-
-    window.set_content(equals)?;
-
-    // Show the window
-    window.show()?;
-
-    println!("Starting application...");
-    app.run()
 }
 
+unsafe extern "system" fn window_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+    match msg {
+        WM_SIZE => {
+            if let Ok(child) = GetWindow(hwnd, GW_CHILD) {
+                if !child.0.is_null() {
+                    let width = (lparam.0 & 0xFFFF) as i32;
+                    let height = ((lparam.0 >> 16) & 0xFFFF) as i32;
+                    let _ = SetWindowPos(child, None, 0, 0, width, height, SWP_NOZORDER | SWP_NOACTIVATE);
+                }
+            }
+            LRESULT(0)
+        }
+        WM_DESTROY => {
+            PostQuitMessage(0);
+            LRESULT(0)
+        }
+        _ => DefWindowProcW(hwnd, msg, wparam, lparam),
+    }
+}
+
+// Calculator state
 struct CalculatorState {
     display: String,
     current_value: f64,
-    stored_value: f64,
-    operation: Option<String>,
+    operation: Option<char>,
     new_number: bool,
 }
 
 impl CalculatorState {
     fn new() -> Self {
-        Self {
+        CalculatorState {
             display: "0".to_string(),
             current_value: 0.0,
-            stored_value: 0.0,
             operation: None,
             new_number: true,
         }
@@ -157,48 +91,190 @@ impl CalculatorState {
                 self.display.push_str(digit);
             }
         }
-        self.current_value = self.display.parse().unwrap_or(0.0);
     }
 
-    fn append_decimal(&mut self) {
-        if !self.display.contains('.') {
-            self.display.push('.');
+    fn set_operation(&mut self, op: char) {
+        if let Ok(val) = self.display.parse::<f64>() {
+            if let Some(current_op) = self.operation {
+                self.current_value = match current_op {
+                    '+' => self.current_value + val,
+                    '-' => self.current_value - val,
+                    '×' => self.current_value * val,
+                    '÷' => if val != 0.0 { self.current_value / val } else { 0.0 },
+                    _ => val,
+                };
+                self.display = self.current_value.to_string();
+            } else {
+                self.current_value = val;
+            }
         }
-    }
-
-    fn set_operation(&mut self, op: &str) {
-        self.stored_value = self.current_value;
-        self.operation = Some(op.to_string());
+        self.operation = Some(op);
         self.new_number = true;
     }
 
     fn calculate(&mut self) {
-        if let Some(op) = &self.operation {
-            let result = match op.as_str() {
-                "+" => self.stored_value + self.current_value,
-                "-" => self.stored_value - self.current_value,
-                "×" => self.stored_value * self.current_value,
-                "÷" => {
-                    if self.current_value != 0.0 {
-                        self.stored_value / self.current_value
-                    } else {
-                        0.0
-                    }
-                }
-                _ => self.current_value,
-            };
-            self.current_value = result;
-            self.display = format!("{}", result);
-            self.operation = None;
-            self.new_number = true;
+        if let Ok(val) = self.display.parse::<f64>() {
+            if let Some(op) = self.operation {
+                self.current_value = match op {
+                    '+' => self.current_value + val,
+                    '-' => self.current_value - val,
+                    '×' => self.current_value * val,
+                    '÷' => if val != 0.0 { self.current_value / val } else { 0.0 },
+                    _ => val,
+                };
+                self.display = self.current_value.to_string();
+                self.operation = None;
+                self.new_number = true;
+            }
         }
     }
 
     fn clear(&mut self) {
         self.display = "0".to_string();
         self.current_value = 0.0;
-        self.stored_value = 0.0;
         self.operation = None;
         self.new_number = true;
     }
 }
+
+fn main() -> Result<()> {
+    println!("\n╔═══════════════════════════════════════════════╗");
+    println!("║   WinRT Functional Calculator - WORKING!    ║");
+    println!("╚═══════════════════════════════════════════════╝\n");
+
+    unsafe { CoInitializeEx(None, COINIT_APARTMENTTHREADED).ok(); }
+
+    let _manager = XamlManager::new()?;
+    let host_hwnd = create_host_window()?;
+    let mut xaml_source = XamlSource::new()?;
+    let island_hwnd = xaml_source.attach_to_window(host_hwnd)?;
+
+    // Shared calculator state
+    let state = Arc::new(Mutex::new(CalculatorState::new()));
+
+    // Build calculator UI
+    let main_panel = XamlStackPanel::new()?;
+    main_panel.set_vertical(true)?;
+    main_panel.set_spacing(10.0)?;
+
+    // Title
+    let title = XamlTextBlock::new()?;
+    title.set_text("Functional Calculator")?;
+    title.set_font_size(24.0)?;
+    main_panel.add_child(&title.as_uielement())?;
+
+    // Display
+    let display = Arc::new(XamlTextBox::new()?);
+    display.set_text("0")?;
+    display.set_size(350.0, 60.0)?;
+    main_panel.add_child(&display.as_uielement())?;
+
+    // Button rows
+    let buttons = [
+        ["7", "8", "9", "÷"],
+        ["4", "5", "6", "×"],
+        ["1", "2", "3", "-"],
+        ["0", ".", "=", "+"],
+    ];
+
+    for row in &buttons {
+        let row_panel = XamlStackPanel::new()?;
+        row_panel.set_vertical(false)?;
+        row_panel.set_spacing(5.0)?;
+
+        for &label in row {
+            let button = XamlButton::new()?;
+            button.set_content(label)?;
+            button.set_size(80.0, 60.0)?;
+
+            // Clone Arc references for the closure
+            let state_clone = Arc::clone(&state);
+            let display_clone = Arc::clone(&display);
+            let label_str = label.to_string();
+
+            // Register click handler
+            button.on_click(move || {
+                let mut state = state_clone.lock().unwrap();
+
+                match label_str.as_str() {
+                    "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" => {
+                        state.append_digit(&label_str);
+                    }
+                    "." => {
+                        if !state.display.contains('.') {
+                            state.append_digit(".");
+                        }
+                    }
+                    "+" | "-" | "×" | "÷" => {
+                        state.set_operation(label_str.chars().next().unwrap());
+                    }
+                    "=" => {
+                        state.calculate();
+                    }
+                    _ => {}
+                }
+
+                // Update display
+                let _ = display_clone.set_text(&state.display);
+            })?;
+
+            row_panel.add_child(&button.as_uielement())?;
+        }
+
+        main_panel.add_child(&row_panel.as_uielement())?;
+    }
+
+    // Clear button
+    let clear_btn = XamlButton::new()?;
+    clear_btn.set_content("Clear (C)")?;
+    clear_btn.set_size(350.0, 50.0)?;
+
+    let state_clone = Arc::clone(&state);
+    let display_clone = Arc::clone(&display);
+    clear_btn.on_click(move || {
+        let mut state = state_clone.lock().unwrap();
+        state.clear();
+        let _ = display_clone.set_text(&state.display);
+    })?;
+
+    main_panel.add_child(&clear_btn.as_uielement())?;
+
+    // Info
+    let info = XamlTextBlock::new()?;
+    info.set_text("✨ Fully functional! Click the buttons!")?;
+    info.set_font_size(12.0)?;
+    main_panel.add_child(&info.as_uielement())?;
+
+    xaml_source.set_content_element(&main_panel.as_uielement())?;
+
+    // Show and size the island
+    unsafe {
+        let _ = ShowWindow(island_hwnd, SW_SHOW);
+        let mut rect = windows::Win32::Foundation::RECT::default();
+        let _ = GetClientRect(host_hwnd, &mut rect);
+        let _ = SetWindowPos(island_hwnd, None, 0, 0,
+            rect.right - rect.left, rect.bottom - rect.top,
+            SWP_NOZORDER | SWP_NOACTIVATE);
+    }
+
+    println!("✅ Functional calculator ready!");
+    println!("📊 Features:");
+    println!("   • Working button click handlers");
+    println!("   • Basic arithmetic operations");
+    println!("   • Real-time display updates");
+    println!("   • Fluent Design button styling");
+    println!("🎬 Try it out! Close window to exit\n");
+
+    // Message loop
+    unsafe {
+        let mut msg = MSG::default();
+        while GetMessageW(&mut msg, None, 0, 0).as_bool() {
+            let _ = TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+        }
+        CoUninitialize();
+    }
+
+    Ok(())
+}
+

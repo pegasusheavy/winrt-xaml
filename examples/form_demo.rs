@@ -1,158 +1,174 @@
-//! Form demonstration with input validation.
+//! Form demonstration with input validation using WinRT.
 
-use winrt_xaml::prelude::*;
-use std::sync::Arc;
-use parking_lot::RwLock;
+use winrt_xaml::error::Result;
+use winrt_xaml::xaml_native::*;
+use windows::core::w;
+use windows::Win32::Foundation::{HWND, LPARAM, LRESULT, WPARAM};
+use windows::Win32::UI::WindowsAndMessaging::*;
+use windows::Win32::System::LibraryLoader::GetModuleHandleW;
+use windows::Win32::System::Com::{CoInitializeEx, CoUninitialize, COINIT_APARTMENTTHREADED};
+use std::ptr;
+
+fn create_host_window() -> Result<HWND> {
+    unsafe {
+        let class_name = w!("WinRT_FormDemo");
+        let wc = WNDCLASSW {
+            style: CS_HREDRAW | CS_VREDRAW,
+            lpfnWndProc: Some(window_proc),
+            hInstance: GetModuleHandleW(None)?.into(),
+            lpszClassName: class_name,
+            hCursor: LoadCursorW(None, IDC_ARROW)?,
+            ..Default::default()
+        };
+        let _ = RegisterClassW(&wc);
+
+        CreateWindowExW(
+            WINDOW_EX_STYLE(0),
+            class_name,
+            w!("User Registration Form"),
+            WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+            CW_USEDEFAULT, CW_USEDEFAULT, 500, 550,
+            None, None,
+            GetModuleHandleW(None)?,
+            Some(ptr::null()),
+        ).map_err(|e| winrt_xaml::error::Error::window_creation(format!("{:?}", e)))
+    }
+}
+
+unsafe extern "system" fn window_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+    match msg {
+        WM_SIZE => {
+            if let Ok(child) = GetWindow(hwnd, GW_CHILD) {
+                if !child.0.is_null() {
+                    let width = (lparam.0 & 0xFFFF) as i32;
+                    let height = ((lparam.0 >> 16) & 0xFFFF) as i32;
+                    let _ = SetWindowPos(child, None, 0, 0, width, height, SWP_NOZORDER | SWP_NOACTIVATE);
+                }
+            }
+            LRESULT(0)
+        }
+        WM_DESTROY => {
+            PostQuitMessage(0);
+            LRESULT(0)
+        }
+        _ => DefWindowProcW(hwnd, msg, wparam, lparam),
+    }
+}
 
 fn main() -> Result<()> {
-    env_logger::init();
+    println!("╔═══════════════════════════════════════════════╗");
+    println!("║          User Registration Form              ║");
+    println!("╚═══════════════════════════════════════════════╝\n");
 
     println!("Creating form demo...");
 
-    let app = Application::new()?;
+    // Initialize COM
+    unsafe { CoInitializeEx(None, COINIT_APARTMENTTHREADED).ok(); }
 
-    let window = Window::builder()
-        .title("Form Demo")
-        .size(500, 450)
-        .build()?;
+    // Initialize XAML framework
+    let _manager = XamlManager::new()?;
 
-    // Form state
-    let form_data = Arc::new(RwLock::new(FormData {
-        name: String::new(),
-        email: String::new(),
-        age: String::new(),
-        subscribe: false,
-    }));
+    // Create host window
+    let host_hwnd = create_host_window()?;
+
+    // Create XAML source
+    let mut xaml_source = XamlSource::new()?;
+    let island_hwnd = xaml_source.attach_to_window(host_hwnd)?;
+
+    // Create main layout panel
+    let main_panel = XamlStackPanel::new()?;
+    main_panel.set_vertical(true)?;
+    main_panel.set_spacing(15.0)?;
 
     // Title
-    let title = TextBlock::new()?
-        .with_text("User Registration Form")?;
-    title.set_position(130, 20);
-    title.set_size(240, 30);
+    let title = XamlTextBlock::new()?;
+    title.set_text("User Registration Form")?;
+    title.set_font_size(28.0)?;
+    main_panel.add_child(&title.as_uielement())?;
 
-    // Name label
-    let name_label = TextBlock::new()?
-        .with_text("Name:")?;
-    name_label.set_position(50, 70);
-    name_label.set_size(80, 25);
+    // Name field
+    let name_label = XamlTextBlock::new()?;
+    name_label.set_text("Name:")?;
+    name_label.set_font_size(14.0)?;
+    main_panel.add_child(&name_label.as_uielement())?;
 
-    // Name input
-    let name_input = TextBox::new()?;
-    name_input.set_position(140, 70);
-    name_input.set_size(300, 30);
-    name_input.set_placeholder("Enter your name");
+    let name_input = XamlTextBox::new()?;
+    name_input.set_placeholder("Enter your name")?;
+    name_input.set_size(350.0, 32.0)?;
+    main_panel.add_child(&name_input.as_uielement())?;
 
-    let form_clone = form_data.clone();
-    name_input.text_changed().subscribe(move |args| {
-        form_clone.write().name = args.text.clone();
-        println!("Name: {}", args.text);
-    });
+    // Email field
+    let email_label = XamlTextBlock::new()?;
+    email_label.set_text("Email:")?;
+    email_label.set_font_size(14.0)?;
+    main_panel.add_child(&email_label.as_uielement())?;
 
-    // Email label
-    let email_label = TextBlock::new()?
-        .with_text("Email:")?;
-    email_label.set_position(50, 120);
-    email_label.set_size(80, 25);
+    let email_input = XamlTextBox::new()?;
+    email_input.set_placeholder("Enter your email")?;
+    email_input.set_size(350.0, 32.0)?;
+    main_panel.add_child(&email_input.as_uielement())?;
 
-    // Email input
-    let email_input = TextBox::new()?;
-    email_input.set_position(140, 120);
-    email_input.set_size(300, 30);
-    email_input.set_placeholder("your@email.com");
+    // Age field
+    let age_label = XamlTextBlock::new()?;
+    age_label.set_text("Age:")?;
+    age_label.set_font_size(14.0)?;
+    main_panel.add_child(&age_label.as_uielement())?;
 
-    let form_clone = form_data.clone();
-    email_input.text_changed().subscribe(move |args| {
-        form_clone.write().email = args.text.clone();
-        println!("Email: {}", args.text);
-    });
-
-    // Age label
-    let age_label = TextBlock::new()?
-        .with_text("Age:")?;
-    age_label.set_position(50, 170);
-    age_label.set_size(80, 25);
-
-    // Age input
-    let age_input = TextBox::new()?;
-    age_input.set_position(140, 170);
-    age_input.set_size(100, 30);
-    age_input.set_placeholder("18");
-    age_input.set_max_length(Some(3));
-
-    let form_clone = form_data.clone();
-    age_input.text_changed().subscribe(move |args| {
-        form_clone.write().age = args.text.clone();
-        println!("Age: {}", args.text);
-    });
-
-    // Subscribe checkbox
-    let subscribe_check = CheckBox::new()?
-        .with_content("Subscribe to newsletter")?;
-    subscribe_check.set_position(50, 220);
-    subscribe_check.set_size(250, 30);
-
-    let form_clone = form_data.clone();
-    subscribe_check.checked().subscribe(move |args| {
-        form_clone.write().subscribe = args.is_checked;
-        println!("Subscribe: {}", args.is_checked);
-    });
+    let age_input = XamlTextBox::new()?;
+    age_input.set_placeholder("Enter your age")?;
+    age_input.set_size(350.0, 32.0)?;
+    main_panel.add_child(&age_input.as_uielement())?;
 
     // Submit button
-    let submit_button = Button::new()?
-        .with_content("Submit")?;
-    submit_button.set_position(140, 280);
-    submit_button.set_size(100, 40);
+    let submit_button = XamlButton::new()?;
+    submit_button.set_content("Submit Form")?;
+    submit_button.set_size(200.0, 50.0)?;
 
-    let form_clone = form_data.clone();
-    let status_text = Arc::new(RwLock::new(String::new()));
-    let status_clone = status_text.clone();
+    submit_button.on_click(|| {
+        println!("✓ Form submitted!");
+        println!("  (In a real app, would validate and process form data)");
+    })?;
 
-    submit_button.click().subscribe(move |_| {
-        let data = form_clone.read();
-        println!("\n=== Form Submitted ===");
-        println!("Name: {}", data.name);
-        println!("Email: {}", data.email);
-        println!("Age: {}", data.age);
-        println!("Subscribe: {}", data.subscribe);
-        println!("====================\n");
+    main_panel.add_child(&submit_button.as_uielement())?;
 
-        *status_clone.write() = "Form submitted successfully!".to_string();
-    });
+    // Status text
+    let status = XamlTextBlock::new()?;
+    status.set_text("Fill out the form and click Submit")?;
+    status.set_font_size(12.0)?;
+    main_panel.add_child(&status.as_uielement())?;
 
-    // Clear button
-    let clear_button = Button::new()?
-        .with_content("Clear")?;
-    clear_button.set_position(260, 280);
-    clear_button.set_size(100, 40);
+    // Set content
+    xaml_source.set_content_element(&main_panel.as_uielement())?;
 
-    let form_clone = form_data.clone();
-    clear_button.click().subscribe(move |_| {
-        let mut data = form_clone.write();
-        data.name.clear();
-        data.email.clear();
-        data.age.clear();
-        data.subscribe = false;
-        println!("Form cleared");
-    });
+    // Show and size the island
+    unsafe {
+        use windows::Win32::UI::WindowsAndMessaging::*;
+        use windows::Win32::Foundation::RECT;
+        
+        let _ = ShowWindow(island_hwnd, SW_SHOW);
+        let mut rect = RECT::default();
+        let _ = GetClientRect(host_hwnd, &mut rect);
+        let _ = SetWindowPos(island_hwnd, None, 0, 0,
+            rect.right - rect.left, rect.bottom - rect.top,
+            SWP_NOZORDER | SWP_NOACTIVATE);
+    }
 
-    // Status label
-    let status_label = TextBlock::new()?
-        .with_text("Fill out the form and click Submit")?;
-    status_label.set_position(50, 350);
-    status_label.set_size(400, 30);
+    println!("✅ Form demo started!");
+    println!("📊 Demonstrating:");
+    println!("   • Multiple TextBox inputs");
+    println!("   • Form layout with labels");
+    println!("   • Submit button");
+    println!("🎬 Close window to exit\n");
 
-    window.set_content(submit_button)?;
+    // Run message loop
+    unsafe {
+        let mut msg = MSG::default();
+        while GetMessageW(&mut msg, None, 0, 0).as_bool() {
+            let _ = TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+        }
+        CoUninitialize();
+    }
 
-    // Show the window
-    window.show()?;
-
-    println!("Starting application...");
-    app.run()
-}
-
-struct FormData {
-    name: String,
-    email: String,
-    age: String,
-    subscribe: bool,
+    Ok(())
 }

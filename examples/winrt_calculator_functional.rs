@@ -195,7 +195,7 @@ fn main() -> Result<()> {
             // Register click handler
             button.on_click(move || {
                 let mut state = state_clone.lock().unwrap();
-                
+
                 match label_str.as_str() {
                     "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" => {
                         state.append_digit(&label_str);
@@ -228,7 +228,7 @@ fn main() -> Result<()> {
     let clear_btn = XamlButton::new()?;
     clear_btn.set_content("Clear (C)")?;
     clear_btn.set_size(350.0, 50.0)?;
-    
+
     let state_clone = Arc::clone(&state);
     let display_clone = Arc::clone(&display);
     clear_btn.on_click(move || {
@@ -236,7 +236,7 @@ fn main() -> Result<()> {
         state.clear();
         let _ = display_clone.set_text(&state.display);
     })?;
-    
+
     main_panel.add_child(&clear_btn.as_uielement())?;
 
     // Info
