@@ -169,6 +169,30 @@ impl TextBox {
         self.element.hwnd()
     }
 
+    /// Set the X position (fluent API).
+    pub fn with_x(self, x: i32) -> Self {
+        self.element.set_x(x);
+        self
+    }
+
+    /// Set the Y position (fluent API).
+    pub fn with_y(self, y: i32) -> Self {
+        self.element.set_y(y);
+        self
+    }
+
+    /// Set the width (fluent API).
+    pub fn with_width(self, width: i32) -> Self {
+        self.element.set_width(width);
+        self
+    }
+
+    /// Set the height (fluent API).
+    pub fn with_height(self, height: i32) -> Self {
+        self.element.set_height(height);
+        self
+    }
+
     /// Set the position of the text box.
     pub fn set_position(&self, x: i32, y: i32) -> Result<()> {
         self.element.set_x(x);
