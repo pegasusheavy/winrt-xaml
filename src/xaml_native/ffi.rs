@@ -79,6 +79,7 @@ extern "C" {
     pub fn xaml_textbox_create() -> XamlTextBoxHandle;
     pub fn xaml_textbox_destroy(textbox: XamlTextBoxHandle);
     pub fn xaml_textbox_set_text(textbox: XamlTextBoxHandle, text: *const u16) -> i32;
+    pub fn xaml_textbox_get_text(textbox: XamlTextBoxHandle, buffer: *mut u16, buffer_size: i32) -> i32;
     pub fn xaml_textbox_set_placeholder(textbox: XamlTextBoxHandle, placeholder: *const u16) -> i32;
     pub fn xaml_textbox_set_size(textbox: XamlTextBoxHandle, width: f64, height: f64) -> i32;
 
@@ -91,6 +92,29 @@ extern "C" {
     pub fn xaml_grid_create() -> XamlGridHandle;
     pub fn xaml_grid_destroy(grid: XamlGridHandle);
     pub fn xaml_grid_add_child(grid: XamlGridHandle, child: XamlUIElementHandle) -> i32;
+
+    // Styling APIs
+    pub fn xaml_button_set_background(button: XamlButtonHandle, color: u32) -> i32;
+    pub fn xaml_button_set_foreground(button: XamlButtonHandle, color: u32) -> i32;
+    pub fn xaml_button_set_corner_radius(button: XamlButtonHandle, radius: f64) -> i32;
+    pub fn xaml_button_set_padding(button: XamlButtonHandle, left: f64, top: f64, right: f64, bottom: f64) -> i32;
+
+    pub fn xaml_textblock_set_foreground(textblock: XamlTextBlockHandle, color: u32) -> i32;
+    pub fn xaml_textblock_set_font_weight(textblock: XamlTextBlockHandle, weight: i32) -> i32;
+    pub fn xaml_textblock_set_margin(textblock: XamlTextBlockHandle, left: f64, top: f64, right: f64, bottom: f64) -> i32;
+
+    pub fn xaml_textbox_set_background(textbox: XamlTextBoxHandle, color: u32) -> i32;
+    pub fn xaml_textbox_set_foreground(textbox: XamlTextBoxHandle, color: u32) -> i32;
+    pub fn xaml_textbox_set_corner_radius(textbox: XamlTextBoxHandle, radius: f64) -> i32;
+    pub fn xaml_textbox_set_padding(textbox: XamlTextBoxHandle, left: f64, top: f64, right: f64, bottom: f64) -> i32;
+
+    pub fn xaml_stackpanel_set_background(panel: XamlStackPanelHandle, color: u32) -> i32;
+    pub fn xaml_stackpanel_set_padding(panel: XamlStackPanelHandle, left: f64, top: f64, right: f64, bottom: f64) -> i32;
+    pub fn xaml_stackpanel_set_corner_radius(panel: XamlStackPanelHandle, radius: f64) -> i32;
+
+    pub fn xaml_grid_set_background(grid: XamlGridHandle, color: u32) -> i32;
+    pub fn xaml_grid_set_padding(grid: XamlGridHandle, left: f64, top: f64, right: f64, bottom: f64) -> i32;
+    pub fn xaml_grid_set_corner_radius(grid: XamlGridHandle, radius: f64) -> i32;
 
     pub fn xaml_button_as_uielement(button: XamlButtonHandle) -> XamlUIElementHandle;
     pub fn xaml_textblock_as_uielement(textblock: XamlTextBlockHandle) -> XamlUIElementHandle;

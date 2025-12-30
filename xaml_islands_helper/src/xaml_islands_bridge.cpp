@@ -201,18 +201,18 @@ int xaml_button_register_click(XamlButtonHandle button, void (*callback)(void* u
 
     try {
         auto* btn = reinterpret_cast<std::shared_ptr<Button>*>(button);
-        
+
         // Register the Click event handler
         // We explicitly specify event_token to help the compiler
         winrt::event_token token = (*btn)->Click([callback, user_data](IInspectable const& sender, RoutedEventArgs const& args) {
             // Call the C callback from Rust
             callback(user_data);
         });
-        
+
         // Note: In a production app, you'd want to store this token to unregister later
         // For now, the event will remain registered for the button's lifetime
         (void)token; // Suppress unused variable warning
-        
+
         return 0;
     }
     catch (const hresult_error& e) {
@@ -365,6 +365,38 @@ int xaml_textbox_set_text(XamlTextBoxHandle textbox, const wchar_t* text) {
     }
     catch (...) {
         set_last_error(L"Unknown error in xaml_textbox_set_text");
+        return -1;
+    }
+}
+
+// Get the text content from a TextBox
+int xaml_textbox_get_text(XamlTextBoxHandle textbox, wchar_t* buffer, int buffer_size) {
+    if (!textbox || !buffer || buffer_size <= 0) {
+        set_last_error(L"Invalid textbox, buffer, or buffer size");
+        return -1;
+    }
+
+    try {
+        auto* tb = reinterpret_cast<std::shared_ptr<TextBox>*>(textbox);
+        auto text = (*tb)->Text();
+
+        // Copy the text to the buffer
+        int len = static_cast<int>(text.size());
+        if (len >= buffer_size) {
+            len = buffer_size - 1; // Leave room for null terminator
+        }
+
+        wcsncpy_s(buffer, buffer_size, text.c_str(), len);
+        buffer[len] = L'\0';
+
+        return len; // Return the number of characters copied
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_textbox_get_text");
         return -1;
     }
 }
@@ -659,6 +691,387 @@ XamlUIElementHandle xaml_grid_as_uielement(XamlGridHandle grid) {
     catch (...) {
         set_last_error(L"Error converting grid to UIElement");
         return nullptr;
+    }
+}
+
+// ===== Styling Implementations =====
+#include <winrt/Windows.UI.h>
+#include <winrt/Windows.UI.Xaml.Media.h>
+
+using namespace Windows::UI;
+using namespace Windows::UI::Xaml::Media;
+
+// Helper to create a SolidColorBrush from ARGB
+SolidColorBrush create_solid_brush(unsigned int argb) {
+    byte a = (argb >> 24) & 0xFF;
+    byte r = (argb >> 16) & 0xFF;
+    byte g = (argb >> 8) & 0xFF;
+    byte b = argb & 0xFF;
+    Color color{ a, r, g, b };
+    return SolidColorBrush(color);
+}
+
+// Button styling
+int xaml_button_set_background(XamlButtonHandle button, unsigned int color) {
+    if (!button) {
+        set_last_error(L"Invalid button handle");
+        return -1;
+    }
+
+    try {
+        auto* btn = reinterpret_cast<std::shared_ptr<Button>*>(button);
+        (*btn)->Background(create_solid_brush(color));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_button_set_background");
+        return -1;
+    }
+}
+
+int xaml_button_set_foreground(XamlButtonHandle button, unsigned int color) {
+    if (!button) {
+        set_last_error(L"Invalid button handle");
+        return -1;
+    }
+
+    try {
+        auto* btn = reinterpret_cast<std::shared_ptr<Button>*>(button);
+        (*btn)->Foreground(create_solid_brush(color));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_button_set_foreground");
+        return -1;
+    }
+}
+
+int xaml_button_set_corner_radius(XamlButtonHandle button, double radius) {
+    if (!button) {
+        set_last_error(L"Invalid button handle");
+        return -1;
+    }
+
+    try {
+        auto* btn = reinterpret_cast<std::shared_ptr<Button>*>(button);
+        (*btn)->CornerRadius(CornerRadius{ radius, radius, radius, radius });
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_button_set_corner_radius");
+        return -1;
+    }
+}
+
+int xaml_button_set_padding(XamlButtonHandle button, double left, double top, double right, double bottom) {
+    if (!button) {
+        set_last_error(L"Invalid button handle");
+        return -1;
+    }
+
+    try {
+        auto* btn = reinterpret_cast<std::shared_ptr<Button>*>(button);
+        (*btn)->Padding(Thickness{ left, top, right, bottom });
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_button_set_padding");
+        return -1;
+    }
+}
+
+// TextBlock styling
+int xaml_textblock_set_foreground(XamlTextBlockHandle textblock, unsigned int color) {
+    if (!textblock) {
+        set_last_error(L"Invalid textblock handle");
+        return -1;
+    }
+
+    try {
+        auto* tb = reinterpret_cast<std::shared_ptr<TextBlock>*>(textblock);
+        (*tb)->Foreground(create_solid_brush(color));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_textblock_set_foreground");
+        return -1;
+    }
+}
+
+int xaml_textblock_set_font_weight(XamlTextBlockHandle textblock, int weight) {
+    if (!textblock) {
+        set_last_error(L"Invalid textblock handle");
+        return -1;
+    }
+
+    try {
+        auto* tb = reinterpret_cast<std::shared_ptr<TextBlock>*>(textblock);
+        Windows::UI::Text::FontWeight fw;
+        fw.Weight = static_cast<uint16_t>(weight);
+        (*tb)->FontWeight(fw);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_textblock_set_font_weight");
+        return -1;
+    }
+}
+
+int xaml_textblock_set_margin(XamlTextBlockHandle textblock, double left, double top, double right, double bottom) {
+    if (!textblock) {
+        set_last_error(L"Invalid textblock handle");
+        return -1;
+    }
+
+    try {
+        auto* tb = reinterpret_cast<std::shared_ptr<TextBlock>*>(textblock);
+        (*tb)->Margin(Thickness{ left, top, right, bottom });
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_textblock_set_margin");
+        return -1;
+    }
+}
+
+// TextBox styling
+int xaml_textbox_set_background(XamlTextBoxHandle textbox, unsigned int color) {
+    if (!textbox) {
+        set_last_error(L"Invalid textbox handle");
+        return -1;
+    }
+
+    try {
+        auto* tb = reinterpret_cast<std::shared_ptr<TextBox>*>(textbox);
+        (*tb)->Background(create_solid_brush(color));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_textbox_set_background");
+        return -1;
+    }
+}
+
+int xaml_textbox_set_foreground(XamlTextBoxHandle textbox, unsigned int color) {
+    if (!textbox) {
+        set_last_error(L"Invalid textbox handle");
+        return -1;
+    }
+
+    try {
+        auto* tb = reinterpret_cast<std::shared_ptr<TextBox>*>(textbox);
+        (*tb)->Foreground(create_solid_brush(color));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_textbox_set_foreground");
+        return -1;
+    }
+}
+
+int xaml_textbox_set_corner_radius(XamlTextBoxHandle textbox, double radius) {
+    if (!textbox) {
+        set_last_error(L"Invalid textbox handle");
+        return -1;
+    }
+
+    try {
+        auto* tb = reinterpret_cast<std::shared_ptr<TextBox>*>(textbox);
+        (*tb)->CornerRadius(CornerRadius{ radius, radius, radius, radius });
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_textbox_set_corner_radius");
+        return -1;
+    }
+}
+
+int xaml_textbox_set_padding(XamlTextBoxHandle textbox, double left, double top, double right, double bottom) {
+    if (!textbox) {
+        set_last_error(L"Invalid textbox handle");
+        return -1;
+    }
+
+    try {
+        auto* tb = reinterpret_cast<std::shared_ptr<TextBox>*>(textbox);
+        (*tb)->Padding(Thickness{ left, top, right, bottom });
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_textbox_set_padding");
+        return -1;
+    }
+}
+
+// StackPanel styling
+int xaml_stackpanel_set_background(XamlStackPanelHandle panel, unsigned int color) {
+    if (!panel) {
+        set_last_error(L"Invalid panel handle");
+        return -1;
+    }
+
+    try {
+        auto* sp = reinterpret_cast<std::shared_ptr<StackPanel>*>(panel);
+        (*sp)->Background(create_solid_brush(color));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_stackpanel_set_background");
+        return -1;
+    }
+}
+
+int xaml_stackpanel_set_padding(XamlStackPanelHandle panel, double left, double top, double right, double bottom) {
+    if (!panel) {
+        set_last_error(L"Invalid panel handle");
+        return -1;
+    }
+
+    try {
+        auto* sp = reinterpret_cast<std::shared_ptr<StackPanel>*>(panel);
+        (*sp)->Padding(Thickness{ left, top, right, bottom });
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_stackpanel_set_padding");
+        return -1;
+    }
+}
+
+int xaml_stackpanel_set_corner_radius(XamlStackPanelHandle panel, double radius) {
+    if (!panel) {
+        set_last_error(L"Invalid panel handle");
+        return -1;
+    }
+
+    try {
+        auto* sp = reinterpret_cast<std::shared_ptr<StackPanel>*>(panel);
+        (*sp)->CornerRadius(CornerRadius{ radius, radius, radius, radius });
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_stackpanel_set_corner_radius");
+        return -1;
+    }
+}
+
+// Grid styling
+int xaml_grid_set_background(XamlGridHandle grid, unsigned int color) {
+    if (!grid) {
+        set_last_error(L"Invalid grid handle");
+        return -1;
+    }
+
+    try {
+        auto* g = reinterpret_cast<std::shared_ptr<Grid>*>(grid);
+        (*g)->Background(create_solid_brush(color));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_grid_set_background");
+        return -1;
+    }
+}
+
+int xaml_grid_set_padding(XamlGridHandle grid, double left, double top, double right, double bottom) {
+    if (!grid) {
+        set_last_error(L"Invalid grid handle");
+        return -1;
+    }
+
+    try {
+        auto* g = reinterpret_cast<std::shared_ptr<Grid>*>(grid);
+        (*g)->Padding(Thickness{ left, top, right, bottom });
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_grid_set_padding");
+        return -1;
+    }
+}
+
+int xaml_grid_set_corner_radius(XamlGridHandle grid, double radius) {
+    if (!grid) {
+        set_last_error(L"Invalid grid handle");
+        return -1;
+    }
+
+    try {
+        auto* g = reinterpret_cast<std::shared_ptr<Grid>*>(grid);
+        (*g)->CornerRadius(CornerRadius{ radius, radius, radius, radius });
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_grid_set_corner_radius");
+        return -1;
     }
 }
 

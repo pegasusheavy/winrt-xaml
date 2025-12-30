@@ -96,6 +96,7 @@ XAML_ISLANDS_API int xaml_textblock_set_font_size(XamlTextBlockHandle textblock,
 XAML_ISLANDS_API XamlTextBoxHandle xaml_textbox_create();
 XAML_ISLANDS_API void xaml_textbox_destroy(XamlTextBoxHandle textbox);
 XAML_ISLANDS_API int xaml_textbox_set_text(XamlTextBoxHandle textbox, const wchar_t* text);
+XAML_ISLANDS_API int xaml_textbox_get_text(XamlTextBoxHandle textbox, wchar_t* buffer, int buffer_size);
 XAML_ISLANDS_API int xaml_textbox_set_placeholder(XamlTextBoxHandle textbox, const wchar_t* placeholder);
 XAML_ISLANDS_API int xaml_textbox_set_size(XamlTextBoxHandle textbox, double width, double height);
 
@@ -113,6 +114,30 @@ XAML_ISLANDS_API int xaml_grid_add_child(XamlGridHandle grid, XamlUIElementHandl
 
 // ===== Generic XAML Source Content APIs =====
 XAML_ISLANDS_API int xaml_source_set_content_generic(XamlSourceHandle source, XamlUIElementHandle element);
+
+// ===== Styling APIs =====
+// Color format: 0xAARRGGBB (e.g., 0xFF0078D4 for solid blue)
+XAML_ISLANDS_API int xaml_button_set_background(XamlButtonHandle button, unsigned int color);
+XAML_ISLANDS_API int xaml_button_set_foreground(XamlButtonHandle button, unsigned int color);
+XAML_ISLANDS_API int xaml_button_set_corner_radius(XamlButtonHandle button, double radius);
+XAML_ISLANDS_API int xaml_button_set_padding(XamlButtonHandle button, double left, double top, double right, double bottom);
+
+XAML_ISLANDS_API int xaml_textblock_set_foreground(XamlTextBlockHandle textblock, unsigned int color);
+XAML_ISLANDS_API int xaml_textblock_set_font_weight(XamlTextBlockHandle textblock, int weight); // 400=Normal, 600=SemiBold, 700=Bold
+XAML_ISLANDS_API int xaml_textblock_set_margin(XamlTextBlockHandle textblock, double left, double top, double right, double bottom);
+
+XAML_ISLANDS_API int xaml_textbox_set_background(XamlTextBoxHandle textbox, unsigned int color);
+XAML_ISLANDS_API int xaml_textbox_set_foreground(XamlTextBoxHandle textbox, unsigned int color);
+XAML_ISLANDS_API int xaml_textbox_set_corner_radius(XamlTextBoxHandle textbox, double radius);
+XAML_ISLANDS_API int xaml_textbox_set_padding(XamlTextBoxHandle textbox, double left, double top, double right, double bottom);
+
+XAML_ISLANDS_API int xaml_stackpanel_set_background(XamlStackPanelHandle panel, unsigned int color);
+XAML_ISLANDS_API int xaml_stackpanel_set_padding(XamlStackPanelHandle panel, double left, double top, double right, double bottom);
+XAML_ISLANDS_API int xaml_stackpanel_set_corner_radius(XamlStackPanelHandle panel, double radius);
+
+XAML_ISLANDS_API int xaml_grid_set_background(XamlGridHandle grid, unsigned int color);
+XAML_ISLANDS_API int xaml_grid_set_padding(XamlGridHandle grid, double left, double top, double right, double bottom);
+XAML_ISLANDS_API int xaml_grid_set_corner_radius(XamlGridHandle grid, double radius);
 
 // ===== Type Conversion APIs =====
 XAML_ISLANDS_API XamlUIElementHandle xaml_button_as_uielement(XamlButtonHandle button);

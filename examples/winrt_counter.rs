@@ -90,34 +90,55 @@ fn main() -> Result<()> {
     let mut xaml_source = XamlSource::new()?;
     let island_hwnd = xaml_source.attach_to_window(host_hwnd)?;
 
-    // Build UI
+    // Build UI with modern styling
     let panel = XamlStackPanel::new()?;
     panel.set_vertical(true)?;
-    panel.set_spacing(20.0)?;
+    panel.set_spacing(25.0)?;
+    panel.set_background(0xFF1A1A1A)?; // Very dark gray
+    panel.set_padding(40.0, 40.0, 40.0, 40.0)?;
+    panel.set_corner_radius(16.0)?;
 
     let title = XamlTextBlock::new()?;
-    title.set_text("Counter Application")?;
-    title.set_font_size(28.0)?;
+    title.set_text("⚡ Counter")?;
+    title.set_font_size(36.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White
+    title.set_margin(0.0, 0.0, 0.0, 15.0)?;
     panel.add_child(&title.as_uielement())?;
 
     let counter_display = XamlTextBlock::new()?;
     counter_display.set_text("Count: 0")?;
-    counter_display.set_font_size(48.0)?;
+    counter_display.set_font_size(56.0)?;
+    counter_display.set_font_weight(600)?; // SemiBold
+    counter_display.set_foreground(0xFF00D4FF)?; // Bright cyan
+    counter_display.set_margin(0.0, 20.0, 0.0, 30.0)?;
     panel.add_child(&counter_display.as_uielement())?;
 
     let increment_btn = XamlButton::new()?;
     increment_btn.set_content("➕ Increment")?;
-    increment_btn.set_size(200.0, 60.0)?;
+    increment_btn.set_size(220.0, 64.0)?;
+    increment_btn.set_background(0xFF107C10)?; // Green
+    increment_btn.set_foreground(0xFFFFFFFF)?;
+    increment_btn.set_corner_radius(10.0)?;
+    increment_btn.set_padding(16.0, 12.0, 16.0, 12.0)?;
     panel.add_child(&increment_btn.as_uielement())?;
 
     let decrement_btn = XamlButton::new()?;
     decrement_btn.set_content("➖ Decrement")?;
-    decrement_btn.set_size(200.0, 60.0)?;
+    decrement_btn.set_size(220.0, 64.0)?;
+    decrement_btn.set_background(0xFFE74856)?; // Red
+    decrement_btn.set_foreground(0xFFFFFFFF)?;
+    decrement_btn.set_corner_radius(10.0)?;
+    decrement_btn.set_padding(16.0, 12.0, 16.0, 12.0)?;
     panel.add_child(&decrement_btn.as_uielement())?;
 
     let reset_btn = XamlButton::new()?;
     reset_btn.set_content("🔄 Reset")?;
-    reset_btn.set_size(200.0, 60.0)?;
+    reset_btn.set_size(220.0, 64.0)?;
+    reset_btn.set_background(0xFF0078D4)?; // Blue
+    reset_btn.set_foreground(0xFFFFFFFF)?;
+    reset_btn.set_corner_radius(10.0)?;
+    reset_btn.set_padding(16.0, 12.0, 16.0, 12.0)?;
     panel.add_child(&reset_btn.as_uielement())?;
 
     xaml_source.set_content_element(&panel.as_uielement())?;

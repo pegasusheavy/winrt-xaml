@@ -134,7 +134,7 @@ fn main() -> Result<()> {
     unsafe {
         use windows::Win32::UI::WindowsAndMessaging::*;
         use windows::Win32::Foundation::RECT;
-        
+
         let _ = ShowWindow(island_hwnd, SW_SHOW);
         let mut rect = RECT::default();
         let _ = GetClientRect(host_hwnd, &mut rect);

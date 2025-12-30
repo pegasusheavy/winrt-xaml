@@ -79,21 +79,29 @@ fn main() -> Result<()> {
     // Message storage
     let messages = Arc::new(Mutex::new(Vec::<String>::new()));
 
-    // Create main layout panel
+    // Create main layout panel with modern styling
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(15.0)?;
+    main_panel.set_spacing(20.0)?;
+    main_panel.set_background(0xFF202020)?; // Dark gray background
+    main_panel.set_padding(30.0, 30.0, 30.0, 30.0)?;
+    main_panel.set_corner_radius(12.0)?; // Rounded corners
 
-    // Title
+    // Title with modern styling
     let title = XamlTextBlock::new()?;
-    title.set_text("Chat Room")?;
-    title.set_font_size(28.0)?;
+    title.set_text("💬 Chat Room")?;
+    title.set_font_size(32.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White text
+    title.set_margin(0.0, 0.0, 0.0, 10.0)?;
     main_panel.add_child(&title.as_uielement())?;
 
-    // Messages display
+    // Messages display with stylish container
     let messages_display = Arc::new(XamlTextBlock::new()?);
     messages_display.set_text("No messages yet\n\nType a message below and click Send!")?;
-    messages_display.set_font_size(14.0)?;
+    messages_display.set_font_size(15.0)?;
+    messages_display.set_foreground(0xFFE0E0E0)?; // Light gray text
+    messages_display.set_margin(0.0, 10.0, 0.0, 10.0)?;
     main_panel.add_child(&messages_display.as_uielement())?;
 
     // Spacer
@@ -101,56 +109,85 @@ fn main() -> Result<()> {
     spacer.set_text("")?;
     main_panel.add_child(&spacer.as_uielement())?;
 
-    // Message input label
+    // Message input label with modern styling
     let input_label = XamlTextBlock::new()?;
-    input_label.set_text("Your message:")?;
-    input_label.set_font_size(14.0)?;
+    input_label.set_text("📝 Your message:")?;
+    input_label.set_font_size(16.0)?;
+    input_label.set_font_weight(600)?; // SemiBold
+    input_label.set_foreground(0xFFFFFFFF)?; // White text
+    input_label.set_margin(0.0, 10.0, 0.0, 5.0)?;
     main_panel.add_child(&input_label.as_uielement())?;
 
-    // Message input
+    // Message input with modern styling
     let message_input = Arc::new(XamlTextBox::new()?);
     message_input.set_placeholder("Type a message...")?;
-    message_input.set_size(400.0, 40.0)?;
+    message_input.set_size(450.0, 45.0)?;
+    message_input.set_background(0xFF2D2D2D)?; // Slightly lighter gray
+    message_input.set_foreground(0xFFFFFFFF)?; // White text
+    message_input.set_corner_radius(8.0)?; // Rounded corners
+    message_input.set_padding(12.0, 10.0, 12.0, 10.0)?;
     main_panel.add_child(&message_input.as_uielement())?;
 
     // Button row
     let button_row = XamlStackPanel::new()?;
     button_row.set_vertical(false)?;
-    button_row.set_spacing(10.0)?;
+    button_row.set_spacing(15.0)?;
+    button_row.set_padding(0.0, 15.0, 0.0, 0.0)?;
 
-    // Send button
+    // Send button with vibrant blue styling
     let send_button = XamlButton::new()?;
-    send_button.set_content("Send")?;
-    send_button.set_size(150.0, 45.0)?;
+    send_button.set_content("📤 Send")?;
+    send_button.set_size(170.0, 48.0)?;
+    send_button.set_background(0xFF0078D4)?; // Microsoft blue
+    send_button.set_foreground(0xFFFFFFFF)?; // White text
+    send_button.set_corner_radius(8.0)?; // Rounded corners
+    send_button.set_padding(16.0, 12.0, 16.0, 12.0)?;
 
     let messages_clone = Arc::clone(&messages);
     let input_clone = Arc::clone(&message_input);
     let display_clone = Arc::clone(&messages_display);
     send_button.on_click(move || {
-        // Get current text (placeholder for actual text retrieval)
-        let mut msgs = messages_clone.lock().unwrap();
-        let msg_count = msgs.len() + 1;
-        let new_message = format!("You: Message #{}", msg_count);
-        msgs.push(new_message.clone());
+        // Get the actual text from the input field
+        match input_clone.get_text() {
+            Ok(text) => {
+                // Only send if there's actual text
+                let trimmed = text.trim();
+                if !trimmed.is_empty() {
+                    let mut msgs = messages_clone.lock().unwrap();
+                    let new_message = format!("You: {}", trimmed);
+                    msgs.push(new_message.clone());
 
-        // Show last 8 messages
-        let recent: Vec<_> = msgs.iter().rev().take(8).rev().cloned().collect();
-        let display_text = if recent.is_empty() {
-            "No messages yet".to_string()
-        } else {
-            recent.join("\n")
-        };
-        let _ = display_clone.set_text(&display_text);
+                    // Show last 8 messages
+                    let recent: Vec<_> = msgs.iter().rev().take(8).rev().cloned().collect();
+                    let display_text = if recent.is_empty() {
+                        "No messages yet".to_string()
+                    } else {
+                        recent.join("\n")
+                    };
+                    let _ = display_clone.set_text(&display_text);
 
-        println!("✓ Sent: {}", new_message);
+                    // Clear the input field
+                    let _ = input_clone.set_text("");
+
+                    println!("✓ Sent: {}", new_message);
+                }
+            }
+            Err(e) => {
+                println!("✗ Error getting text: {}", e);
+            }
+        }
     })?;
 
     button_row.add_child(&send_button.as_uielement())?;
 
-    // Clear button
+    // Clear button with stylish red accent
     let clear_button = XamlButton::new()?;
-    clear_button.set_content("Clear Chat")?;
-    clear_button.set_size(150.0, 45.0)?;
+    clear_button.set_content("🗑️ Clear")?;
+    clear_button.set_size(170.0, 48.0)?;
+    clear_button.set_background(0xFF8B0000)?; // Dark red
+    clear_button.set_foreground(0xFFFFFFFF)?; // White text
+    clear_button.set_corner_radius(8.0)?; // Rounded corners
+    clear_button.set_padding(16.0, 12.0, 16.0, 12.0)?;
 
     let messages_clone = Arc::clone(&messages);
     let display_clone = Arc::clone(&messages_display);

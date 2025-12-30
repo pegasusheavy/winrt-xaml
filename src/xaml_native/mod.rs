@@ -210,6 +210,42 @@ impl XamlButton {
         Ok(())
     }
 
+    /// Set the button background color (ARGB format: 0xAARRGGBB).
+    pub fn set_background(&self, color: u32) -> Result<()> {
+        let result = unsafe { ffi::xaml_button_set_background(self.handle, color) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set background".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the button foreground (text) color (ARGB format: 0xAARRGGBB).
+    pub fn set_foreground(&self, color: u32) -> Result<()> {
+        let result = unsafe { ffi::xaml_button_set_foreground(self.handle, color) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set foreground".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the button corner radius for rounded corners.
+    pub fn set_corner_radius(&self, radius: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_button_set_corner_radius(self.handle, radius) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set corner radius".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the button padding (inner spacing).
+    pub fn set_padding(&self, left: f64, top: f64, right: f64, bottom: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_button_set_padding(self.handle, left, top, right, bottom) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set padding".to_string()));
+        }
+        Ok(())
+    }
+
     /// Convert to UIElement for use in layout containers.
     pub fn as_uielement(&self) -> XamlUIElement {
         let handle = unsafe { ffi::xaml_button_as_uielement(self.handle) };
@@ -264,6 +300,33 @@ impl XamlTextBlock {
         Ok(())
     }
 
+    /// Set the text foreground color (ARGB format: 0xAARRGGBB).
+    pub fn set_foreground(&self, color: u32) -> Result<()> {
+        let result = unsafe { ffi::xaml_textblock_set_foreground(self.handle, color) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set foreground".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the font weight (400=Normal, 600=SemiBold, 700=Bold).
+    pub fn set_font_weight(&self, weight: i32) -> Result<()> {
+        let result = unsafe { ffi::xaml_textblock_set_font_weight(self.handle, weight) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set font weight".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the margin (outer spacing).
+    pub fn set_margin(&self, left: f64, top: f64, right: f64, bottom: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_textblock_set_margin(self.handle, left, top, right, bottom) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set margin".to_string()));
+        }
+        Ok(())
+    }
+
     /// Convert to UIElement for use in layout containers.
     pub fn as_uielement(&self) -> XamlUIElement {
         let handle = unsafe { ffi::xaml_textblock_as_uielement(self.handle) };
@@ -309,6 +372,25 @@ impl XamlTextBox {
         Ok(())
     }
 
+    /// Get the current text content.
+    pub fn get_text(&self) -> Result<String> {
+        const BUFFER_SIZE: i32 = 1024;
+        let mut buffer: Vec<u16> = vec![0; BUFFER_SIZE as usize];
+
+        let result = unsafe {
+            ffi::xaml_textbox_get_text(self.handle, buffer.as_mut_ptr(), BUFFER_SIZE)
+        };
+
+        if result < 0 {
+            return Err(Error::control_creation("Failed to get text".to_string()));
+        }
+
+        // Convert the wide string to Rust String
+        let len = result as usize;
+        let text = String::from_utf16_lossy(&buffer[..len]);
+        Ok(text)
+    }
+
     /// Set the placeholder text.
     pub fn set_placeholder(&self, placeholder: &str) -> Result<()> {
         let wide_placeholder = to_wide_string(placeholder);
@@ -324,6 +406,42 @@ impl XamlTextBox {
         let result = unsafe { ffi::xaml_textbox_set_size(self.handle, width, height) };
         if result != 0 {
             return Err(Error::control_creation("Failed to set size".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the textbox background color (ARGB format: 0xAARRGGBB).
+    pub fn set_background(&self, color: u32) -> Result<()> {
+        let result = unsafe { ffi::xaml_textbox_set_background(self.handle, color) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set background".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the textbox foreground (text) color (ARGB format: 0xAARRGGBB).
+    pub fn set_foreground(&self, color: u32) -> Result<()> {
+        let result = unsafe { ffi::xaml_textbox_set_foreground(self.handle, color) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set foreground".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the textbox corner radius for rounded corners.
+    pub fn set_corner_radius(&self, radius: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_textbox_set_corner_radius(self.handle, radius) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set corner radius".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the textbox padding (inner spacing).
+    pub fn set_padding(&self, left: f64, top: f64, right: f64, bottom: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_textbox_set_padding(self.handle, left, top, right, bottom) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set padding".to_string()));
         }
         Ok(())
     }
@@ -390,6 +508,33 @@ impl XamlStackPanel {
         Ok(())
     }
 
+    /// Set the panel background color (ARGB format: 0xAARRGGBB).
+    pub fn set_background(&self, color: u32) -> Result<()> {
+        let result = unsafe { ffi::xaml_stackpanel_set_background(self.handle, color) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set background".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the panel padding (inner spacing).
+    pub fn set_padding(&self, left: f64, top: f64, right: f64, bottom: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_stackpanel_set_padding(self.handle, left, top, right, bottom) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set padding".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the panel corner radius for rounded corners.
+    pub fn set_corner_radius(&self, radius: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_stackpanel_set_corner_radius(self.handle, radius) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set corner radius".to_string()));
+        }
+        Ok(())
+    }
+
     /// Convert to UIElement for use in layout containers.
     pub fn as_uielement(&self) -> XamlUIElement {
         let handle = unsafe { ffi::xaml_stackpanel_as_uielement(self.handle) };
@@ -430,6 +575,33 @@ impl XamlGrid {
         let result = unsafe { ffi::xaml_grid_add_child(self.handle, child.handle) };
         if result != 0 {
             return Err(Error::control_creation("Failed to add child".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the grid background color (ARGB format: 0xAARRGGBB).
+    pub fn set_background(&self, color: u32) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_set_background(self.handle, color) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set background".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the grid padding (inner spacing).
+    pub fn set_padding(&self, left: f64, top: f64, right: f64, bottom: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_set_padding(self.handle, left, top, right, bottom) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set padding".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the grid corner radius for rounded corners.
+    pub fn set_corner_radius(&self, radius: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_set_corner_radius(self.handle, radius) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set corner radius".to_string()));
         }
         Ok(())
     }

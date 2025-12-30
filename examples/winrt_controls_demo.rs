@@ -141,46 +141,70 @@ fn main() -> Result<()> {
     // Create main StackPanel
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(15.0)?;
+    main_panel.set_spacing(20.0)?;
+    main_panel.set_background(0xFF1E1E1E)?; // Dark theme
+    main_panel.set_padding(35.0, 35.0, 35.0, 35.0)?;
+    main_panel.set_corner_radius(14.0)?;
 
-    // Title
+    // Title with modern styling
     let title = XamlTextBlock::new()?;
-    title.set_text("WinRT XAML Controls Showcase")?;
-    title.set_font_size(24.0)?;
+    title.set_text("🎨 WinRT XAML Showcase")?;
+    title.set_font_size(32.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White
+    title.set_margin(0.0, 0.0, 0.0, 10.0)?;
     main_panel.add_child(&title.as_uielement())?;
 
-    // Description
+    // Description with modern styling
     let description = XamlTextBlock::new()?;
-    description.set_text("This demo shows real Windows.UI.Xaml controls rendered through XAML Islands")?;
-    description.set_font_size(14.0)?;
+    description.set_text("Real Windows.UI.Xaml controls through XAML Islands")?;
+    description.set_font_size(16.0)?;
+    description.set_foreground(0xFFB0B0B0)?; // Light gray
+    description.set_margin(0.0, 0.0, 0.0, 25.0)?;
     main_panel.add_child(&description.as_uielement())?;
 
-    // Button demo
+    // Button demo section
     let button_label = XamlTextBlock::new()?;
-    button_label.set_text("Button Control:")?;
-    button_label.set_font_size(16.0)?;
+    button_label.set_text("📱 Button Control")?;
+    button_label.set_font_size(18.0)?;
+    button_label.set_font_weight(600)?; // SemiBold
+    button_label.set_foreground(0xFF00D4FF)?; // Cyan
+    button_label.set_margin(0.0, 10.0, 0.0, 8.0)?;
     main_panel.add_child(&button_label.as_uielement())?;
 
     let button = XamlButton::new()?;
-    button.set_content("🎉 Click Me - I'm a Real WinRT Button!")?;
-    button.set_size(400.0, 50.0)?;
+    button.set_content("🎉 Click Me!")?;
+    button.set_size(420.0, 56.0)?;
+    button.set_background(0xFF0078D4)?; // Microsoft blue
+    button.set_foreground(0xFFFFFFFF)?;
+    button.set_corner_radius(8.0)?;
+    button.set_padding(16.0, 12.0, 16.0, 12.0)?;
     main_panel.add_child(&button.as_uielement())?;
 
-    // TextBox demo
+    // TextBox demo section
     let textbox_label = XamlTextBlock::new()?;
-    textbox_label.set_text("TextBox Control:")?;
-    textbox_label.set_font_size(16.0)?;
+    textbox_label.set_text("📝 TextBox Control")?;
+    textbox_label.set_font_size(18.0)?;
+    textbox_label.set_font_weight(600)?; // SemiBold
+    textbox_label.set_foreground(0xFF00D4FF)?; // Cyan
+    textbox_label.set_margin(0.0, 15.0, 0.0, 8.0)?;
     main_panel.add_child(&textbox_label.as_uielement())?;
 
     let textbox = XamlTextBox::new()?;
     textbox.set_placeholder("Type something here...")?;
-    textbox.set_size(400.0, 36.0)?;
+    textbox.set_size(420.0, 44.0)?;
+    textbox.set_background(0xFF2D2D2D)?; // Dark input
+    textbox.set_foreground(0xFFFFFFFF)?; // White text
+    textbox.set_corner_radius(8.0)?;
+    textbox.set_padding(12.0, 10.0, 12.0, 10.0)?;
     main_panel.add_child(&textbox.as_uielement())?;
 
-    // Info text
+    // Info text with modern styling
     let info = XamlTextBlock::new()?;
-    info.set_text("✨ These are native WinRT controls with Fluent Design styling!")?;
-    info.set_font_size(14.0)?;
+    info.set_text("✨ Native WinRT with Fluent Design")?;
+    info.set_font_size(15.0)?;
+    info.set_foreground(0xFF90EE90)?; // Light green
+    info.set_margin(0.0, 20.0, 0.0, 0.0)?;
     main_panel.add_child(&info.as_uielement())?;
 
     // Set the main panel as content
