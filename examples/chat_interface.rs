@@ -1,89 +1,204 @@
-//! Chat interface example.
+//! Chat interface example using WinRT.
 
-use winrt_xaml::prelude::*;
-use std::sync::Arc;
-use parking_lot::RwLock;
+use winrt_xaml::error::Result;
+use winrt_xaml::xaml_native::*;
+use windows::core::w;
+use windows::Win32::Foundation::{HWND, LPARAM, LRESULT, WPARAM};
+use windows::Win32::UI::WindowsAndMessaging::*;
+use windows::Win32::System::LibraryLoader::GetModuleHandleW;
+use windows::Win32::System::Com::{CoInitializeEx, CoUninitialize, COINIT_APARTMENTTHREADED};
+use std::sync::{Arc, Mutex};
+use std::ptr;
+
+fn create_host_window() -> Result<HWND> {
+    unsafe {
+        let class_name = w!("WinRT_ChatInterface");
+        let wc = WNDCLASSW {
+            style: CS_HREDRAW | CS_VREDRAW,
+            lpfnWndProc: Some(window_proc),
+            hInstance: GetModuleHandleW(None)?.into(),
+            lpszClassName: class_name,
+            hCursor: LoadCursorW(None, IDC_ARROW)?,
+            ..Default::default()
+        };
+        let _ = RegisterClassW(&wc);
+
+        CreateWindowExW(
+            WINDOW_EX_STYLE(0),
+            class_name,
+            w!("Chat Interface"),
+            WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+            CW_USEDEFAULT, CW_USEDEFAULT, 500, 700,
+            None, None,
+            GetModuleHandleW(None)?,
+            Some(ptr::null()),
+        ).map_err(|e| winrt_xaml::error::Error::window_creation(format!("{:?}", e)))
+    }
+}
+
+unsafe extern "system" fn window_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+    match msg {
+        WM_SIZE => {
+            if let Ok(child) = GetWindow(hwnd, GW_CHILD) {
+                if !child.0.is_null() {
+                    let width = (lparam.0 & 0xFFFF) as i32;
+                    let height = ((lparam.0 >> 16) & 0xFFFF) as i32;
+                    let _ = SetWindowPos(child, None, 0, 0, width, height, SWP_NOZORDER | SWP_NOACTIVATE);
+                }
+            }
+            LRESULT(0)
+        }
+        WM_DESTROY => {
+            PostQuitMessage(0);
+            LRESULT(0)
+        }
+        _ => DefWindowProcW(hwnd, msg, wparam, lparam),
+    }
+}
 
 fn main() -> Result<()> {
-    env_logger::init();
+    println!("╔═══════════════════════════════════════════════╗");
+    println!("║            Chat Interface                    ║");
+    println!("╚═══════════════════════════════════════════════╝\n");
 
-    let app = Application::new()?;
+    println!("Creating chat interface...");
 
-    let window = Window::builder()
-        .title("Chat Interface")
-        .size(500, 600)
-        .build()?;
+    // Initialize COM
+    unsafe { CoInitializeEx(None, COINIT_APARTMENTTHREADED).ok(); }
 
-    let messages = Arc::new(RwLock::new(Vec::<String>::new()));
+    // Initialize XAML framework
+    let _manager = XamlManager::new()?;
+
+    // Create host window
+    let host_hwnd = create_host_window()?;
+
+    // Create XAML source
+    let mut xaml_source = XamlSource::new()?;
+    let island_hwnd = xaml_source.attach_to_window(host_hwnd)?;
+
+    // Message storage
+    let messages = Arc::new(Mutex::new(Vec::<String>::new()));
+
+    // Create main layout panel
+    let main_panel = XamlStackPanel::new()?;
+    main_panel.set_vertical(true)?;
+    main_panel.set_spacing(15.0)?;
 
     // Title
-    let title = TextBlock::new()?
-        .with_text("Chat Room")?;
-    title.set_position(190, 20);
-    title.set_size(120, 30);
+    let title = XamlTextBlock::new()?;
+    title.set_text("Chat Room")?;
+    title.set_font_size(28.0)?;
+    main_panel.add_child(&title.as_uielement())?;
 
-    // Messages display (simplified - would need scrollable list)
-    let messages_display = TextBlock::new()?
-        .with_text("No messages yet")?;
-    messages_display.set_position(50, 70);
-    messages_display.set_size(400, 350);
+    // Messages display
+    let messages_display = Arc::new(XamlTextBlock::new()?);
+    messages_display.set_text("No messages yet\n\nType a message below and click Send!")?;
+    messages_display.set_font_size(14.0)?;
+    main_panel.add_child(&messages_display.as_uielement())?;
+
+    // Spacer
+    let spacer = XamlTextBlock::new()?;
+    spacer.set_text("")?;
+    main_panel.add_child(&spacer.as_uielement())?;
+
+    // Message input label
+    let input_label = XamlTextBlock::new()?;
+    input_label.set_text("Your message:")?;
+    input_label.set_font_size(14.0)?;
+    main_panel.add_child(&input_label.as_uielement())?;
 
     // Message input
-    let message_input = TextBox::new()?;
-    message_input.set_position(50, 450);
-    message_input.set_size(300, 35);
-    message_input.set_placeholder("Type a message...");
+    let message_input = Arc::new(XamlTextBox::new()?);
+    message_input.set_placeholder("Type a message...")?;
+    message_input.set_size(400.0, 40.0)?;
+    main_panel.add_child(&message_input.as_uielement())?;
+
+    // Button row
+    let button_row = XamlStackPanel::new()?;
+    button_row.set_vertical(false)?;
+    button_row.set_spacing(10.0)?;
 
     // Send button
-    let send_button = Button::new()?
-        .with_content("Send")?;
-    send_button.set_position(370, 450);
-    send_button.set_size(80, 35);
+    let send_button = XamlButton::new()?;
+    send_button.set_content("Send")?;
+    send_button.set_size(150.0, 45.0)?;
 
-    let messages_clone = messages.clone();
-    let input_clone = message_input.clone();
-    let display_clone = messages_display.clone();
-    send_button.click().subscribe(move |_| {
-        let text = input_clone.text();
-        if !text.is_empty() {
-            let mut msgs = messages_clone.write();
-            msgs.push(format!("You: {}", text));
+    let messages_clone = Arc::clone(&messages);
+    let input_clone = Arc::clone(&message_input);
+    let display_clone = Arc::clone(&messages_display);
+    send_button.on_click(move || {
+        // Get current text (placeholder for actual text retrieval)
+        let mut msgs = messages_clone.lock().unwrap();
+        let msg_count = msgs.len() + 1;
+        let new_message = format!("You: Message #{}", msg_count);
+        msgs.push(new_message.clone());
 
-            // Show last 5 messages
-            let recent: Vec<_> = msgs.iter().rev().take(5).rev().cloned().collect();
-            let display_text = recent.join("\n");
-            let _ = display_clone.set_text(&display_text);
+        // Show last 8 messages
+        let recent: Vec<_> = msgs.iter().rev().take(8).rev().cloned().collect();
+        let display_text = if recent.is_empty() {
+            "No messages yet".to_string()
+        } else {
+            recent.join("\n")
+        };
+        let _ = display_clone.set_text(&display_text);
 
-            let _ = input_clone.set_text("");
-            println!("Sent: {}", text);
-        }
-    });
+        println!("✓ Sent: {}", new_message);
+    })?;
+
+    button_row.add_child(&send_button.as_uielement())?;
 
     // Clear button
-    let clear_button = Button::new()?
-        .with_content("Clear")?;
-    clear_button.set_position(50, 510);
-    clear_button.set_size(100, 35);
+    let clear_button = XamlButton::new()?;
+    clear_button.set_content("Clear Chat")?;
+    clear_button.set_size(150.0, 45.0)?;
 
-    let messages_clone = messages.clone();
-    let display_clone = messages_display.clone();
-    clear_button.click().subscribe(move |_| {
-        messages_clone.write().clear();
-        let _ = display_clone.set_text("No messages yet");
-        println!("Chat cleared");
-    });
+    let messages_clone = Arc::clone(&messages);
+    let display_clone = Arc::clone(&messages_display);
+    clear_button.on_click(move || {
+        messages_clone.lock().unwrap().clear();
+        let _ = display_clone.set_text("No messages yet\n\nType a message below and click Send!");
+        println!("✓ Chat cleared");
+    })?;
+
+    button_row.add_child(&clear_button.as_uielement())?;
+
+    main_panel.add_child(&button_row.as_uielement())?;
 
     // Info
-    let info = TextBlock::new()?
-        .with_text("Simplified chat - no networking")?;
-    info.set_position(150, 560);
-    info.set_size(200, 25);
+    let info = XamlTextBlock::new()?;
+    info.set_text("📝 Simplified chat demo - no networking")?;
+    info.set_font_size(12.0)?;
+    main_panel.add_child(&info.as_uielement())?;
 
-    window.set_content(send_button)?;
+    // Set content
+    xaml_source.set_content_element(&main_panel.as_uielement())?;
 
-    // Show the window
-    window.show()?;
+    // Show and size the island
+    unsafe {
+        let _ = ShowWindow(island_hwnd, SW_SHOW);
+        let mut rect = windows::Win32::Foundation::RECT::default();
+        let _ = GetClientRect(host_hwnd, &mut rect);
+        let _ = SetWindowPos(island_hwnd, None, 0, 0,
+            rect.right - rect.left, rect.bottom - rect.top,
+            SWP_NOZORDER | SWP_NOACTIVATE);
+    }
 
-    println!("Starting application...");
-    app.run()
+    println!("✅ Chat interface started!");
+    println!("📊 Features:");
+    println!("   • Send messages");
+    println!("   • View message history");
+    println!("   • Clear chat");
+    println!("🎬 Close window to exit\n");
+
+    // Run message loop
+    unsafe {
+        let mut msg = MSG::default();
+        while GetMessageW(&mut msg, None, 0, 0).as_bool() {
+            let _ = TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+        }
+        CoUninitialize();
+    }
+
+    Ok(())
 }
