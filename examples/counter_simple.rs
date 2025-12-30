@@ -78,6 +78,9 @@ fn main() -> Result<()> {
     // Set the first button as window content (others are children)
     window.set_content(inc_button)?;
 
+    // Show the window
+    window.show()?;
+
     println!("Starting application...");
     app.run()
 }

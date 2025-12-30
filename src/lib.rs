@@ -50,6 +50,12 @@
 #![warn(rust_2018_idioms)]
 
 #[cfg(any(feature = "xaml-islands", feature = "uwp"))]
+pub mod winrt;
+pub mod xaml_native;
+
+#[cfg(any(feature = "xaml-islands", feature = "uwp"))]
+pub mod xaml_islands;
+#[cfg(any(feature = "xaml-islands", feature = "uwp"))]
 pub mod app;
 #[cfg(any(feature = "xaml-islands", feature = "uwp"))]
 pub mod controls;

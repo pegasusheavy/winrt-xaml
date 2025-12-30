@@ -1,6 +1,6 @@
 //! ComboBox control implementation using Win32 COMBOBOX.
 
-use crate::controls::UIElement;
+use crate::controls::{Control, UIElement};
 use crate::error::{Error, Result};
 use crate::events::{EventHandler, SelectionChangedEventArgs};
 use parking_lot::RwLock;
@@ -13,16 +13,31 @@ use windows::Win32::{
 };
 
 /// A combobox (dropdown) control.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct ComboBox {
     element: UIElement,
     inner: Arc<ComboBoxInner>,
 }
 
+#[derive(Debug)]
 struct ComboBoxInner {
     items: RwLock<Vec<String>>,
     selected_index: RwLock<i32>,
     selection_changed: EventHandler<SelectionChangedEventArgs>,
+}
+
+impl Control for ComboBox {
+    fn create_control(&self, parent: HWND) -> Result<()> {
+        self.create(parent)
+    }
+
+    fn as_element(&self) -> &UIElement {
+        &self.element
+    }
+
+    fn as_any(&self) -> &dyn std::any::Any {
+        self
+    }
 }
 
 impl ComboBox {
@@ -185,3 +200,4 @@ impl From<ComboBox> for UIElement {
         combobox.element.clone()
     }
 }
+

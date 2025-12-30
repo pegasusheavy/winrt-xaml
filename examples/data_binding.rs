@@ -1,67 +1,123 @@
-//! Data binding example demonstrating XAML loading and resources.
-//!
-//! This example shows how to use XAML markup and resource dictionaries.
+//! Data binding example (simplified for Win32 implementation).
 
 use winrt_xaml::prelude::*;
+use std::sync::Arc;
+use parking_lot::RwLock;
 
 fn main() -> Result<()> {
     env_logger::init();
 
+    println!("Creating data binding demo...");
+
     let app = Application::new()?;
 
-    // Set up application resources
-    let resources = ResourceDictionary::new();
-    resources.insert("PrimaryBrush", Brush::from_color(Color::rgb(0, 120, 215)));
-    resources.insert("SecondaryBrush", Brush::from_color(Color::rgb(100, 100, 100)));
-    resources.insert("HeaderFontSize", 24.0f64);
-    resources.insert("BodyFontSize", 14.0f64);
-    app.set_resources(resources);
-
     let window = Window::builder()
-        .title("XAML and Resources Demo")
-        .size(800, 600)
+        .title("Data Binding Demo")
+        .size(500, 400)
         .build()?;
 
-    // Create UI from XAML string
-    let xaml = r#"
-        <StackPanel Orientation="Vertical" Spacing="20" Padding="30">
-            <TextBlock Text="XAML Loading Demo" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center"/>
+    // Shared data model
+    let model = Arc::new(RwLock::new(DataModel {
+        name: "John Doe".to_string(),
+        age: 25,
+        email: "john@example.com".to_string(),
+    }));
 
-            <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="8" Padding="20">
-                <StackPanel Orientation="Vertical" Spacing="10">
-                    <TextBlock Text="This UI was loaded from XAML markup!" FontSize="16"/>
-                    <TextBlock Text="The library supports parsing XAML strings and files." TextWrapping="Wrap"/>
-                </StackPanel>
-            </Border>
+    // Title
+    let title = TextBlock::new()?
+        .with_text("Data Binding Example")?;
+    title.set_position(140, 20);
+    title.set_size(220, 30);
 
-            <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
-                <Button Content="Button 1" Padding="20,10"/>
-                <Button Content="Button 2" Padding="20,10"/>
-                <Button Content="Button 3" Padding="20,10"/>
-            </StackPanel>
+    // Name label
+    let name_label = TextBlock::new()?
+        .with_text("Name:")?;
+    name_label.set_position(50, 80);
+    name_label.set_size(80, 25);
 
-            <Grid RowSpacing="10" ColumnSpacing="10">
-                <TextBlock Text="This is a Grid layout loaded from XAML"/>
-            </Grid>
+    // Name input
+    let name_input = TextBox::new()?;
+    name_input.set_position(140, 80);
+    name_input.set_size(300, 30);
+    name_input.set_text(&model.read().name)?;
 
-            <StackPanel Orientation="Vertical" Spacing="10">
-                <TextBlock Text="Input Controls:" FontWeight="SemiBold"/>
-                <TextBox PlaceholderText="Enter text here..." Width="300"/>
-                <CheckBox Content="I agree to the terms" />
-                <ToggleSwitch Header="Enable notifications" OnContent="On" OffContent="Off"/>
-            </StackPanel>
+    let model_clone = model.clone();
+    name_input.text_changed().subscribe(move |args| {
+        model_clone.write().name = args.text.clone();
+        println!("Name updated: {}", args.text);
+    });
 
-            <ProgressBar Value="65" Maximum="100" Width="400"/>
-            <Slider Minimum="0" Maximum="100" Value="50" Width="400"/>
-        </StackPanel>
-    "#;
+    // Age label
+    let age_label = TextBlock::new()?
+        .with_text("Age:")?;
+    age_label.set_position(50, 130);
+    age_label.set_size(80, 25);
 
-    // Load the XAML
-    let content = load_xaml(xaml)?;
+    // Age input
+    let age_input = TextBox::new()?;
+    age_input.set_position(140, 130);
+    age_input.set_size(100, 30);
+    age_input.set_text(&model.read().age.to_string())?;
 
-    window.set_content(content)?;
-    window.center()?;
+    let model_clone = model.clone();
+    age_input.text_changed().subscribe(move |args| {
+        if let Ok(age) = args.text.parse::<i32>() {
+            model_clone.write().age = age;
+            println!("Age updated: {}", age);
+        }
+    });
+
+    // Email label
+    let email_label = TextBlock::new()?
+        .with_text("Email:")?;
+    email_label.set_position(50, 180);
+    email_label.set_size(80, 25);
+
+    // Email input
+    let email_input = TextBox::new()?;
+    email_input.set_position(140, 180);
+    email_input.set_size(300, 30);
+    email_input.set_text(&model.read().email)?;
+
+    let model_clone = model.clone();
+    email_input.text_changed().subscribe(move |args| {
+        model_clone.write().email = args.text.clone();
+        println!("Email updated: {}", args.text);
+    });
+
+    // Display button
+    let display_button = Button::new()?
+        .with_content("Show Data")?;
+    display_button.set_position(140, 240);
+    display_button.set_size(120, 40);
+
+    let model_clone = model.clone();
+    display_button.click().subscribe(move |_| {
+        let data = model_clone.read();
+        println!("\n=== Current Data ===");
+        println!("Name: {}", data.name);
+        println!("Age: {}", data.age);
+        println!("Email: {}", data.email);
+        println!("===================\n");
+    });
+
+    // Info text
+    let info = TextBlock::new()?
+        .with_text("Data is automatically synced as you type")?;
+    info.set_position(50, 310);
+    info.set_size(400, 25);
+
+    window.set_content(display_button)?;
+
+    // Show the window
     window.show()?;
 
+    println!("Starting application...");
     app.run()
+}
+
+struct DataModel {
+    name: String,
+    age: i32,
+    email: String,
 }

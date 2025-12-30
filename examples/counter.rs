@@ -1,118 +1,115 @@
-//! Simple Counter Example
-//!
-//! A minimal example showing state management with buttons.
-//!
-//! Run with: cargo run --example counter
+//! Counter example demonstrating state management.
 
 use winrt_xaml::prelude::*;
+use std::sync::atomic::{AtomicI32, Ordering};
 use std::sync::Arc;
-use parking_lot::RwLock;
 
 fn main() -> Result<()> {
     env_logger::init();
 
+    println!("Creating counter application...");
+
     let app = Application::new()?;
 
     let window = Window::builder()
-        .title("Counter - WinRT-XAML")
-        .size(400, 300)
+        .title("Counter Example")
+        .size(500, 350)
         .build()?;
 
     // Shared counter state
-    let counter = Arc::new(RwLock::new(0i32));
+    let counter = Arc::new(AtomicI32::new(0));
 
-    // Clone for each button
-    let counter_inc = counter.clone();
-    let counter_dec = counter.clone();
-    let counter_reset = counter.clone();
-    let counter_display = counter.clone();
+    // Title
+    let title = TextBlock::new()?
+        .with_text("Counter Application")?;
+    title.set_position(150, 30);
+    title.set_size(200, 30);
 
-    let content = StackPanel::new()
-        .orientation(Orientation::Vertical)
-        .spacing(20.0)
-        .padding_uniform(40.0)
-        .horizontal_alignment(HorizontalAlignment::Center)
-        .vertical_alignment(VerticalAlignment::Center)
-        // Title
-        .child(
-            TextBlock::new()
-                .text("Simple Counter")
-                .font_size(28.0)
-                .font_weight(FontWeight::Bold)
-                .horizontal_alignment(HorizontalAlignment::Center),
-        )
-        // Counter display
-        .child(
-            Border::new()
-                .background(&Brush::from_color(Color::rgb(240, 240, 240)))
-                .corner_radius_uniform(10.0)
-                .padding(Thickness::symmetric(40.0, 20.0))
-                .child(
-                    TextBlock::new()
-                        .text(&format!("{}", *counter_display.read()))
-                        .font_size(48.0)
-                        .font_weight(FontWeight::Light)
-                        .horizontal_alignment(HorizontalAlignment::Center),
-                ),
-        )
-        // Buttons row
-        .child(
-            StackPanel::new()
-                .orientation(Orientation::Horizontal)
-                .spacing(10.0)
-                .horizontal_alignment(HorizontalAlignment::Center)
-                // Decrement button
-                .child(
-                    Button::new()
-                        .content("-")
-                        .width(60.0)
-                        .height(60.0)
-                        .font_size(24.0)
-                        .on_click(move |_| {
-                            let mut count = counter_dec.write();
-                            *count -= 1;
-                            println!("Counter: {}", *count);
-                        }),
-                )
-                // Reset button
-                .child(
-                    Button::new()
-                        .content("Reset")
-                        .width(80.0)
-                        .height(60.0)
-                        .font_size(14.0)
-                        .on_click(move |_| {
-                            let mut count = counter_reset.write();
-                            *count = 0;
-                            println!("Counter reset to 0");
-                        }),
-                )
-                // Increment button
-                .child(
-                    Button::new()
-                        .content("+")
-                        .width(60.0)
-                        .height(60.0)
-                        .font_size(24.0)
-                        .on_click(move |_| {
-                            let mut count = counter_inc.write();
-                            *count += 1;
-                            println!("Counter: {}", *count);
-                        }),
-                ),
-        )
-        // Instructions
-        .child(
-            TextBlock::new()
-                .text("Click + or - to change the counter")
-                .font_size(12.0)
-                .foreground(&Brush::from_color(Color::GRAY))
-                .horizontal_alignment(HorizontalAlignment::Center),
-        );
+    // Counter display
+    let display = TextBlock::new()?
+        .with_text("Count: 0")?;
+    display.set_position(180, 100);
+    display.set_size(140, 40);
 
-    window.set_content(content)?;
-    window.center()?;
+    // Increment button
+    let inc_button = Button::new()?
+        .with_content("+")?;
+    inc_button.set_position(120, 180);
+    inc_button.set_size(60, 40);
+
+    let counter_clone = counter.clone();
+    let display_clone = display.clone();
+    inc_button.click().subscribe(move |_| {
+        let new_value = counter_clone.fetch_add(1, Ordering::SeqCst) + 1;
+        let _ = display_clone.set_text(&format!("Count: {}", new_value));
+        println!("Incremented to: {}", new_value);
+    });
+
+    // Decrement button
+    let dec_button = Button::new()?
+        .with_content("-")?;
+    dec_button.set_position(200, 180);
+    dec_button.set_size(60, 40);
+
+    let counter_clone = counter.clone();
+    let display_clone = display.clone();
+    dec_button.click().subscribe(move |_| {
+        let new_value = counter_clone.fetch_sub(1, Ordering::SeqCst) - 1;
+        let _ = display_clone.set_text(&format!("Count: {}", new_value));
+        println!("Decremented to: {}", new_value);
+    });
+
+    // Reset button
+    let reset_button = Button::new()?
+        .with_content("Reset")?;
+    reset_button.set_position(280, 180);
+    reset_button.set_size(80, 40);
+
+    let counter_clone = counter.clone();
+    let display_clone = display.clone();
+    reset_button.click().subscribe(move |_| {
+        counter_clone.store(0, Ordering::SeqCst);
+        let _ = display_clone.set_text("Count: 0");
+        println!("Counter reset");
+    });
+
+    // Double button
+    let double_button = Button::new()?
+        .with_content("×2")?;
+    double_button.set_position(150, 240);
+    double_button.set_size(80, 40);
+
+    let counter_clone = counter.clone();
+    let display_clone = display.clone();
+    double_button.click().subscribe(move |_| {
+        let current = counter_clone.load(Ordering::SeqCst);
+        let new_value = current * 2;
+        counter_clone.store(new_value, Ordering::SeqCst);
+        let _ = display_clone.set_text(&format!("Count: {}", new_value));
+        println!("Doubled to: {}", new_value);
+    });
+
+    // Half button
+    let half_button = Button::new()?
+        .with_content("÷2")?;
+    half_button.set_position(250, 240);
+    half_button.set_size(80, 40);
+
+    let counter_clone = counter.clone();
+    let display_clone = display.clone();
+    half_button.click().subscribe(move |_| {
+        let current = counter_clone.load(Ordering::SeqCst);
+        let new_value = current / 2;
+        counter_clone.store(new_value, Ordering::SeqCst);
+        let _ = display_clone.set_text(&format!("Count: {}", new_value));
+        println!("Halved to: {}", new_value);
+    });
+
+    window.set_content(inc_button)?;
+
+    // Show the window
     window.show()?;
 
+    println!("Starting application...");
     app.run()
 }

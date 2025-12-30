@@ -8,6 +8,14 @@ pub struct EventHandler<T> {
     handlers: Arc<RwLock<Vec<Box<dyn Fn(&T) + Send + Sync>>>>,
 }
 
+impl<T> std::fmt::Debug for EventHandler<T> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("EventHandler")
+            .field("handlers", &format!("{} handler(s)", self.handlers.read().len()))
+            .finish()
+    }
+}
+
 impl<T> EventHandler<T> {
     /// Create a new event handler.
     pub fn new() -> Self {

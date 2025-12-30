@@ -5,38 +5,38 @@
 ### All Tests
 
 ```powershell
-cargo test --tests --features library-enabled
+cargo test --tests
 ```
 
 ### Specific Test Module
 
 ```powershell
 # Error handling tests
-cargo test --test error_tests --features library-enabled
+cargo test --test error_tests
 
 # Event system tests
-cargo test --test events_tests --features library-enabled
+cargo test --test events_tests
 
 # Control tests
-cargo test --test controls_tests --features library-enabled
+cargo test --test controls_tests
 
 # Layout tests
-cargo test --test layout_tests --features library-enabled
+cargo test --test layout_tests
 
 # Media tests
-cargo test --test media_tests --features library-enabled
+cargo test --test media_tests
 
 # Resource tests
-cargo test --test resources_tests --features library-enabled
+cargo test --test resources_tests
 
 # Integration tests
-cargo test --test integration_tests --features library-enabled
+cargo test --test integration_tests
 ```
 
 ### With Output
 
 ```powershell
-cargo test --tests --features library-enabled -- --nocapture
+cargo test --tests -- --nocapture
 ```
 
 ## Test Coverage
@@ -89,10 +89,8 @@ cargo test --tests --features library-enabled -- --nocapture
 ### Test Structure
 
 ```rust
-#[cfg(feature = "library-enabled")]
 use winrt_xaml::prelude::*;
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_my_feature() {
     // Arrange
@@ -162,7 +160,7 @@ These tests require a Windows environment and will not run on Linux/macOS:
 
 ### Feature Gating
 
-Most tests require the `library-enabled` feature flag to compile.
+Tests can be run without any feature flags.
 
 ## Performance Tests
 
@@ -175,7 +173,7 @@ For performance benchmarking, see:
 Run benchmarks with:
 
 ```powershell
-cargo bench --features library-enabled
+cargo bench
 ```
 
 ## Memory Testing
@@ -183,12 +181,12 @@ cargo bench --features library-enabled
 Memory profiling is available via `dhat`:
 
 ```powershell
-cargo run --bin memory_profile --features "dhat-heap,library-enabled"
+cargo run --bin memory_profile --features "dhat-heap"
 ```
 
 ## Test Best Practices
 
-1. **Feature Gate Tests**: Always use `#[cfg(feature = "library-enabled")]` for tests that use the library
+1. **Feature Gate Tests**: Tests no longer require feature gates
 2. **Isolate Tests**: Each test should be independent and not rely on state from other tests
 3. **Clear Naming**: Use descriptive test names that indicate what is being tested
 4. **Arrange-Act-Assert**: Follow AAA pattern for test structure
@@ -199,10 +197,10 @@ cargo run --bin memory_profile --features "dhat-heap,library-enabled"
 
 ### Tests Not Running
 
-Ensure you're using the `library-enabled` feature:
+Run tests directly:
 
 ```powershell
-cargo test --tests --features library-enabled
+cargo test --tests
 ```
 
 ### Win32 Conflicts
@@ -210,7 +208,7 @@ cargo test --tests --features library-enabled
 If tests fail due to Win32 window class conflicts, run with single thread:
 
 ```powershell
-cargo test --tests --features library-enabled -- --test-threads=1
+cargo test --tests -- --test-threads=1
 ```
 
 ### Compilation Errors

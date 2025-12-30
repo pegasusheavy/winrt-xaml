@@ -1,6 +1,6 @@
 //! TextBlock control implementation using Win32 STATIC control.
 
-use crate::controls::UIElement;
+use crate::controls::{Control, UIElement};
 use crate::error::{Error, Result};
 use parking_lot::RwLock;
 use std::sync::Arc;
@@ -28,16 +28,31 @@ pub enum TextAlignment {
 }
 
 /// A text display control.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct TextBlock {
     element: UIElement,
     inner: Arc<TextBlockInner>,
 }
 
+#[derive(Debug)]
 struct TextBlockInner {
     text: RwLock<String>,
     font_size: RwLock<f64>,
     alignment: RwLock<TextAlignment>,
+}
+
+impl Control for TextBlock {
+    fn create_control(&self, parent: HWND) -> Result<()> {
+        self.create(parent)
+    }
+
+    fn as_element(&self) -> &UIElement {
+        &self.element
+    }
+
+    fn as_any(&self) -> &dyn std::any::Any {
+        self
+    }
 }
 
 impl TextBlock {
@@ -68,15 +83,19 @@ impl TextBlock {
                 TextAlignment::Right => SS_RIGHT,
             };
 
+            // Get position and size from the element
+            let (x, y) = self.element.position();
+            let (width, height) = self.element.size();
+
             let hwnd = CreateWindowExW(
                 WINDOW_EX_STYLE(0),
                 w!("STATIC"),
                 PCWSTR(text_wide.as_ptr()),
                 WS_CHILD | WS_VISIBLE | WINDOW_STYLE(alignment),
-                0,
-                0,
-                200,
-                20,
+                x,
+                y,
+                width,
+                height,
                 parent,
                 HMENU(std::ptr::null_mut()),
                 HINSTANCE(hinstance.0),
@@ -88,8 +107,6 @@ impl TextBlock {
             }
 
             self.element.set_hwnd(hwnd);
-            self.element.set_width(200);
-            self.element.set_height(20);
 
             Ok(())
         }
@@ -160,6 +177,30 @@ impl TextBlock {
         self.element.hwnd()
     }
 
+    /// Set the X position (fluent API).
+    pub fn with_x(self, x: i32) -> Self {
+        self.element.set_x(x);
+        self
+    }
+
+    /// Set the Y position (fluent API).
+    pub fn with_y(self, y: i32) -> Self {
+        self.element.set_y(y);
+        self
+    }
+
+    /// Set the width (fluent API).
+    pub fn with_width(self, width: i32) -> Self {
+        self.element.set_width(width);
+        self
+    }
+
+    /// Set the height (fluent API).
+    pub fn with_height(self, height: i32) -> Self {
+        self.element.set_height(height);
+        self
+    }
+
     /// Set the position of the text block.
     pub fn set_position(&self, x: i32, y: i32) -> Result<()> {
         self.element.set_x(x);
@@ -218,3 +259,4 @@ impl From<TextBlock> for UIElement {
         block.element.clone()
     }
 }
+

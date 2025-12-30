@@ -1,16 +1,13 @@
 //! Unit tests for UI controls.
 
-#[cfg(feature = "library-enabled")]
 use winrt_xaml::controls::*;
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_button_creation() {
     let button = Button::new();
     assert!(button.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_button_content() {
     let button = Button::new().unwrap();
@@ -20,7 +17,6 @@ fn test_button_content() {
     assert_eq!(button.content(), "Click me");
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_button_fluent_api() {
     let button = Button::new()
@@ -31,7 +27,6 @@ fn test_button_fluent_api() {
     assert_eq!(button.content(), "Test");
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_button_click_event() {
     let button = Button::new().unwrap();
@@ -46,14 +41,12 @@ fn test_button_click_event() {
     assert_eq!(click_handler.subscriber_count(), 1);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_textblock_creation() {
     let textblock = TextBlock::new();
     assert!(textblock.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_textblock_text() {
     let textblock = TextBlock::new().unwrap();
@@ -63,7 +56,6 @@ fn test_textblock_text() {
     assert_eq!(textblock.text(), "Hello, World!");
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_textblock_font_size() {
     let textblock = TextBlock::new().unwrap();
@@ -73,7 +65,6 @@ fn test_textblock_font_size() {
     assert_eq!(textblock.font_size(), 24.0);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_textblock_alignment() {
     let textblock = TextBlock::new().unwrap();
@@ -83,14 +74,12 @@ fn test_textblock_alignment() {
     assert_eq!(textblock.alignment(), TextAlignment::Center);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_textbox_creation() {
     let textbox = TextBox::new();
     assert!(textbox.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_textbox_text() {
     let textbox = TextBox::new().unwrap();
@@ -100,7 +89,6 @@ fn test_textbox_text() {
     assert_eq!(textbox.text(), "Input text");
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_textbox_placeholder() {
     let textbox = TextBox::new().unwrap();
@@ -110,7 +98,6 @@ fn test_textbox_placeholder() {
     assert_eq!(textbox.placeholder(), "Enter text here");
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_textbox_max_length() {
     let textbox = TextBox::new().unwrap();
@@ -120,14 +107,12 @@ fn test_textbox_max_length() {
     assert_eq!(textbox.max_length(), Some(100));
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_checkbox_creation() {
     let checkbox = CheckBox::new();
     assert!(checkbox.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_checkbox_state() {
     let checkbox = CheckBox::new().unwrap();
@@ -137,14 +122,12 @@ fn test_checkbox_state() {
     assert!(checkbox.is_checked());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_combobox_creation() {
     let combobox = ComboBox::new();
     assert!(combobox.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_combobox_items() {
     let combobox = ComboBox::new().unwrap();
@@ -157,7 +140,6 @@ fn test_combobox_items() {
     assert_eq!(combobox.items().len(), 3);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_combobox_selection() {
     let combobox = ComboBox::new().unwrap();
@@ -169,14 +151,12 @@ fn test_combobox_selection() {
     assert_eq!(combobox.selected_index(), 0);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_slider_creation() {
     let slider = Slider::new();
     assert!(slider.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_slider_value() {
     let slider = Slider::new().unwrap();
@@ -186,7 +166,6 @@ fn test_slider_value() {
     assert_eq!(slider.value(), 50.0);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_slider_range() {
     let slider = Slider::new().unwrap();
@@ -200,14 +179,12 @@ fn test_slider_range() {
     assert_eq!(slider.maximum(), 200.0);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_progressbar_creation() {
     let progressbar = ProgressBar::new();
     assert!(progressbar.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_progressbar_value() {
     let progressbar = ProgressBar::new().unwrap();
@@ -217,14 +194,12 @@ fn test_progressbar_value() {
     assert_eq!(progressbar.value(), 75.0);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_image_creation() {
     let image = Image::new();
     assert!(image.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_image_stretch() {
     let image = Image::new().unwrap();
@@ -234,21 +209,18 @@ fn test_image_stretch() {
     assert_eq!(image.stretch(), Stretch::Fill);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_listview_creation() {
     let listview = ListView::new();
     assert!(listview.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_toggle_switch_creation() {
     let toggle = ToggleSwitch::new();
     assert!(toggle.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_toggle_switch_state() {
     let toggle = ToggleSwitch::new().unwrap();

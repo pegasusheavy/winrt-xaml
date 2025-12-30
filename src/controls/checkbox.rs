@@ -1,6 +1,6 @@
 //! CheckBox control implementation using Win32 BUTTON with BS_CHECKBOX.
 
-use crate::controls::UIElement;
+use crate::controls::{Control, UIElement};
 use crate::error::{Error, Result};
 use crate::events::{CheckedEventArgs, EventHandler};
 use parking_lot::RwLock;
@@ -17,16 +17,31 @@ const BST_UNCHECKED: usize = 0x0000;
 const BST_CHECKED: usize = 0x0001;
 
 /// A checkbox control.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct CheckBox {
     element: UIElement,
     inner: Arc<CheckBoxInner>,
 }
 
+#[derive(Debug)]
 struct CheckBoxInner {
     content: RwLock<String>,
     is_checked: RwLock<bool>,
     checked: EventHandler<CheckedEventArgs>,
+}
+
+impl Control for CheckBox {
+    fn create_control(&self, parent: HWND) -> Result<()> {
+        self.create(parent)
+    }
+
+    fn as_element(&self) -> &UIElement {
+        &self.element
+    }
+
+    fn as_any(&self) -> &dyn std::any::Any {
+        self
+    }
 }
 
 impl CheckBox {
@@ -184,6 +199,7 @@ impl From<CheckBox> for UIElement {
         checkbox.element.clone()
     }
 }
+
 
 
 

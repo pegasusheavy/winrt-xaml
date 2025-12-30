@@ -6,6 +6,7 @@ use crate::layout::Orientation;
 use parking_lot::RwLock;
 use std::sync::Arc;
 use windows::Win32::Foundation::*;
+use windows::Win32::UI::WindowsAndMessaging::*;
 
 /// A panel that arranges children in a stack.
 #[derive(Clone)]
@@ -107,10 +108,10 @@ impl StackPanel {
     }
 
     /// Perform layout calculations.
-    pub(crate) fn layout(&self, available_width: i32, available_height: i32) {
+    pub(crate) fn layout(&self, _available_width: i32, _available_height: i32) {
         let orientation = self.orientation();
         let spacing = self.spacing();
-        let (pad_left, pad_top, pad_right, pad_bottom) = self.padding();
+        let (pad_left, pad_top, _pad_right, _pad_bottom) = self.padding();
 
         let mut current_x = pad_left;
         let mut current_y = pad_top;
@@ -128,8 +129,25 @@ impl StackPanel {
             let child_width = child.width();
             let child_height = child.height();
 
+            // Set position in the element
             child.set_x(current_x);
             child.set_y(current_y);
+
+            // Actually move the Win32 child window if it exists
+            let hwnd = child.hwnd();
+            if !hwnd.0.is_null() {
+                unsafe {
+                    let _ = SetWindowPos(
+                        hwnd,
+                        HWND(std::ptr::null_mut()),
+                        current_x,
+                        current_y,
+                        child_width,
+                        child_height,
+                        SWP_NOZORDER | SWP_NOACTIVATE,
+                    );
+                }
+            }
 
             match orientation {
                 Orientation::Vertical => current_y += child_height,

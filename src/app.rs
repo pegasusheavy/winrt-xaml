@@ -66,8 +66,8 @@ impl Application {
                     break;
                 }
 
-                TranslateMessage(&msg);
-                DispatchMessageW(&msg);
+                let _ = TranslateMessage(&msg);
+                let _ = DispatchMessageW(&msg);
             }
 
             Ok(())

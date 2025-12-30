@@ -1,23 +1,19 @@
 //! Unit tests for layout panels.
 
-#[cfg(feature = "library-enabled")]
 use winrt_xaml::layout::*;
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_orientation() {
     assert_eq!(Orientation::Horizontal, Orientation::Horizontal);
     assert_ne!(Orientation::Horizontal, Orientation::Vertical);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_stackpanel_creation() {
     let panel = StackPanel::new();
     assert!(panel.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_stackpanel_orientation() {
     let panel = StackPanel::new().unwrap();
@@ -27,7 +23,6 @@ fn test_stackpanel_orientation() {
     assert_eq!(panel.orientation(), Orientation::Horizontal);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_stackpanel_spacing() {
     let panel = StackPanel::new().unwrap();
@@ -37,7 +32,6 @@ fn test_stackpanel_spacing() {
     assert_eq!(panel.spacing(), 10);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_stackpanel_padding() {
     let panel = StackPanel::new().unwrap();
@@ -47,7 +41,6 @@ fn test_stackpanel_padding() {
     assert_eq!(panel.padding(), (10, 15, 10, 15));
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_stackpanel_fluent_api() {
     let panel = StackPanel::new()
@@ -61,21 +54,18 @@ fn test_stackpanel_fluent_api() {
     assert_eq!(panel.padding(), (5, 5, 5, 5));
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_grid_creation() {
     let grid = Grid::new();
     assert!(grid.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_border_creation() {
     let border = Border::new();
     assert!(border.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_border_thickness() {
     let border = Border::new().unwrap();
@@ -85,7 +75,6 @@ fn test_border_thickness() {
     assert_eq!(border.border_thickness(), (2, 2, 2, 2));
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_border_padding() {
     let border = Border::new().unwrap();
@@ -95,7 +84,6 @@ fn test_border_padding() {
     assert_eq!(border.padding(), (10, 10, 10, 10));
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_scrollviewer_creation() {
     let scrollviewer = ScrollViewer::new();

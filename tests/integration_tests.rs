@@ -1,16 +1,13 @@
 //! Integration tests for the library.
 
-#[cfg(feature = "library-enabled")]
 use winrt_xaml::prelude::*;
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_application_creation() {
     let app = Application::new();
     assert!(app.is_ok());
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_window_builder() {
     let window = Window::builder()
@@ -26,7 +23,6 @@ fn test_window_builder() {
     }
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_window_position() {
     let window = Window::new().unwrap();
@@ -36,7 +32,6 @@ fn test_window_position() {
     // Just test that it doesn't panic
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_window_size() {
     let window = Window::new().unwrap();
@@ -45,7 +40,6 @@ fn test_window_size() {
     assert_eq!(window.size(), (1024, 768));
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_window_title() {
     let window = Window::new().unwrap();
@@ -54,7 +48,6 @@ fn test_window_title() {
     assert_eq!(window.title(), "My Application");
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_window_visibility() {
     let window = Window::new().unwrap();
@@ -63,7 +56,6 @@ fn test_window_visibility() {
     // Note: Can't actually show window in tests
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_control_hierarchy() {
     // Create a simple control hierarchy
@@ -78,7 +70,6 @@ fn test_control_hierarchy() {
     assert_eq!(textblock.text(), "Test Text");
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_event_workflow() {
     use std::sync::atomic::{AtomicBool, Ordering};
@@ -96,7 +87,6 @@ fn test_event_workflow() {
     assert_eq!(button.click().subscriber_count(), 1);
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_resource_dictionary_usage() {
     let resources = ResourceDictionary::new();
@@ -110,7 +100,6 @@ fn test_resource_dictionary_usage() {
     }
 }
 
-#[cfg(feature = "library-enabled")]
 #[test]
 fn test_color_brush_workflow() {
     let color = Color::from_rgb(128, 128, 255);

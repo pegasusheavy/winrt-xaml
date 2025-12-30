@@ -1,6 +1,6 @@
 //! TextBox control implementation using Win32 EDIT control.
 
-use crate::controls::UIElement;
+use crate::controls::{Control, UIElement};
 use crate::error::{Error, Result};
 use crate::events::{EventHandler, TextChangedEventArgs};
 use parking_lot::RwLock;
@@ -17,17 +17,32 @@ const ES_LEFT: u32 = 0x0000;
 const ES_AUTOHSCROLL: u32 = 0x0080;
 
 /// A text input control.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct TextBox {
     element: UIElement,
     inner: Arc<TextBoxInner>,
 }
 
+#[derive(Debug)]
 struct TextBoxInner {
     text: RwLock<String>,
     placeholder: RwLock<String>,
     max_length: RwLock<Option<u32>>,
     text_changed: EventHandler<TextChangedEventArgs>,
+}
+
+impl Control for TextBox {
+    fn create_control(&self, parent: HWND) -> Result<()> {
+        self.create(parent)
+    }
+
+    fn as_element(&self) -> &UIElement {
+        &self.element
+    }
+
+    fn as_any(&self) -> &dyn std::any::Any {
+        self
+    }
 }
 
 impl TextBox {
@@ -196,3 +211,4 @@ impl From<TextBox> for UIElement {
         textbox.element.clone()
     }
 }
+

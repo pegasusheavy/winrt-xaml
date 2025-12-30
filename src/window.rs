@@ -89,6 +89,33 @@ unsafe extern "system" fn window_proc(
             }
             LRESULT(0)
         }
+        WM_COMMAND => {
+            // Handle button clicks and other control notifications
+            let control_hwnd = HWND(lparam.0 as *mut _);
+            let notification_code = ((wparam.0 >> 16) & 0xFFFF) as u32;
+
+            // BN_CLICKED = 0
+            const BN_CLICKED: u32 = 0;
+
+            if notification_code == BN_CLICKED {
+                // Find the window and control
+                if let Some(window) = WINDOWS.read().get(&(hwnd.0 as isize)) {
+                    let controls = window.controls.read();
+                    for control in controls.iter() {
+                        let element = control.as_element();
+                        if element.hwnd().0 == control_hwnd.0 {
+                            // Try to downcast to Button
+                            if let Some(button) = control.as_any().downcast_ref::<crate::controls::Button>() {
+                                button.trigger_click();
+                                return LRESULT(0);
+                            }
+                        }
+                    }
+                }
+            }
+
+            DefWindowProcW(hwnd, msg, wparam, lparam)
+        }
         _ => DefWindowProcW(hwnd, msg, wparam, lparam),
     }
 }
@@ -106,6 +133,10 @@ struct WindowInner {
     position: RwLock<(i32, i32)>,
     content: RwLock<Option<UIElement>>,
     is_visible: RwLock<bool>,
+    // Store controls as trait objects for polymorphic handling
+    controls: RwLock<Vec<Arc<dyn crate::controls::Control>>>,
+    // XAML Islands support
+    xaml_island: RwLock<Option<crate::xaml_islands::XamlIslandHost>>,
 }
 
 impl Window {
@@ -122,6 +153,8 @@ impl Window {
             position: RwLock::new((CW_USEDEFAULT, CW_USEDEFAULT)),
             content: RwLock::new(None),
             is_visible: RwLock::new(false),
+            controls: RwLock::new(Vec::new()),
+            xaml_island: RwLock::new(None),
         });
 
         Ok(Window { inner })
@@ -245,12 +278,21 @@ impl Window {
     pub fn show(&self) -> Result<()> {
         let hwnd = self.hwnd();
         if hwnd.0.is_null() {
+            println!("Creating window...");
             self.create_window()?;
+            println!("Window created with HWND: {:?}", self.hwnd());
+
+            // Create child controls after window is created
+            println!("Creating child controls...");
+            self.create_child_controls()?;
         }
 
         unsafe {
-            ShowWindow(self.hwnd(), SW_SHOW);
+            println!("Calling ShowWindow...");
+            let result = ShowWindow(self.hwnd(), SW_SHOW);
+            println!("ShowWindow result: {:?}", result);
             let _ = UpdateWindow(self.hwnd());
+            println!("UpdateWindow called");
         }
 
         *self.inner.is_visible.write() = true;
@@ -262,7 +304,7 @@ impl Window {
         let hwnd = self.hwnd();
         if !hwnd.0.is_null() {
             unsafe {
-                ShowWindow(hwnd, SW_HIDE);
+                let _ = ShowWindow(hwnd, SW_HIDE);
             }
         }
 
@@ -305,14 +347,64 @@ impl Window {
 
     /// Set the window content.
     pub fn set_content(&self, content: impl Into<UIElement>) -> Result<()> {
-        let content = content.into();
-        *self.inner.content.write() = Some(content.clone());
+        let content_elem = content.into();
+        *self.inner.content.write() = Some(content_elem.clone());
 
-        // If window is created, create child controls
+        // If window already exists, create the control immediately
         let hwnd = self.hwnd();
         if !hwnd.0.is_null() {
-            // TODO: Create child window for content
-            // This will be implemented when we have UIElement properly working
+            println!("Window exists, creating child control immediately");
+            self.create_child_controls()?;
+        } else {
+            println!("Window doesn't exist yet, will create controls on show()");
+        }
+
+        Ok(())
+    }
+
+    /// Add a control to the window.
+    ///
+    /// This method stores the control and will automatically create it
+    /// when the window is shown. If the window is already visible,
+    /// the control is created immediately.
+    pub fn add_control(&self, control: impl crate::controls::Control + 'static) -> Result<()> {
+        let control_arc = Arc::new(control);
+        self.inner.controls.write().push(control_arc.clone());
+
+        // If window already exists, create the control immediately
+        let hwnd = self.hwnd();
+        if !hwnd.0.is_null() {
+            println!("Window exists, creating control immediately");
+            control_arc.create_control(hwnd)?;
+        } else {
+            println!("Window doesn't exist yet, will create control on show()");
+        }
+
+        Ok(())
+    }
+
+    /// Get all controls added to this window.
+    pub fn controls(&self) -> Vec<Arc<dyn crate::controls::Control>> {
+        self.inner.controls.read().clone()
+    }
+
+    /// Create all child controls after the window is shown.
+    /// This must be called after the window HWND exists.
+    fn create_child_controls(&self) -> Result<()> {
+        let hwnd = self.hwnd();
+        if hwnd.0.is_null() {
+            return Err(Error::window_creation("Window HWND is null"));
+        }
+
+        println!("Creating {} child controls for window HWND: {:?}",
+                 self.inner.controls.read().len(), hwnd);
+
+        // Create all stored controls
+        for control in self.inner.controls.read().iter() {
+            if !control.is_created() {
+                println!("Creating control: {:?}", control);
+                control.create_control(hwnd)?;
+            }
         }
 
         Ok(())
@@ -328,7 +420,7 @@ impl Window {
         let hwnd = self.hwnd();
         if !hwnd.0.is_null() {
             unsafe {
-                ShowWindow(hwnd, SW_MAXIMIZE);
+                let _ = ShowWindow(hwnd, SW_MAXIMIZE);
             }
         }
         Ok(())
@@ -339,7 +431,7 @@ impl Window {
         let hwnd = self.hwnd();
         if !hwnd.0.is_null() {
             unsafe {
-                ShowWindow(hwnd, SW_MINIMIZE);
+                let _ = ShowWindow(hwnd, SW_MINIMIZE);
             }
         }
         Ok(())
@@ -350,10 +442,46 @@ impl Window {
         let hwnd = self.hwnd();
         if !hwnd.0.is_null() {
             unsafe {
-                ShowWindow(hwnd, SW_RESTORE);
+                let _ = ShowWindow(hwnd, SW_RESTORE);
             }
         }
         Ok(())
+    }
+
+    /// Enable XAML Islands hosting in this window.
+    ///
+    /// This creates a DesktopWindowXamlSource and attaches it to the window,
+    /// allowing XAML content to be displayed.
+    pub fn enable_xaml_islands(&self) -> Result<()> {
+        // Initialize XAML Islands
+        crate::xaml_islands::initialize()?;
+
+        // Create the XAML Island host
+        let host = crate::xaml_islands::XamlIslandHost::new(self)?;
+
+        // Update the island size to match the window
+        let (width, height) = self.size();
+        host.update_size(width, height)?;
+
+        // Show the island
+        host.show()?;
+
+        // Store the host
+        *self.inner.xaml_island.write() = Some(host);
+
+        println!("✅ XAML Islands enabled for window");
+
+        Ok(())
+    }
+
+    /// Get the XAML Island host, if XAML Islands are enabled.
+    pub fn xaml_island(&self) -> Option<crate::xaml_islands::XamlIslandHost> {
+        self.inner.xaml_island.read().clone()
+    }
+
+    /// Check if XAML Islands are enabled for this window.
+    pub fn has_xaml_islands(&self) -> bool {
+        self.inner.xaml_island.read().is_some()
     }
 }
 

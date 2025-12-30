@@ -17,98 +17,104 @@ path = "src/lib.rs"
 [[example]]
 name = "basic_window"
 path = "examples/basic_window.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "simple_window"
 path = "examples/simple_window.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "controls_demo"
 path = "examples/controls_demo.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "data_binding"
 path = "examples/data_binding.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "todo_app"
 path = "examples/todo_app.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "counter"
 path = "examples/counter.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "calculator"
 path = "examples/calculator.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "form_demo"
 path = "examples/form_demo.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "settings_panel"
 path = "examples/settings_panel.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "color_picker"
 path = "examples/color_picker.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "timer_stopwatch"
 path = "examples/timer_stopwatch.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "image_gallery"
 path = "examples/image_gallery.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "music_player"
 path = "examples/music_player.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "weather_dashboard"
 path = "examples/weather_dashboard.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "shopping_cart"
 path = "examples/shopping_cart.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "chat_interface"
 path = "examples/chat_interface.rs"
-required-features = ["library-enabled"]
 
 [[example]]
 name = "counter_simple"
 path = "examples/counter_simple.rs"
-required-features = ["library-enabled"]
+
+[[example]]
+name = "trait_demo"
+path = "examples/trait_demo.rs"
+
+[[example]]
+name = "winrt_activation_test"
+path = "examples/winrt_activation_test.rs"
+
+[[example]]
+name = "winrt_activation_with_com"
+path = "examples/winrt_activation_with_com.rs"
+
+[[example]]
+name = "xaml_islands_demo"
+path = "examples/xaml_islands_demo.rs"
+
+[[example]]
+name = "winrt_mvp"
+path = "examples/winrt_mvp.rs"
+
+[[example]]
+name = "pure_winrt_button"
+path = "examples/pure_winrt_button.rs"
 
 [[bin]]
 name = "memory_profile"
 path = "bin/memory_profile.rs"
-required-features = ["dhat-heap", "library-enabled"]
+required-features = ["dhat-heap"]
 
 [dependencies]
-# Microsoft's official Windows crate for WinRT bindings
+# Microsoft's official Windows crate for Win32 and WinRT infrastructure
 windows = { version = "0.58", features = [
     "Foundation",
-    "UI",
     "Win32_Foundation",
     "Win32_System_Com",
     "Win32_System_WinRT",
@@ -153,6 +159,8 @@ optional = true
 
 [build-dependencies]
 windows = "0.58"
+embed-resource = "2.4"
+winres = "0.1"
 
 # Benchmark configuration
 [[bench]]
@@ -194,7 +202,6 @@ debug = true # For profiling
 
 [features]
 default = ["xaml-islands"]
-library-enabled = []
 xaml-islands = []
 uwp = []
 dhat-heap = ["dhat"]

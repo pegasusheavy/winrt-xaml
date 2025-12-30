@@ -5,11 +5,12 @@ use std::sync::Arc;
 use windows::Win32::Foundation::*;
 
 /// A base UI element that wraps a Win32 HWND.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct UIElement {
     inner: Arc<UIElementInner>,
 }
 
+#[derive(Debug)]
 struct UIElementInner {
     hwnd: RwLock<isize>,
     width: RwLock<i32>,
@@ -51,6 +52,16 @@ impl UIElement {
     /// Set the HWND of this element.
     pub fn set_hwnd(&self, hwnd: HWND) {
         *self.inner.hwnd.write() = hwnd.0 as isize;
+    }
+
+    /// Get the position of this element.
+    pub fn position(&self) -> (i32, i32) {
+        (*self.inner.x.read(), *self.inner.y.read())
+    }
+
+    /// Get the size of this element.
+    pub fn size(&self) -> (i32, i32) {
+        (*self.inner.width.read(), *self.inner.height.read())
     }
 
     /// Get the width of this element.

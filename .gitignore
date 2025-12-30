@@ -1,9 +1,70 @@
+# Rust
 /target
 Cargo.lock
 **/*.rs.bk
 *.pdb
+
+# C++ Build Artifacts
+xaml_islands_helper/build/
+xaml_islands_helper/out/
+xaml_islands_helper/.vs/
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
 *.dll
 *.exe
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+*.cmake
+
+# Visual Studio
 .vs/
 .vscode/
 *.user
+*.suo
+*.sln.docstates
+*.userprefs
+*.vcxproj.user
+*.vcxproj.filters
+*.sdf
+*.opensdf
+*.opendb
+*.VC.db
+*.VC.opendb
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# Temporary/Generated Documentation
+*_STATUS.md
+*_COMPLETE.md
+*_QUICKSTART.md
+*_FIXED.md
+RUNTIME_FIXED.md
+
+# OS Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Backup Files
+*~
+*.bak
+*.swp
+*.swo
+
+# Test Artifacts
+*.profraw
+*.profdata
+
+# Logs
+*.log
+
+# Windows shortcuts
+*.lnk

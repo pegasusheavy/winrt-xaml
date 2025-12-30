@@ -1,6 +1,6 @@
 //! Button control implementation using Win32.
 
-use crate::controls::UIElement;
+use crate::controls::{Control, UIElement};
 use crate::error::{Error, Result};
 use crate::events::{ClickEventArgs, EventHandler};
 use parking_lot::RwLock;
@@ -13,15 +13,30 @@ use windows::Win32::{
 };
 
 /// A button control.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Button {
     element: UIElement,
     inner: Arc<ButtonInner>,
 }
 
+#[derive(Debug)]
 struct ButtonInner {
     content: RwLock<String>,
     click: EventHandler<ClickEventArgs>,
+}
+
+impl Control for Button {
+    fn create_control(&self, parent: HWND) -> Result<()> {
+        self.create(parent)
+    }
+
+    fn as_element(&self) -> &UIElement {
+        &self.element
+    }
+
+    fn as_any(&self) -> &dyn std::any::Any {
+        self
+    }
 }
 
 impl Button {
@@ -39,21 +54,27 @@ impl Button {
     }
 
     /// Create the Win32 button control.
-    pub(crate) fn create(&self, parent: HWND) -> Result<()> {
+    pub fn create(&self, parent: HWND) -> Result<()> {
         unsafe {
             let hinstance = GetModuleHandleW(None)?;
             let content = self.inner.content.read().clone();
             let content_wide: Vec<u16> = content.encode_utf16().chain(Some(0)).collect();
+
+            // Get position and size from the element
+            let (x, y) = self.element.position();
+            let (width, height) = self.element.size();
+
+            println!("Creating button at ({}, {}) size {}x{} with text: '{}'", x, y, width, height, content);
 
             let hwnd = CreateWindowExW(
                 WINDOW_EX_STYLE(0),
                 w!("BUTTON"),
                 PCWSTR(content_wide.as_ptr()),
                 WS_CHILD | WS_VISIBLE | WS_TABSTOP | WINDOW_STYLE(BS_PUSHBUTTON as u32),
-                0,
-                0,
-                100,
-                30,
+                x,
+                y,
+                width,
+                height,
                 parent,
                 HMENU(std::ptr::null_mut()),
                 HINSTANCE(hinstance.0),
@@ -64,9 +85,8 @@ impl Button {
                 return Err(Error::control_creation("Failed to create button"));
             }
 
+            println!("Button created successfully with HWND: {:?}", hwnd);
             self.element.set_hwnd(hwnd);
-            self.element.set_width(100);
-            self.element.set_height(30);
 
             Ok(())
         }
@@ -108,6 +128,30 @@ impl Button {
     pub(crate) fn trigger_click(&self) {
         let args = ClickEventArgs::new();
         self.inner.click.invoke(&args);
+    }
+
+    /// Set the width (fluent API).
+    pub fn with_width(self, width: i32) -> Self {
+        self.element.set_width(width);
+        self
+    }
+
+    /// Set the height (fluent API).
+    pub fn with_height(self, height: i32) -> Self {
+        self.element.set_height(height);
+        self
+    }
+
+    /// Set the X position (fluent API).
+    pub fn with_x(self, x: i32) -> Self {
+        self.element.set_x(x);
+        self
+    }
+
+    /// Set the Y position (fluent API).
+    pub fn with_y(self, y: i32) -> Self {
+        self.element.set_y(y);
+        self
     }
 
     /// Get the underlying UI element.

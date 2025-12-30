@@ -40,6 +40,14 @@ pub enum Error {
     #[error("Application error: {0}")]
     Application(String),
 
+    /// Initialization error
+    #[error("Initialization error: {0}")]
+    Initialization(String),
+
+    /// Synchronization error.
+    #[error("Synchronization error: {0}")]
+    Synchronization(String),
+
     /// I/O error
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
@@ -92,6 +100,16 @@ impl Error {
     /// Create an application error.
     pub fn application(msg: impl Into<String>) -> Self {
         Self::Application(msg.into())
+    }
+
+    /// Create an initialization error.
+    pub fn initialization(msg: impl Into<String>) -> Self {
+        Self::Initialization(msg.into())
+    }
+
+    /// Create a synchronization error.
+    pub fn synchronization(msg: impl Into<String>) -> Self {
+        Self::Synchronization(msg.into())
     }
 }
 

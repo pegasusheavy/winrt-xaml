@@ -5,69 +5,56 @@
 use winrt_xaml::prelude::*;
 
 fn main() -> Result<()> {
-    // Initialize logging
     env_logger::init();
+
+    println!("Creating basic window application...");
 
     // Create the application
     let app = Application::new()?;
 
-    // Create a window
+    // Create the main window
     let window = Window::builder()
         .title("Basic WinRT-XAML Window")
-        .size(800, 600)
+        .size(600, 400)
         .build()?;
 
-    // Create the UI using the fluent builder API
-    let content = StackPanel::new()
-        .orientation(Orientation::Vertical)
-        .spacing(20.0)
-        .padding_uniform(30.0)
-        .child(
-            TextBlock::new()
-                .text("Welcome to WinRT-XAML!")
-                .font_size(32.0)
-                .font_weight(FontWeight::Bold)
-                .horizontal_alignment(HorizontalAlignment::Center),
-        )
-        .child(
-            TextBlock::new()
-                .text("This is a simple example demonstrating the library.")
-                .font_size(16.0)
-                .text_wrapping(TextWrapping::Wrap)
-                .horizontal_alignment(HorizontalAlignment::Center),
-        )
-        .child(
-            StackPanel::new()
-                .orientation(Orientation::Horizontal)
-                .spacing(10.0)
-                .horizontal_alignment(HorizontalAlignment::Center)
-                .child(
-                    Button::new()
-                        .content("Click Me!")
-                        .padding_uniform(15.0)
-                        .on_click(|_| {
-                            println!("Button clicked!");
-                        }),
-                )
-                .child(
-                    Button::new()
-                        .content("Exit")
-                        .padding_uniform(15.0)
-                        .on_click(|_| {
-                            if let Some(app) = Application::current() {
-                                app.exit();
-                            }
-                        }),
-                ),
-        );
+    // Create click button
+    let click_button = Button::new()?
+        .with_content("Click Me!")?
+        .with_width(100)
+        .with_height(40)
+        .with_x(150)
+        .with_y(200);
 
-    // Set the window content
-    window.set_content(content)?;
+    let click_count = std::sync::Arc::new(std::sync::atomic::AtomicUsize::new(0));
+    let count_clone = click_count.clone();
+    click_button.click().subscribe(move |_| {
+        let count = count_clone.fetch_add(1, std::sync::atomic::Ordering::SeqCst) + 1;
+        println!("Button clicked {} times!", count);
+    });
 
-    // Center and show the window
-    window.center()?;
+    // Add the button to the window (it will be created automatically)
+    window.add_control(click_button)?;
+
+    // Create exit button
+    let exit_button = Button::new()?
+        .with_content("Exit")?
+        .with_width(100)
+        .with_height(40)
+        .with_x(270)
+        .with_y(200);
+
+    exit_button.click().subscribe(|_| {
+        println!("Exiting application...");
+        std::process::exit(0);
+    });
+
+    // Add the exit button to the window
+    window.add_control(exit_button)?;
+
+    // Show the window (controls will be created automatically)
     window.show()?;
 
-    // Run the application
+    println!("Starting application...");
     app.run()
 }
