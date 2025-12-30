@@ -166,6 +166,50 @@ impl XamlButton {
         Ok(())
     }
 
+    /// Register a click event handler.
+    /// The callback will be called when the button is clicked.
+    /// Note: The callback must be 'static and will be leaked to ensure it remains valid.
+    pub fn on_click<F>(&self, callback: F) -> Result<()>
+    where
+        F: Fn() + Send + 'static,
+    {
+        // Box the callback and convert to a raw pointer
+        let boxed_callback = Box::new(callback);
+        let user_data = Box::into_raw(boxed_callback) as *mut std::ffi::c_void;
+
+        // Define the C callback that will be called by C++
+        extern "C" fn trampoline<F>(user_data: *mut std::ffi::c_void)
+        where
+            F: Fn(),
+        {
+            unsafe {
+                let callback = &*(user_data as *const F);
+                callback();
+            }
+        }
+
+        // Register the click handler
+        let result = unsafe {
+            ffi::xaml_button_register_click(
+                self.handle,
+                trampoline::<F>,
+                user_data,
+            )
+        };
+
+        if result != 0 {
+            // If registration failed, clean up the leaked box
+            unsafe {
+                let _ = Box::from_raw(user_data as *mut F);
+            }
+            return Err(Error::control_creation("Failed to register click handler".to_string()));
+        }
+
+        // Note: The callback is intentionally leaked and will remain valid for the button's lifetime
+        // In a production app, you'd want to store the pointer and clean it up in Drop
+        Ok(())
+    }
+
     /// Convert to UIElement for use in layout containers.
     pub fn as_uielement(&self) -> XamlUIElement {
         let handle = unsafe { ffi::xaml_button_as_uielement(self.handle) };

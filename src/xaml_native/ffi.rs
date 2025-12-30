@@ -69,6 +69,7 @@ extern "C" {
     pub fn xaml_button_destroy(button: XamlButtonHandle);
     pub fn xaml_button_set_content(button: XamlButtonHandle, content: *const u16) -> i32;
     pub fn xaml_button_set_size(button: XamlButtonHandle, width: f64, height: f64) -> i32;
+    pub fn xaml_button_register_click(button: XamlButtonHandle, callback: extern "C" fn(*mut c_void), user_data: *mut c_void) -> i32;
 
     pub fn xaml_textblock_create() -> XamlTextBlockHandle;
     pub fn xaml_textblock_destroy(textblock: XamlTextBlockHandle);

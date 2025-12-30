@@ -117,6 +117,9 @@ name = "winrt_simple_window"
 [[example]]
 name = "winrt_calculator"
 
+[[example]]
+name = "winrt_calculator_functional"
+
 [[bin]]
 name = "memory_profile"
 path = "bin/memory_profile.rs"

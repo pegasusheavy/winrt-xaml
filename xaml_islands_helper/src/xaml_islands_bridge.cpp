@@ -3,6 +3,7 @@
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.UI.Xaml.h>
 #include <winrt/Windows.UI.Xaml.Controls.h>
+#include <winrt/Windows.UI.Xaml.Controls.Primitives.h>
 #include <winrt/Windows.UI.Xaml.Hosting.h>
 #include <Windows.UI.Xaml.Hosting.DesktopWindowXamlSource.h>
 #include <string>
@@ -187,6 +188,39 @@ int xaml_button_set_size(XamlButtonHandle button, double width, double height) {
     }
     catch (...) {
         set_last_error(L"Unknown error in xaml_button_set_size");
+        return -1;
+    }
+}
+
+// Register a click event handler for a button
+int xaml_button_register_click(XamlButtonHandle button, void (*callback)(void* user_data), void* user_data) {
+    if (!button || !callback) {
+        set_last_error(L"Invalid button or callback");
+        return -1;
+    }
+
+    try {
+        auto* btn = reinterpret_cast<std::shared_ptr<Button>*>(button);
+        
+        // Register the Click event handler
+        // We explicitly specify event_token to help the compiler
+        winrt::event_token token = (*btn)->Click([callback, user_data](IInspectable const& sender, RoutedEventArgs const& args) {
+            // Call the C callback from Rust
+            callback(user_data);
+        });
+        
+        // Note: In a production app, you'd want to store this token to unregister later
+        // For now, the event will remain registered for the button's lifetime
+        (void)token; // Suppress unused variable warning
+        
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_button_register_click");
         return -1;
     }
 }

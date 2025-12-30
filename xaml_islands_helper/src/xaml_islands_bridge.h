@@ -69,6 +69,14 @@ XAML_ISLANDS_API int xaml_button_set_size(
     double height
 );
 
+// Register a click event handler for a button
+// The callback should be a function pointer: void (*callback)(void* user_data)
+XAML_ISLANDS_API int xaml_button_register_click(
+    XamlButtonHandle button,
+    void (*callback)(void* user_data),
+    void* user_data
+);
+
 // Set the XAML content of a source (e.g., a button)
 XAML_ISLANDS_API int xaml_source_set_content(
     XamlSourceHandle source,
