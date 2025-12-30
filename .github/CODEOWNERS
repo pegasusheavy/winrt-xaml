@@ -1,0 +1,11 @@
+# Performance-related files should be reviewed by maintainers
+/benches/ @maintainers
+*benchmark*.md @maintainers
+*performance*.md @maintainers
+*optimization*.md @maintainers
+.github/workflows/benchmark*.yml @maintainers
+.github/workflows/performance*.yml @maintainers
+
+# Ensure performance regressions are caught
+Cargo.toml @maintainers
+

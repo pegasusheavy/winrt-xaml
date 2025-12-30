@@ -1,0 +1,227 @@
+name: Performance Tracking
+
+on:
+  push:
+    branches: [ main, master ]
+  schedule:
+    # Run weekly on Monday at 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+env:
+  RUST_BACKTRACE: 1
+  CARGO_TERM_COLOR: always
+
+jobs:
+  track-performance:
+    name: Track Performance Over Time
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Cache dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-tracking-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Run all benchmarks
+      run: |
+        cargo bench --bench infrastructure_test --no-default-features -- --save-baseline tracking-${{ github.sha }}
+        cargo bench --bench optimized_patterns --no-default-features
+
+    - name: Extract performance metrics
+      shell: pwsh
+      run: |
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $commit = "${{ github.sha }}".Substring(0, 7)
+
+        # Create performance log entry
+        $entry = @{
+          timestamp = $timestamp
+          commit = $commit
+          branch = "${{ github.ref_name }}"
+          metrics = @{}
+        }
+
+        # Parse criterion results
+        if (Test-Path "target/criterion") {
+          $benchmarks = Get-ChildItem -Path "target/criterion" -Directory -Recurse -Filter "new"
+
+          foreach ($bench in $benchmarks) {
+            $estimatesPath = Join-Path $bench.Parent.FullName "base/estimates.json"
+            if (Test-Path $estimatesPath) {
+              $estimates = Get-Content $estimatesPath | ConvertFrom-Json
+              $benchName = $bench.Parent.Name
+              $entry.metrics[$benchName] = $estimates.mean.point_estimate
+            }
+          }
+        }
+
+        # Save to tracking file
+        $trackingFile = "performance-tracking.json"
+        $tracking = @()
+
+        if (Test-Path $trackingFile) {
+          $tracking = Get-Content $trackingFile | ConvertFrom-Json
+        }
+
+        $tracking += $entry
+        $tracking | ConvertTo-Json -Depth 10 | Set-Content $trackingFile
+
+        Write-Host "Performance metrics tracked for commit $commit"
+
+    - name: Generate performance trends
+      shell: pwsh
+      run: |
+        if (Test-Path "performance-tracking.json") {
+          $data = Get-Content "performance-tracking.json" | ConvertFrom-Json
+
+          $report = @"
+        # 📈 Performance Trends Report
+
+        Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC")
+
+        ## Recent Performance History
+
+        | Date | Commit | Branch | Key Metrics |
+        |------|--------|--------|-------------|
+        "@
+
+          $recent = $data | Select-Object -Last 10
+          foreach ($entry in $recent) {
+            $date = $entry.timestamp
+            $commit = $entry.commit
+            $branch = $entry.branch
+            $metricsCount = ($entry.metrics | Get-Member -MemberType NoteProperty).Count
+            $report += "`n| $date | ``$commit`` | $branch | $metricsCount benchmarks |"
+          }
+
+          $report += @"
+
+
+        ## Performance Stability
+
+        - Total measurements: $($data.Count)
+        - Tracking since: $($data[0].timestamp)
+        - Latest: $($data[-1].timestamp)
+
+        ## Next Steps
+
+        - Review trends for regressions
+        - Identify optimization opportunities
+        - Validate performance improvements
+
+        "@
+
+          Set-Content -Path "performance-trends.md" -Value $report
+        }
+
+    - name: Upload tracking data
+      uses: actions/upload-artifact@v4
+      with:
+        name: performance-tracking-${{ github.sha }}
+        path: |
+          performance-tracking.json
+          performance-trends.md
+          target/criterion/
+        retention-days: 90
+
+    - name: Commit tracking data
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add performance-tracking.json performance-trends.md || true
+        git diff --staged --quiet || git commit -m "chore: update performance tracking data [skip ci]"
+        git push || true
+
+  regression-check:
+    name: Check for Performance Regressions
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 50  # Get enough history for comparison
+
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Cache dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-regression-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Run current benchmarks
+      run: |
+        cargo bench --bench infrastructure_test --no-default-features -- --save-baseline current
+
+    - name: Checkout previous commit
+      run: |
+        git checkout HEAD~1
+
+    - name: Run previous benchmarks
+      run: |
+        cargo bench --bench infrastructure_test --no-default-features -- --save-baseline previous || true
+
+    - name: Checkout current commit
+      run: |
+        git checkout -
+
+    - name: Compare and detect regressions
+      shell: pwsh
+      run: |
+        cargo bench --bench infrastructure_test --no-default-features -- --baseline previous > regression-check.txt 2>&1 || true
+
+        $output = Get-Content regression-check.txt -Raw
+
+        # Look for performance regressions (>10% slower)
+        $regressions = $output | Select-String -Pattern "change:.*\+[0-9]{2,}\.[0-9]+%" -AllMatches
+
+        if ($regressions.Matches.Count -gt 0) {
+          Write-Host "⚠️ Performance regressions detected!"
+          Write-Host $output
+
+          # Create issue comment format
+          $report = @"
+        ## 🚨 Performance Regression Alert
+
+        Detected $($regressions.Matches.Count) potential performance regression(s) in this commit.
+
+        ### Details
+        ``````
+        $output
+        ``````
+
+        Please review these changes and ensure they are intentional.
+        "@
+
+          Set-Content -Path "regression-report.md" -Value $report
+
+          # Fail the job if regressions found
+          exit 1
+        } else {
+          Write-Host "✅ No significant performance regressions detected"
+        }
+
+    - name: Upload regression report
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: regression-report
+        path: regression-report.md
+        retention-days: 30
+

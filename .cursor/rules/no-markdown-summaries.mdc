@@ -1,0 +1,112 @@
+---
+title: No Markdown Summaries
+description: Do not create markdown summaries of completed tasks unless explicitly requested
+tags: [documentation, workflow, preferences]
+---
+
+# No Markdown Summaries Rule
+
+## Important: Do Not Create Task Summaries
+
+**NEVER** create markdown files summarizing completed work unless the user explicitly requests it.
+
+## What NOT to Create
+
+❌ **DO NOT** create files like:
+- `TASK_SUMMARY.md`
+- `WORK_COMPLETED.md`
+- `CHANGES_SUMMARY.md`
+- `IMPLEMENTATION_SUMMARY.md`
+- `SESSION_NOTES.md`
+- `FINAL_STATUS.md`
+- `FINAL_REPORT.md`
+- `COMPLETION_SUMMARY.md`
+- `REWRITE_COMPLETE.md` (unless explicitly requested)
+- `BENCHMARKING_SUMMARY.md`
+- `PERFORMANCE_ANALYSIS.md`
+- `STATUS_UPDATE.md`
+- `PROGRESS_REPORT.md`
+- Any similar summary/recap/status/completion documents
+
+## When This Rule Applies
+
+This rule applies to:
+- ✅ End of work sessions
+- ✅ After completing tasks
+- ✅ After major changes
+- ✅ After implementing features
+- ✅ After bug fixes
+- ✅ After any significant work
+
+## Exceptions
+
+**ONLY** create summary markdown files if:
+1. The user **explicitly asks** for a summary document
+2. The user requests documentation of changes
+3. It's part of the project's documentation requirements (e.g., CHANGELOG.md, CONTRIBUTING.md)
+
+## What TO Do Instead
+
+Instead of creating summary files:
+1. ✅ Provide verbal summary in the conversation
+2. ✅ Update existing relevant documentation
+3. ✅ Update CHANGELOG.md if one exists
+4. ✅ Commit messages should capture the work done
+5. ✅ Let git history speak for itself
+
+## Examples
+
+### ❌ BAD: Unsolicited Summary
+```
+User: "fix the bug"
+AI: *fixes bug* *creates BUG_FIX_SUMMARY.md*
+```
+
+### ✅ GOOD: No Summary
+```
+User: "fix the bug"
+AI: *fixes bug* "Bug fixed! The issue was..."
+```
+
+### ✅ GOOD: Requested Summary
+```
+User: "fix the bug and document what you did in a summary file"
+AI: *fixes bug* *creates BUG_FIX_SUMMARY.md*
+```
+
+## Rationale
+
+- The user prefers concise, action-focused work
+- Git history and existing docs are sufficient
+- Unnecessary files create clutter
+- The conversation itself serves as a record
+- Summary files quickly become outdated
+- They duplicate information already in git/conversation
+
+## Critical Reminder
+
+🚨 **DEFAULT BEHAVIOR**: Do the work → Report verbally → Move on
+
+**NO SUMMARY FILES** unless the user says:
+- "create a summary document"
+- "document this in a file"
+- "write up what we did"
+- Or similar explicit requests
+
+## Project-Specific Allowed Files
+
+These are **ALLOWED** as they serve specific purposes:
+- ✅ `README.md` - Project introduction
+- ✅ `CHANGELOG.md` - Version history
+- ✅ `CONTRIBUTING.md` - Contribution guidelines
+- ✅ `LICENSE`, `LICENSE-MIT`, `LICENSE-APACHE` - Legal documents
+- ✅ `SECURITY.md` - Security policy
+- ✅ `CODE_OF_CONDUCT.md` - Community standards
+- ✅ `IMPLEMENTATION_TODO.md` - **Only if** explicitly requested as a roadmap
+- ✅ `REWRITE_STATUS.md` - **Only if** explicitly requested for tracking
+
+Everything else: **Ask first or don't create it!**
+
+---
+
+**Remember**: Just do the work and report verbally. Don't create summary documents unless asked!

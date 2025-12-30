@@ -1,0 +1,298 @@
+---
+title: Performance Optimization Rules
+description: Enforce high-performance coding patterns for WinRT-XAML based on benchmarking results
+tags: [performance, optimization, rust, benchmarking]
+---
+
+# Performance Optimization Rules
+
+These rules are based on comprehensive benchmarking that shows **61.6x average performance improvements** when applied correctly.
+
+## State Access Patterns
+
+### ❌ DON'T: Clone entire state unless necessary
+```rust
+// BAD: Clones everything (122ns)
+fn get_count(state: &Arc<RwLock<AppState>>) -> i32 {
+    state.read().clone().count
+}
+```
+
+### ✅ DO: Read only required fields
+```rust
+// GOOD: Direct field access (11ns) - 10.6x faster
+fn get_count(state: &Arc<RwLock<AppState>>) -> i32 {
+    state.read().count
+}
+```
+
+**Impact**: 10.6x faster state access
+
+---
+
+### ❌ DON'T: Lock inside loops
+```rust
+// BAD: Locks 10 times (115ns)
+for i in 0..10 {
+    let value = state.read().value;
+    process(value);
+}
+```
+
+### ✅ DO: Batch multiple reads under single lock
+```rust
+// GOOD: Lock once (24ns) - 4.7x faster
+let guard = state.read();
+for i in 0..10 {
+    let value = guard.value;
+    process(value);
+}
+```
+
+**Impact**: 4.7x faster batch operations
+
+---
+
+### ✅ DO: Keep write locks as short as possible
+```rust
+// GOOD: Minimal lock duration
+{
+    let mut guard = state.write();
+    guard.count += 1;
+} // Lock released here
+
+// Do heavy work outside lock
+expensive_operation();
+```
+
+---
+
+## Collection Patterns
+
+### ❌ DON'T: Build vectors without pre-allocation
+```rust
+// BAD: Multiple reallocations (859ns)
+let mut items = Vec::new();
+for i in 0..1000 {
+    items.push(i);
+}
+```
+
+### ✅ DO: Use collect() for iterators
+```rust
+// GOOD: Single allocation (56ns) - 15.3x faster
+let items: Vec<i32> = (0..1000).collect();
+```
+
+**Impact**: 15.3x faster vec creation
+
+---
+
+### ✅ DO: Pre-allocate with with_capacity() when size known
+```rust
+// GOOD: Pre-allocated (510ns) - 1.7x faster than Vec::new()
+let mut items = Vec::with_capacity(1000);
+for i in 0..1000 {
+    items.push(i);
+}
+```
+
+---
+
+### ❌ DON'T: Pass owned Vec when reference works
+```rust
+// BAD: Forces caller to clone (42ns)
+fn process_items(items: Vec<Item>) {
+    for item in items {
+        render(item);
+    }
+}
+// Caller must: process_items(my_items.clone());
+```
+
+### ✅ DO: Pass slices (&[T]) instead of owned Vec
+```rust
+// GOOD: Zero-cost borrowing (3.5ns) - 12x faster
+fn process_items(items: &[Item]) {
+    for item in items {
+        render(item);
+    }
+}
+// Caller can: process_items(&my_items);
+```
+
+**Impact**: 12x faster collection passing
+
+---
+
+### ✅ DO: Avoid cloning large collections
+```rust
+// GOOD: Only clone what you need
+let needed = large_vec[0..10].to_vec();  // Clone 10 items
+// Or better: use references
+let needed = &large_vec[0..10];  // 12x faster
+```
+
+---
+
+## Resource Management
+
+### ❌ DON'T: Create new Arc in hot paths
+```rust
+// BAD: Allocates every time (50ns)
+fn get_button_brush() -> Arc<Brush> {
+    Arc::new(Brush::solid_color(Color::BLUE))
+}
+```
+
+### ✅ DO: Cache common brushes/colors in lazy_static
+```rust
+// GOOD: Cached (0.19ns) - 265x faster!
+lazy_static! {
+    static ref BUTTON_BRUSH: Arc<Brush> =
+        Arc::new(Brush::solid_color(Color::BLUE));
+}
+
+fn get_button_brush() -> &'static Arc<Brush> {
+    &BUTTON_BRUSH
+}
+```
+
+**Impact**: 265x faster resource access (biggest win!)
+
+---
+
+### ✅ DO: Reuse Arc instances
+```rust
+// GOOD: Arc clone is cheap (8ns vs 50ns for new)
+let shared = Arc::new(expensive_resource);
+let clone1 = shared.clone();  // Just increments ref count
+let clone2 = shared.clone();  // 6x cheaper than Arc::new()
+```
+
+---
+
+### ✅ DO: Consider resource pooling for expensive objects
+```rust
+// GOOD: For frequently created/destroyed objects
+struct ResourcePool<T> {
+    available: Vec<Arc<T>>,
+}
+
+impl<T> ResourcePool<T> {
+    fn acquire(&mut self) -> Arc<T> {
+        self.available.pop().unwrap_or_else(|| {
+            Arc::new(create_expensive_resource())
+        })
+    }
+
+    fn release(&mut self, resource: Arc<T>) {
+        if Arc::strong_count(&resource) == 1 {
+            self.available.push(resource);
+        }
+    }
+}
+```
+
+---
+
+## Locking Patterns
+
+### ✅ DO: Use RwLock for read-heavy scenarios
+```rust
+// GOOD: Multiple readers can proceed simultaneously
+let state = Arc::new(RwLock::new(data));
+
+// Many threads can read at once
+let reader1 = state.read();  // ✅ Allowed
+let reader2 = state.read();  // ✅ Allowed
+let reader3 = state.read();  // ✅ Allowed
+
+// Only one writer at a time
+let writer = state.write();  // ⏸️ Blocks until readers done
+```
+
+---
+
+### ✅ DO: Release locks before heavy computation
+```rust
+// GOOD: Minimize lock contention
+let data_to_process = {
+    let guard = state.read();
+    guard.clone_minimal_data()  // Only clone what's needed
+}; // Lock released here
+
+// Process outside the lock
+let result = expensive_computation(data_to_process);
+
+// Write result back with minimal lock time
+{
+    let mut guard = state.write();
+    guard.result = result;
+}
+```
+
+---
+
+## Performance Checklist
+
+Before committing code, verify:
+
+### State Access
+- [ ] No `state.read().clone()` unless absolutely necessary
+- [ ] Direct field access instead of full clone
+- [ ] Locks acquired once for batch operations
+- [ ] Write locks held for minimal time
+
+### Collections
+- [ ] `collect()` used for iterator-based vec creation
+- [ ] `with_capacity()` used when size is known
+- [ ] Functions accept `&[T]` instead of `Vec<T>` where possible
+- [ ] No unnecessary cloning of large collections
+
+### Resources
+- [ ] Common resources (brushes, colors, styles) cached in `lazy_static`
+- [ ] Arc instances reused, not recreated
+- [ ] No `Arc::new()` in loops or hot paths
+- [ ] Resource pools considered for frequently created objects
+
+### Locks
+- [ ] Batch operations under single lock acquisition
+- [ ] No locks acquired inside loops
+- [ ] Heavy computation done outside locks
+- [ ] RwLock used for read-heavy access patterns
+
+## Performance Targets
+
+Ensure operations meet these targets:
+
+| Operation | Target | Current Best |
+|-----------|--------|--------------|
+| State read | < 15ns | 11.5ns ✅ |
+| State write | < 15ns | 10.7ns ✅ |
+| Vec creation (100 items) | < 100ns | 56ns ✅ |
+| Collection passing | < 10ns | 3.5ns ✅ |
+| Arc access | < 10ns | 0.2ns ✅ |
+| Lock acquisition | < 15ns | 12ns ✅ |
+
+## Benchmarking
+
+When making performance-sensitive changes:
+
+```powershell
+# Before changes
+.\scripts\benchmark-local.ps1 -Save before
+
+# After changes
+.\scripts\benchmark-local.ps1 -Compare -Baseline before
+```
+
+## References
+
+- [OPTIMIZATION_GUIDE.md](../../OPTIMIZATION_GUIDE.md) - Detailed patterns and examples
+- [PERFORMANCE_ANALYSIS.md](../../PERFORMANCE_ANALYSIS.md) - Benchmark results
+- [README_BENCHMARKS.md](../../README_BENCHMARKS.md) - Quick reference
+
+---
+
+**Remember**: These patterns provide **10-265x performance improvements** when applied correctly. Profile before optimizing, and measure to verify improvements!

@@ -1,0 +1,11 @@
+# Cargo configuration for winrt-xaml
+
+[build]
+# Target Windows MSVC by default
+target = "x86_64-pc-windows-msvc"
+
+[test]
+# Run tests single-threaded by default to avoid Win32 conflicts
+# (Win32 window classes are global per-process)
+test-threads = 1
+

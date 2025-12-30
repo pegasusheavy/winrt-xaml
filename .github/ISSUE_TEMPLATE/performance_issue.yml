@@ -1,0 +1,107 @@
+name: ⚡ Performance Issue
+description: Report performance problems or regressions
+title: "[Performance]: "
+labels: ["performance", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Performance is critical to this project. Please provide benchmark data.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Performance Issue Description
+      description: Describe the performance problem
+      placeholder: What is slow or inefficient?
+    validations:
+      required: true
+
+  - type: textarea
+    id: benchmark
+    attributes:
+      label: Benchmark Results
+      description: Provide benchmark data
+      render: shell
+      placeholder: |
+        cargo bench --bench infrastructure_test
+
+        Operation X: 150ns (expected: <100ns)
+        Operation Y: 2ms (expected: <1ms)
+    validations:
+      required: true
+
+  - type: textarea
+    id: profiling
+    attributes:
+      label: Profiling Data
+      description: Include profiling output if available
+      render: shell
+      placeholder: |
+        Profiling results, flamegraphs, etc.
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Code Sample
+      description: Code that demonstrates the issue
+      render: rust
+      placeholder: |
+        // Slow code
+        for item in items {
+            expensive_operation();
+        }
+
+  - type: input
+    id: regression
+    attributes:
+      label: Regression?
+      description: Is this a regression from a previous version?
+      placeholder: "Yes, from version 0.0.9 to 0.1.0"
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Performance
+      description: What performance do you expect?
+      placeholder: Should complete in < 100ns
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Performance
+      description: What is the actual performance?
+      placeholder: Currently takes 500ns
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How critical is this performance issue?
+      options:
+        - "Low - Minor optimization"
+        - "Medium - Noticeable impact"
+        - "High - Major bottleneck"
+        - "Critical - Unusable"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other relevant information
+      placeholder: Environment details, dependencies, etc.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I have run benchmarks
+          required: true
+        - label: I have checked existing performance issues
+          required: true
+        - label: I have profiled the code
+          required: false
+

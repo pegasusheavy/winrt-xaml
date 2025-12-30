@@ -1,0 +1,194 @@
+name: Benchmark Performance
+
+on:
+  pull_request:
+    branches: [ main, master ]
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+env:
+  RUST_BACKTRACE: 1
+  CARGO_TERM_COLOR: always
+
+jobs:
+  benchmark:
+    name: Run Benchmarks
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Need full history for comparison
+
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: stable
+
+    - name: Cache cargo registry
+      uses: actions/cache@v4
+      with:
+        path: ~/.cargo/registry
+        key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Cache cargo index
+      uses: actions/cache@v4
+      with:
+        path: ~/.cargo/git
+        key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Cache target directory
+      uses: actions/cache@v4
+      with:
+        path: target
+        key: ${{ runner.os }}-target-bench-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Run infrastructure benchmarks
+      run: |
+        cargo bench --bench infrastructure_test --no-default-features -- --save-baseline current
+
+    - name: Run optimized patterns benchmarks
+      run: |
+        cargo bench --bench optimized_patterns --no-default-features
+
+    - name: Store benchmark results
+      uses: benchmark-action/github-action-benchmark@v1
+      with:
+        name: WinRT-XAML Benchmarks
+        tool: 'criterion'
+        output-file-path: target/criterion/infrastructure_test/base/estimates.json
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        auto-push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        alert-threshold: '110%'  # Alert if 10% slower
+        comment-on-alert: true
+        fail-on-alert: false
+        alert-comment-cc-users: '@maintainers'
+
+    - name: Upload benchmark results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: benchmark-results
+        path: |
+          target/criterion/
+          !target/criterion/**/raw.csv
+        retention-days: 30
+
+    - name: Generate benchmark report
+      if: github.event_name == 'pull_request'
+      run: |
+        echo "# Benchmark Results 📊" > benchmark-report.md
+        echo "" >> benchmark-report.md
+        echo "## Performance Summary" >> benchmark-report.md
+        echo "" >> benchmark-report.md
+        echo "Benchmarks completed successfully. Check the artifacts for detailed results." >> benchmark-report.md
+        echo "" >> benchmark-report.md
+        echo "### Quick Stats" >> benchmark-report.md
+        echo "- ✅ Infrastructure tests: Completed" >> benchmark-report.md
+        echo "- ✅ Optimized patterns: Completed" >> benchmark-report.md
+        echo "" >> benchmark-report.md
+        echo "### View Results" >> benchmark-report.md
+        echo "Download the benchmark-results artifact to view detailed HTML reports." >> benchmark-report.md
+
+    - name: Comment PR with results
+      uses: actions/github-script@v7
+      if: github.event_name == 'pull_request'
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const report = fs.readFileSync('benchmark-report.md', 'utf8');
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: report
+          });
+
+  benchmark-comparison:
+    name: Compare with Baseline
+    runs-on: windows-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+    - name: Checkout PR branch
+      uses: actions/checkout@v4
+
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Cache dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Run benchmarks (PR)
+      run: |
+        cargo bench --bench infrastructure_test --no-default-features -- --save-baseline pr
+
+    - name: Checkout base branch
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.base_ref }}
+        clean: false
+
+    - name: Run benchmarks (base)
+      run: |
+        cargo bench --bench infrastructure_test --no-default-features -- --save-baseline base
+
+    - name: Checkout PR branch again
+      uses: actions/checkout@v4
+      with:
+        clean: false
+
+    - name: Compare benchmarks
+      run: |
+        cargo bench --bench infrastructure_test --no-default-features -- --baseline base > comparison.txt 2>&1 || true
+
+    - name: Parse and report comparison
+      shell: pwsh
+      run: |
+        $comparison = Get-Content comparison.txt -Raw
+
+        $report = @"
+        # 📊 Benchmark Comparison Report
+
+        ## Performance Changes from Base Branch
+
+        ``````
+        $comparison
+        ``````
+
+        ### Legend
+        - 🟢 **Improvement**: Faster than base
+        - 🔴 **Regression**: Slower than base
+        - ⚪ **No Change**: Within noise threshold
+
+        ### Thresholds
+        - ⚠️ **Warning**: >5% regression
+        - 🚨 **Alert**: >10% regression
+
+        "@
+
+        Set-Content -Path comparison-report.md -Value $report
+
+    - name: Comment PR with comparison
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const report = fs.readFileSync('comparison-report.md', 'utf8');
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: report
+          });
+

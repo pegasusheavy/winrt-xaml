@@ -1,0 +1,3953 @@
+   Compiling winrt-xaml v0.1.0 (F:\Projects\winrt-xaml)
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\app.rs:52:26
+   |
+52 |         use windows::UI::Xaml::Hosting::WindowsXamlManager;
+   |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\app.rs:46:28
+   |
+46 |     _manager: windows::UI::Xaml::Hosting::WindowsXamlManager,
+   |                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\button.rs:31:26
+   |
+31 |     button: windows::UI::Xaml::Controls::Button,
+   |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\button.rs:65:52
+   |
+65 |     pub fn as_winrt_button(&self) -> &windows::UI::Xaml::Controls::Button {
+   |                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\button.rs:167:35
+    |
+167 |         let control: windows::UI::Xaml::Controls::Control = self.inner.button.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\button.rs:174:35
+    |
+174 |         let control: windows::UI::Xaml::Controls::Control = self.inner.button.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\button.rs:186:35
+    |
+186 |         let control: windows::UI::Xaml::Controls::Control = self.inner.button.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\button.rs:199:35
+    |
+199 |         let control: windows::UI::Xaml::Controls::Control = self.inner.button.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\checkbox.rs:31:28
+   |
+31 |     checkbox: windows::UI::Xaml::Controls::CheckBox,
+   |                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\checkbox.rs:58:54
+   |
+58 |     pub fn as_winrt_checkbox(&self) -> &windows::UI::Xaml::Controls::CheckBox {
+   |                                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\checkbox.rs:81:41
+   |
+81 |         let toggle_button: windows::UI::Xaml::Controls::Primitives::ToggleButton =
+   |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\checkbox.rs:89:41
+   |
+89 |         let toggle_button: windows::UI::Xaml::Controls::Primitives::ToggleButton =
+   |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\checkbox.rs:101:41
+    |
+101 |         let toggle_button: windows::UI::Xaml::Controls::Primitives::ToggleButton =
+    |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\checkbox.rs:109:41
+    |
+109 |         let toggle_button: windows::UI::Xaml::Controls::Primitives::ToggleButton =
+    |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\checkbox.rs:128:41
+    |
+128 |         let toggle_button: windows::UI::Xaml::Controls::Primitives::ToggleButton =
+    |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\checkbox.rs:140:35
+    |
+140 |         let control: windows::UI::Xaml::Controls::Control = self.inner.checkbox.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\checkbox.rs:147:35
+    |
+147 |         let control: windows::UI::Xaml::Controls::Control = self.inner.checkbox.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\combobox.rs:32:28
+   |
+32 |     combobox: windows::UI::Xaml::Controls::ComboBox,
+   |                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\combobox.rs:59:54
+   |
+59 |     pub fn as_winrt_combobox(&self) -> &windows::UI::Xaml::Controls::ComboBox {
+   |                                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\combobox.rs:65:41
+   |
+65 |         let items_control: windows::UI::Xaml::Controls::ItemsControl =
+   |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\combobox.rs:84:41
+   |
+84 |         let items_control: windows::UI::Xaml::Controls::ItemsControl =
+   |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\combobox.rs:93:41
+   |
+93 |         let items_control: windows::UI::Xaml::Controls::ItemsControl =
+   |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\combobox.rs:101:36
+    |
+101 |         let selector: windows::UI::Xaml::Controls::Primitives::Selector =
+    |                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\combobox.rs:109:36
+    |
+109 |         let selector: windows::UI::Xaml::Controls::Primitives::Selector =
+    |                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\combobox.rs:116:36
+    |
+116 |         let selector: windows::UI::Xaml::Controls::Primitives::Selector =
+    |                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\combobox.rs:147:36
+    |
+147 |         let selector: windows::UI::Xaml::Controls::Primitives::Selector =
+    |                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\combobox.rs:156:35
+    |
+156 |         let control: windows::UI::Xaml::Controls::Control = self.inner.combobox.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\combobox.rs:163:35
+    |
+163 |         let control: windows::UI::Xaml::Controls::Control = self.inner.combobox.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\image.rs:26:44
+   |
+26 |     pub fn to_winrt(&self) -> windows::UI::Xaml::Media::Stretch {
+   |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\image.rs:53:25
+   |
+53 |     image: windows::UI::Xaml::Controls::Image,
+   |                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\image.rs:75:51
+   |
+75 |     pub fn as_winrt_image(&self) -> &windows::UI::Xaml::Controls::Image {
+   |                                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\image.rs:83:41
+   |
+83 |         let bitmap_image = windows::UI::Xaml::Media::Imaging::BitmapImage::new()?;
+   |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\listview.rs:28:44
+   |
+28 |     pub fn to_winrt(&self) -> windows::UI::Xaml::Controls::ListViewSelectionMode {
+   |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\listview.rs:30:49
+   |
+30 |             SelectionMode::None => windows::UI::Xaml::Controls::ListViewSelectionMode::None,
+   |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\listview.rs:31:51
+   |
+31 |             SelectionMode::Single => windows::UI::Xaml::Controls::ListViewSelectionMode::Single,
+   |                                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\listview.rs:32:53
+   |
+32 |             SelectionMode::Multiple => windows::UI::Xaml::Controls::ListViewSelectionMode::Multiple,
+   |                                                     ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\listview.rs:33:53
+   |
+33 |             SelectionMode::Extended => windows::UI::Xaml::Controls::ListViewSelectionMode::Extended,
+   |                                                     ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\listview.rs:58:28
+   |
+58 |     listview: windows::UI::Xaml::Controls::ListView,
+   |                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\listview.rs:85:54
+   |
+85 |     pub fn as_winrt_listview(&self) -> &windows::UI::Xaml::Controls::ListView {
+   |                                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\listview.rs:91:41
+   |
+91 |         let items_control: windows::UI::Xaml::Controls::ItemsControl =
+   |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:110:41
+    |
+110 |         let items_control: windows::UI::Xaml::Controls::ItemsControl =
+    |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:119:41
+    |
+119 |         let items_control: windows::UI::Xaml::Controls::ItemsControl =
+    |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:127:42
+    |
+127 |         let list_view_base: windows::UI::Xaml::Controls::ListViewBase =
+    |                                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:135:36
+    |
+135 |         let selector: windows::UI::Xaml::Controls::Primitives::Selector =
+    |                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:143:36
+    |
+143 |         let selector: windows::UI::Xaml::Controls::Primitives::Selector =
+    |                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:150:36
+    |
+150 |         let selector: windows::UI::Xaml::Controls::Primitives::Selector =
+    |                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:162:41
+    |
+162 |         let items_control: windows::UI::Xaml::Controls::ItemsControl =
+    |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:167:46
+    |
+167 |             let list_view_base: windows::UI::Xaml::Controls::ListViewBase =
+    |                                              ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:188:36
+    |
+188 |         let selector: windows::UI::Xaml::Controls::Primitives::Selector =
+    |                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:197:35
+    |
+197 |         let control: windows::UI::Xaml::Controls::Control = self.inner.listview.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\listview.rs:204:35
+    |
+204 |         let control: windows::UI::Xaml::Controls::Control = self.inner.listview.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\progressbar.rs:27:32
+   |
+27 |     progress_bar: windows::UI::Xaml::Controls::ProgressBar,
+   |                                ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\progressbar.rs:52:57
+   |
+52 |     pub fn as_winrt_progressbar(&self) -> &windows::UI::Xaml::Controls::ProgressBar {
+   |                                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\progressbar.rs:58:38
+   |
+58 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+   |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\progressbar.rs:66:38
+   |
+66 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+   |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\progressbar.rs:73:38
+   |
+73 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+   |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\progressbar.rs:81:38
+   |
+81 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+   |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\progressbar.rs:88:38
+   |
+88 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+   |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\progressbar.rs:96:38
+   |
+96 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+   |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\progressbar.rs:219:35
+    |
+219 |         let control: windows::UI::Xaml::Controls::Control = self.inner.progress_bar.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\progressbar.rs:225:35
+    |
+225 |         let control: windows::UI::Xaml::Controls::Control = self.inner.progress_bar.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\slider.rs:23:44
+   |
+23 |     pub fn to_winrt(&self) -> windows::UI::Xaml::Controls::Orientation {
+   |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\slider.rs:52:26
+   |
+52 |     slider: windows::UI::Xaml::Controls::Slider,
+   |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\slider.rs:79:52
+   |
+79 |     pub fn as_winrt_slider(&self) -> &windows::UI::Xaml::Controls::Slider {
+   |                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\slider.rs:85:38
+   |
+85 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+   |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\slider.rs:93:38
+   |
+93 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+   |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\slider.rs:100:38
+    |
+100 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+    |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\slider.rs:108:38
+    |
+108 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+    |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\slider.rs:115:38
+    |
+115 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+    |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\slider.rs:123:38
+    |
+123 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+    |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\slider.rs:148:26
+    |
+148 |             windows::UI::Xaml::Controls::Primitives::SliderSnapsTo::Ticks
+    |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\slider.rs:150:26
+    |
+150 |             windows::UI::Xaml::Controls::Primitives::SliderSnapsTo::StepValues
+    |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\slider.rs:175:38
+    |
+175 |         let range_base: windows::UI::Xaml::Controls::Primitives::RangeBase =
+    |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\slider.rs:184:35
+    |
+184 |         let control: windows::UI::Xaml::Controls::Control = self.inner.slider.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\slider.rs:191:35
+    |
+191 |         let control: windows::UI::Xaml::Controls::Control = self.inner.slider.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\textblock.rs:30:30
+   |
+30 |     text_block: windows::UI::Xaml::Controls::TextBlock,
+   |                              ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\textblock.rs:62:55
+   |
+62 |     pub fn as_winrt_textblock(&self) -> &windows::UI::Xaml::Controls::TextBlock {
+   |                                                       ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\textblock.rs:92:40
+   |
+92 |         let font_family = windows::UI::Xaml::Media::FontFamily::CreateInstanceWithName(&family_name)?;
+   |                                        ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\textblock.rs:148:26
+    |
+148 |             windows::UI::Xaml::TextTrimming::CharacterEllipsis
+    |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\textblock.rs:150:26
+    |
+150 |             windows::UI::Xaml::TextTrimming::WordEllipsis
+    |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\textbox.rs:31:28
+   |
+31 |     text_box: windows::UI::Xaml::Controls::TextBox,
+   |                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\textbox.rs:58:53
+   |
+58 |     pub fn as_winrt_textbox(&self) -> &windows::UI::Xaml::Controls::TextBox {
+   |                                                     ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\textbox.rs:164:35
+    |
+164 |         let control: windows::UI::Xaml::Controls::Control = self.inner.text_box.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\textbox.rs:171:35
+    |
+171 |         let control: windows::UI::Xaml::Controls::Control = self.inner.text_box.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\textbox.rs:177:35
+    |
+177 |         let control: windows::UI::Xaml::Controls::Control = self.inner.text_box.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\toggle.rs:33:26
+   |
+33 |     toggle: windows::UI::Xaml::Controls::ToggleSwitch,
+   |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\toggle.rs:60:52
+   |
+60 |     pub fn as_winrt_toggle(&self) -> &windows::UI::Xaml::Controls::ToggleSwitch {
+   |                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\toggle.rs:127:35
+    |
+127 |         let control: windows::UI::Xaml::Controls::Control = self.inner.toggle.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\toggle.rs:134:35
+    |
+134 |         let control: windows::UI::Xaml::Controls::Control = self.inner.toggle.cast()?;
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\uielement.rs:18:41
+   |
+18 |     element: RwLock<Option<windows::UI::Xaml::UIElement>>,
+   |                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\uielement.rs:28:45
+   |
+28 |     pub fn from_winrt(element: windows::UI::Xaml::UIElement) -> Self {
+   |                                             ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\uielement.rs:53:59
+   |
+53 |     pub fn as_winrt_element(&self) -> Result<windows::UI::Xaml::UIElement> {
+   |                                                           ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\uielement.rs:67:49
+   |
+67 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+   |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\uielement.rs:83:30
+   |
+83 |                 windows::UI::Xaml::Visibility::Visible
+   |                              ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\uielement.rs:85:30
+   |
+85 |                 windows::UI::Xaml::Visibility::Collapsed
+   |                              ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\uielement.rs:96:43
+   |
+96 |             Ok(visibility == windows::UI::Xaml::Visibility::Visible)
+   |                                           ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:122:49
+    |
+122 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:131:49
+    |
+131 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:141:49
+    |
+141 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:150:49
+    |
+150 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:160:49
+    |
+160 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:169:49
+    |
+169 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:178:49
+    |
+178 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:187:49
+    |
+187 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:196:49
+    |
+196 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:205:49
+    |
+205 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:215:49
+    |
+215 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:224:49
+    |
+224 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:234:49
+    |
+234 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:243:49
+    |
+243 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:253:49
+    |
+253 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:262:39
+    |
+262 |             let control: windows::UI::Xaml::Controls::Control = element.cast()?;
+    |                                       ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:263:43
+    |
+263 |             Ok(control.Focus(windows::UI::Xaml::FocusState::Programmatic)?)
+    |                                           ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:270:66
+    |
+270 |     pub(crate) fn set_winrt_element(&self, element: windows::UI::Xaml::UIElement) {
+    |                                                                  ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:284:24
+    |
+284 | impl From<windows::UI::Xaml::UIElement> for UIElement {
+    |                        ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\uielement.rs:285:35
+    |
+285 |     fn from(element: windows::UI::Xaml::UIElement) -> Self {
+    |                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:146:44
+    |
+146 |     pub fn to_winrt(&self) -> windows::UI::Xaml::Thickness {
+    |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:147:22
+    |
+147 |         windows::UI::Xaml::Thickness {
+    |                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:156:39
+    |
+156 |     pub fn from_winrt(t: windows::UI::Xaml::Thickness) -> Self {
+    |                                       ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:182:44
+    |
+182 |     pub fn to_winrt(&self) -> windows::UI::Xaml::HorizontalAlignment {
+    |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:192:39
+    |
+192 |     pub fn from_winrt(a: windows::UI::Xaml::HorizontalAlignment) -> Self {
+    |                                       ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:219:44
+    |
+219 |     pub fn to_winrt(&self) -> windows::UI::Xaml::VerticalAlignment {
+    |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:229:39
+    |
+229 |     pub fn from_winrt(a: windows::UI::Xaml::VerticalAlignment) -> Self {
+    |                                       ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:275:44
+    |
+275 |     pub fn to_winrt(&self) -> windows::UI::Xaml::CornerRadius {
+    |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:276:22
+    |
+276 |         windows::UI::Xaml::CornerRadius {
+    |                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Text` in `UI`
+   --> src\controls\mod.rs:315:44
+    |
+315 |     pub fn to_winrt(&self) -> windows::UI::Text::FontWeight {
+    |                                            ^^^^ could not find `Text` in `UI`
+    |
+note: found an item that was configured out
+   --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\UI\mod.rs:20:9
+    |
+ 19 | #[cfg(feature = "UI_Text")]
+    |       ------------------- the item is gated behind the `UI_Text` feature
+ 20 | pub mod Text;
+    |         ^^^^
+help: there is an enum variant `quick_xml::events::Event::Text`; try using the variant's enum
+    |
+315 -     pub fn to_winrt(&self) -> windows::UI::Text::FontWeight {
+315 +     pub fn to_winrt(&self) -> quick_xml::events::Event::FontWeight {
+    |
+
+error[E0433]: failed to resolve: could not find `Text` in `UI`
+   --> src\controls\mod.rs:329:22
+    |
+329 |         windows::UI::Text::FontWeight { Weight: weight }
+    |                      ^^^^ could not find `Text` in `UI`
+    |
+note: found an item that was configured out
+   --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\UI\mod.rs:20:9
+    |
+ 19 | #[cfg(feature = "UI_Text")]
+    |       ------------------- the item is gated behind the `UI_Text` feature
+ 20 | pub mod Text;
+    |         ^^^^
+help: there is an enum variant `quick_xml::events::Event::Text`; try using the variant's enum
+    |
+329 -         windows::UI::Text::FontWeight { Weight: weight }
+329 +         quick_xml::events::Event::FontWeight { Weight: weight }
+    |
+
+error[E0433]: failed to resolve: could not find `Text` in `UI`
+   --> src\controls\mod.rs:347:44
+    |
+347 |     pub fn to_winrt(&self) -> windows::UI::Text::FontStyle {
+    |                                            ^^^^ could not find `Text` in `UI`
+    |
+note: found an item that was configured out
+   --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\UI\mod.rs:20:9
+    |
+ 19 | #[cfg(feature = "UI_Text")]
+    |       ------------------- the item is gated behind the `UI_Text` feature
+ 20 | pub mod Text;
+    |         ^^^^
+help: there is an enum variant `quick_xml::events::Event::Text`; try using the variant's enum
+    |
+347 -     pub fn to_winrt(&self) -> windows::UI::Text::FontStyle {
+347 +     pub fn to_winrt(&self) -> quick_xml::events::Event::FontStyle {
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:372:44
+    |
+372 |     pub fn to_winrt(&self) -> windows::UI::Xaml::TextAlignment {
+    |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:396:44
+    |
+396 |     pub fn to_winrt(&self) -> windows::UI::Xaml::TextWrapping {
+    |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\events\mod.rs:42:70
+   |
+42 |     ) -> TypedEventHandler<windows::core::IInspectable, windows::UI::Xaml::RoutedEventArgs> {
+   |                                                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\events\mod.rs:46:68
+   |
+46 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+   |                                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\events\mod.rs:89:22
+   |
+89 |         windows::UI::Xaml::Controls::TextChangedEventArgs,
+   |                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\events\mod.rs:94:68
+   |
+94 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+   |                                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:135:70
+    |
+135 |     ) -> TypedEventHandler<windows::core::IInspectable, windows::UI::Xaml::RoutedEventArgs> {
+    |                                                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:139:68
+    |
+139 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:156:70
+    |
+156 |     ) -> TypedEventHandler<windows::core::IInspectable, windows::UI::Xaml::RoutedEventArgs> {
+    |                                                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:163:70
+    |
+163 |     ) -> TypedEventHandler<windows::core::IInspectable, windows::UI::Xaml::RoutedEventArgs> {
+    |                                                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:196:22
+    |
+196 |         windows::UI::Xaml::Controls::SelectionChangedEventArgs,
+    |                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:201:68
+    |
+201 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:244:22
+    |
+244 |         windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs,
+    |                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:249:68
+    |
+249 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:290:70
+    |
+290 |     ) -> TypedEventHandler<windows::core::IInspectable, windows::UI::Xaml::RoutedEventArgs> {
+    |                                                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:294:68
+    |
+294 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:350:70
+    |
+350 |     ) -> TypedEventHandler<windows::core::IInspectable, windows::UI::Xaml::Input::PointerRoutedEventArgs>
+    |                                                                      ^^^^ could not find `Xaml` in `UI`
+    |
+help: there is an enum variant `quick_xml::utils::CowRef::Input`; try using the variant's enum
+    |
+350 -     ) -> TypedEventHandler<windows::core::IInspectable, windows::UI::Xaml::Input::PointerRoutedEventArgs>
+350 +     ) -> TypedEventHandler<windows::core::IInspectable, quick_xml::utils::CowRef::PointerRoutedEventArgs>
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:355:68
+    |
+355 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:454:70
+    |
+454 |     ) -> TypedEventHandler<windows::core::IInspectable, windows::UI::Xaml::Input::KeyRoutedEventArgs>
+    |                                                                      ^^^^ could not find `Xaml` in `UI`
+    |
+help: there is an enum variant `quick_xml::utils::CowRef::Input`; try using the variant's enum
+    |
+454 -     ) -> TypedEventHandler<windows::core::IInspectable, windows::UI::Xaml::Input::KeyRoutedEventArgs>
+454 +     ) -> TypedEventHandler<windows::core::IInspectable, quick_xml::utils::CowRef::KeyRoutedEventArgs>
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\events\mod.rs:459:68
+    |
+459 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `System` in `windows`
+   --> src\events\mod.rs:470:56
+    |
+470 |                     key: args.Key().unwrap_or(windows::System::VirtualKey::None).0 as u32,
+    |                                                        ^^^^^^ could not find `System` in `windows`
+    |
+note: found an item that was configured out
+   --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows/mod.rs:36:9
+    |
+ 35 | #[cfg(feature = "System")]
+    |       ------------------ the item is gated behind the `System` feature
+ 36 | pub mod System;
+    |         ^^^^^^
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:25:26
+   |
+25 |     canvas: windows::UI::Xaml::Controls::Canvas,
+   |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:47:52
+   |
+47 |     pub fn as_winrt_canvas(&self) -> &windows::UI::Xaml::Controls::Canvas {
+   |                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:61:33
+   |
+61 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.canvas.cast()?;
+   |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\canvas.rs:172:33
+    |
+172 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.canvas.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\canvas.rs:189:33
+    |
+189 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.canvas.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\canvas.rs:196:33
+    |
+196 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.canvas.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\grid.rs:21:44
+   |
+21 |     pub fn to_winrt(&self) -> windows::UI::Xaml::GridLength {
+   |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\grid.rs:23:46
+   |
+23 |             GridLength::Auto => windows::UI::Xaml::GridLength {
+   |                                              ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\grid.rs:25:44
+   |
+25 |                 GridUnitType: windows::UI::Xaml::GridUnitType::Auto,
+   |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\grid.rs:27:50
+   |
+27 |             GridLength::Pixel(v) => windows::UI::Xaml::GridLength {
+   |                                                  ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\grid.rs:29:44
+   |
+29 |                 GridUnitType: windows::UI::Xaml::GridUnitType::Pixel,
+   |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\grid.rs:31:49
+   |
+31 |             GridLength::Star(v) => windows::UI::Xaml::GridLength {
+   |                                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\grid.rs:33:44
+   |
+33 |                 GridUnitType: windows::UI::Xaml::GridUnitType::Star,
+   |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\grid.rs:88:51
+   |
+88 |     pub fn to_winrt(&self) -> Result<windows::UI::Xaml::Controls::RowDefinition> {
+   |                                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:154:51
+    |
+154 |     pub fn to_winrt(&self) -> Result<windows::UI::Xaml::Controls::ColumnDefinition> {
+    |                                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:191:24
+    |
+191 |     grid: windows::UI::Xaml::Controls::Grid,
+    |                        ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:213:50
+    |
+213 |     pub fn as_winrt_grid(&self) -> &windows::UI::Xaml::Controls::Grid {
+    |                                                  ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:270:33
+    |
+270 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.grid.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:295:33
+    |
+295 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.grid.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:434:33
+    |
+434 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.grid.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:451:33
+    |
+451 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.grid.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:458:33
+    |
+458 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.grid.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\stack_panel.rs:20:44
+   |
+20 |     pub fn to_winrt(&self) -> windows::UI::Xaml::Controls::Orientation {
+   |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\stack_panel.rs:28:39
+   |
+28 |     pub fn from_winrt(o: windows::UI::Xaml::Controls::Orientation) -> Self {
+   |                                       ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\stack_panel.rs:57:25
+   |
+57 |     panel: windows::UI::Xaml::Controls::StackPanel,
+   |                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\stack_panel.rs:79:51
+   |
+79 |     pub fn as_winrt_panel(&self) -> &windows::UI::Xaml::Controls::StackPanel {
+   |                                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\stack_panel.rs:211:33
+    |
+211 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.panel.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\stack_panel.rs:219:33
+    |
+219 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.panel.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\stack_panel.rs:237:33
+    |
+237 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.panel.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\stack_panel.rs:244:33
+    |
+244 |         let panel: windows::UI::Xaml::Controls::Panel = self.inner.panel.cast()?;
+    |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\border.rs:28:26
+   |
+28 |     border: windows::UI::Xaml::Controls::Border,
+   |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\border.rs:50:52
+   |
+50 |     pub fn as_winrt_border(&self) -> &windows::UI::Xaml::Controls::Border {
+   |                                                    ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\scroll_viewer.rs:23:44
+   |
+23 |     pub fn to_winrt(&self) -> windows::UI::Xaml::Controls::ScrollBarVisibility {
+   |                                            ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\scroll_viewer.rs:61:33
+   |
+61 |     scroll_viewer: windows::UI::Xaml::Controls::ScrollViewer,
+   |                                 ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\scroll_viewer.rs:86:58
+   |
+86 |     pub fn as_winrt_scrollviewer(&self) -> &windows::UI::Xaml::Controls::ScrollViewer {
+   |                                                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\scroll_viewer.rs:102:62
+    |
+102 |             if let Ok(element) = content.cast::<windows::UI::Xaml::UIElement>() {
+    |                                                              ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\scroll_viewer.rs:185:26
+    |
+185 |             windows::UI::Xaml::Controls::ScrollMode::Enabled
+    |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\scroll_viewer.rs:187:26
+    |
+187 |             windows::UI::Xaml::Controls::ScrollMode::Disabled
+    |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\scroll_viewer.rs:196:26
+    |
+196 |             windows::UI::Xaml::Controls::ScrollMode::Enabled
+    |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\scroll_viewer.rs:198:26
+    |
+198 |             windows::UI::Xaml::Controls::ScrollMode::Disabled
+    |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\scroll_viewer.rs:207:26
+    |
+207 |             windows::UI::Xaml::Controls::ZoomMode::Enabled
+    |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\scroll_viewer.rs:209:26
+    |
+209 |             windows::UI::Xaml::Controls::ZoomMode::Disabled
+    |                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:121:38
+    |
+121 |     WinRT(RwLock<Option<windows::UI::Xaml::Media::Brush>>),
+    |                                      ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:182:43
+    |
+182 |     pub fn from_winrt(brush: windows::UI::Xaml::Media::Brush) -> Self {
+    |                                           ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:189:57
+    |
+189 |     pub fn as_winrt_brush(&self) -> Result<windows::UI::Xaml::Media::Brush> {
+    |                                                         ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:192:42
+    |
+192 |                 let brush = windows::UI::Xaml::Media::SolidColorBrush::new()?;
+    |                                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:197:42
+    |
+197 |                 let brush = windows::UI::Xaml::Media::LinearGradientBrush::new()?;
+    |                                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:219:42
+    |
+219 |                 let brush = windows::UI::Xaml::Media::RadialGradientBrush::new()?;
+    |                                          ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:376:51
+    |
+376 |     pub fn to_winrt(&self) -> Result<windows::UI::Xaml::Media::Transform> {
+    |                                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:379:46
+    |
+379 |                 let transform = windows::UI::Xaml::Media::RotateTransform::new()?;
+    |                                              ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:386:46
+    |
+386 |                 let transform = windows::UI::Xaml::Media::ScaleTransform::new()?;
+    |                                              ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:394:46
+    |
+394 |                 let transform = windows::UI::Xaml::Media::TranslateTransform::new()?;
+    |                                              ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:400:46
+    |
+400 |                 let transform = windows::UI::Xaml::Media::SkewTransform::new()?;
+    |                                              ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\resources\mod.rs:198:51
+    |
+198 |     pub fn to_winrt(&self) -> Result<windows::UI::Xaml::Style> {
+    |                                                   ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\window.rs:36:45
+   |
+36 |     xaml_source: RwLock<Option<windows::UI::Xaml::Hosting::DesktopWindowXamlSource>>,
+   |                                             ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\window.rs:230:43
+    |
+230 |                 let source = windows::UI::Xaml::Hosting::DesktopWindowXamlSource::new()?;
+    |                                           ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\window.rs:233:43
+    |
+233 |                 let interop: windows::UI::Xaml::Hosting::IDesktopWindowXamlSourceNative =
+    |                                           ^^^^ could not find `Xaml` in `UI`
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\button.rs:43:35
+   |
+43 |         let button = windows::UI::Xaml::Controls::Button::new()
+   |                                   ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Button;
+   |
+help: if you import `Button`, refer to it directly
+   |
+43 -         let button = windows::UI::Xaml::Controls::Button::new()
+43 +         let button = Button::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\checkbox.rs:43:37
+   |
+43 |         let checkbox = windows::UI::Xaml::Controls::CheckBox::new()
+   |                                     ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::CheckBox;
+   |
+help: if you import `CheckBox`, refer to it directly
+   |
+43 -         let checkbox = windows::UI::Xaml::Controls::CheckBox::new()
+43 +         let checkbox = CheckBox::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\combobox.rs:44:37
+   |
+44 |         let combobox = windows::UI::Xaml::Controls::ComboBox::new()
+   |                                     ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::ComboBox;
+   |
+help: if you import `ComboBox`, refer to it directly
+   |
+44 -         let combobox = windows::UI::Xaml::Controls::ComboBox::new()
+44 +         let combobox = ComboBox::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\image.rs:28:43
+   |
+28 |             Stretch::None => windows::UI::Xaml::Media::Stretch::None,
+   |                                           ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this enum through its public re-export
+   |
+ 3 + use crate::prelude::Stretch;
+   |
+help: if you import `Stretch`, refer to it directly
+   |
+28 -             Stretch::None => windows::UI::Xaml::Media::Stretch::None,
+28 +             Stretch::None => Stretch::None,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\image.rs:29:43
+   |
+29 |             Stretch::Fill => windows::UI::Xaml::Media::Stretch::Fill,
+   |                                           ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this enum through its public re-export
+   |
+ 3 + use crate::prelude::Stretch;
+   |
+help: if you import `Stretch`, refer to it directly
+   |
+29 -             Stretch::Fill => windows::UI::Xaml::Media::Stretch::Fill,
+29 +             Stretch::Fill => Stretch::Fill,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\image.rs:30:46
+   |
+30 |             Stretch::Uniform => windows::UI::Xaml::Media::Stretch::Uniform,
+   |                                              ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this enum through its public re-export
+   |
+ 3 + use crate::prelude::Stretch;
+   |
+help: if you import `Stretch`, refer to it directly
+   |
+30 -             Stretch::Uniform => windows::UI::Xaml::Media::Stretch::Uniform,
+30 +             Stretch::Uniform => Stretch::Uniform,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\image.rs:31:52
+   |
+31 |             Stretch::UniformToFill => windows::UI::Xaml::Media::Stretch::UniformToFill,
+   |                                                    ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this enum through its public re-export
+   |
+ 3 + use crate::prelude::Stretch;
+   |
+help: if you import `Stretch`, refer to it directly
+   |
+31 -             Stretch::UniformToFill => windows::UI::Xaml::Media::Stretch::UniformToFill,
+31 +             Stretch::UniformToFill => Stretch::UniformToFill,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\image.rs:64:34
+   |
+64 |         let image = windows::UI::Xaml::Controls::Image::new()
+   |                                  ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Image;
+   |
+help: if you import `Image`, refer to it directly
+   |
+64 -         let image = windows::UI::Xaml::Controls::Image::new()
+64 +         let image = Image::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\image.rs:99:26
+   |
+99 |             windows::UI::Xaml::Media::Stretch::None => Stretch::None,
+   |                          ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this enum through its public re-export
+   |
+ 3 + use crate::prelude::Stretch;
+   |
+help: if you import `Stretch`, refer to it directly
+   |
+99 -             windows::UI::Xaml::Media::Stretch::None => Stretch::None,
+99 +             Stretch::None => Stretch::None,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\image.rs:100:26
+    |
+100 |             windows::UI::Xaml::Media::Stretch::Fill => Stretch::Fill,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+  3 + use crate::prelude::Stretch;
+    |
+help: if you import `Stretch`, refer to it directly
+    |
+100 -             windows::UI::Xaml::Media::Stretch::Fill => Stretch::Fill,
+100 +             Stretch::Fill => Stretch::Fill,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\image.rs:101:26
+    |
+101 |             windows::UI::Xaml::Media::Stretch::Uniform => Stretch::Uniform,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+  3 + use crate::prelude::Stretch;
+    |
+help: if you import `Stretch`, refer to it directly
+    |
+101 -             windows::UI::Xaml::Media::Stretch::Uniform => Stretch::Uniform,
+101 +             Stretch::Uniform => Stretch::Uniform,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\image.rs:102:26
+    |
+102 |             windows::UI::Xaml::Media::Stretch::UniformToFill => Stretch::UniformToFill,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+  3 + use crate::prelude::Stretch;
+    |
+help: if you import `Stretch`, refer to it directly
+    |
+102 -             windows::UI::Xaml::Media::Stretch::UniformToFill => Stretch::UniformToFill,
+102 +             Stretch::UniformToFill => Stretch::UniformToFill,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\listview.rs:70:37
+   |
+70 |         let listview = windows::UI::Xaml::Controls::ListView::new()
+   |                                     ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::ListView;
+   |
+help: if you import `ListView`, refer to it directly
+   |
+70 -         let listview = windows::UI::Xaml::Controls::ListView::new()
+70 +         let listview = ListView::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\progressbar.rs:38:41
+   |
+38 |         let progress_bar = windows::UI::Xaml::Controls::ProgressBar::new()
+   |                                         ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::ProgressBar;
+   |
+help: if you import `ProgressBar`, refer to it directly
+   |
+38 -         let progress_bar = windows::UI::Xaml::Controls::ProgressBar::new()
+38 +         let progress_bar = ProgressBar::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\slider.rs:25:53
+   |
+25 |             Orientation::Horizontal => windows::UI::Xaml::Controls::Orientation::Horizontal,
+   |                                                     ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing one of these enums
+   |
+ 3 + use crate::layout::Orientation;
+   |
+ 3 + use crate::prelude::Orientation;
+   |
+help: if you import `Orientation`, refer to it directly
+   |
+25 -             Orientation::Horizontal => windows::UI::Xaml::Controls::Orientation::Horizontal,
+25 +             Orientation::Horizontal => Orientation::Horizontal,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\slider.rs:26:51
+   |
+26 |             Orientation::Vertical => windows::UI::Xaml::Controls::Orientation::Vertical,
+   |                                                   ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing one of these enums
+   |
+ 3 + use crate::layout::Orientation;
+   |
+ 3 + use crate::prelude::Orientation;
+   |
+help: if you import `Orientation`, refer to it directly
+   |
+26 -             Orientation::Vertical => windows::UI::Xaml::Controls::Orientation::Vertical,
+26 +             Orientation::Vertical => Orientation::Vertical,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\slider.rs:64:35
+   |
+64 |         let slider = windows::UI::Xaml::Controls::Slider::new()
+   |                                   ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Slider;
+   |
+help: if you import `Slider`, refer to it directly
+   |
+64 -         let slider = windows::UI::Xaml::Controls::Slider::new()
+64 +         let slider = Slider::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\textblock.rs:41:39
+   |
+41 |         let text_block = windows::UI::Xaml::Controls::TextBlock::new()
+   |                                       ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::TextBlock;
+   |
+help: if you import `TextBlock`, refer to it directly
+   |
+41 -         let text_block = windows::UI::Xaml::Controls::TextBlock::new()
+41 +         let text_block = TextBlock::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\textbox.rs:43:37
+   |
+43 |         let text_box = windows::UI::Xaml::Controls::TextBox::new()
+   |                                     ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::TextBox;
+   |
+help: if you import `TextBox`, refer to it directly
+   |
+43 -         let text_box = windows::UI::Xaml::Controls::TextBox::new()
+43 +         let text_box = TextBox::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\controls\toggle.rs:45:35
+   |
+45 |         let toggle = windows::UI::Xaml::Controls::ToggleSwitch::new()
+   |                                   ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::ToggleSwitch;
+   |
+help: if you import `ToggleSwitch`, refer to it directly
+   |
+45 -         let toggle = windows::UI::Xaml::Controls::ToggleSwitch::new()
+45 +         let toggle = ToggleSwitch::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:184:55
+    |
+184 |             HorizontalAlignment::Left => windows::UI::Xaml::HorizontalAlignment::Left,
+    |                                                       ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::HorizontalAlignment;
+    |
+help: if you import `HorizontalAlignment`, refer to it directly
+    |
+184 -             HorizontalAlignment::Left => windows::UI::Xaml::HorizontalAlignment::Left,
+184 +             HorizontalAlignment::Left => HorizontalAlignment::Left,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:185:57
+    |
+185 |             HorizontalAlignment::Center => windows::UI::Xaml::HorizontalAlignment::Center,
+    |                                                         ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::HorizontalAlignment;
+    |
+help: if you import `HorizontalAlignment`, refer to it directly
+    |
+185 -             HorizontalAlignment::Center => windows::UI::Xaml::HorizontalAlignment::Center,
+185 +             HorizontalAlignment::Center => HorizontalAlignment::Center,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:186:56
+    |
+186 |             HorizontalAlignment::Right => windows::UI::Xaml::HorizontalAlignment::Right,
+    |                                                        ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::HorizontalAlignment;
+    |
+help: if you import `HorizontalAlignment`, refer to it directly
+    |
+186 -             HorizontalAlignment::Right => windows::UI::Xaml::HorizontalAlignment::Right,
+186 +             HorizontalAlignment::Right => HorizontalAlignment::Right,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:187:58
+    |
+187 |             HorizontalAlignment::Stretch => windows::UI::Xaml::HorizontalAlignment::Stretch,
+    |                                                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::HorizontalAlignment;
+    |
+help: if you import `HorizontalAlignment`, refer to it directly
+    |
+187 -             HorizontalAlignment::Stretch => windows::UI::Xaml::HorizontalAlignment::Stretch,
+187 +             HorizontalAlignment::Stretch => HorizontalAlignment::Stretch,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:194:26
+    |
+194 |             windows::UI::Xaml::HorizontalAlignment::Left => HorizontalAlignment::Left,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::HorizontalAlignment;
+    |
+help: if you import `HorizontalAlignment`, refer to it directly
+    |
+194 -             windows::UI::Xaml::HorizontalAlignment::Left => HorizontalAlignment::Left,
+194 +             HorizontalAlignment::Left => HorizontalAlignment::Left,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:195:26
+    |
+195 |             windows::UI::Xaml::HorizontalAlignment::Center => HorizontalAlignment::Center,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::HorizontalAlignment;
+    |
+help: if you import `HorizontalAlignment`, refer to it directly
+    |
+195 -             windows::UI::Xaml::HorizontalAlignment::Center => HorizontalAlignment::Center,
+195 +             HorizontalAlignment::Center => HorizontalAlignment::Center,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:196:26
+    |
+196 |             windows::UI::Xaml::HorizontalAlignment::Right => HorizontalAlignment::Right,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::HorizontalAlignment;
+    |
+help: if you import `HorizontalAlignment`, refer to it directly
+    |
+196 -             windows::UI::Xaml::HorizontalAlignment::Right => HorizontalAlignment::Right,
+196 +             HorizontalAlignment::Right => HorizontalAlignment::Right,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:197:26
+    |
+197 |             windows::UI::Xaml::HorizontalAlignment::Stretch => HorizontalAlignment::Stretch,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::HorizontalAlignment;
+    |
+help: if you import `HorizontalAlignment`, refer to it directly
+    |
+197 -             windows::UI::Xaml::HorizontalAlignment::Stretch => HorizontalAlignment::Stretch,
+197 +             HorizontalAlignment::Stretch => HorizontalAlignment::Stretch,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:221:52
+    |
+221 |             VerticalAlignment::Top => windows::UI::Xaml::VerticalAlignment::Top,
+    |                                                    ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::VerticalAlignment;
+    |
+help: if you import `VerticalAlignment`, refer to it directly
+    |
+221 -             VerticalAlignment::Top => windows::UI::Xaml::VerticalAlignment::Top,
+221 +             VerticalAlignment::Top => VerticalAlignment::Top,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:222:55
+    |
+222 |             VerticalAlignment::Center => windows::UI::Xaml::VerticalAlignment::Center,
+    |                                                       ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::VerticalAlignment;
+    |
+help: if you import `VerticalAlignment`, refer to it directly
+    |
+222 -             VerticalAlignment::Center => windows::UI::Xaml::VerticalAlignment::Center,
+222 +             VerticalAlignment::Center => VerticalAlignment::Center,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:223:55
+    |
+223 |             VerticalAlignment::Bottom => windows::UI::Xaml::VerticalAlignment::Bottom,
+    |                                                       ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::VerticalAlignment;
+    |
+help: if you import `VerticalAlignment`, refer to it directly
+    |
+223 -             VerticalAlignment::Bottom => windows::UI::Xaml::VerticalAlignment::Bottom,
+223 +             VerticalAlignment::Bottom => VerticalAlignment::Bottom,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:224:56
+    |
+224 |             VerticalAlignment::Stretch => windows::UI::Xaml::VerticalAlignment::Stretch,
+    |                                                        ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::VerticalAlignment;
+    |
+help: if you import `VerticalAlignment`, refer to it directly
+    |
+224 -             VerticalAlignment::Stretch => windows::UI::Xaml::VerticalAlignment::Stretch,
+224 +             VerticalAlignment::Stretch => VerticalAlignment::Stretch,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:231:26
+    |
+231 |             windows::UI::Xaml::VerticalAlignment::Top => VerticalAlignment::Top,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::VerticalAlignment;
+    |
+help: if you import `VerticalAlignment`, refer to it directly
+    |
+231 -             windows::UI::Xaml::VerticalAlignment::Top => VerticalAlignment::Top,
+231 +             VerticalAlignment::Top => VerticalAlignment::Top,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:232:26
+    |
+232 |             windows::UI::Xaml::VerticalAlignment::Center => VerticalAlignment::Center,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::VerticalAlignment;
+    |
+help: if you import `VerticalAlignment`, refer to it directly
+    |
+232 -             windows::UI::Xaml::VerticalAlignment::Center => VerticalAlignment::Center,
+232 +             VerticalAlignment::Center => VerticalAlignment::Center,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:233:26
+    |
+233 |             windows::UI::Xaml::VerticalAlignment::Bottom => VerticalAlignment::Bottom,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::VerticalAlignment;
+    |
+help: if you import `VerticalAlignment`, refer to it directly
+    |
+233 -             windows::UI::Xaml::VerticalAlignment::Bottom => VerticalAlignment::Bottom,
+233 +             VerticalAlignment::Bottom => VerticalAlignment::Bottom,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:234:26
+    |
+234 |             windows::UI::Xaml::VerticalAlignment::Stretch => VerticalAlignment::Stretch,
+    |                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::VerticalAlignment;
+    |
+help: if you import `VerticalAlignment`, refer to it directly
+    |
+234 -             windows::UI::Xaml::VerticalAlignment::Stretch => VerticalAlignment::Stretch,
+234 +             VerticalAlignment::Stretch => VerticalAlignment::Stretch,
+    |
+
+error[E0433]: failed to resolve: could not find `Text` in `UI`
+   --> src\controls\mod.rs:349:47
+    |
+349 |             FontStyle::Normal => windows::UI::Text::FontStyle::Normal,
+    |                                               ^^^^ could not find `Text` in `UI`
+    |
+note: found an item that was configured out
+   --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\UI\mod.rs:20:9
+    |
+ 19 | #[cfg(feature = "UI_Text")]
+    |       ------------------- the item is gated behind the `UI_Text` feature
+ 20 | pub mod Text;
+    |         ^^^^
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::FontStyle;
+    |
+help: if you import `FontStyle`, refer to it directly
+    |
+349 -             FontStyle::Normal => windows::UI::Text::FontStyle::Normal,
+349 +             FontStyle::Normal => FontStyle::Normal,
+    |
+
+error[E0433]: failed to resolve: could not find `Text` in `UI`
+   --> src\controls\mod.rs:350:48
+    |
+350 |             FontStyle::Oblique => windows::UI::Text::FontStyle::Oblique,
+    |                                                ^^^^ could not find `Text` in `UI`
+    |
+note: found an item that was configured out
+   --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\UI\mod.rs:20:9
+    |
+ 19 | #[cfg(feature = "UI_Text")]
+    |       ------------------- the item is gated behind the `UI_Text` feature
+ 20 | pub mod Text;
+    |         ^^^^
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::FontStyle;
+    |
+help: if you import `FontStyle`, refer to it directly
+    |
+350 -             FontStyle::Oblique => windows::UI::Text::FontStyle::Oblique,
+350 +             FontStyle::Oblique => FontStyle::Oblique,
+    |
+
+error[E0433]: failed to resolve: could not find `Text` in `UI`
+   --> src\controls\mod.rs:351:47
+    |
+351 |             FontStyle::Italic => windows::UI::Text::FontStyle::Italic,
+    |                                               ^^^^ could not find `Text` in `UI`
+    |
+note: found an item that was configured out
+   --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\UI\mod.rs:20:9
+    |
+ 19 | #[cfg(feature = "UI_Text")]
+    |       ------------------- the item is gated behind the `UI_Text` feature
+ 20 | pub mod Text;
+    |         ^^^^
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::FontStyle;
+    |
+help: if you import `FontStyle`, refer to it directly
+    |
+351 -             FontStyle::Italic => windows::UI::Text::FontStyle::Italic,
+351 +             FontStyle::Italic => FontStyle::Italic,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:374:49
+    |
+374 |             TextAlignment::Left => windows::UI::Xaml::TextAlignment::Left,
+    |                                                 ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::TextAlignment;
+    |
+help: if you import `TextAlignment`, refer to it directly
+    |
+374 -             TextAlignment::Left => windows::UI::Xaml::TextAlignment::Left,
+374 +             TextAlignment::Left => TextAlignment::Left,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:375:51
+    |
+375 |             TextAlignment::Center => windows::UI::Xaml::TextAlignment::Center,
+    |                                                   ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::TextAlignment;
+    |
+help: if you import `TextAlignment`, refer to it directly
+    |
+375 -             TextAlignment::Center => windows::UI::Xaml::TextAlignment::Center,
+375 +             TextAlignment::Center => TextAlignment::Center,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:376:50
+    |
+376 |             TextAlignment::Right => windows::UI::Xaml::TextAlignment::Right,
+    |                                                  ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::TextAlignment;
+    |
+help: if you import `TextAlignment`, refer to it directly
+    |
+376 -             TextAlignment::Right => windows::UI::Xaml::TextAlignment::Right,
+376 +             TextAlignment::Right => TextAlignment::Right,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:377:52
+    |
+377 |             TextAlignment::Justify => windows::UI::Xaml::TextAlignment::Justify,
+    |                                                    ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::TextAlignment;
+    |
+help: if you import `TextAlignment`, refer to it directly
+    |
+377 -             TextAlignment::Justify => windows::UI::Xaml::TextAlignment::Justify,
+377 +             TextAlignment::Justify => TextAlignment::Justify,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:398:50
+    |
+398 |             TextWrapping::NoWrap => windows::UI::Xaml::TextWrapping::NoWrap,
+    |                                                  ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::TextWrapping;
+    |
+help: if you import `TextWrapping`, refer to it directly
+    |
+398 -             TextWrapping::NoWrap => windows::UI::Xaml::TextWrapping::NoWrap,
+398 +             TextWrapping::NoWrap => TextWrapping::NoWrap,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:399:48
+    |
+399 |             TextWrapping::Wrap => windows::UI::Xaml::TextWrapping::Wrap,
+    |                                                ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::TextWrapping;
+    |
+help: if you import `TextWrapping`, refer to it directly
+    |
+399 -             TextWrapping::Wrap => windows::UI::Xaml::TextWrapping::Wrap,
+399 +             TextWrapping::Wrap => TextWrapping::Wrap,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\controls\mod.rs:400:58
+    |
+400 |             TextWrapping::WrapWholeWords => windows::UI::Xaml::TextWrapping::WrapWholeWords,
+    |                                                          ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this enum through its public re-export
+    |
+ 18 + use crate::prelude::TextWrapping;
+    |
+help: if you import `TextWrapping`, refer to it directly
+    |
+400 -             TextWrapping::WrapWholeWords => windows::UI::Xaml::TextWrapping::WrapWholeWords,
+400 +             TextWrapping::WrapWholeWords => TextWrapping::WrapWholeWords,
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:36:35
+   |
+36 |         let canvas = windows::UI::Xaml::Controls::Canvas::new()
+   |                                   ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Canvas;
+   |
+help: if you import `Canvas`, refer to it directly
+   |
+36 -         let canvas = windows::UI::Xaml::Controls::Canvas::new()
+36 +         let canvas = Canvas::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:57:22
+   |
+57 |         windows::UI::Xaml::Controls::Canvas::SetLeft(&winrt_element, left)?;
+   |                      ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Canvas;
+   |
+help: if you import `Canvas`, refer to it directly
+   |
+57 -         windows::UI::Xaml::Controls::Canvas::SetLeft(&winrt_element, left)?;
+57 +         Canvas::SetLeft(&winrt_element, left)?;
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:58:22
+   |
+58 |         windows::UI::Xaml::Controls::Canvas::SetTop(&winrt_element, top)?;
+   |                      ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Canvas;
+   |
+help: if you import `Canvas`, refer to it directly
+   |
+58 -         windows::UI::Xaml::Controls::Canvas::SetTop(&winrt_element, top)?;
+58 +         Canvas::SetTop(&winrt_element, top)?;
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:70:22
+   |
+70 |         windows::UI::Xaml::Controls::Canvas::SetLeft(&winrt_element, left)?;
+   |                      ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Canvas;
+   |
+help: if you import `Canvas`, refer to it directly
+   |
+70 -         windows::UI::Xaml::Controls::Canvas::SetLeft(&winrt_element, left)?;
+70 +         Canvas::SetLeft(&winrt_element, left)?;
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:77:22
+   |
+77 |         windows::UI::Xaml::Controls::Canvas::SetTop(&winrt_element, top)?;
+   |                      ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Canvas;
+   |
+help: if you import `Canvas`, refer to it directly
+   |
+77 -         windows::UI::Xaml::Controls::Canvas::SetTop(&winrt_element, top)?;
+77 +         Canvas::SetTop(&winrt_element, top)?;
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:84:25
+   |
+84 |         Ok(windows::UI::Xaml::Controls::Canvas::GetLeft(&winrt_element)?)
+   |                         ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Canvas;
+   |
+help: if you import `Canvas`, refer to it directly
+   |
+84 -         Ok(windows::UI::Xaml::Controls::Canvas::GetLeft(&winrt_element)?)
+84 +         Ok(Canvas::GetLeft(&winrt_element)?)
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:90:25
+   |
+90 |         Ok(windows::UI::Xaml::Controls::Canvas::GetTop(&winrt_element)?)
+   |                         ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Canvas;
+   |
+help: if you import `Canvas`, refer to it directly
+   |
+90 -         Ok(windows::UI::Xaml::Controls::Canvas::GetTop(&winrt_element)?)
+90 +         Ok(Canvas::GetTop(&winrt_element)?)
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\canvas.rs:96:22
+   |
+96 |         windows::UI::Xaml::Controls::Canvas::SetZIndex(&winrt_element, z_index)?;
+   |                      ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Canvas;
+   |
+help: if you import `Canvas`, refer to it directly
+   |
+96 -         windows::UI::Xaml::Controls::Canvas::SetZIndex(&winrt_element, z_index)?;
+96 +         Canvas::SetZIndex(&winrt_element, z_index)?;
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\canvas.rs:103:25
+    |
+103 |         Ok(windows::UI::Xaml::Controls::Canvas::GetZIndex(&winrt_element)?)
+    |                         ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::Canvas;
+    |
+help: if you import `Canvas`, refer to it directly
+    |
+103 -         Ok(windows::UI::Xaml::Controls::Canvas::GetZIndex(&winrt_element)?)
+103 +         Ok(Canvas::GetZIndex(&winrt_element)?)
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\grid.rs:89:36
+   |
+89 |         let row_def = windows::UI::Xaml::Controls::RowDefinition::new()?;
+   |                                    ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::RowDefinition;
+   |
+help: if you import `RowDefinition`, refer to it directly
+   |
+89 -         let row_def = windows::UI::Xaml::Controls::RowDefinition::new()?;
+89 +         let row_def = RowDefinition::new()?;
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:155:36
+    |
+155 |         let col_def = windows::UI::Xaml::Controls::ColumnDefinition::new()?;
+    |                                    ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::ColumnDefinition;
+    |
+help: if you import `ColumnDefinition`, refer to it directly
+    |
+155 -         let col_def = windows::UI::Xaml::Controls::ColumnDefinition::new()?;
+155 +         let col_def = ColumnDefinition::new()?;
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:202:33
+    |
+202 |         let grid = windows::UI::Xaml::Controls::Grid::new()
+    |                                 ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::Grid;
+    |
+help: if you import `Grid`, refer to it directly
+    |
+202 -         let grid = windows::UI::Xaml::Controls::Grid::new()
+202 +         let grid = Grid::new()
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:266:22
+    |
+266 |         windows::UI::Xaml::Controls::Grid::SetRow(&winrt_element, row)?;
+    |                      ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::Grid;
+    |
+help: if you import `Grid`, refer to it directly
+    |
+266 -         windows::UI::Xaml::Controls::Grid::SetRow(&winrt_element, row)?;
+266 +         Grid::SetRow(&winrt_element, row)?;
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:267:22
+    |
+267 |         windows::UI::Xaml::Controls::Grid::SetColumn(&winrt_element, column)?;
+    |                      ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::Grid;
+    |
+help: if you import `Grid`, refer to it directly
+    |
+267 -         windows::UI::Xaml::Controls::Grid::SetColumn(&winrt_element, column)?;
+267 +         Grid::SetColumn(&winrt_element, column)?;
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:289:22
+    |
+289 |         windows::UI::Xaml::Controls::Grid::SetRow(&winrt_element, row)?;
+    |                      ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::Grid;
+    |
+help: if you import `Grid`, refer to it directly
+    |
+289 -         windows::UI::Xaml::Controls::Grid::SetRow(&winrt_element, row)?;
+289 +         Grid::SetRow(&winrt_element, row)?;
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:290:22
+    |
+290 |         windows::UI::Xaml::Controls::Grid::SetColumn(&winrt_element, column)?;
+    |                      ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::Grid;
+    |
+help: if you import `Grid`, refer to it directly
+    |
+290 -         windows::UI::Xaml::Controls::Grid::SetColumn(&winrt_element, column)?;
+290 +         Grid::SetColumn(&winrt_element, column)?;
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:291:22
+    |
+291 |         windows::UI::Xaml::Controls::Grid::SetRowSpan(&winrt_element, row_span)?;
+    |                      ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::Grid;
+    |
+help: if you import `Grid`, refer to it directly
+    |
+291 -         windows::UI::Xaml::Controls::Grid::SetRowSpan(&winrt_element, row_span)?;
+291 +         Grid::SetRowSpan(&winrt_element, row_span)?;
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\layout\grid.rs:292:22
+    |
+292 |         windows::UI::Xaml::Controls::Grid::SetColumnSpan(&winrt_element, column_span)?;
+    |                      ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::Grid;
+    |
+help: if you import `Grid`, refer to it directly
+    |
+292 -         windows::UI::Xaml::Controls::Grid::SetColumnSpan(&winrt_element, column_span)?;
+292 +         Grid::SetColumnSpan(&winrt_element, column_span)?;
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\stack_panel.rs:22:51
+   |
+22 |             Orientation::Vertical => windows::UI::Xaml::Controls::Orientation::Vertical,
+   |                                                   ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing one of these enums
+   |
+ 3 + use crate::layout::Orientation;
+   |
+ 3 + use crate::prelude::Orientation;
+   |
+help: if you import `Orientation`, refer to it directly
+   |
+22 -             Orientation::Vertical => windows::UI::Xaml::Controls::Orientation::Vertical,
+22 +             Orientation::Vertical => Orientation::Vertical,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\stack_panel.rs:23:53
+   |
+23 |             Orientation::Horizontal => windows::UI::Xaml::Controls::Orientation::Horizontal,
+   |                                                     ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing one of these enums
+   |
+ 3 + use crate::layout::Orientation;
+   |
+ 3 + use crate::prelude::Orientation;
+   |
+help: if you import `Orientation`, refer to it directly
+   |
+23 -             Orientation::Horizontal => windows::UI::Xaml::Controls::Orientation::Horizontal,
+23 +             Orientation::Horizontal => Orientation::Horizontal,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\stack_panel.rs:30:26
+   |
+30 |             windows::UI::Xaml::Controls::Orientation::Vertical => Orientation::Vertical,
+   |                          ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing one of these enums
+   |
+ 3 + use crate::layout::Orientation;
+   |
+ 3 + use crate::prelude::Orientation;
+   |
+help: if you import `Orientation`, refer to it directly
+   |
+30 -             windows::UI::Xaml::Controls::Orientation::Vertical => Orientation::Vertical,
+30 +             Orientation::Vertical => Orientation::Vertical,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\stack_panel.rs:31:26
+   |
+31 |             windows::UI::Xaml::Controls::Orientation::Horizontal => Orientation::Horizontal,
+   |                          ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing one of these enums
+   |
+ 3 + use crate::layout::Orientation;
+   |
+ 3 + use crate::prelude::Orientation;
+   |
+help: if you import `Orientation`, refer to it directly
+   |
+31 -             windows::UI::Xaml::Controls::Orientation::Horizontal => Orientation::Horizontal,
+31 +             Orientation::Horizontal => Orientation::Horizontal,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\stack_panel.rs:68:34
+   |
+68 |         let panel = windows::UI::Xaml::Controls::StackPanel::new()
+   |                                  ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::StackPanel;
+   |
+help: if you import `StackPanel`, refer to it directly
+   |
+68 -         let panel = windows::UI::Xaml::Controls::StackPanel::new()
+68 +         let panel = StackPanel::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\border.rs:39:35
+   |
+39 |         let border = windows::UI::Xaml::Controls::Border::new()
+   |                                   ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::Border;
+   |
+help: if you import `Border`, refer to it directly
+   |
+39 -         let border = windows::UI::Xaml::Controls::Border::new()
+39 +         let border = Border::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\scroll_viewer.rs:26:30
+   |
+26 |                 windows::UI::Xaml::Controls::ScrollBarVisibility::Disabled
+   |                              ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this enum through its public re-export
+   |
+ 3 + use crate::prelude::ScrollBarVisibility;
+   |
+help: if you import `ScrollBarVisibility`, refer to it directly
+   |
+26 -                 windows::UI::Xaml::Controls::ScrollBarVisibility::Disabled
+26 +                 ScrollBarVisibility::Disabled
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\scroll_viewer.rs:28:55
+   |
+28 |             ScrollBarVisibility::Auto => windows::UI::Xaml::Controls::ScrollBarVisibility::Auto,
+   |                                                       ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this enum through its public re-export
+   |
+ 3 + use crate::prelude::ScrollBarVisibility;
+   |
+help: if you import `ScrollBarVisibility`, refer to it directly
+   |
+28 -             ScrollBarVisibility::Auto => windows::UI::Xaml::Controls::ScrollBarVisibility::Auto,
+28 +             ScrollBarVisibility::Auto => ScrollBarVisibility::Auto,
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\scroll_viewer.rs:30:30
+   |
+30 |                 windows::UI::Xaml::Controls::ScrollBarVisibility::Hidden
+   |                              ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this enum through its public re-export
+   |
+ 3 + use crate::prelude::ScrollBarVisibility;
+   |
+help: if you import `ScrollBarVisibility`, refer to it directly
+   |
+30 -                 windows::UI::Xaml::Controls::ScrollBarVisibility::Hidden
+30 +                 ScrollBarVisibility::Hidden
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\scroll_viewer.rs:33:30
+   |
+33 |                 windows::UI::Xaml::Controls::ScrollBarVisibility::Visible
+   |                              ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this enum through its public re-export
+   |
+ 3 + use crate::prelude::ScrollBarVisibility;
+   |
+help: if you import `ScrollBarVisibility`, refer to it directly
+   |
+33 -                 windows::UI::Xaml::Controls::ScrollBarVisibility::Visible
+33 +                 ScrollBarVisibility::Visible
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+  --> src\layout\scroll_viewer.rs:72:42
+   |
+72 |         let scroll_viewer = windows::UI::Xaml::Controls::ScrollViewer::new()
+   |                                          ^^^^ could not find `Xaml` in `UI`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 3 + use crate::prelude::ScrollViewer;
+   |
+help: if you import `ScrollViewer`, refer to it directly
+   |
+72 -         let scroll_viewer = windows::UI::Xaml::Controls::ScrollViewer::new()
+72 +         let scroll_viewer = ScrollViewer::new()
+   |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:209:43
+    |
+209 |                     let gs = windows::UI::Xaml::Media::GradientStop::new()?;
+    |                                           ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::GradientStop;
+    |
+help: if you import `GradientStop`, refer to it directly
+    |
+209 -                     let gs = windows::UI::Xaml::Media::GradientStop::new()?;
+209 +                     let gs = GradientStop::new()?;
+    |
+
+error[E0433]: failed to resolve: could not find `Xaml` in `UI`
+   --> src\media\mod.rs:229:43
+    |
+229 |                     let gs = windows::UI::Xaml::Media::GradientStop::new()?;
+    |                                           ^^^^ could not find `Xaml` in `UI`
+    |
+help: consider importing this struct through its public re-export
+    |
+  3 + use crate::prelude::GradientStop;
+    |
+help: if you import `GradientStop`, refer to it directly
+    |
+229 -                     let gs = windows::UI::Xaml::Media::GradientStop::new()?;
+229 +                     let gs = GradientStop::new()?;
+    |
+
+warning: unused import: `core::*`
+  --> src\app.rs:15:5
+   |
+15 |     core::*,
+   |     ^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: hidden lifetime parameters in types are deprecated
+  --> src\xaml\parser.rs:94:46
+   |
+94 |     fn create_element_builder(&self, event: &BytesStart) -> Result<ElementBuilder> {
+   |                                              ^^^^^^^^^^ expected lifetime parameter
+   |
+note: the lint level is defined here
+  --> src\lib.rs:50:9
+   |
+50 | #![warn(rust_2018_idioms)]
+   |         ^^^^^^^^^^^^^^^^
+   = note: `#[warn(elided_lifetimes_in_paths)]` implied by `#[warn(rust_2018_idioms)]`
+help: indicate the anonymous lifetime
+   |
+94 |     fn create_element_builder(&self, event: &BytesStart<'_>) -> Result<ElementBuilder> {
+   |                                                        ++++
+
+warning: ambiguous glob re-exports
+  --> src\lib.rs:79:13
+   |
+79 |     pub use crate::controls::*;
+   |             ^^^^^^^^^^^^^^^^^^ the name `Orientation` in the type namespace is first re-exported here
+...
+82 |     pub use crate::layout::*;
+   |             ---------------- but the name `Orientation` in the type namespace is also re-exported here
+   |
+   = note: `#[warn(ambiguous_glob_reexports)]` on by default
+
+error[E0053]: method `drop` has an incompatible type for trait
+   --> src\app.rs:241:13
+    |
+241 |     fn drop(&self) {
+    |             ^^^^^ types differ in mutability
+    |
+    = note: expected signature `fn(&mut Application)`
+               found signature `fn(&Application)`
+help: change the self-receiver type to match the trait
+    |
+241 |     fn drop(&mut self) {
+    |              +++
+
+error[E0592]: duplicate definitions with name `content`
+   --> src\controls\button.rs:124:5
+    |
+ 77 |     pub fn content(&self) -> Result<String> {
+    |     --------------------------------------- other definition for `content`
+...
+124 |     pub fn content(self, content: impl AsRef<str>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `content`
+
+error[E0592]: duplicate definitions with name `content`
+   --> src\controls\checkbox.rs:154:5
+    |
+ 70 |     pub fn content(&self) -> Result<String> {
+    |     --------------------------------------- other definition for `content`
+...
+154 |     pub fn content(self, content: impl AsRef<str>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `content`
+
+error[E0592]: duplicate definitions with name `selected_index`
+   --> src\controls\combobox.rs:176:5
+    |
+108 |     pub fn selected_index(&self) -> Result<i32> {
+    |     ------------------------------------------- other definition for `selected_index`
+...
+176 |     pub fn selected_index(self, index: i32) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `selected_index`
+
+error[E0592]: duplicate definitions with name `stretch`
+   --> src\controls\image.rs:116:5
+    |
+ 96 |     pub fn stretch(&self) -> Result<Stretch> {
+    |     ---------------------------------------- other definition for `stretch`
+...
+116 |     pub fn stretch(self, stretch: Stretch) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `stretch`
+
+error[E0592]: duplicate definitions with name `selected_index`
+   --> src\controls\listview.rs:223:5
+    |
+142 |     pub fn selected_index(&self) -> Result<i32> {
+    |     ------------------------------------------- other definition for `selected_index`
+...
+223 |     pub fn selected_index(self, index: i32) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `selected_index`
+
+error[E0592]: duplicate definitions with name `text`
+   --> src\controls\textblock.rs:165:5
+    |
+ 74 |     pub fn text(&self) -> Result<String> {
+    |     ------------------------------------ other definition for `text`
+...
+165 |     pub fn text(self, text: impl AsRef<str>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `text`
+
+error[E0592]: duplicate definitions with name `font_size`
+   --> src\controls\textblock.rs:171:5
+    |
+ 85 |     pub fn font_size(&self) -> Result<f64> {
+    |     -------------------------------------- other definition for `font_size`
+...
+171 |     pub fn font_size(self, size: f64) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `font_size`
+
+error[E0592]: duplicate definitions with name `text`
+   --> src\controls\textbox.rs:185:5
+    |
+ 70 |     pub fn text(&self) -> Result<String> {
+    |     ------------------------------------ other definition for `text`
+...
+185 |     pub fn text(self, text: impl AsRef<str>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `text`
+
+error[E0592]: duplicate definitions with name `placeholder`
+   --> src\controls\textbox.rs:191:5
+    |
+ 82 |     pub fn placeholder(&self) -> Result<String> {
+    |     ------------------------------------------- other definition for `placeholder`
+...
+191 |     pub fn placeholder(self, placeholder: impl AsRef<str>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `placeholder`
+
+error[E0592]: duplicate definitions with name `max_length`
+   --> src\controls\textbox.rs:215:5
+    |
+116 |     pub fn max_length(&self) -> Result<i32> {
+    |     --------------------------------------- other definition for `max_length`
+...
+215 |     pub fn max_length(self, max: i32) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `max_length`
+
+error[E0592]: duplicate definitions with name `header`
+   --> src\controls\toggle.rs:147:5
+    |
+ 83 |     pub fn header(&self) -> Result<String> {
+    |     -------------------------------------- other definition for `header`
+...
+147 |     pub fn header(self, header: impl AsRef<str>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `header`
+
+error[E0592]: duplicate definitions with name `orientation`
+   --> src\layout\stack_panel.rs:119:5
+    |
+ 90 |     pub fn orientation(&self) -> Result<Orientation> {
+    |     ------------------------------------------------ other definition for `orientation`
+...
+119 |     pub fn orientation(self, orientation: Orientation) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `orientation`
+
+error[E0592]: duplicate definitions with name `spacing`
+   --> src\layout\stack_panel.rs:125:5
+    |
+101 |     pub fn spacing(&self) -> Result<f64> {
+    |     ------------------------------------ other definition for `spacing`
+...
+125 |     pub fn spacing(self, spacing: f64) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `spacing`
+
+error[E0592]: duplicate definitions with name `padding`
+   --> src\layout\stack_panel.rs:131:5
+    |
+112 |     pub fn padding(&self) -> Result<Thickness> {
+    |     ------------------------------------------ other definition for `padding`
+...
+131 |     pub fn padding(self, padding: Thickness) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `padding`
+
+error[E0592]: duplicate definitions with name `child`
+   --> src\layout\border.rs:115:5
+    |
+ 63 |     pub fn child(&self) -> Result<Option<UIElement>> {
+    |     ------------------------------------------------ other definition for `child`
+...
+115 |     pub fn child(self, child: impl Into<UIElement>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `child`
+
+error[E0592]: duplicate definitions with name `border_thickness`
+   --> src\layout\border.rs:121:5
+    |
+ 79 |     pub fn border_thickness(&self) -> Result<Thickness> {
+    |     --------------------------------------------------- other definition for `border_thickness`
+...
+121 |     pub fn border_thickness(self, thickness: Thickness) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `border_thickness`
+
+error[E0592]: duplicate definitions with name `padding`
+   --> src\layout\border.rs:157:5
+    |
+108 |     pub fn padding(&self) -> Result<Thickness> {
+    |     ------------------------------------------ other definition for `padding`
+...
+157 |     pub fn padding(self, padding: Thickness) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `padding`
+
+error[E0592]: duplicate definitions with name `content`
+   --> src\layout\scroll_viewer.rs:244:5
+    |
+ 99 |     pub fn content(&self) -> Result<Option<UIElement>> {
+    |     -------------------------------------------------- other definition for `content`
+...
+244 |     pub fn content(self, content: impl Into<UIElement>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `content`
+
+error[E0277]: the `?` operator can only be applied to values that implement `Try`
+  --> src\app.rs:97:13
+   |
+97 |             CoInitializeEx(None, COINIT_APARTMENTTHREADED)?;
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `?` operator cannot be applied to type `HRESULT`
+   |
+   = help: the trait `Try` is not implemented for `HRESULT`
+
+error[E0277]: the trait bound `IInspectable: TryFrom<HSTRING>` is not satisfied
+  --> src\controls\button.rs:72:39
+   |
+72 |         self.inner.button.SetContent(&windows::core::IInspectable::try_from(content_str)?)?;
+   |                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0277]: `?` couldn't convert the error to `error::Error`
+  --> src\controls\button.rs:72:89
+   |
+72 |         self.inner.button.SetContent(&windows::core::IInspectable::try_from(content_str)?)?;
+   |                                       --------------------------------------------------^ the trait `From<Infallible>` is not implemented for `error::Error`
+   |                                       |
+   |                                       this can't be annotated with `?` because it has type `Result<_, Infallible>`
+   |
+note: `error::Error` needs to implement `From<Infallible>`
+  --> src\error.rs:9:1
+   |
+ 9 | pub enum Error {
+   | ^^^^^^^^^^^^^^
+   = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+   = help: the following other types implement trait `From<T>`:
+             `error::Error` implements `From<Utf8Error>`
+             `error::Error` implements `From<quick_xml::Error>`
+             `error::Error` implements `From<std::io::Error>`
+             `error::Error` implements `From<windows_result::error::Error>`
+
+error[E0277]: the trait bound `IInspectable: From<HSTRING>` is not satisfied
+  --> src\controls\button.rs:72:39
+   |
+72 |         self.inner.button.SetContent(&windows::core::IInspectable::try_from(content_str)?)?;
+   |                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0282]: type annotations needed
+  --> src\controls\button.rs:80:16
+   |
+80 |             Ok(content.to_string())
+   |                ^^^^^^^ cannot infer type
+
+error[E0277]: the trait bound `IInspectable: TryFrom<HSTRING>` is not satisfied
+  --> src\controls\checkbox.rs:65:41
+   |
+65 |         self.inner.checkbox.SetContent(&windows::core::IInspectable::try_from(content_str)?)?;
+   |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0277]: `?` couldn't convert the error to `error::Error`
+  --> src\controls\checkbox.rs:65:91
+   |
+65 |         self.inner.checkbox.SetContent(&windows::core::IInspectable::try_from(content_str)?)?;
+   |                                         --------------------------------------------------^ the trait `From<Infallible>` is not implemented for `error::Error`
+   |                                         |
+   |                                         this can't be annotated with `?` because it has type `Result<_, Infallible>`
+   |
+note: `error::Error` needs to implement `From<Infallible>`
+  --> src\error.rs:9:1
+   |
+ 9 | pub enum Error {
+   | ^^^^^^^^^^^^^^
+   = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+   = help: the following other types implement trait `From<T>`:
+             `error::Error` implements `From<Utf8Error>`
+             `error::Error` implements `From<quick_xml::Error>`
+             `error::Error` implements `From<std::io::Error>`
+             `error::Error` implements `From<windows_result::error::Error>`
+
+error[E0277]: the trait bound `IInspectable: From<HSTRING>` is not satisfied
+  --> src\controls\checkbox.rs:65:41
+   |
+65 |         self.inner.checkbox.SetContent(&windows::core::IInspectable::try_from(content_str)?)?;
+   |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0282]: type annotations needed
+  --> src\controls\checkbox.rs:73:16
+   |
+73 |             Ok(content.to_string())
+   |                ^^^^^^^ cannot infer type
+
+error[E0308]: mismatched types
+   --> src\controls\checkbox.rs:83:74
+    |
+ 83 |         toggle_button.SetIsChecked(windows::Foundation::IReference::from(checked))?;
+    |                                    ------------------------------------- ^^^^^^^ expected `IReference<_>`, found `bool`
+    |                                    |
+    |                                    arguments to this function are incorrect
+    |
+    = note: expected struct `IReference<_>`
+                 found type `bool`
+note: associated function defined here
+   --> C:\Users\Joseph\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib/rustlib/src/rust\library\core\src\convert\mod.rs:592:8
+    |
+592 |     fn from(value: T) -> Self;
+    |        ^^^^
+
+error[E0282]: type annotations needed
+  --> src\controls\checkbox.rs:93:21
+   |
+93 |             Ok(Some(checked.Value()?))
+   |                     ^^^^^^^ cannot infer type
+
+error[E0277]: the trait bound `IInspectable: TryFrom<HSTRING>` is not satisfied
+  --> src\controls\combobox.rs:69:23
+   |
+69 |         items.Append(&windows::core::IInspectable::try_from(item_str)?)?;
+   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0277]: `?` couldn't convert the error to `error::Error`
+  --> src\controls\combobox.rs:69:70
+   |
+69 |         items.Append(&windows::core::IInspectable::try_from(item_str)?)?;
+   |                       -----------------------------------------------^ the trait `From<Infallible>` is not implemented for `error::Error`
+   |                       |
+   |                       this can't be annotated with `?` because it has type `Result<_, Infallible>`
+   |
+note: `error::Error` needs to implement `From<Infallible>`
+  --> src\error.rs:9:1
+   |
+ 9 | pub enum Error {
+   | ^^^^^^^^^^^^^^
+   = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+   = help: the following other types implement trait `From<T>`:
+             `error::Error` implements `From<Utf8Error>`
+             `error::Error` implements `From<quick_xml::Error>`
+             `error::Error` implements `From<std::io::Error>`
+             `error::Error` implements `From<windows_result::error::Error>`
+
+error[E0277]: the trait bound `IInspectable: From<HSTRING>` is not satisfied
+  --> src\controls\combobox.rs:69:23
+   |
+69 |         items.Append(&windows::core::IInspectable::try_from(item_str)?)?;
+   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0282]: type annotations needed
+   --> src\controls\combobox.rs:120:21
+    |
+120 |             Ok(Some(item.to_string()))
+    |                     ^^^^ cannot infer type
+
+error[E0277]: the trait bound `IInspectable: TryFrom<HSTRING>` is not satisfied
+  --> src\controls\listview.rs:95:23
+   |
+95 |         items.Append(&windows::core::IInspectable::try_from(item_str)?)?;
+   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0277]: `?` couldn't convert the error to `error::Error`
+  --> src\controls\listview.rs:95:70
+   |
+95 |         items.Append(&windows::core::IInspectable::try_from(item_str)?)?;
+   |                       -----------------------------------------------^ the trait `From<Infallible>` is not implemented for `error::Error`
+   |                       |
+   |                       this can't be annotated with `?` because it has type `Result<_, Infallible>`
+   |
+note: `error::Error` needs to implement `From<Infallible>`
+  --> src\error.rs:9:1
+   |
+ 9 | pub enum Error {
+   | ^^^^^^^^^^^^^^
+   = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+   = help: the following other types implement trait `From<T>`:
+             `error::Error` implements `From<Utf8Error>`
+             `error::Error` implements `From<quick_xml::Error>`
+             `error::Error` implements `From<std::io::Error>`
+             `error::Error` implements `From<windows_result::error::Error>`
+
+error[E0277]: the trait bound `IInspectable: From<HSTRING>` is not satisfied
+  --> src\controls\listview.rs:95:23
+   |
+95 |         items.Append(&windows::core::IInspectable::try_from(item_str)?)?;
+   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0282]: type annotations needed
+   --> src\controls\listview.rs:154:21
+    |
+154 |             Ok(Some(item.to_string()))
+    |                     ^^^^ cannot infer type
+
+error[E0277]: the trait bound `IInspectable: TryFrom<HSTRING>` is not satisfied
+  --> src\controls\toggle.rs:78:38
+   |
+78 |         self.inner.toggle.SetHeader(&windows::core::IInspectable::try_from(header)?)?;
+   |                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0277]: `?` couldn't convert the error to `error::Error`
+  --> src\controls\toggle.rs:78:83
+   |
+78 |         self.inner.toggle.SetHeader(&windows::core::IInspectable::try_from(header)?)?;
+   |                                      ---------------------------------------------^ the trait `From<Infallible>` is not implemented for `error::Error`
+   |                                      |
+   |                                      this can't be annotated with `?` because it has type `Result<_, Infallible>`
+   |
+note: `error::Error` needs to implement `From<Infallible>`
+  --> src\error.rs:9:1
+   |
+ 9 | pub enum Error {
+   | ^^^^^^^^^^^^^^
+   = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+   = help: the following other types implement trait `From<T>`:
+             `error::Error` implements `From<Utf8Error>`
+             `error::Error` implements `From<quick_xml::Error>`
+             `error::Error` implements `From<std::io::Error>`
+             `error::Error` implements `From<windows_result::error::Error>`
+
+error[E0277]: the trait bound `IInspectable: From<HSTRING>` is not satisfied
+  --> src\controls\toggle.rs:78:38
+   |
+78 |         self.inner.toggle.SetHeader(&windows::core::IInspectable::try_from(header)?)?;
+   |                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0282]: type annotations needed
+  --> src\controls\toggle.rs:86:16
+   |
+86 |             Ok(header.to_string())
+   |                ^^^^^^ cannot infer type
+
+error[E0277]: the trait bound `IInspectable: TryFrom<HSTRING>` is not satisfied
+  --> src\controls\toggle.rs:95:41
+   |
+95 |         self.inner.toggle.SetOnContent(&windows::core::IInspectable::try_from(content)?)?;
+   |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0277]: `?` couldn't convert the error to `error::Error`
+  --> src\controls\toggle.rs:95:87
+   |
+95 |         self.inner.toggle.SetOnContent(&windows::core::IInspectable::try_from(content)?)?;
+   |                                         ----------------------------------------------^ the trait `From<Infallible>` is not implemented for `error::Error`
+   |                                         |
+   |                                         this can't be annotated with `?` because it has type `Result<_, Infallible>`
+   |
+note: `error::Error` needs to implement `From<Infallible>`
+  --> src\error.rs:9:1
+   |
+ 9 | pub enum Error {
+   | ^^^^^^^^^^^^^^
+   = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+   = help: the following other types implement trait `From<T>`:
+             `error::Error` implements `From<Utf8Error>`
+             `error::Error` implements `From<quick_xml::Error>`
+             `error::Error` implements `From<std::io::Error>`
+             `error::Error` implements `From<windows_result::error::Error>`
+
+error[E0277]: the trait bound `IInspectable: From<HSTRING>` is not satisfied
+  --> src\controls\toggle.rs:95:41
+   |
+95 |         self.inner.toggle.SetOnContent(&windows::core::IInspectable::try_from(content)?)?;
+   |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `&IInspectable` implements `From<&ColorHelper>`
+             `&IInspectable` implements `From<&Colors>`
+             `&IInspectable` implements `From<&Deferral>`
+             `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+             `&IInspectable` implements `From<&IActivationFactory>`
+             `&IInspectable` implements `From<&IAsyncAction>`
+             `&IInspectable` implements `From<&IAsyncInfo>`
+             `&IInspectable` implements `From<&IClosable>`
+           and 66 others
+   = note: required for `HSTRING` to implement `Into<IInspectable>`
+   = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0277]: the trait bound `IInspectable: TryFrom<HSTRING>` is not satisfied
+   --> src\controls\toggle.rs:102:42
+    |
+102 |         self.inner.toggle.SetOffContent(&windows::core::IInspectable::try_from(content)?)?;
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+    |
+    = help: the following other types implement trait `From<T>`:
+              `&IInspectable` implements `From<&ColorHelper>`
+              `&IInspectable` implements `From<&Colors>`
+              `&IInspectable` implements `From<&Deferral>`
+              `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+              `&IInspectable` implements `From<&IActivationFactory>`
+              `&IInspectable` implements `From<&IAsyncAction>`
+              `&IInspectable` implements `From<&IAsyncInfo>`
+              `&IInspectable` implements `From<&IClosable>`
+            and 66 others
+    = note: required for `HSTRING` to implement `Into<IInspectable>`
+    = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0277]: `?` couldn't convert the error to `error::Error`
+   --> src\controls\toggle.rs:102:88
+    |
+102 |         self.inner.toggle.SetOffContent(&windows::core::IInspectable::try_from(content)?)?;
+    |                                          ----------------------------------------------^ the trait `From<Infallible>` is not implemented for `error::Error`
+    |                                          |
+    |                                          this can't be annotated with `?` because it has type `Result<_, Infallible>`
+    |
+note: `error::Error` needs to implement `From<Infallible>`
+   --> src\error.rs:9:1
+    |
+  9 | pub enum Error {
+    | ^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+    = help: the following other types implement trait `From<T>`:
+              `error::Error` implements `From<Utf8Error>`
+              `error::Error` implements `From<quick_xml::Error>`
+              `error::Error` implements `From<std::io::Error>`
+              `error::Error` implements `From<windows_result::error::Error>`
+
+error[E0277]: the trait bound `IInspectable: From<HSTRING>` is not satisfied
+   --> src\controls\toggle.rs:102:42
+    |
+102 |         self.inner.toggle.SetOffContent(&windows::core::IInspectable::try_from(content)?)?;
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `From<HSTRING>` is not implemented for `IInspectable`
+    |
+    = help: the following other types implement trait `From<T>`:
+              `&IInspectable` implements `From<&ColorHelper>`
+              `&IInspectable` implements `From<&Colors>`
+              `&IInspectable` implements `From<&Deferral>`
+              `&IInspectable` implements `From<&IAccountsSettingsPaneInterop>`
+              `&IInspectable` implements `From<&IActivationFactory>`
+              `&IInspectable` implements `From<&IAsyncAction>`
+              `&IInspectable` implements `From<&IAsyncInfo>`
+              `&IInspectable` implements `From<&IClosable>`
+            and 66 others
+    = note: required for `HSTRING` to implement `Into<IInspectable>`
+    = note: required for `IInspectable` to implement `TryFrom<HSTRING>`
+
+error[E0282]: type annotations needed
+  --> src\controls\uielement.rs:67:74
+   |
+67 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+   |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+  --> src\controls\uielement.rs:87:13
+   |
+87 |             element.SetVisibility(visibility)?;
+   |             ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+  --> src\controls\uielement.rs:95:30
+   |
+95 |             let visibility = element.Visibility()?;
+   |                              ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:105:13
+    |
+105 |             element.SetOpacity(opacity)?;
+    |             ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:113:16
+    |
+113 |             Ok(element.Opacity()?)
+    |                ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:122:74
+    |
+122 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:131:74
+    |
+131 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:141:74
+    |
+141 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:150:74
+    |
+150 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:160:74
+    |
+160 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:169:74
+    |
+169 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:178:74
+    |
+178 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:187:74
+    |
+187 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:196:74
+    |
+196 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:205:74
+    |
+205 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:215:74
+    |
+215 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:224:74
+    |
+224 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:234:74
+    |
+234 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:243:74
+    |
+243 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:253:74
+    |
+253 |             let framework_element: windows::UI::Xaml::FrameworkElement = element.cast()?;
+    |                                                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\controls\uielement.rs:262:65
+    |
+262 |             let control: windows::UI::Xaml::Controls::Control = element.cast()?;
+    |                                                                 ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed for `&Option<_>`
+  --> src\events\mod.rs:44:38
+   |
+44 |         TypedEventHandler::new(move |sender, _args| {
+   |                                      ^^^^^^
+45 |             let element = if let Some(sender) = sender {
+46 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+   |                                         ------ type must be known at this point
+   |
+help: consider giving this closure parameter an explicit type, where the placeholders `_` are specified
+   |
+44 |         TypedEventHandler::new(move |sender: &Option<T>, _args| {
+   |                                            ++++++++++++
+
+error[E0282]: type annotations needed for `&Option<_>`
+  --> src\events\mod.rs:92:38
+   |
+92 |         TypedEventHandler::new(move |sender, _args| {
+   |                                      ^^^^^^
+93 |             let element = if let Some(sender) = sender {
+94 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+   |                                         ------ type must be known at this point
+   |
+help: consider giving this closure parameter an explicit type, where the placeholders `_` are specified
+   |
+92 |         TypedEventHandler::new(move |sender: &Option<T>, _args| {
+   |                                            ++++++++++++
+
+error[E0282]: type annotations needed for `&Option<_>`
+   --> src\events\mod.rs:137:38
+    |
+137 |         TypedEventHandler::new(move |sender, _args| {
+    |                                      ^^^^^^
+138 |             let element = if let Some(sender) = sender {
+139 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                         ------ type must be known at this point
+    |
+help: consider giving this closure parameter an explicit type, where the placeholders `_` are specified
+    |
+137 |         TypedEventHandler::new(move |sender: &Option<T>, _args| {
+    |                                            ++++++++++++
+
+error[E0282]: type annotations needed for `&Option<_>`
+   --> src\events\mod.rs:199:38
+    |
+199 |         TypedEventHandler::new(move |sender, _args| {
+    |                                      ^^^^^^
+200 |             let element = if let Some(sender) = sender {
+201 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                         ------ type must be known at this point
+    |
+help: consider giving this closure parameter an explicit type, where the placeholders `_` are specified
+    |
+199 |         TypedEventHandler::new(move |sender: &Option<T>, _args| {
+    |                                            ++++++++++++
+
+error[E0282]: type annotations needed for `&Option<_>`
+   --> src\events\mod.rs:247:38
+    |
+247 |         TypedEventHandler::new(move |sender, _args| {
+    |                                      ^^^^^^
+248 |             let element = if let Some(sender) = sender {
+249 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                         ------ type must be known at this point
+    |
+help: consider giving this closure parameter an explicit type, where the placeholders `_` are specified
+    |
+247 |         TypedEventHandler::new(move |sender: &Option<T>, _args| {
+    |                                            ++++++++++++
+
+error[E0282]: type annotations needed for `&Option<_>`
+   --> src\events\mod.rs:292:38
+    |
+292 |         TypedEventHandler::new(move |sender, _args| {
+    |                                      ^^^^^^
+293 |             let element = if let Some(sender) = sender {
+294 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                         ------ type must be known at this point
+    |
+help: consider giving this closure parameter an explicit type, where the placeholders `_` are specified
+    |
+292 |         TypedEventHandler::new(move |sender: &Option<T>, _args| {
+    |                                            ++++++++++++
+
+error[E0282]: type annotations needed for `&Option<_>`
+   --> src\events\mod.rs:353:38
+    |
+353 |         TypedEventHandler::new(move |sender, args| {
+    |                                      ^^^^^^
+354 |             let element = if let Some(sender) = sender {
+355 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                         ------ type must be known at this point
+    |
+help: consider giving this closure parameter an explicit type, where the placeholders `_` are specified
+    |
+353 |         TypedEventHandler::new(move |sender: &Option<T>, args| {
+    |                                            ++++++++++++
+
+error[E0282]: type annotations needed for `&Option<_>`
+   --> src\events\mod.rs:353:46
+    |
+353 |         TypedEventHandler::new(move |sender, args| {
+    |                                              ^^^^
+...
+365 |                 if let Ok(current_point) = args.GetCurrentPoint(None) {
+    |                                            ---- type must be known at this point
+    |
+help: consider giving this closure parameter an explicit type, where the placeholders `_` are specified
+    |
+353 |         TypedEventHandler::new(move |sender, args: &Option<T>| {
+    |                                                  ++++++++++++
+
+error[E0282]: type annotations needed
+   --> src\events\mod.rs:366:43
+    |
+366 |                     if let Ok(position) = current_point.Position() {
+    |                                           ^^^^^^^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\events\mod.rs:371:54
+    |
+371 | ...                   left_button_pressed: properties.IsLeftButtonPressed().unwrap_or(false),
+    |                                            ^^^^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed for `&Option<_>`
+   --> src\events\mod.rs:457:38
+    |
+457 |         TypedEventHandler::new(move |sender, args| {
+    |                                      ^^^^^^
+458 |             let element = if let Some(sender) = sender {
+459 |                 if let Ok(ui_element) = sender.cast::<windows::UI::Xaml::UIElement>() {
+    |                                         ------ type must be known at this point
+    |
+help: consider giving this closure parameter an explicit type, where the placeholders `_` are specified
+    |
+457 |         TypedEventHandler::new(move |sender: &Option<T>, args| {
+    |                                            ++++++++++++
+
+error[E0282]: type annotations needed for `&Option<_>`
+   --> src\events\mod.rs:457:46
+    |
+457 |         TypedEventHandler::new(move |sender, args| {
+    |                                              ^^^^
+...
+470 |                     key: args.Key().unwrap_or(windows::System::VirtualKey::None).0 as u32,
+    |                          ---- type must be known at this point
+    |
+help: consider giving this closure parameter an explicit type, where the placeholders `_` are specified
+    |
+457 |         TypedEventHandler::new(move |sender, args: &Option<T>| {
+    |                                                  ++++++++++++
+
+error[E0282]: type annotations needed
+   --> src\layout\scroll_viewer.rs:102:34
+    |
+102 |             if let Ok(element) = content.cast::<windows::UI::Xaml::UIElement>() {
+    |                                  ^^^^^^^ cannot infer type
+
+error[E0308]: mismatched types
+   --> src\layout\scroll_viewer.rs:161:51
+    |
+161 |             windows::Foundation::IReference::from(horizontal_offset),
+    |             ------------------------------------- ^^^^^^^^^^^^^^^^^ expected `IReference<_>`, found `f64`
+    |             |
+    |             arguments to this function are incorrect
+    |
+    = note: expected struct `IReference<_>`
+                 found type `f64`
+note: associated function defined here
+   --> C:\Users\Joseph\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib/rustlib/src/rust\library\core\src\convert\mod.rs:592:8
+    |
+592 |     fn from(value: T) -> Self;
+    |        ^^^^
+
+error[E0308]: mismatched types
+   --> src\layout\scroll_viewer.rs:162:51
+    |
+162 |             windows::Foundation::IReference::from(vertical_offset),
+    |             ------------------------------------- ^^^^^^^^^^^^^^^ expected `IReference<_>`, found `f64`
+    |             |
+    |             arguments to this function are incorrect
+    |
+    = note: expected struct `IReference<_>`
+                 found type `f64`
+note: associated function defined here
+   --> C:\Users\Joseph\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib/rustlib/src/rust\library\core\src\convert\mod.rs:592:8
+    |
+592 |     fn from(value: T) -> Self;
+    |        ^^^^
+
+error[E0308]: mismatched types
+   --> src\layout\scroll_viewer.rs:175:51
+    |
+175 |             windows::Foundation::IReference::from(horizontal_offset),
+    |             ------------------------------------- ^^^^^^^^^^^^^^^^^ expected `IReference<_>`, found `f64`
+    |             |
+    |             arguments to this function are incorrect
+    |
+    = note: expected struct `IReference<_>`
+                 found type `f64`
+note: associated function defined here
+   --> C:\Users\Joseph\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib/rustlib/src/rust\library\core\src\convert\mod.rs:592:8
+    |
+592 |     fn from(value: T) -> Self;
+    |        ^^^^
+
+error[E0308]: mismatched types
+   --> src\layout\scroll_viewer.rs:176:51
+    |
+176 |             windows::Foundation::IReference::from(vertical_offset),
+    |             ------------------------------------- ^^^^^^^^^^^^^^^ expected `IReference<_>`, found `f64`
+    |             |
+    |             arguments to this function are incorrect
+    |
+    = note: expected struct `IReference<_>`
+                 found type `f64`
+note: associated function defined here
+   --> C:\Users\Joseph\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib/rustlib/src/rust\library\core\src\convert\mod.rs:592:8
+    |
+592 |     fn from(value: T) -> Self;
+    |        ^^^^
+
+error[E0308]: mismatched types
+   --> src\layout\scroll_viewer.rs:220:51
+    |
+220 |             windows::Foundation::IReference::from(factor),
+    |             ------------------------------------- ^^^^^^ expected `IReference<_>`, found `f32`
+    |             |
+    |             arguments to this function are incorrect
+    |
+    = note: expected struct `IReference<_>`
+                 found type `f32`
+note: associated function defined here
+   --> C:\Users\Joseph\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib/rustlib/src/rust\library\core\src\convert\mod.rs:592:8
+    |
+592 |     fn from(value: T) -> Self;
+    |        ^^^^
+
+error[E0282]: type annotations needed
+   --> src\window.rs:262:17
+    |
+262 |                 source.SetContent(&element.as_winrt_element()?)?;
+    |                 ^^^^^^ cannot infer type
+
+error[E0425]: cannot find function, tuple struct or tuple variant `SetFocus` in this scope
+   --> src\window.rs:294:13
+    |
+294 |             SetFocus(self.inner.hwnd);
+    |             ^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `EnableWindow` in this scope
+   --> src\window.rs:302:21
+    |
+302 |             let _ = EnableWindow(self.inner.hwnd, enabled);
+    |                     ^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `IsWindowEnabled` in this scope
+    --> src\window.rs:309:18
+     |
+ 309 |           unsafe { IsWindowEnabled(self.inner.hwnd).into() }
+     |                    ^^^^^^^^^^^^^^^ help: a function with a similar name exists: `IsWindowArranged`
+     |
+    ::: C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\Win32\UI\WindowsAndMessaging\mod.rs:1842:1
+     |
+1842 | / pub unsafe fn IsWindowArranged<P0>(hwnd: P0) -> super::super::Foundation::BOOL
+1843 | | where
+1844 | |     P0: windows_core::Param<super::super::Foundation::HWND>,
+     | |____________________________________________________________- similarly named function `IsWindowArranged` defined here
+
+error[E0271]: type mismatch resolving `<Option<HWND> as TypeKind>::TypeKind == CopyType`
+    --> src\window.rs:318:17
+     |
+ 316 |             SetWindowPos(
+     |             ------------ required by a bound introduced by this call
+ 317 |                 self.inner.hwnd,
+ 318 |                 Some(hwnd_insert_after),
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^ expected `CopyType`, found `InterfaceType`
+     |
+     = note: required for `Option<Win32::Foundation::HWND>` to implement `Param<Win32::Foundation::HWND, CopyType>`
+note: required by a bound in `WindowsAndMessaging::SetWindowPos`
+    --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\Win32\UI\WindowsAndMessaging\mod.rs:3053:9
+     |
+3050 | pub unsafe fn SetWindowPos<P0, P1>(hwnd: P0, hwndinsertafter: P1, x: i32, y: i32, cx: i32, cy: i32, uflags: SET_WINDOW_POS_FLAGS) -> wind...
+     |               ------------ required by a bound in this function
+...
+3053 |     P1: windows_core::Param<super::super::Foundation::HWND>,
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `SetWindowPos`
+
+error[E0277]: the trait bound `Option<Win32::Foundation::HWND>: Param<Win32::Foundation::HWND, CopyType>` is not satisfied
+    --> src\window.rs:318:17
+     |
+ 316 |             SetWindowPos(
+     |             ------------ required by a bound introduced by this call
+ 317 |                 self.inner.hwnd,
+ 318 |                 Some(hwnd_insert_after),
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^ the trait `CanInto<Win32::Foundation::HWND>` is not implemented for `Option<Win32::Foundation::HWND>`
+     |
+     = help: the following other types implement trait `CanInto<T>`:
+               `AsyncIAdviseSink` implements `CanInto<IUnknown>`
+               `AsyncIAdviseSink2` implements `CanInto<AsyncIAdviseSink>`
+               `AsyncIAdviseSink2` implements `CanInto<IUnknown>`
+               `AsyncIMultiQI` implements `CanInto<IUnknown>`
+               `AsyncIPipeByte` implements `CanInto<IUnknown>`
+               `AsyncIPipeDouble` implements `CanInto<IUnknown>`
+               `AsyncIPipeLong` implements `CanInto<IUnknown>`
+               `AsyncIUnknown` implements `CanInto<IUnknown>`
+             and 261 others
+     = note: required for `Option<Win32::Foundation::HWND>` to implement `Param<Win32::Foundation::HWND, CopyType>`
+note: required by a bound in `WindowsAndMessaging::SetWindowPos`
+    --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\Win32\UI\WindowsAndMessaging\mod.rs:3053:9
+     |
+3050 | pub unsafe fn SetWindowPos<P0, P1>(hwnd: P0, hwndinsertafter: P1, x: i32, y: i32, cx: i32, cy: i32, uflags: SET_WINDOW_POS_FLAGS) -> wind...
+     |               ------------ required by a bound in this function
+...
+3053 |     P1: windows_core::Param<super::super::Foundation::HWND>,
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `SetWindowPos`
+
+error[E0277]: the trait bound `Option<Win32::Foundation::HWND>: Param<Win32::Foundation::HWND, CopyType>` is not satisfied
+    --> src\window.rs:318:17
+     |
+ 316 |             SetWindowPos(
+     |             ------------ required by a bound introduced by this call
+ 317 |                 self.inner.hwnd,
+ 318 |                 Some(hwnd_insert_after),
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^ the trait `core::interface::Interface` is not implemented for `Option<Win32::Foundation::HWND>`
+     |
+     = help: the following other types implement trait `core::interface::Interface`:
+               AsyncActionCompletedHandler
+               AsyncActionProgressHandler<TProgress>
+               AsyncActionWithProgressCompletedHandler<TProgress>
+               AsyncIAdviseSink
+               AsyncIAdviseSink2
+               AsyncIMultiQI
+               AsyncIPipeByte
+               AsyncIPipeDouble
+             and 203 others
+     = note: required for `Option<Win32::Foundation::HWND>` to implement `TypeKind`
+     = note: required for `Option<Win32::Foundation::HWND>` to implement `Param<Win32::Foundation::HWND, CopyType>`
+note: required by a bound in `WindowsAndMessaging::SetWindowPos`
+    --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\Win32\UI\WindowsAndMessaging\mod.rs:3053:9
+     |
+3050 | pub unsafe fn SetWindowPos<P0, P1>(hwnd: P0, hwndinsertafter: P1, x: i32, y: i32, cx: i32, cy: i32, uflags: SET_WINDOW_POS_FLAGS) -> wind...
+     |               ------------ required by a bound in this function
+...
+3053 |     P1: windows_core::Param<super::super::Foundation::HWND>,
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `SetWindowPos`
+
+error[E0308]: mismatched types
+   --> src\window.rs:521:28
+    |
+521 |                 hInstance: instance,
+    |                            ^^^^^^^^ expected `HINSTANCE`, found `HMODULE`
+    |
+help: call `Into::into` on this expression to convert `Win32::Foundation::HMODULE` into `HINSTANCE`
+    |
+521 |                 hInstance: instance.into(),
+    |                                    +++++++
+
+error[E0599]: no method named `is_invalid` found for enum `std::result::Result<T, E>` in the current scope
+     --> src\window.rs:565:31
+      |
+  565 |                     if !child.is_invalid() {
+      |                               ^^^^^^^^^^ method not found in `std::result::Result<Win32::Foundation::HWND, windows_result::error::Error>`
+      |
+note: the method `is_invalid` exists on the type `Win32::Foundation::HWND`
+     --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\Win32\Foundation\mod.rs:10868:5
+      |
+10868 |     pub fn is_invalid(&self) -> bool {
+      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider using `Result::expect` to unwrap the `Win32::Foundation::HWND` value, panicking if the value is a `Result::Err`
+      |
+  565 |                     if !child.expect("REASON").is_invalid() {
+      |                              +++++++++++++++++
+
+error[E0271]: type mismatch resolving `<Result<HWND, Error> as TypeKind>::TypeKind == CopyType`
+    --> src\window.rs:567:29
+     |
+ 566 |                         let _ = SetWindowPos(
+     |                                 ------------ required by a bound introduced by this call
+ 567 |                             child,
+     |                             ^^^^^ expected `CopyType`, found `InterfaceType`
+     |
+     = note: required for `std::result::Result<Win32::Foundation::HWND, windows_result::error::Error>` to implement `Param<Win32::Foundation::HWND, CopyType>`
+note: required by a bound in `WindowsAndMessaging::SetWindowPos`
+    --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\Win32\UI\WindowsAndMessaging\mod.rs:3052:9
+     |
+3050 | pub unsafe fn SetWindowPos<P0, P1>(hwnd: P0, hwndinsertafter: P1, x: i32, y: i32, cx: i32, cy: i32, uflags: SET_WINDOW_POS_FLAGS) -> wind...
+     |               ------------ required by a bound in this function
+3051 | where
+3052 |     P0: windows_core::Param<super::super::Foundation::HWND>,
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `SetWindowPos`
+
+error[E0277]: the trait bound `Result<HWND, Error>: Param<HWND, CopyType>` is not satisfied
+    --> src\window.rs:567:29
+     |
+ 566 |                         let _ = SetWindowPos(
+     |                                 ------------ required by a bound introduced by this call
+ 567 |                             child,
+     |                             ^^^^^ unsatisfied trait bound
+     |
+     = help: the trait `CanInto<Win32::Foundation::HWND>` is not implemented for `std::result::Result<Win32::Foundation::HWND, windows_result::error::Error>`
+     = help: the following other types implement trait `CanInto<T>`:
+               `AsyncIAdviseSink` implements `CanInto<IUnknown>`
+               `AsyncIAdviseSink2` implements `CanInto<AsyncIAdviseSink>`
+               `AsyncIAdviseSink2` implements `CanInto<IUnknown>`
+               `AsyncIMultiQI` implements `CanInto<IUnknown>`
+               `AsyncIPipeByte` implements `CanInto<IUnknown>`
+               `AsyncIPipeDouble` implements `CanInto<IUnknown>`
+               `AsyncIPipeLong` implements `CanInto<IUnknown>`
+               `AsyncIUnknown` implements `CanInto<IUnknown>`
+             and 261 others
+     = note: required for `std::result::Result<Win32::Foundation::HWND, windows_result::error::Error>` to implement `Param<Win32::Foundation::HWND, CopyType>`
+note: required by a bound in `WindowsAndMessaging::SetWindowPos`
+    --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\Win32\UI\WindowsAndMessaging\mod.rs:3052:9
+     |
+3050 | pub unsafe fn SetWindowPos<P0, P1>(hwnd: P0, hwndinsertafter: P1, x: i32, y: i32, cx: i32, cy: i32, uflags: SET_WINDOW_POS_FLAGS) -> wind...
+     |               ------------ required by a bound in this function
+3051 | where
+3052 |     P0: windows_core::Param<super::super::Foundation::HWND>,
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `SetWindowPos`
+     = note: the full name for the type has been written to 'F:\Projects\winrt-xaml\target\debug\deps\winrt_xaml-88579981e9ff8a18.long-type-13677224258011224080.txt'
+     = note: consider using `--verbose` to print the full type name to the console
+
+error[E0277]: the trait bound `Result<HWND, Error>: Param<HWND, CopyType>` is not satisfied
+    --> src\window.rs:567:29
+     |
+ 566 |                         let _ = SetWindowPos(
+     |                                 ------------ required by a bound introduced by this call
+ 567 |                             child,
+     |                             ^^^^^ the trait `core::interface::Interface` is not implemented for `std::result::Result<Win32::Foundation::HWND, windows_result::error::Error>`
+     |
+     = help: the following other types implement trait `core::interface::Interface`:
+               AsyncActionCompletedHandler
+               AsyncActionProgressHandler<TProgress>
+               AsyncActionWithProgressCompletedHandler<TProgress>
+               AsyncIAdviseSink
+               AsyncIAdviseSink2
+               AsyncIMultiQI
+               AsyncIPipeByte
+               AsyncIPipeDouble
+             and 203 others
+     = note: required for `std::result::Result<Win32::Foundation::HWND, windows_result::error::Error>` to implement `TypeKind`
+     = note: required for `std::result::Result<Win32::Foundation::HWND, windows_result::error::Error>` to implement `Param<Win32::Foundation::HWND, CopyType>`
+note: required by a bound in `WindowsAndMessaging::SetWindowPos`
+    --> C:\Users\Joseph\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-0.58.0\src\Windows\Win32\UI\WindowsAndMessaging\mod.rs:3052:9
+     |
+3050 | pub unsafe fn SetWindowPos<P0, P1>(hwnd: P0, hwndinsertafter: P1, x: i32, y: i32, cx: i32, cy: i32, uflags: SET_WINDOW_POS_FLAGS) -> wind...
+     |               ------------ required by a bound in this function
+3051 | where
+3052 |     P0: windows_core::Param<super::super::Foundation::HWND>,
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `SetWindowPos`
+     = note: the full name for the type has been written to 'F:\Projects\winrt-xaml\target\debug\deps\winrt_xaml-88579981e9ff8a18.long-type-13677224258011224080.txt'
+     = note: consider using `--verbose` to print the full type name to the console
+
+error[E0277]: the trait bound `impl Into<String>: AsRef<str>` is not satisfied
+   --> src\window.rs:607:25
+    |
+607 |             w.set_title(title)?;
+    |               --------- ^^^^^ the trait `AsRef<str>` is not implemented for `impl Into<String>`
+    |               |
+    |               required by a bound introduced by this call
+    |
+note: required by a bound in `Window::set_title`
+   --> src\window.rs:87:41
+    |
+ 87 |     pub fn set_title(&self, title: impl AsRef<str>) -> Result<()> {
+    |                                         ^^^^^^^^^^ required by this bound in `Window::set_title`
+help: consider restricting opaque type `impl Into<String>` with trait `AsRef`
+    |
+605 |     fn title(self, title: impl Into<String> + std::convert::AsRef<str>) -> Self {
+    |                                             ++++++++++++++++++++++++++
+
+error[E0599]: no method named `as_ui_element` found for struct `border::Border` in the current scope
+   --> src\xaml\parser.rs:318:48
+    |
+318 |                 "Width" => apply_width(&border.as_ui_element(), value)?,
+    |                                                ^^^^^^^^^^^^^ method not found in `border::Border`
+    |
+   ::: src\layout\border.rs:23:1
+    |
+ 23 | pub struct Border {
+    | ----------------- method `as_ui_element` not found for this struct
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following traits define an item `as_ui_element`, perhaps you need to implement one of them:
+            candidate #1: `controls::Control`
+            candidate #2: `layout::Panel`
+
+error[E0599]: no method named `as_ui_element` found for struct `border::Border` in the current scope
+   --> src\xaml\parser.rs:319:50
+    |
+319 |                 "Height" => apply_height(&border.as_ui_element(), value)?,
+    |                                                  ^^^^^^^^^^^^^ method not found in `border::Border`
+    |
+   ::: src\layout\border.rs:23:1
+    |
+ 23 | pub struct Border {
+    | ----------------- method `as_ui_element` not found for this struct
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following traits define an item `as_ui_element`, perhaps you need to implement one of them:
+            candidate #1: `controls::Control`
+            candidate #2: `layout::Panel`
+
+error[E0599]: no method named `as_ui_element` found for struct `border::Border` in the current scope
+   --> src\xaml\parser.rs:322:28
+    |
+322 |                     border.as_ui_element().set_margin(margin)?;
+    |                            ^^^^^^^^^^^^^ method not found in `border::Border`
+    |
+   ::: src\layout\border.rs:23:1
+    |
+ 23 | pub struct Border {
+    | ----------------- method `as_ui_element` not found for this struct
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following traits define an item `as_ui_element`, perhaps you need to implement one of them:
+            candidate #1: `controls::Control`
+            candidate #2: `layout::Panel`
+
+error[E0599]: no method named `as_ui_element` found for struct `scroll_viewer::ScrollViewer` in the current scope
+   --> src\xaml\parser.rs:348:55
+    |
+348 |                 "Width" => apply_width(&scroll_viewer.as_ui_element(), value)?,
+    |                                                       ^^^^^^^^^^^^^ method not found in `scroll_viewer::ScrollViewer`
+    |
+   ::: src\layout\scroll_viewer.rs:56:1
+    |
+ 56 | pub struct ScrollViewer {
+    | ----------------------- method `as_ui_element` not found for this struct
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following traits define an item `as_ui_element`, perhaps you need to implement one of them:
+            candidate #1: `controls::Control`
+            candidate #2: `layout::Panel`
+
+error[E0599]: no method named `as_ui_element` found for struct `scroll_viewer::ScrollViewer` in the current scope
+   --> src\xaml\parser.rs:349:57
+    |
+349 |                 "Height" => apply_height(&scroll_viewer.as_ui_element(), value)?,
+    |                                                         ^^^^^^^^^^^^^ method not found in `scroll_viewer::ScrollViewer`
+    |
+   ::: src\layout\scroll_viewer.rs:56:1
+    |
+ 56 | pub struct ScrollViewer {
+    | ----------------------- method `as_ui_element` not found for this struct
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following traits define an item `as_ui_element`, perhaps you need to implement one of them:
+            candidate #1: `controls::Control`
+            candidate #2: `layout::Panel`
+
+error[E0599]: no method named `as_ui_element` found for struct `scroll_viewer::ScrollViewer` in the current scope
+   --> src\xaml\parser.rs:352:35
+    |
+352 |                     scroll_viewer.as_ui_element().set_margin(margin)?;
+    |                                   ^^^^^^^^^^^^^ method not found in `scroll_viewer::ScrollViewer`
+    |
+   ::: src\layout\scroll_viewer.rs:56:1
+    |
+ 56 | pub struct ScrollViewer {
+    | ----------------------- method `as_ui_element` not found for this struct
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following traits define an item `as_ui_element`, perhaps you need to implement one of them:
+            candidate #1: `controls::Control`
+            candidate #2: `layout::Panel`
+
+error[E0716]: temporary value dropped while borrowed
+   --> src\xaml\parser.rs:95:40
+    |
+ 95 |         let name = std::str::from_utf8(event.name().as_ref())
+    |                                        ^^^^^^^^^^^^ creates a temporary value which is freed while still in use
+ 96 |             .map_err(|e| Error::xaml_parse(format!("Invalid element name: {}", e)))?;
+    |                                                                                     - temporary value is freed at the end of this statement
+...
+110 |         Ok(ElementBuilder::new(name.to_string(), attributes))
+    |                                ---- borrow later used here
+    |
+help: consider using a `let` binding to create a longer lived value
+    |
+ 95 ~         let binding = event.name();
+ 96 ~         let name = std::str::from_utf8(binding.as_ref())
+    |
+
+Some errors have detailed explanations: E0053, E0271, E0277, E0282, E0308, E0425, E0433, E0592, E0599...
+For more information about an error, try `rustc --explain E0053`.
+warning: `winrt-xaml` (lib) generated 3 warnings
+error: could not compile `winrt-xaml` (lib) due to 390 previous errors; 3 warnings emitted
