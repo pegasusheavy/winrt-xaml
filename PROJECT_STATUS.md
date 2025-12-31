@@ -224,15 +224,18 @@ Instead of traditional XAML data binding (INotifyPropertyChanged), we implemente
 |---------|--------|----------|---------|
 | Button | ✅ Complete | Content, Click, Styling | - |
 | TextBlock | ✅ Complete | Text, Font, Styling | - |
-| TextBox | ✅ Complete | Text I/O, Placeholder, Styling | TextChanged event |
+| TextBox | ✅ Complete | Text I/O, Placeholder, Styling, TextChanged | - |
 | StackPanel | ✅ Complete | V/H orientation, Spacing, Styling | - |
-| Grid | ✅ Complete | Children, Styling | Row/Column definitions |
+| Grid | ✅ Complete | Children, Styling, Row/Column definitions (Auto, Star, Pixel) | - |
 | ScrollViewer | ✅ Complete | Scrolling, Visibility | - |
-| ComboBox | 📅 Planned | - | Everything |
-| CheckBox | 📅 Planned | - | Everything |
-| RadioButton | 📅 Planned | - | Everything |
-| Slider | 📅 Planned | - | Everything |
-| ProgressBar | 📅 Planned | - | Everything |
+| CheckBox | ✅ Complete | Checked state, Content, Styling | Events (on_checked/unchecked) |
+| RadioButton | ✅ Complete | Groups, Checked/Unchecked events, Styling | - |
+| ComboBox | ✅ Complete | Items, Selection, Dropdown | Selection changed event |
+| Slider | ✅ Complete | Min/Max/Value, Orientation, Styling | Value changed event |
+| ProgressBar | ✅ Complete | Determinate/Indeterminate, Min/Max/Value | - |
+| Image | ✅ Complete | URI loading, Stretch modes, Sizing | - |
+| ListView | ✅ Complete | Items, Selection, Selection changed events | - |
+| ToggleSwitch | ✅ Complete | On/Off states, Content | - |
 
 ### Styling Features
 
