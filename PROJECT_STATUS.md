@@ -191,10 +191,13 @@ Instead of traditional XAML data binding (INotifyPropertyChanged), we implemente
 - [x] Color parsing (hex format)
 - [x] Attribute parsing
 - [x] Multiple control types
-- [ ] XAML file loading (not needed with compile-time parsing)
-- [ ] Resource dictionaries (future)
-- [ ] Style definitions (future)
-- [ ] Control templates (future)
+- [x] **Resource dictionaries** ✅ - IMPLEMENTED (XamlResourceDictionary with color, double, string resources)
+- [x] **Animation system** ✅ - IMPLEMENTED (XamlStoryboard, XamlDoubleAnimation, XamlColorAnimation)
+- [-] XAML file loading - Not needed with compile-time parsing (by design)
+- [-] Style definitions - Not implemented (use resource dictionaries + manual styling instead)
+- [-] Control templates - Not implemented (use composition patterns instead)
+
+**Note**: Resource dictionaries and animations are fully functional. See `examples/resource_dictionary_demo.rs` and `examples/animations_demo.rs`.
 
 ## 📦 Component Status
 
