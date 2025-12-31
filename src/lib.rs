@@ -72,8 +72,6 @@ pub mod media;
 pub mod resources;
 #[cfg(any(feature = "xaml-islands", feature = "uwp"))]
 pub mod window;
-#[cfg(any(feature = "xaml-islands", feature = "uwp"))]
-pub mod xaml;
 
 // Re-export windows crate for advanced usage
 #[cfg(any(feature = "xaml-islands", feature = "uwp"))]
@@ -90,7 +88,6 @@ pub mod prelude {
     pub use crate::media::*;
     pub use crate::resources::*;
     pub use crate::window::Window;
-    pub use crate::xaml::*;
 }
 
 /// Re-export of the Result type with our Error

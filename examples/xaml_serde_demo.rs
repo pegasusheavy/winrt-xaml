@@ -20,19 +20,19 @@ use quick_xml::de::from_str;
 struct ButtonXaml {
     #[serde(rename = "@Content")]
     content: String,
-    
+
     #[serde(rename = "@Width", default)]
     width: Option<f64>,
-    
+
     #[serde(rename = "@Height", default)]
     height: Option<f64>,
-    
+
     #[serde(rename = "@Background", default)]
     background: Option<String>,
-    
+
     #[serde(rename = "@Foreground", default)]
     foreground: Option<String>,
-    
+
     #[serde(rename = "@CornerRadius", default)]
     corner_radius: Option<f64>,
 }
@@ -43,13 +43,13 @@ struct ButtonXaml {
 struct TextBlockXaml {
     #[serde(rename = "@Text")]
     text: String,
-    
+
     #[serde(rename = "@FontSize", default)]
     font_size: Option<f64>,
-    
+
     #[serde(rename = "@FontWeight", default)]
     font_weight: Option<i32>,
-    
+
     #[serde(rename = "@Foreground", default)]
     foreground: Option<String>,
 }
@@ -60,16 +60,16 @@ struct TextBlockXaml {
 struct TextBoxXaml {
     #[serde(rename = "@PlaceholderText", default)]
     placeholder: Option<String>,
-    
+
     #[serde(rename = "@Text", default)]
     text: Option<String>,
-    
+
     #[serde(rename = "@Width", default)]
     width: Option<f64>,
-    
+
     #[serde(rename = "@Height", default)]
     height: Option<f64>,
-    
+
     #[serde(rename = "@Background", default)]
     background: Option<String>,
 }
@@ -80,13 +80,13 @@ struct TextBoxXaml {
 struct StackPanelXaml {
     #[serde(rename = "@Orientation", default)]
     orientation: Option<String>,
-    
+
     #[serde(rename = "@Spacing", default)]
     spacing: Option<f64>,
-    
+
     #[serde(rename = "@Background", default)]
     background: Option<String>,
-    
+
     // Children would go here in a more complete implementation
     // #[serde(rename = "$value", default)]
     // children: Vec<XamlElement>,
