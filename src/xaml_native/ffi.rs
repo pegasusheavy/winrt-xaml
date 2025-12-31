@@ -78,6 +78,18 @@ unsafe impl Sync for XamlProgressBarHandle {}
 
 #[repr(C)]
 #[derive(Clone, Copy)]
+pub struct XamlRadioButtonHandle(pub *mut c_void);
+unsafe impl Send for XamlRadioButtonHandle {}
+unsafe impl Sync for XamlRadioButtonHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct XamlImageHandle(pub *mut c_void);
+unsafe impl Send for XamlImageHandle {}
+unsafe impl Sync for XamlImageHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
 pub struct XamlUIElementHandle(pub *mut c_void);
 unsafe impl Send for XamlUIElementHandle {}
 unsafe impl Sync for XamlUIElementHandle {}
@@ -221,6 +233,36 @@ extern "C" {
     pub fn xaml_combobox_as_uielement(combobox: XamlComboBoxHandle) -> XamlUIElementHandle;
     pub fn xaml_slider_as_uielement(slider: XamlSliderHandle) -> XamlUIElementHandle;
     pub fn xaml_progressbar_as_uielement(progressbar: XamlProgressBarHandle) -> XamlUIElementHandle;
+
+    // RadioButton APIs
+    pub fn xaml_radiobutton_create() -> XamlRadioButtonHandle;
+    pub fn xaml_radiobutton_destroy(radiobutton: XamlRadioButtonHandle);
+    pub fn xaml_radiobutton_set_content(radiobutton: XamlRadioButtonHandle, content: *const u16) -> i32;
+    pub fn xaml_radiobutton_set_is_checked(radiobutton: XamlRadioButtonHandle, is_checked: i32) -> i32;
+    pub fn xaml_radiobutton_get_is_checked(radiobutton: XamlRadioButtonHandle) -> i32;
+    pub fn xaml_radiobutton_set_group_name(radiobutton: XamlRadioButtonHandle, group_name: *const u16) -> i32;
+    pub fn xaml_radiobutton_on_checked(radiobutton: XamlRadioButtonHandle, callback_ptr: *mut c_void);
+    pub fn xaml_radiobutton_on_unchecked(radiobutton: XamlRadioButtonHandle, callback_ptr: *mut c_void);
+    pub fn xaml_radiobutton_as_uielement(radiobutton: XamlRadioButtonHandle) -> XamlUIElementHandle;
+
+    // Image APIs
+    pub fn xaml_image_create() -> XamlImageHandle;
+    pub fn xaml_image_destroy(image: XamlImageHandle);
+    pub fn xaml_image_set_source(image: XamlImageHandle, uri: *const u16) -> i32;
+    pub fn xaml_image_set_stretch(image: XamlImageHandle, stretch_mode: i32) -> i32;
+    pub fn xaml_image_set_size(image: XamlImageHandle, width: f64, height: f64) -> i32;
+    pub fn xaml_image_as_uielement(image: XamlImageHandle) -> XamlUIElementHandle;
+
+    // Grid row/column definition APIs
+    pub fn xaml_grid_add_row_definition(grid: XamlGridHandle, height: f64, is_auto: i32, is_star: i32) -> i32;
+    pub fn xaml_grid_add_column_definition(grid: XamlGridHandle, width: f64, is_auto: i32, is_star: i32) -> i32;
+    pub fn xaml_grid_set_child_row(child: XamlUIElementHandle, row: i32) -> i32;
+    pub fn xaml_grid_set_child_column(child: XamlUIElementHandle, column: i32) -> i32;
+    pub fn xaml_grid_set_child_row_span(child: XamlUIElementHandle, row_span: i32) -> i32;
+    pub fn xaml_grid_set_child_column_span(child: XamlUIElementHandle, column_span: i32) -> i32;
+
+    // TextBox TextChanged event
+    pub fn xaml_textbox_on_text_changed(textbox: XamlTextBoxHandle, callback_ptr: *mut c_void);
 
     // Resource Dictionary APIs
     pub fn xaml_resource_dictionary_create() -> XamlResourceDictionaryHandle;

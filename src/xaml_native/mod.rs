@@ -130,6 +130,42 @@ impl XamlUIElement {
     pub fn handle(&self) -> ffi::XamlUIElementHandle {
         self.handle
     }
+
+    /// Set the Grid.Row attached property.
+    pub fn set_grid_row(&self, row: i32) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_set_child_row(self.handle, row) };
+        if result != 0 {
+            return Err(Error::invalid_operation("Failed to set grid row".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the Grid.Column attached property.
+    pub fn set_grid_column(&self, column: i32) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_set_child_column(self.handle, column) };
+        if result != 0 {
+            return Err(Error::invalid_operation("Failed to set grid column".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the Grid.RowSpan attached property.
+    pub fn set_grid_row_span(&self, row_span: i32) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_set_child_row_span(self.handle, row_span) };
+        if result != 0 {
+            return Err(Error::invalid_operation("Failed to set grid row span".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the Grid.ColumnSpan attached property.
+    pub fn set_grid_column_span(&self, column_span: i32) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_set_child_column_span(self.handle, column_span) };
+        if result != 0 {
+            return Err(Error::invalid_operation("Failed to set grid column span".to_string()));
+        }
+        Ok(())
+    }
 }
 
 unsafe impl Send for XamlUIElement {}
@@ -456,6 +492,35 @@ impl XamlTextBox {
         let handle = unsafe { ffi::xaml_textbox_as_uielement(self.handle) };
         XamlUIElement::from_handle(handle)
     }
+
+    /// Register a callback for when the text changes.
+    pub fn on_text_changed<F>(&self, callback: F) -> Result<()>
+    where
+        F: Fn() + Send + Sync + 'static,
+    {
+        let boxed = Box::new(callback);
+        let ptr = Box::into_raw(boxed);
+        
+        extern "C" fn trampoline<F>(user_data: *mut std::ffi::c_void)
+        where
+            F: Fn() + Send + Sync + 'static,
+        {
+            unsafe {
+                let callback = &*(user_data as *const F);
+                callback();
+            }
+        }
+        
+        unsafe {
+            ffi::xaml_textbox_on_text_changed(
+                self.handle,
+                std::mem::transmute(trampoline::<F> as *const ())
+            );
+        }
+        
+        std::mem::forget(ptr);
+        Ok(())
+    }
 }
 
 impl Drop for XamlTextBox {
@@ -613,6 +678,60 @@ impl XamlGrid {
         let result = unsafe { ffi::xaml_grid_set_corner_radius(self.handle, radius) };
         if result != 0 {
             return Err(Error::control_creation("Failed to set corner radius".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Add a row definition with pixel height.
+    pub fn add_row_pixels(&self, height: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_add_row_definition(self.handle, height, 0, 0) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to add row definition".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Add a row definition with Auto sizing.
+    pub fn add_row_auto(&self) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_add_row_definition(self.handle, 0.0, 1, 0) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to add row definition".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Add a row definition with Star sizing (proportional).
+    pub fn add_row_star(&self, proportion: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_add_row_definition(self.handle, proportion, 0, 1) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to add row definition".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Add a column definition with pixel width.
+    pub fn add_column_pixels(&self, width: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_add_column_definition(self.handle, width, 0, 0) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to add column definition".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Add a column definition with Auto sizing.
+    pub fn add_column_auto(&self) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_add_column_definition(self.handle, 0.0, 1, 0) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to add column definition".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Add a column definition with Star sizing (proportional).
+    pub fn add_column_star(&self, proportion: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_grid_add_column_definition(self.handle, proportion, 0, 1) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to add column definition".to_string()));
         }
         Ok(())
     }
@@ -953,4 +1072,220 @@ impl XamlProgressBar {
 
 unsafe impl Send for XamlProgressBar {}
 unsafe impl Sync for XamlProgressBar {}
+
+// ===== RadioButton =====
+
+/// A WinRT RadioButton control for mutually exclusive selections.
+pub struct XamlRadioButton {
+    handle: ffi::XamlRadioButtonHandle,
+}
+
+impl XamlRadioButton {
+    /// Create a new RadioButton.
+    pub fn new() -> Result<Self> {
+        let handle = unsafe { ffi::xaml_radiobutton_create() };
+        if handle.0.is_null() {
+            return Err(Error::control_creation("Failed to create RadioButton".to_string()));
+        }
+        Ok(XamlRadioButton { handle })
+    }
+
+    /// Set the content (label) of the radio button.
+    pub fn set_content(&self, content: impl AsRef<str>) -> Result<()> {
+        let content_wide = to_wide_string(content.as_ref());
+        let result = unsafe { ffi::xaml_radiobutton_set_content(self.handle, content_wide.as_ptr()) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set radiobutton content".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set whether the radio button is checked.
+    pub fn set_is_checked(&self, is_checked: bool) -> Result<()> {
+        let result = unsafe { ffi::xaml_radiobutton_set_is_checked(self.handle, if is_checked { 1 } else { 0 }) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set radiobutton checked state".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Get whether the radio button is checked.
+    pub fn is_checked(&self) -> bool {
+        let result = unsafe { ffi::xaml_radiobutton_get_is_checked(self.handle) };
+        result != 0
+    }
+
+    /// Set the group name for mutual exclusivity.
+    /// Radio buttons with the same group name are mutually exclusive.
+    pub fn set_group_name(&self, group_name: impl AsRef<str>) -> Result<()> {
+        let group_wide = to_wide_string(group_name.as_ref());
+        let result = unsafe { ffi::xaml_radiobutton_set_group_name(self.handle, group_wide.as_ptr()) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set radiobutton group name".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Register a callback for when the radio button is checked.
+    pub fn on_checked<F>(&self, callback: F) -> Result<()>
+    where
+        F: Fn() + Send + Sync + 'static,
+    {
+        let boxed = Box::new(callback);
+        let ptr = Box::into_raw(boxed);
+        
+        extern "C" fn trampoline<F>(user_data: *mut std::ffi::c_void)
+        where
+            F: Fn() + Send + Sync + 'static,
+        {
+            unsafe {
+                let callback = &*(user_data as *const F);
+                callback();
+            }
+        }
+        
+        unsafe {
+            ffi::xaml_radiobutton_on_checked(
+                self.handle,
+                std::mem::transmute(trampoline::<F> as *const ())
+            );
+        }
+        
+        // Note: This leaks the callback. In production, you'd want proper cleanup.
+        std::mem::forget(ptr);
+        Ok(())
+    }
+
+    /// Register a callback for when the radio button is unchecked.
+    pub fn on_unchecked<F>(&self, callback: F) -> Result<()>
+    where
+        F: Fn() + Send + Sync + 'static,
+    {
+        let boxed = Box::new(callback);
+        let ptr = Box::into_raw(boxed);
+        
+        extern "C" fn trampoline<F>(user_data: *mut std::ffi::c_void)
+        where
+            F: Fn() + Send + Sync + 'static,
+        {
+            unsafe {
+                let callback = &*(user_data as *const F);
+                callback();
+            }
+        }
+        
+        unsafe {
+            ffi::xaml_radiobutton_on_unchecked(
+                self.handle,
+                std::mem::transmute(trampoline::<F> as *const ())
+            );
+        }
+        
+        std::mem::forget(ptr);
+        Ok(())
+    }
+
+    /// Convert to a UIElement for use as content in other containers.
+    pub fn as_uielement(&self) -> XamlUIElement {
+        let handle = unsafe { ffi::xaml_radiobutton_as_uielement(self.handle) };
+        XamlUIElement { handle }
+    }
+}
+
+impl Drop for XamlRadioButton {
+    fn drop(&mut self) {
+        unsafe {
+            ffi::xaml_radiobutton_destroy(self.handle);
+        }
+    }
+}
+
+unsafe impl Send for XamlRadioButton {}
+unsafe impl Sync for XamlRadioButton {}
+
+// ===== Image =====
+
+/// Stretch modes for Image control.
+#[repr(i32)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ImageStretch {
+    /// No stretching.
+    None = 0,
+    /// Fill the available space.
+    Fill = 1,
+    /// Uniform scaling to fit.
+    Uniform = 2,
+    /// Uniform scaling to fill.
+    UniformToFill = 3,
+}
+
+/// A WinRT Image control for displaying images.
+pub struct XamlImage {
+    handle: ffi::XamlImageHandle,
+}
+
+impl XamlImage {
+    /// Create a new Image.
+    pub fn new() -> Result<Self> {
+        let handle = unsafe { ffi::xaml_image_create() };
+        if handle.0.is_null() {
+            return Err(Error::control_creation("Failed to create Image".to_string()));
+        }
+        Ok(XamlImage { handle })
+    }
+
+    /// Set the image source from a URI.
+    /// 
+    /// # Examples
+    /// ```no_run
+    /// # use winrt_xaml::xaml_native::XamlImage;
+    /// let image = XamlImage::new()?;
+    /// image.set_source("ms-appx:///Assets/logo.png")?;
+    /// image.set_source("https://example.com/image.jpg")?;
+    /// # Ok::<(), winrt_xaml::Error>(())
+    /// ```
+    pub fn set_source(&self, uri: impl AsRef<str>) -> Result<()> {
+        let uri_wide = to_wide_string(uri.as_ref());
+        let result = unsafe { ffi::xaml_image_set_source(self.handle, uri_wide.as_ptr()) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set image source".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the stretch mode for the image.
+    pub fn set_stretch(&self, stretch: ImageStretch) -> Result<()> {
+        let result = unsafe { ffi::xaml_image_set_stretch(self.handle, stretch as i32) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set image stretch".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the size of the image.
+    pub fn set_size(&self, width: f64, height: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_image_set_size(self.handle, width, height) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set image size".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Convert to a UIElement for use as content in other containers.
+    pub fn as_uielement(&self) -> XamlUIElement {
+        let handle = unsafe { ffi::xaml_image_as_uielement(self.handle) };
+        XamlUIElement { handle }
+    }
+}
+
+impl Drop for XamlImage {
+    fn drop(&mut self) {
+        unsafe {
+            ffi::xaml_image_destroy(self.handle);
+        }
+    }
+}
+
+unsafe impl Send for XamlImage {}
+unsafe impl Sync for XamlImage {}
 

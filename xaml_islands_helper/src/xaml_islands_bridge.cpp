@@ -2374,7 +2374,7 @@ void xaml_radiobutton_on_checked(XamlRadioButtonHandle radiobutton, void* callba
     try {
         auto& rb_ptr = *reinterpret_cast<std::shared_ptr<RadioButton>*>(radiobutton);
         auto callback = reinterpret_cast<void(*)()>(callback_ptr);
-        
+
         rb_ptr->Checked([callback](auto&&, auto&&) {
             callback();
         });
@@ -2392,7 +2392,7 @@ void xaml_radiobutton_on_unchecked(XamlRadioButtonHandle radiobutton, void* call
     try {
         auto& rb_ptr = *reinterpret_cast<std::shared_ptr<RadioButton>*>(radiobutton);
         auto callback = reinterpret_cast<void(*)()>(callback_ptr);
-        
+
         rb_ptr->Unchecked([callback](auto&&, auto&&) {
             callback();
         });
@@ -2517,7 +2517,7 @@ int xaml_grid_add_row_definition(XamlGridHandle grid, double height, int is_auto
     try {
         auto& grid_ptr = *reinterpret_cast<std::shared_ptr<Grid>*>(grid);
         auto rowDef = RowDefinition();
-        
+
         if (is_auto) {
             rowDef.Height(GridLengthHelper::Auto());
         } else if (is_star) {
@@ -2525,7 +2525,7 @@ int xaml_grid_add_row_definition(XamlGridHandle grid, double height, int is_auto
         } else {
             rowDef.Height(GridLengthHelper::FromPixels(height));
         }
-        
+
         grid_ptr->RowDefinitions().Append(rowDef);
         return 0;
     }
@@ -2548,7 +2548,7 @@ int xaml_grid_add_column_definition(XamlGridHandle grid, double width, int is_au
     try {
         auto& grid_ptr = *reinterpret_cast<std::shared_ptr<Grid>*>(grid);
         auto colDef = ColumnDefinition();
-        
+
         if (is_auto) {
             colDef.Width(GridLengthHelper::Auto());
         } else if (is_star) {
@@ -2556,7 +2556,7 @@ int xaml_grid_add_column_definition(XamlGridHandle grid, double width, int is_au
         } else {
             colDef.Width(GridLengthHelper::FromPixels(width));
         }
-        
+
         grid_ptr->ColumnDefinitions().Append(colDef);
         return 0;
     }
@@ -2670,7 +2670,7 @@ void xaml_textbox_on_text_changed(XamlTextBoxHandle textbox, void* callback_ptr)
     try {
         auto& tb_ptr = *reinterpret_cast<std::shared_ptr<TextBox>*>(textbox);
         auto callback = reinterpret_cast<void(*)()>(callback_ptr);
-        
+
         tb_ptr->TextChanged([callback](auto&&, auto&&) {
             callback();
         });
