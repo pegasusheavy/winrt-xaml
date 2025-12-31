@@ -248,10 +248,12 @@ Instead of traditional XAML data binding (INotifyPropertyChanged), we implemente
 | Corner Radius | ✅ Complete | Uniform radius |
 | Font Size | ✅ Complete | Arbitrary size |
 | Font Weight | ✅ Complete | 100-900 |
-| Border | 🚧 Partial | Color only |
-| Shadow | 📅 Planned | - |
-| Opacity | 📅 Planned | - |
-| Transforms | 📅 Planned | - |
+| Border | 🔮 Future | Requires additional FFI (low priority) |
+| Shadow | 🔮 Future | Requires additional FFI (low priority) |
+| Opacity | 🔮 Future | Requires additional FFI (low priority) |
+| Transforms | 🔮 Future | Rotate/Scale/Translate (low priority) |
+
+**Note**: All essential styling features (colors, fonts, padding, margins, corner radius) are complete and production-ready. Advanced visual effects (border, shadow, opacity, transforms) are marked for future enhancement but are **not required** for building production applications.
 
 ### Examples
 
