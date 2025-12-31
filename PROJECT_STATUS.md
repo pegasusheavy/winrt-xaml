@@ -356,13 +356,16 @@ button.on_click(move || count.update(|c| c + 1));
 4. **Implement ProgressBar** control (WinRT ProgressBar via C++ bridge)
 5. **Implement RadioButton** control (WinRT RadioButton via C++ bridge)
 
-### Medium Term (Next Month)
+### 📅 Medium Term (Next Month)
 
-1. **Add RadioButton** control
-2. **Implement Grid row/column** definitions
-3. **Add TextChanged event** for TextBox
-4. **Create tutorial series** (Getting Started, Building Apps, etc.)
-5. **Performance benchmarking** suite
+1. **Add Image** control (WinRT Image/ImageSource)
+2. **Add ListView** control (WinRT ListView/ListViewItem)
+3. **Add ToggleSwitch** control (WinRT ToggleSwitch)
+4. **Implement Grid row/column** definitions (RowDefinitions/ColumnDefinitions)
+5. **Add more events** (TextChanged, SelectionChanged, Toggled, etc.)
+6. **Reactive signals** library integration (optional - for complex state)
+7. **Performance benchmarking** suite (measure FFI overhead)
+8. **More advanced examples** (data grid, settings page, dashboard)
 
 ### Long Term (Next Quarter)
 
