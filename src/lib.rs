@@ -96,9 +96,10 @@ pub mod prelude {
     // Re-export WinRT XAML types
     #[cfg(feature = "xaml-islands")]
     pub use crate::xaml_native::{
-        ImageStretch, ScrollBarVisibility, ScrollMode, XamlButton, XamlCheckBox, XamlComboBox,
-        XamlGrid, XamlImage, XamlManager, XamlProgressBar, XamlRadioButton, XamlScrollViewer,
-        XamlSlider, XamlSource, XamlStackPanel, XamlTextBlock, XamlTextBox, XamlUIElement,
+        ImageStretch, ListViewSelectionMode, ScrollBarVisibility, ScrollMode, XamlButton,
+        XamlCheckBox, XamlComboBox, XamlGrid, XamlImage, XamlListView, XamlManager,
+        XamlProgressBar, XamlRadioButton, XamlScrollViewer, XamlSlider, XamlSource,
+        XamlStackPanel, XamlTextBlock, XamlTextBox, XamlUIElement,
     };
 
     // Re-export reactive types

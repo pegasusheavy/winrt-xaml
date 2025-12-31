@@ -1289,3 +1289,155 @@ impl Drop for XamlImage {
 unsafe impl Send for XamlImage {}
 unsafe impl Sync for XamlImage {}
 
+// ===== ListView =====
+
+/// Selection modes for ListView control.
+#[repr(i32)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ListViewSelectionMode {
+    /// No selection allowed.
+    None = 0,
+    /// Single item selection.
+    Single = 1,
+    /// Multiple item selection.
+    Multiple = 2,
+    /// Extended selection (Ctrl/Shift).
+    Extended = 3,
+}
+
+/// A WinRT ListView control for displaying lists of items.
+pub struct XamlListView {
+    handle: ffi::XamlListViewHandle,
+}
+
+impl XamlListView {
+    /// Create a new ListView.
+    pub fn new() -> Result<Self> {
+        let handle = unsafe { ffi::xaml_listview_create() };
+        if handle.0.is_null() {
+            return Err(Error::control_creation("Failed to create ListView".to_string()));
+        }
+        Ok(XamlListView { handle })
+    }
+
+    /// Add an item to the list.
+    pub fn add_item(&self, item: impl AsRef<str>) -> Result<()> {
+        let item_wide = to_wide_string(item.as_ref());
+        let result = unsafe { ffi::xaml_listview_add_item(self.handle, item_wide.as_ptr()) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to add listview item".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Remove an item at the specified index.
+    pub fn remove_item(&self, index: i32) -> Result<()> {
+        let result = unsafe { ffi::xaml_listview_remove_item(self.handle, index) };
+        if result != 0 {
+            return Err(Error::invalid_operation("Failed to remove listview item".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Clear all items from the list.
+    pub fn clear(&self) -> Result<()> {
+        let result = unsafe { ffi::xaml_listview_clear_items(self.handle) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to clear listview items".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Get the number of items in the list.
+    pub fn item_count(&self) -> i32 {
+        unsafe { ffi::xaml_listview_get_item_count(self.handle) }
+    }
+
+    /// Get the currently selected index (-1 if none selected).
+    pub fn selected_index(&self) -> i32 {
+        unsafe { ffi::xaml_listview_get_selected_index(self.handle) }
+    }
+
+    /// Set the selected index.
+    pub fn set_selected_index(&self, index: i32) -> Result<()> {
+        let result = unsafe { ffi::xaml_listview_set_selected_index(self.handle, index) };
+        if result != 0 {
+            return Err(Error::invalid_operation("Failed to set listview selected index".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Get the item text at the specified index.
+    pub fn get_item(&self, index: i32) -> Result<String> {
+        const BUFFER_SIZE: i32 = 1024;
+        let mut buffer: Vec<u16> = vec![0; BUFFER_SIZE as usize];
+
+        let result = unsafe {
+            ffi::xaml_listview_get_item(self.handle, index, buffer.as_mut_ptr(), BUFFER_SIZE)
+        };
+
+        if result < 0 {
+            return Err(Error::invalid_operation("Failed to get listview item".to_string()));
+        }
+
+        let len = result as usize;
+        let text = String::from_utf16_lossy(&buffer[..len]);
+        Ok(text)
+    }
+
+    /// Register a callback for when the selection changes.
+    pub fn on_selection_changed<F>(&self, callback: F) -> Result<()>
+    where
+        F: Fn(i32) + Send + Sync + 'static,
+    {
+        let boxed = Box::new(callback);
+        let ptr = Box::into_raw(boxed);
+        
+        extern "C" fn trampoline<F>(index: i32, user_data: *mut std::ffi::c_void)
+        where
+            F: Fn(i32) + Send + Sync + 'static,
+        {
+            unsafe {
+                let callback = &*(user_data as *const F);
+                callback(index);
+            }
+        }
+        
+        unsafe {
+            ffi::xaml_listview_on_selection_changed(
+                self.handle,
+                std::mem::transmute(trampoline::<F> as *const ())
+            );
+        }
+        
+        std::mem::forget(ptr);
+        Ok(())
+    }
+
+    /// Set the selection mode.
+    pub fn set_selection_mode(&self, mode: ListViewSelectionMode) -> Result<()> {
+        let result = unsafe { ffi::xaml_listview_set_selection_mode(self.handle, mode as i32) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set listview selection mode".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Convert to a UIElement for use as content in other containers.
+    pub fn as_uielement(&self) -> XamlUIElement {
+        let handle = unsafe { ffi::xaml_listview_as_uielement(self.handle) };
+        XamlUIElement { handle }
+    }
+}
+
+impl Drop for XamlListView {
+    fn drop(&mut self) {
+        unsafe {
+            ffi::xaml_listview_destroy(self.handle);
+        }
+    }
+}
+
+unsafe impl Send for XamlListView {}
+unsafe impl Sync for XamlListView {}
+

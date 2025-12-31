@@ -73,7 +73,7 @@ fn main() -> Result<()> {
         let main_grid = XamlGrid::new()?;
         main_grid.set_background(0xFF1E1E1E)?; // Dark background
         main_grid.set_padding(20.0, 20.0, 20.0, 20.0)?;
-        
+
         // Add row definitions
         main_grid.add_row_auto()?; // Title
         main_grid.add_row_auto()?; // RadioButton section
@@ -274,10 +274,10 @@ fn create_slider_section() -> Result<XamlStackPanel> {
     slider.set_minimum(0.0)?;
     slider.set_maximum(100.0)?;
     slider.set_value(50.0)?;
-    
+
     // Note: Slider value_changed event requires additional FFI implementation
     // For now, the slider can be moved but won't update the progress bar automatically
-    
+
     panel.add_child(&slider.as_uielement())?;
 
     Ok(panel)
@@ -304,9 +304,9 @@ fn create_combobox_section() -> Result<XamlStackPanel> {
     combo.add_item("☕ Java")?;
     combo.add_item("🔷 TypeScript")?;
     combo.set_selected_index(0)?;
-    
+
     // Note: ComboBox selection_changed event requires additional FFI implementation
-    
+
     panel.add_child(&combo.as_uielement())?;
 
     Ok(panel)
@@ -330,7 +330,7 @@ fn create_progress_section() -> Result<XamlStackPanel> {
     progress.set_minimum(0.0)?;
     progress.set_maximum(100.0)?;
     progress.set_value(50.0)?;
-    
+
     // Note: Progress bar value would be updated by slider events when implemented
     panel.add_child(&progress.as_uielement())?;
 

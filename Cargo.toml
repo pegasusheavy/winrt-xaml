@@ -89,6 +89,11 @@ path = "examples/advanced_controls_demo.rs"
 required-features = ["xaml-islands"]
 
 [[example]]
+name = "listview_demo"
+path = "examples/listview_demo.rs"
+required-features = ["xaml-islands"]
+
+[[example]]
 name = "reactive_binding_simple"
 path = "examples/reactive_binding_simple.rs"
 required-features = ["xaml-islands"]

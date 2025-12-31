@@ -90,6 +90,12 @@ unsafe impl Sync for XamlImageHandle {}
 
 #[repr(C)]
 #[derive(Clone, Copy)]
+pub struct XamlListViewHandle(pub *mut c_void);
+unsafe impl Send for XamlListViewHandle {}
+unsafe impl Sync for XamlListViewHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
 pub struct XamlUIElementHandle(pub *mut c_void);
 unsafe impl Send for XamlUIElementHandle {}
 unsafe impl Sync for XamlUIElementHandle {}
@@ -263,6 +269,20 @@ extern "C" {
 
     // TextBox TextChanged event
     pub fn xaml_textbox_on_text_changed(textbox: XamlTextBoxHandle, callback_ptr: *mut c_void);
+
+    // ListView APIs
+    pub fn xaml_listview_create() -> XamlListViewHandle;
+    pub fn xaml_listview_destroy(listview: XamlListViewHandle);
+    pub fn xaml_listview_add_item(listview: XamlListViewHandle, item: *const u16) -> i32;
+    pub fn xaml_listview_remove_item(listview: XamlListViewHandle, index: i32) -> i32;
+    pub fn xaml_listview_clear_items(listview: XamlListViewHandle) -> i32;
+    pub fn xaml_listview_get_item_count(listview: XamlListViewHandle) -> i32;
+    pub fn xaml_listview_get_selected_index(listview: XamlListViewHandle) -> i32;
+    pub fn xaml_listview_set_selected_index(listview: XamlListViewHandle, index: i32) -> i32;
+    pub fn xaml_listview_get_item(listview: XamlListViewHandle, index: i32, buffer: *mut u16, buffer_size: i32) -> i32;
+    pub fn xaml_listview_on_selection_changed(listview: XamlListViewHandle, callback_ptr: *mut c_void);
+    pub fn xaml_listview_set_selection_mode(listview: XamlListViewHandle, mode: i32) -> i32;
+    pub fn xaml_listview_as_uielement(listview: XamlListViewHandle) -> XamlUIElementHandle;
 
     // Resource Dictionary APIs
     pub fn xaml_resource_dictionary_create() -> XamlResourceDictionaryHandle;

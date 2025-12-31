@@ -28,6 +28,7 @@ typedef void* XamlSliderHandle;
 typedef void* XamlProgressBarHandle;
 typedef void* XamlRadioButtonHandle;
 typedef void* XamlImageHandle;
+typedef void* XamlListViewHandle;
 typedef void* XamlUIElementHandle;
 typedef void* XamlResourceDictionaryHandle;
 typedef void* XamlControlTemplateHandle;
@@ -227,6 +228,23 @@ XAML_ISLANDS_API XamlUIElementHandle xaml_slider_as_uielement(XamlSliderHandle s
 XAML_ISLANDS_API XamlUIElementHandle xaml_progressbar_as_uielement(XamlProgressBarHandle progressbar);
 XAML_ISLANDS_API XamlUIElementHandle xaml_radiobutton_as_uielement(XamlRadioButtonHandle radiobutton);
 XAML_ISLANDS_API XamlUIElementHandle xaml_image_as_uielement(XamlImageHandle image);
+
+// ============================================================================
+// ListView APIs
+// ============================================================================
+
+XAML_ISLANDS_API XamlListViewHandle xaml_listview_create();
+XAML_ISLANDS_API void xaml_listview_destroy(XamlListViewHandle listview);
+XAML_ISLANDS_API int xaml_listview_add_item(XamlListViewHandle listview, const wchar_t* item);
+XAML_ISLANDS_API int xaml_listview_remove_item(XamlListViewHandle listview, int index);
+XAML_ISLANDS_API int xaml_listview_clear_items(XamlListViewHandle listview);
+XAML_ISLANDS_API int xaml_listview_get_item_count(XamlListViewHandle listview);
+XAML_ISLANDS_API int xaml_listview_get_selected_index(XamlListViewHandle listview);
+XAML_ISLANDS_API int xaml_listview_set_selected_index(XamlListViewHandle listview, int index);
+XAML_ISLANDS_API int xaml_listview_get_item(XamlListViewHandle listview, int index, wchar_t* buffer, int buffer_size);
+XAML_ISLANDS_API void xaml_listview_on_selection_changed(XamlListViewHandle listview, void* callback_ptr);
+XAML_ISLANDS_API int xaml_listview_set_selection_mode(XamlListViewHandle listview, int mode); // 0: None, 1: Single, 2: Multiple, 3: Extended
+XAML_ISLANDS_API XamlUIElementHandle xaml_listview_as_uielement(XamlListViewHandle listview);
 
 // ============================================================================
 // Resource Dictionary APIs

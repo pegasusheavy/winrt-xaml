@@ -2659,6 +2659,271 @@ int xaml_grid_set_child_column_span(XamlUIElementHandle child, int column_span) 
 }
 
 // ============================================================================
+// ListView Implementation
+// ============================================================================
+
+XamlListViewHandle xaml_listview_create() {
+    try {
+        auto listview = std::make_shared<ListView>();
+        return reinterpret_cast<XamlListViewHandle>(new std::shared_ptr<ListView>(listview));
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return nullptr;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_listview_create");
+        return nullptr;
+    }
+}
+
+void xaml_listview_destroy(XamlListViewHandle listview) {
+    if (listview) {
+        delete reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+    }
+}
+
+int xaml_listview_add_item(XamlListViewHandle listview, const wchar_t* item) {
+    if (!listview || !item) {
+        set_last_error(L"Invalid parameters in xaml_listview_add_item");
+        return -1;
+    }
+
+    try {
+        auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+        auto items = lv_ptr->Items();
+        items.Append(box_value(hstring(item)));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_listview_add_item");
+        return -1;
+    }
+}
+
+int xaml_listview_remove_item(XamlListViewHandle listview, int index) {
+    if (!listview || index < 0) {
+        set_last_error(L"Invalid parameters in xaml_listview_remove_item");
+        return -1;
+    }
+
+    try {
+        auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+        auto items = lv_ptr->Items();
+        
+        if (index >= static_cast<int>(items.Size())) {
+            set_last_error(L"Index out of range in xaml_listview_remove_item");
+            return -1;
+        }
+        
+        items.RemoveAt(index);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_listview_remove_item");
+        return -1;
+    }
+}
+
+int xaml_listview_clear_items(XamlListViewHandle listview) {
+    if (!listview) {
+        set_last_error(L"Invalid parameters in xaml_listview_clear_items");
+        return -1;
+    }
+
+    try {
+        auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+        lv_ptr->Items().Clear();
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_listview_clear_items");
+        return -1;
+    }
+}
+
+int xaml_listview_get_item_count(XamlListViewHandle listview) {
+    if (!listview) {
+        set_last_error(L"Invalid parameters in xaml_listview_get_item_count");
+        return -1;
+    }
+
+    try {
+        auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+        return static_cast<int>(lv_ptr->Items().Size());
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_listview_get_item_count");
+        return -1;
+    }
+}
+
+int xaml_listview_get_selected_index(XamlListViewHandle listview) {
+    if (!listview) {
+        set_last_error(L"Invalid parameters in xaml_listview_get_selected_index");
+        return -1;
+    }
+
+    try {
+        auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+        return lv_ptr->SelectedIndex();
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_listview_get_selected_index");
+        return -1;
+    }
+}
+
+int xaml_listview_set_selected_index(XamlListViewHandle listview, int index) {
+    if (!listview) {
+        set_last_error(L"Invalid parameters in xaml_listview_set_selected_index");
+        return -1;
+    }
+
+    try {
+        auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+        lv_ptr->SelectedIndex(index);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_listview_set_selected_index");
+        return -1;
+    }
+}
+
+int xaml_listview_get_item(XamlListViewHandle listview, int index, wchar_t* buffer, int buffer_size) {
+    if (!listview || !buffer || buffer_size <= 0 || index < 0) {
+        set_last_error(L"Invalid parameters in xaml_listview_get_item");
+        return -1;
+    }
+
+    try {
+        auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+        auto items = lv_ptr->Items();
+        
+        if (index >= static_cast<int>(items.Size())) {
+            set_last_error(L"Index out of range in xaml_listview_get_item");
+            return -1;
+        }
+        
+        auto item = items.GetAt(index);
+        hstring item_str = unbox_value<hstring>(item);
+        
+        int len = static_cast<int>(item_str.size());
+        if (len >= buffer_size) {
+            len = buffer_size - 1;
+        }
+        
+        wcsncpy_s(buffer, buffer_size, item_str.c_str(), len);
+        return len;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_listview_get_item");
+        return -1;
+    }
+}
+
+void xaml_listview_on_selection_changed(XamlListViewHandle listview, void* callback_ptr) {
+    if (!listview || !callback_ptr) {
+        return;
+    }
+
+    try {
+        auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+        auto callback = reinterpret_cast<void(*)(int)>(callback_ptr);
+
+        lv_ptr->SelectionChanged([callback, lv_ptr](auto&&, auto&&) {
+            callback(lv_ptr->SelectedIndex());
+        });
+    }
+    catch (...) {
+        // Silently ignore errors in event registration
+    }
+}
+
+int xaml_listview_set_selection_mode(XamlListViewHandle listview, int mode) {
+    if (!listview) {
+        set_last_error(L"Invalid parameters in xaml_listview_set_selection_mode");
+        return -1;
+    }
+
+    try {
+        auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+        
+        switch (mode) {
+            case 0:
+                lv_ptr->SelectionMode(ListViewSelectionMode::None);
+                break;
+            case 1:
+                lv_ptr->SelectionMode(ListViewSelectionMode::Single);
+                break;
+            case 2:
+                lv_ptr->SelectionMode(ListViewSelectionMode::Multiple);
+                break;
+            case 3:
+                lv_ptr->SelectionMode(ListViewSelectionMode::Extended);
+                break;
+            default:
+                set_last_error(L"Invalid selection mode in xaml_listview_set_selection_mode");
+                return -1;
+        }
+        
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_listview_set_selection_mode");
+        return -1;
+    }
+}
+
+XamlUIElementHandle xaml_listview_as_uielement(XamlListViewHandle listview) {
+    if (!listview) {
+        return nullptr;
+    }
+
+    try {
+        auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
+        UIElement ui_element = *lv_ptr;
+        return reinterpret_cast<XamlUIElementHandle>(new std::shared_ptr<UIElement>(std::make_shared<UIElement>(ui_element)));
+    }
+    catch (...) {
+        return nullptr;
+    }
+}
+
+// ============================================================================
 // TextBox TextChanged Event Implementation
 // ============================================================================
 
