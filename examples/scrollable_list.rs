@@ -140,7 +140,7 @@ fn create_scrollable_list(xaml_source: &XamlSource) -> Result<()> {
         // Item number badge
         let color_index = (i - 1) % colors.len();
         let (badge_color, _color_name) = colors[color_index];
-        
+
         let badge = XamlTextBlock::new()?;
         badge.set_text(&format!("{}", i))?;
         badge.set_font_size(20.0)?;
