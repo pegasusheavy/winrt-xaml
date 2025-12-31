@@ -57,3 +57,4 @@ pub trait WinRTObject: PropertyAccess {
 // Blanket implementation for all PropertyAccess types
 impl<T: PropertyAccess> WinRTObject for T {}
 
+

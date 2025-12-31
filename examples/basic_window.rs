@@ -79,30 +79,44 @@ fn main() -> Result<()> {
     // Create main layout panel
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(20.0)?;
+    main_panel.set_spacing(22.0)?;
+    main_panel.set_background(0xFF1A1A1A)?; // Dark theme
+    main_panel.set_padding(35.0, 35.0, 35.0, 35.0)?;
+    main_panel.set_corner_radius(14.0)?;
 
-    // Title
+    // Title with modern styling
     let title = XamlTextBlock::new()?;
-    title.set_text("Welcome to WinRT-XAML!")?;
-    title.set_font_size(28.0)?;
+    title.set_text("🚀 Welcome to WinRT-XAML!")?;
+    title.set_font_size(32.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White
+    title.set_margin(0.0, 0.0, 0.0, 12.0)?;
     main_panel.add_child(&title.as_uielement())?;
 
-    // Description
+    // Description with styling
     let description = XamlTextBlock::new()?;
     description.set_text("This is a basic window with interactive buttons.")?;
-    description.set_font_size(14.0)?;
+    description.set_font_size(16.0)?;
+    description.set_foreground(0xFFAAAAAA)?; // Light gray
+    description.set_margin(0.0, 0.0, 0.0, 20.0)?;
     main_panel.add_child(&description.as_uielement())?;
 
     // Click counter button
     let click_button = XamlButton::new()?;
-    click_button.set_content("Click Me!")?;
-    click_button.set_size(200.0, 50.0)?;
+    click_button.set_content("✨ Click Me!")?;
+    click_button.set_size(220.0, 56.0)?;
+    click_button.set_background(0xFF0078D4)?; // Blue
+    click_button.set_foreground(0xFFFFFFFF)?;
+    click_button.set_corner_radius(10.0)?;
+    click_button.set_padding(16.0, 12.0, 16.0, 12.0)?;
 
     let click_count = Arc::new(AtomicUsize::new(0));
     let count_clone = click_count.clone();
     let status_text = Arc::new(XamlTextBlock::new()?);
     status_text.set_text("Not clicked yet")?;
-    status_text.set_font_size(16.0)?;
+    status_text.set_font_size(18.0)?;
+    status_text.set_font_weight(600)?; // SemiBold
+    status_text.set_foreground(0xFF00D4FF)?; // Cyan
 
     let status_clone = Arc::clone(&status_text);
     click_button.on_click(move || {
@@ -117,8 +131,12 @@ fn main() -> Result<()> {
 
     // Exit button
     let exit_button = XamlButton::new()?;
-    exit_button.set_content("Exit Application")?;
-    exit_button.set_size(200.0, 50.0)?;
+    exit_button.set_content("🚪 Exit Application")?;
+    exit_button.set_size(220.0, 56.0)?;
+    exit_button.set_background(0xFFE74856)?; // Red
+    exit_button.set_foreground(0xFFFFFFFF)?;
+    exit_button.set_corner_radius(10.0)?;
+    exit_button.set_padding(16.0, 12.0, 16.0, 12.0)?;
 
     exit_button.on_click(|| {
         println!("Exiting application...");

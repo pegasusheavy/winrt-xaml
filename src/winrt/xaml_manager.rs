@@ -46,3 +46,4 @@ impl WindowsXamlManager {
 unsafe impl Send for WindowsXamlManager {}
 unsafe impl Sync for WindowsXamlManager {}
 
+

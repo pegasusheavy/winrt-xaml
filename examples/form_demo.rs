@@ -78,51 +78,82 @@ fn main() -> Result<()> {
     // Create main layout panel
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(15.0)?;
+    main_panel.set_spacing(18.0)?;
+    main_panel.set_background(0xFF1A1A1A)?; // Dark theme
+    main_panel.set_padding(35.0, 35.0, 35.0, 35.0)?;
+    main_panel.set_corner_radius(14.0)?;
 
-    // Title
+    // Title with modern styling
     let title = XamlTextBlock::new()?;
-    title.set_text("User Registration Form")?;
-    title.set_font_size(28.0)?;
+    title.set_text("📝 User Registration")?;
+    title.set_font_size(32.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White
+    title.set_margin(0.0, 0.0, 0.0, 15.0)?;
     main_panel.add_child(&title.as_uielement())?;
 
-    // Name field
+    // Name field with styling
     let name_label = XamlTextBlock::new()?;
-    name_label.set_text("Name:")?;
-    name_label.set_font_size(14.0)?;
+    name_label.set_text("👤 Name:")?;
+    name_label.set_font_size(16.0)?;
+    name_label.set_font_weight(600)?; // SemiBold
+    name_label.set_foreground(0xFF00D4FF)?; // Cyan
+    name_label.set_margin(0.0, 5.0, 0.0, 5.0)?;
     main_panel.add_child(&name_label.as_uielement())?;
 
     let name_input = XamlTextBox::new()?;
     name_input.set_placeholder("Enter your name")?;
-    name_input.set_size(350.0, 32.0)?;
+    name_input.set_size(350.0, 56.0)?; // Increased height
+    name_input.set_background(0xFF2D2D2D)?; // Dark input
+    name_input.set_foreground(0xFFFFFFFF)?;
+    name_input.set_padding(12.0, 5.0, 12.0, 5.0)?;
+    name_input.set_corner_radius(8.0)?;
     main_panel.add_child(&name_input.as_uielement())?;
 
-    // Email field
+    // Email field with styling
     let email_label = XamlTextBlock::new()?;
-    email_label.set_text("Email:")?;
-    email_label.set_font_size(14.0)?;
+    email_label.set_text("📧 Email:")?;
+    email_label.set_font_size(16.0)?;
+    email_label.set_font_weight(600)?; // SemiBold
+    email_label.set_foreground(0xFF00D4FF)?; // Cyan
+    email_label.set_margin(0.0, 5.0, 0.0, 5.0)?;
     main_panel.add_child(&email_label.as_uielement())?;
 
     let email_input = XamlTextBox::new()?;
     email_input.set_placeholder("Enter your email")?;
-    email_input.set_size(350.0, 32.0)?;
+    email_input.set_size(350.0, 56.0)?; // Increased height
+    email_input.set_background(0xFF2D2D2D)?; // Dark input
+    email_input.set_foreground(0xFFFFFFFF)?;
+    email_input.set_padding(12.0, 5.0, 12.0, 5.0)?;
+    email_input.set_corner_radius(8.0)?;
     main_panel.add_child(&email_input.as_uielement())?;
 
-    // Age field
+    // Age field with styling
     let age_label = XamlTextBlock::new()?;
-    age_label.set_text("Age:")?;
-    age_label.set_font_size(14.0)?;
+    age_label.set_text("🎂 Age:")?;
+    age_label.set_font_size(16.0)?;
+    age_label.set_font_weight(600)?; // SemiBold
+    age_label.set_foreground(0xFF00D4FF)?; // Cyan
+    age_label.set_margin(0.0, 5.0, 0.0, 5.0)?;
     main_panel.add_child(&age_label.as_uielement())?;
 
     let age_input = XamlTextBox::new()?;
     age_input.set_placeholder("Enter your age")?;
-    age_input.set_size(350.0, 32.0)?;
+    age_input.set_size(350.0, 56.0)?; // Increased height
+    age_input.set_background(0xFF2D2D2D)?; // Dark input
+    age_input.set_foreground(0xFFFFFFFF)?;
+    age_input.set_padding(12.0, 5.0, 12.0, 5.0)?;
+    age_input.set_corner_radius(8.0)?;
     main_panel.add_child(&age_input.as_uielement())?;
 
-    // Submit button
+    // Submit button with styling
     let submit_button = XamlButton::new()?;
-    submit_button.set_content("Submit Form")?;
-    submit_button.set_size(200.0, 50.0)?;
+    submit_button.set_content("✅ Submit Form")?;
+    submit_button.set_size(220.0, 58.0)?;
+    submit_button.set_background(0xFF107C10)?; // Green
+    submit_button.set_foreground(0xFFFFFFFF)?;
+    submit_button.set_corner_radius(12.0)?;
+    submit_button.set_padding(18.0, 12.0, 18.0, 12.0)?;
 
     submit_button.on_click(|| {
         println!("✓ Form submitted!");
@@ -131,10 +162,11 @@ fn main() -> Result<()> {
 
     main_panel.add_child(&submit_button.as_uielement())?;
 
-    // Status text
+    // Status text with styling
     let status = XamlTextBlock::new()?;
     status.set_text("Fill out the form and click Submit")?;
-    status.set_font_size(12.0)?;
+    status.set_font_size(14.0)?;
+    status.set_foreground(0xFFAAAAAA)?; // Light gray
     main_panel.add_child(&status.as_uielement())?;
 
     // Set content

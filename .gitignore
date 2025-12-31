@@ -51,9 +51,7 @@ RUNTIME_FIXED.md
 # OS Files
 .DS_Store
 Thumbs.db
-Desktop.ini
-
-# Backup Files
+Desktop.ini# Backup Files
 *~
 *.bak
 *.swp

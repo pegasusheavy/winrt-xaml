@@ -82,29 +82,45 @@ fn main() -> Result<()> {
     // Create main layout panel
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(15.0)?;
+    main_panel.set_spacing(20.0)?;
+    main_panel.set_background(0xFF1A1A1A)?; // Dark theme
+    main_panel.set_padding(35.0, 35.0, 35.0, 35.0)?;
+    main_panel.set_corner_radius(14.0)?;
 
-    // Title
+    // Title with modern styling
     let title = XamlTextBlock::new()?;
-    title.set_text("Todo List")?;
-    title.set_font_size(28.0)?;
+    title.set_text("✅ Todo List")?;
+    title.set_font_size(32.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White
+    title.set_margin(0.0, 0.0, 0.0, 15.0)?;
     main_panel.add_child(&title.as_uielement())?;
 
-    // Input field
+    // Input field with styling
     let input = Arc::new(XamlTextBox::new()?);
     input.set_placeholder("Enter a new todo...")?;
-    input.set_size(350.0, 32.0)?;
+    input.set_size(350.0, 56.0)?; // Increased height
+    input.set_background(0xFF2D2D2D)?; // Dark input
+    input.set_foreground(0xFFFFFFFF)?;
+    input.set_padding(12.0, 5.0, 12.0, 5.0)?;
+    input.set_corner_radius(8.0)?;
     main_panel.add_child(&input.as_uielement())?;
 
     // Add button
     let add_button = XamlButton::new()?;
-    add_button.set_content("Add Todo")?;
-    add_button.set_size(150.0, 40.0)?;
+    add_button.set_content("➕ Add Todo")?;
+    add_button.set_size(160.0, 52.0)?;
+    add_button.set_background(0xFF107C10)?; // Green
+    add_button.set_foreground(0xFFFFFFFF)?;
+    add_button.set_corner_radius(10.0)?;
+    add_button.set_padding(16.0, 10.0, 16.0, 10.0)?;
 
     let count_clone = Arc::clone(&todo_count);
     let status_text = Arc::new(XamlTextBlock::new()?);
     status_text.set_text("No todos yet")?;
-    status_text.set_font_size(14.0)?;
+    status_text.set_font_size(16.0)?;
+    status_text.set_foreground(0xFF00D4FF)?; // Cyan
+    status_text.set_font_weight(600)?; // SemiBold
 
     let status_clone = Arc::clone(&status_text);
     add_button.on_click(move || {
@@ -122,8 +138,12 @@ fn main() -> Result<()> {
 
     // Clear button
     let clear_button = XamlButton::new()?;
-    clear_button.set_content("Clear All")?;
-    clear_button.set_size(150.0, 40.0)?;
+    clear_button.set_content("🗑️ Clear All")?;
+    clear_button.set_size(160.0, 52.0)?;
+    clear_button.set_background(0xFFE74856)?; // Red
+    clear_button.set_foreground(0xFFFFFFFF)?;
+    clear_button.set_corner_radius(10.0)?;
+    clear_button.set_padding(16.0, 10.0, 16.0, 10.0)?;
 
     let count_clone = Arc::clone(&todo_count);
     let status_clone = Arc::clone(&status_text);

@@ -79,35 +79,54 @@ fn main() -> Result<()> {
     // Create main layout panel
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(20.0)?;
+    main_panel.set_spacing(22.0)?;
+    main_panel.set_background(0xFF1A1A1A)?; // Dark theme
+    main_panel.set_padding(35.0, 35.0, 35.0, 35.0)?;
+    main_panel.set_corner_radius(14.0)?;
 
-    // Title
+    // Title with modern styling
     let title = XamlTextBlock::new()?;
-    title.set_text("Application Settings")?;
-    title.set_font_size(28.0)?;
+    title.set_text("⚙️ Application Settings")?;
+    title.set_font_size(32.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White
+    title.set_margin(0.0, 0.0, 0.0, 15.0)?;
     main_panel.add_child(&title.as_uielement())?;
 
-    // General Settings section
+    // General Settings section with styling
     let general_header = XamlTextBlock::new()?;
-    general_header.set_text("General Settings")?;
-    general_header.set_font_size(18.0)?;
+    general_header.set_text("🔧 General Settings")?;
+    general_header.set_font_size(20.0)?;
+    general_header.set_font_weight(600)?; // SemiBold
+    general_header.set_foreground(0xFF00D4FF)?; // Cyan
+    general_header.set_margin(0.0, 10.0, 0.0, 10.0)?;
     main_panel.add_child(&general_header.as_uielement())?;
 
     // Username setting
     let username_label = XamlTextBlock::new()?;
-    username_label.set_text("Username:")?;
-    username_label.set_font_size(14.0)?;
+    username_label.set_text("👤 Username:")?;
+    username_label.set_font_size(16.0)?;
+    username_label.set_font_weight(600)?; // SemiBold
+    username_label.set_foreground(0xFFFFFFFF)?; // White
+    username_label.set_margin(0.0, 5.0, 0.0, 5.0)?;
     main_panel.add_child(&username_label.as_uielement())?;
 
     let username_input = XamlTextBox::new()?;
     username_input.set_placeholder("Enter username")?;
-    username_input.set_size(300.0, 32.0)?;
+    username_input.set_size(300.0, 56.0)?; // Increased height
+    username_input.set_background(0xFF2D2D2D)?; // Dark input
+    username_input.set_foreground(0xFFFFFFFF)?;
+    username_input.set_padding(12.0, 5.0, 12.0, 5.0)?;
+    username_input.set_corner_radius(8.0)?;
     main_panel.add_child(&username_input.as_uielement())?;
 
     // Theme setting
     let theme_label = XamlTextBlock::new()?;
-    theme_label.set_text("Theme:")?;
-    theme_label.set_font_size(14.0)?;
+    theme_label.set_text("🎨 Theme:")?;
+    theme_label.set_font_size(16.0)?;
+    theme_label.set_font_weight(600)?; // SemiBold
+    theme_label.set_foreground(0xFFFFFFFF)?; // White
+    theme_label.set_margin(0.0, 5.0, 0.0, 5.0)?;
     main_panel.add_child(&theme_label.as_uielement())?;
 
     let theme_row = XamlStackPanel::new()?;
@@ -115,27 +134,40 @@ fn main() -> Result<()> {
     theme_row.set_spacing(10.0)?;
 
     let light_button = XamlButton::new()?;
-    light_button.set_content("Light")?;
-    light_button.set_size(100.0, 40.0)?;
+    light_button.set_content("☀️ Light")?;
+    light_button.set_size(120.0, 52.0)?;
+    light_button.set_background(0xFFF0F0F0)?; // Light gray
+    light_button.set_foreground(0xFF000000)?; // Black text
+    light_button.set_corner_radius(10.0)?;
+    light_button.set_padding(14.0, 10.0, 14.0, 10.0)?;
     light_button.on_click(|| println!("✓ Light theme selected"))?;
     theme_row.add_child(&light_button.as_uielement())?;
 
     let dark_button = XamlButton::new()?;
-    dark_button.set_content("Dark")?;
-    dark_button.set_size(100.0, 40.0)?;
+    dark_button.set_content("🌙 Dark")?;
+    dark_button.set_size(120.0, 52.0)?;
+    dark_button.set_background(0xFF2D2D2D)?; // Dark gray
+    dark_button.set_foreground(0xFFFFFFFF)?; // White text
+    dark_button.set_corner_radius(10.0)?;
+    dark_button.set_padding(14.0, 10.0, 14.0, 10.0)?;
     dark_button.on_click(|| println!("✓ Dark theme selected"))?;
     theme_row.add_child(&dark_button.as_uielement())?;
 
     main_panel.add_child(&theme_row.as_uielement())?;
 
-    // Save button
+    // Save button with styling
     let status = Arc::new(XamlTextBlock::new()?);
     status.set_text("Make changes and click Save")?;
-    status.set_font_size(12.0)?;
+    status.set_font_size(14.0)?;
+    status.set_foreground(0xFFAAAAAA)?; // Gray
 
     let save_button = XamlButton::new()?;
-    save_button.set_content("Save Settings")?;
-    save_button.set_size(200.0, 50.0)?;
+    save_button.set_content("💾 Save Settings")?;
+    save_button.set_size(220.0, 58.0)?;
+    save_button.set_background(0xFF107C10)?; // Green
+    save_button.set_foreground(0xFFFFFFFF)?;
+    save_button.set_corner_radius(12.0)?;
+    save_button.set_padding(18.0, 12.0, 18.0, 12.0)?;
 
     let status_clone = Arc::clone(&status);
     save_button.on_click(move || {

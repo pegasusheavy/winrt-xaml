@@ -83,12 +83,31 @@ fn main() -> Result<()> {
     println!("✅ XAML Island attached");
 
     // Create simple content
+    // Create a styled panel container
+    let panel = XamlStackPanel::new()?;
+    panel.set_vertical(true)?;
+    panel.set_spacing(15.0)?;
+    panel.set_background(0xFF1A1A1A)?; // Dark theme
+    panel.set_padding(40.0, 40.0, 40.0, 40.0)?;
+    panel.set_corner_radius(14.0)?;
+
+    // Add styled greeting text
     let textblock = XamlTextBlock::new()?;
-    textblock.set_text("Hello, WinRT-XAML!")?;
-    textblock.set_font_size(24.0)?;
+    textblock.set_text("👋 Hello, WinRT-XAML!")?;
+    textblock.set_font_size(36.0)?;
+    textblock.set_font_weight(700)?; // Bold
+    textblock.set_foreground(0xFF00FF9F)?; // Bright green
+    panel.add_child(&textblock.as_uielement())?;
+
+    // Add subtitle
+    let subtitle = XamlTextBlock::new()?;
+    subtitle.set_text("A simple, styled window example")?;
+    subtitle.set_font_size(16.0)?;
+    subtitle.set_foreground(0xFFAAAAAA)?; // Gray
+    panel.add_child(&subtitle.as_uielement())?;
 
     // Set content
-    xaml_source.set_content_element(&textblock.as_uielement())?;
+    xaml_source.set_content_element(&panel.as_uielement())?;
 
     // Show and size the island
     unsafe {

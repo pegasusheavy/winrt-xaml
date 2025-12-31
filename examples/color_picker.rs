@@ -79,24 +79,35 @@ fn main() -> Result<()> {
     // Create main layout panel
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(20.0)?;
+    main_panel.set_spacing(22.0)?;
+    main_panel.set_background(0xFF1A1A1A)?; // Dark theme
+    main_panel.set_padding(35.0, 35.0, 35.0, 35.0)?;
+    main_panel.set_corner_radius(14.0)?;
 
-    // Title
+    // Title with modern styling
     let title = XamlTextBlock::new()?;
-    title.set_text("Color Picker")?;
-    title.set_font_size(28.0)?;
+    title.set_text("🎨 Color Picker")?;
+    title.set_font_size(32.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White
+    title.set_margin(0.0, 0.0, 0.0, 12.0)?;
     main_panel.add_child(&title.as_uielement())?;
 
-    // Description
+    // Description with styling
     let desc = XamlTextBlock::new()?;
     desc.set_text("Select a color:")?;
-    desc.set_font_size(16.0)?;
+    desc.set_font_size(18.0)?;
+    desc.set_foreground(0xFFAAAAAA)?; // Gray
+    desc.set_margin(0.0, 0.0, 0.0, 15.0)?;
     main_panel.add_child(&desc.as_uielement())?;
 
     // Color display
     let color_display = Arc::new(XamlTextBlock::new()?);
     color_display.set_text("No color selected")?;
-    color_display.set_font_size(18.0)?;
+    color_display.set_font_size(20.0)?;
+    color_display.set_font_weight(600)?; // SemiBold
+    color_display.set_foreground(0xFF00D4FF)?; // Cyan
+    color_display.set_margin(0.0, 10.0, 0.0, 15.0)?;
     main_panel.add_child(&color_display.as_uielement())?;
 
     // Color buttons
@@ -116,7 +127,11 @@ fn main() -> Result<()> {
 
         let color_button = XamlButton::new()?;
         color_button.set_content(name)?;
-        color_button.set_size(150.0, 40.0)?;
+        color_button.set_size(160.0, 50.0)?;
+        color_button.set_background(0xFF0078D4)?; // Blue
+        color_button.set_foreground(0xFFFFFFFF)?;
+        color_button.set_corner_radius(10.0)?;
+        color_button.set_padding(16.0, 10.0, 16.0, 10.0)?;
 
         let display_clone = Arc::clone(&color_display);
         let color_name = name.to_string();
@@ -131,7 +146,8 @@ fn main() -> Result<()> {
 
         let hex_label = XamlTextBlock::new()?;
         hex_label.set_text(hex)?;
-        hex_label.set_font_size(14.0)?;
+        hex_label.set_font_size(16.0)?;
+        hex_label.set_foreground(0xFFFFFFFF)?; // White
         color_row.add_child(&hex_label.as_uielement())?;
 
         main_panel.add_child(&color_row.as_uielement())?;
@@ -139,8 +155,12 @@ fn main() -> Result<()> {
 
     // Reset button
     let reset_button = XamlButton::new()?;
-    reset_button.set_content("Reset Selection")?;
-    reset_button.set_size(200.0, 40.0)?;
+    reset_button.set_content("🔄 Reset Selection")?;
+    reset_button.set_size(220.0, 52.0)?;
+    reset_button.set_background(0xFFE74856)?; // Red
+    reset_button.set_foreground(0xFFFFFFFF)?;
+    reset_button.set_corner_radius(10.0)?;
+    reset_button.set_padding(16.0, 10.0, 16.0, 10.0)?;
 
     let display_clone = Arc::clone(&color_display);
     reset_button.on_click(move || {

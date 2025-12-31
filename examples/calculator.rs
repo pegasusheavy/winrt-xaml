@@ -155,18 +155,28 @@ fn main() -> Result<()> {
     // Build calculator UI
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(10.0)?;
+    main_panel.set_spacing(12.0)?;
+    main_panel.set_background(0xFF1A1A1A)?; // Dark theme
+    main_panel.set_padding(25.0, 25.0, 25.0, 25.0)?;
+    main_panel.set_corner_radius(14.0)?;
 
-    // Title
+    // Title with modern styling
     let title = XamlTextBlock::new()?;
-    title.set_text("Functional Calculator")?;
-    title.set_font_size(24.0)?;
+    title.set_text("🧮 Calculator")?;
+    title.set_font_size(28.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White
+    title.set_margin(0.0, 0.0, 0.0, 10.0)?;
     main_panel.add_child(&title.as_uielement())?;
 
-    // Display
+    // Display with modern styling
     let display = Arc::new(XamlTextBox::new()?);
     display.set_text("0")?;
-    display.set_size(350.0, 60.0)?;
+    display.set_size(350.0, 90.0)?; // Increased height
+    display.set_background(0xFF2D2D2D)?; // Dark display
+    display.set_foreground(0xFF00D4FF)?; // Cyan display text
+    display.set_padding(15.0, 5.0, 15.0, 5.0)?; // Minimal vertical padding
+    display.set_corner_radius(10.0)?;
     main_panel.add_child(&display.as_uielement())?;
 
     // Button rows
@@ -185,7 +195,18 @@ fn main() -> Result<()> {
         for &label in row {
             let button = XamlButton::new()?;
             button.set_content(label)?;
-            button.set_size(80.0, 60.0)?;
+            button.set_size(82.0, 62.0)?;
+            
+            // Color code buttons based on type
+            let color = match label {
+                "+" | "-" | "×" | "÷" => 0xFFFF8C00, // Orange for operators
+                "=" => 0xFF0078D4, // Blue for equals
+                _ => 0xFF3A3A3A, // Dark gray for numbers
+            };
+            button.set_background(color)?;
+            button.set_foreground(0xFFFFFFFF)?;
+            button.set_corner_radius(10.0)?;
+            button.set_padding(12.0, 10.0, 12.0, 10.0)?;
 
             // Clone Arc references for the closure
             let state_clone = Arc::clone(&state);
@@ -224,10 +245,14 @@ fn main() -> Result<()> {
         main_panel.add_child(&row_panel.as_uielement())?;
     }
 
-    // Clear button
+    // Clear button with styling
     let clear_btn = XamlButton::new()?;
-    clear_btn.set_content("Clear (C)")?;
-    clear_btn.set_size(350.0, 50.0)?;
+    clear_btn.set_content("🗑️ Clear (C)")?;
+    clear_btn.set_size(350.0, 58.0)?;
+    clear_btn.set_background(0xFFE74856)?; // Red
+    clear_btn.set_foreground(0xFFFFFFFF)?;
+    clear_btn.set_corner_radius(10.0)?;
+    clear_btn.set_padding(16.0, 12.0, 16.0, 12.0)?;
 
     let state_clone = Arc::clone(&state);
     let display_clone = Arc::clone(&display);
