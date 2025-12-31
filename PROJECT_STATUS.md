@@ -82,14 +82,14 @@
 **Target**: Q1 2026
 
 - [x] ScrollViewer control ✅
-- [ ] CheckBox control
-- [ ] RadioButton control
-- [ ] ComboBox/Dropdown
-- [ ] Slider control
-- [ ] ProgressBar control
-- [ ] Image control
-- [ ] ListView/TreeView
-- [ ] ToggleSwitch control
+- [x] CheckBox control ✅
+- [x] RadioButton control ✅
+- [x] ComboBox/Dropdown ✅
+- [x] Slider control ✅
+- [x] ProgressBar control ✅
+- [x] Image control ✅
+- [ ] ListView/TreeView (0%)
+- [x] ToggleSwitch control ✅
 
 **Note**: Basic controls (Button, TextBlock, TextBox, StackPanel, Grid) are complete and production-ready!
 
@@ -407,10 +407,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - [x] ComboBox/Dropdown (100%) ✅
 - [x] Slider control (100%) ✅
 - [x] ProgressBar control (100%) ✅
-- [ ] RadioButton control (0%)
-- [ ] TextChanged events (0%)
-- [ ] Grid row/column definitions (0%)
-- [ ] Image control (0%)
+- [x] RadioButton control (100%) ✅
+- [x] TextChanged events (100%) ✅
+- [x] Grid row/column definitions (100%) ✅
+- [x] Image control (100%) ✅
+- [ ] ListView control (0%)
 - [ ] Unit test suite for new controls (0%)
 
 ### Version 0.3.0 Goals (Planned)
