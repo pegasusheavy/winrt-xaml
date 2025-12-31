@@ -155,32 +155,7 @@ winres = "0.1"
 
 # Benchmark configuration
 [[bench]]
-name = "infrastructure_test"
-harness = false
-required-features = []
-
-[[bench]]
-name = "optimized_patterns"
-harness = false
-required-features = []
-
-[[bench]]
-name = "controls_bench"
-harness = false
-required-features = ["xaml-islands"]
-
-[[bench]]
-name = "layout_bench"
-harness = false
-required-features = ["xaml-islands"]
-
-[[bench]]
-name = "xaml_parser_bench"
-harness = false
-required-features = ["xaml-islands"]
-
-[[bench]]
-name = "resource_bench"
+name = "reactive_bench"
 harness = false
 required-features = ["xaml-islands"]
 
