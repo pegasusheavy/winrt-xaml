@@ -83,26 +83,6 @@ name = "counter_simple"
 path = "examples/counter_simple.rs"
 
 [[example]]
-name = "trait_demo"
-path = "examples/trait_demo.rs"
-
-[[example]]
-name = "winrt_activation_test"
-path = "examples/winrt_activation_test.rs"
-
-[[example]]
-name = "winrt_activation_with_com"
-path = "examples/winrt_activation_with_com.rs"
-
-[[example]]
-name = "xaml_islands_demo"
-path = "examples/xaml_islands_demo.rs"
-
-[[example]]
-name = "winrt_mvp"
-path = "examples/winrt_mvp.rs"
-
-[[example]]
 name = "pure_winrt_button"
 
 [[example]]

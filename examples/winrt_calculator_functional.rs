@@ -172,11 +172,11 @@ fn main() -> Result<()> {
     // Display with modern styling
     let display = Arc::new(XamlTextBox::new()?);
     display.set_text("0")?;
-    display.set_size(350.0, 80.0)?; // Increased height for padding
+    display.set_size(350.0, 90.0)?; // Much larger to prevent clipping
     display.set_background(0xFF2D2D2D)?; // Darker gray
     display.set_foreground(0xFF00D4AA)?; // Cyan for display
     display.set_corner_radius(8.0)?;
-    display.set_padding(15.0, 10.0, 15.0, 10.0)?; // Adjusted padding
+    display.set_padding(15.0, 5.0, 15.0, 5.0)?; // Minimal vertical padding
     main_panel.add_child(&display.as_uielement())?;
 
     // Button rows

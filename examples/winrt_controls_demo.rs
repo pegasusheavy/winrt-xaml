@@ -192,11 +192,11 @@ fn main() -> Result<()> {
 
     let textbox = XamlTextBox::new()?;
     textbox.set_placeholder("Type something here...")?;
-    textbox.set_size(420.0, 50.0)?; // Increased height for padding
+    textbox.set_size(420.0, 56.0)?; // Much larger to prevent clipping
     textbox.set_background(0xFF2D2D2D)?; // Dark input
     textbox.set_foreground(0xFFFFFFFF)?; // White text
     textbox.set_corner_radius(8.0)?;
-    textbox.set_padding(12.0, 8.0, 12.0, 8.0)?; // Adjusted padding
+    textbox.set_padding(12.0, 5.0, 12.0, 5.0)?; // Minimal vertical padding
     main_panel.add_child(&textbox.as_uielement())?;
 
     // Info text with modern styling
