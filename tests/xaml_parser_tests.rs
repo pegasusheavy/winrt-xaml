@@ -1,34 +1,23 @@
 //! Unit tests for XAML parser.
 
 use winrt_xaml::xaml::XamlReader;
+use winrt_xaml::xaml_native::XamlUIElement;
 use winrt_xaml::error::Error;
 
 #[test]
-fn test_xaml_reader_load_not_implemented() {
+#[ignore] // Requires COM initialization to create actual WinRT controls
+fn test_xaml_reader_load_button() {
     let result = XamlReader::load("<Button Content='Click Me' />");
-    assert!(result.is_err());
-
-    match result {
-        Err(e) => {
-            let msg = e.to_string();
-            assert!(msg.contains("not implemented") || msg.contains("not yet implemented"));
-        }
-        Ok(_) => panic!("Expected not implemented error"),
-    }
+    // Should now succeed with the implemented parser
+    assert!(result.is_ok());
 }
 
 #[test]
-fn test_xaml_reader_parse_not_implemented() {
-    let result = XamlReader::parse("<StackPanel><Button /></StackPanel>");
-    assert!(result.is_err());
-
-    match result {
-        Err(e) => {
-            let msg = e.to_string();
-            assert!(msg.contains("not implemented") || msg.contains("not yet implemented"));
-        }
-        Ok(_) => panic!("Expected not implemented error"),
-    }
+#[ignore] // Requires COM initialization to create actual WinRT controls
+fn test_xaml_reader_parse_button() {
+    let result = XamlReader::parse("<Button Content='Test Button' Width='200' Height='50' />");
+    // Should succeed
+    assert!(result.is_ok());
 }
 
 #[test]
@@ -58,16 +47,14 @@ fn test_xaml_reader_parse_invalid_xaml() {
 #[test]
 fn test_xaml_reader_api_exists() {
     // Compile-time checks that the API exists
-
+    
     fn _check_load() {
-        use winrt_xaml::controls::UIElement;
-        fn _needs_method(_: fn(&str) -> Result<UIElement, Error>) {}
+        fn _needs_method(_: fn(&str) -> Result<XamlUIElement, Error>) {}
         _needs_method(XamlReader::load);
     }
-
+    
     fn _check_parse() {
-        use winrt_xaml::controls::UIElement;
-        fn _needs_method(_: fn(&str) -> Result<UIElement, Error>) {}
+        fn _needs_method(_: fn(&str) -> Result<XamlUIElement, Error>) {}
         _needs_method(XamlReader::parse);
     }
 }
@@ -89,8 +76,8 @@ fn test_not_implemented_error_type() {
 // Future tests for when XAML parsing is implemented:
 
 #[test]
-#[ignore]
-fn test_xaml_reader_load_button() {
+#[ignore] // Requires COM initialization
+fn test_xaml_reader_load_button_full() {
     let xaml = r#"<Button Content="Click Me" Width="200" Height="50" />"#;
     let result = XamlReader::load(xaml);
     // When implemented, should succeed
