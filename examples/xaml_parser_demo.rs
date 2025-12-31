@@ -6,7 +6,7 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
 use windows::core::w;
-use windows::Win32::Foundation::{HWND, LPARAM, LRESULT, WPARAM};
+use windows::Win32::Foundation::{HWND, LPARAM, LRESULT, WPARAM, RECT};
 use windows::Win32::System::Com::{CoInitializeEx, CoUninitialize, COINIT_APARTMENTTHREADED};
 use windows::Win32::System::LibraryLoader::GetModuleHandleW;
 use windows::Win32::UI::WindowsAndMessaging::*;
@@ -180,10 +180,27 @@ fn main() -> Result<()> {
     // Set content
     xaml_source.set_content_element(&main_panel.as_uielement())?;
 
-    // Show windows
+    // Show and size the island window to match the host window
     unsafe {
-        ShowWindow(island_hwnd, SW_SHOW);
-        ShowWindow(host_hwnd, SW_SHOW);
+        let _ = ShowWindow(island_hwnd, SW_SHOW);
+        
+        // Get the client area of the host window
+        let mut rect = windows::Win32::Foundation::RECT::default();
+        let _ = GetClientRect(host_hwnd, &mut rect);
+        
+        // Size the island window to fill the host window's client area
+        let _ = SetWindowPos(
+            island_hwnd,
+            None,
+            0,
+            0,
+            rect.right - rect.left,
+            rect.bottom - rect.top,
+            SWP_NOZORDER | SWP_NOACTIVATE,
+        );
+        
+        // Show the host window
+        let _ = ShowWindow(host_hwnd, SW_SHOW);
     }
 
     println!("\n✨ UI loaded successfully!");
