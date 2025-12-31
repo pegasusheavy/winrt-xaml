@@ -337,13 +337,24 @@ button.on_click(move || count.update(|c| c + 1));
 
 ## 🎯 Immediate Next Steps
 
-### Short Term (Next 2 Weeks)
+### ✅ Recently Completed (Last 2 Weeks)
 
-1. **Update README.md** to reflect current WinRT/XAML architecture
-2. **Add Unit Tests** for core components
-3. **Create ARCHITECTURE.md** with detailed system design
-4. **Implement CheckBox** control
-5. **Implement ComboBox** control
+1. ~~**Update README.md**~~ ✅ - Now reflects WinRT/XAML architecture
+2. ~~**Add Unit Tests**~~ ✅ - 144 tests passing (75%+ coverage)
+3. ~~**Create ARCHITECTURE.md**~~ ✅ - Complete system design documented
+4. ~~**Compile-Time XAML**~~ ✅ - `xaml!` macro with zero runtime overhead
+5. ~~**Serde XAML**~~ ✅ - Type-safe deserialization support
+6. ~~**ScrollViewer**~~ ✅ - Scrollable content support
+7. ~~**State Management Guide**~~ ✅ - `STATE_MANAGEMENT.md` created
+8. ~~**Remove Runtime XAML**~~ ✅ - Simplified to compile-time only
+
+### 🎯 Short Term (Next 2 Weeks)
+
+1. **Implement CheckBox** control (WinRT CheckBox via C++ bridge)
+2. **Implement ComboBox** control (WinRT ComboBox via C++ bridge)
+3. **Implement Slider** control (WinRT Slider via C++ bridge)
+4. **Implement ProgressBar** control (WinRT ProgressBar via C++ bridge)
+5. **Implement RadioButton** control (WinRT RadioButton via C++ bridge)
 
 ### Medium Term (Next Month)
 
