@@ -166,6 +166,7 @@ impl<T: Clone> Property<T> {
             }
         }
     }
+
 }
 
 impl<T: Clone> Clone for Property<T> {

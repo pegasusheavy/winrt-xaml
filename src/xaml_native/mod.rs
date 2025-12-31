@@ -1392,7 +1392,7 @@ impl XamlListView {
     {
         let boxed = Box::new(callback);
         let ptr = Box::into_raw(boxed);
-        
+
         extern "C" fn trampoline<F>(index: i32, user_data: *mut std::ffi::c_void)
         where
             F: Fn(i32) + Send + Sync + 'static,
@@ -1402,14 +1402,14 @@ impl XamlListView {
                 callback(index);
             }
         }
-        
+
         unsafe {
             ffi::xaml_listview_on_selection_changed(
                 self.handle,
                 std::mem::transmute(trampoline::<F> as *const ())
             );
         }
-        
+
         std::mem::forget(ptr);
         Ok(())
     }

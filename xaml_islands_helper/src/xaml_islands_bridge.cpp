@@ -2714,12 +2714,12 @@ int xaml_listview_remove_item(XamlListViewHandle listview, int index) {
     try {
         auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
         auto items = lv_ptr->Items();
-        
+
         if (index >= static_cast<int>(items.Size())) {
             set_last_error(L"Index out of range in xaml_listview_remove_item");
             return -1;
         }
-        
+
         items.RemoveAt(index);
         return 0;
     }
@@ -2824,20 +2824,20 @@ int xaml_listview_get_item(XamlListViewHandle listview, int index, wchar_t* buff
     try {
         auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
         auto items = lv_ptr->Items();
-        
+
         if (index >= static_cast<int>(items.Size())) {
             set_last_error(L"Index out of range in xaml_listview_get_item");
             return -1;
         }
-        
+
         auto item = items.GetAt(index);
         hstring item_str = unbox_value<hstring>(item);
-        
+
         int len = static_cast<int>(item_str.size());
         if (len >= buffer_size) {
             len = buffer_size - 1;
         }
-        
+
         wcsncpy_s(buffer, buffer_size, item_str.c_str(), len);
         return len;
     }
@@ -2877,7 +2877,7 @@ int xaml_listview_set_selection_mode(XamlListViewHandle listview, int mode) {
 
     try {
         auto& lv_ptr = *reinterpret_cast<std::shared_ptr<ListView>*>(listview);
-        
+
         switch (mode) {
             case 0:
                 lv_ptr->SelectionMode(ListViewSelectionMode::None);
@@ -2895,7 +2895,7 @@ int xaml_listview_set_selection_mode(XamlListViewHandle listview, int mode) {
                 set_last_error(L"Invalid selection mode in xaml_listview_set_selection_mode");
                 return -1;
         }
-        
+
         return 0;
     }
     catch (const hresult_error& e) {

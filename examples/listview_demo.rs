@@ -60,7 +60,7 @@ fn main() -> Result<()> {
         let main_grid = XamlGrid::new()?;
         main_grid.set_background(0xFF2D2D30)?; // Dark background
         main_grid.set_padding(20.0, 20.0, 20.0, 20.0)?;
-        
+
         // Add row definitions
         main_grid.add_row_auto()?; // Title
         main_grid.add_row_auto()?; // Input section
@@ -85,7 +85,7 @@ fn main() -> Result<()> {
         input_panel.set_orientation(Orientation::Horizontal)?;
         input_panel.set_spacing(10.0)?;
         input_panel.as_uielement().set_grid_row(current_row)?;
-        
+
         let input_label = XamlTextBlock::new()?;
         input_label.set_text("New Task:")?;
         input_label.set_foreground(0xFFFFFFFF)?;
@@ -102,14 +102,14 @@ fn main() -> Result<()> {
         // ===== ListView =====
         let listview = Arc::new(XamlListView::new()?);
         listview.set_selection_mode(ListViewSelectionMode::Single)?;
-        
+
         // Add some initial items
         listview.add_item("✅ Complete project documentation")?;
         listview.add_item("🔧 Fix ListView implementation")?;
         listview.add_item("📝 Write unit tests")?;
         listview.add_item("🚀 Deploy to production")?;
         listview.add_item("📊 Review performance metrics")?;
-        
+
         listview.as_uielement().set_grid_row(current_row)?;
         main_grid.add_child(&listview.as_uielement())?;
         current_row += 1;
@@ -135,7 +135,7 @@ fn main() -> Result<()> {
         add_button.set_background(0xFF0078D4)?;
         add_button.set_foreground(0xFFFFFFFF)?;
         add_button.set_padding(15.0, 8.0, 15.0, 8.0)?;
-        
+
         let listview_clone = listview.clone();
         let input_clone = input_box.clone();
         let status_clone = status_text.clone();
@@ -158,7 +158,7 @@ fn main() -> Result<()> {
         remove_button.set_background(0xFFE81123)?;
         remove_button.set_foreground(0xFFFFFFFF)?;
         remove_button.set_padding(15.0, 8.0, 15.0, 8.0)?;
-        
+
         let listview_clone = listview.clone();
         let status_clone = status_text.clone();
         remove_button.on_click(move || {
@@ -182,7 +182,7 @@ fn main() -> Result<()> {
         clear_button.set_background(0xFF6B6B6B)?;
         clear_button.set_foreground(0xFFFFFFFF)?;
         clear_button.set_padding(15.0, 8.0, 15.0, 8.0)?;
-        
+
         let listview_clone = listview.clone();
         let status_clone = status_text.clone();
         clear_button.on_click(move || {
