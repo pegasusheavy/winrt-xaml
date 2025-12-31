@@ -196,7 +196,7 @@ fn main() -> Result<()> {
             let button = XamlButton::new()?;
             button.set_content(label)?;
             button.set_size(82.0, 62.0)?;
-            
+
             // Color code buttons based on type
             let color = match label {
                 "+" | "-" | "×" | "÷" => 0xFFFF8C00, // Orange for operators

@@ -21,6 +21,7 @@ typedef void* XamlTextBlockHandle;
 typedef void* XamlTextBoxHandle;
 typedef void* XamlStackPanelHandle;
 typedef void* XamlGridHandle;
+typedef void* XamlScrollViewerHandle;
 typedef void* XamlUIElementHandle;
 
 // Initialize the XAML framework for the current thread
@@ -112,6 +113,15 @@ XAML_ISLANDS_API XamlGridHandle xaml_grid_create();
 XAML_ISLANDS_API void xaml_grid_destroy(XamlGridHandle grid);
 XAML_ISLANDS_API int xaml_grid_add_child(XamlGridHandle grid, XamlUIElementHandle child);
 
+// ===== ScrollViewer APIs =====
+XAML_ISLANDS_API XamlScrollViewerHandle xaml_scrollviewer_create();
+XAML_ISLANDS_API void xaml_scrollviewer_destroy(XamlScrollViewerHandle scrollviewer);
+XAML_ISLANDS_API int xaml_scrollviewer_set_content(XamlScrollViewerHandle scrollviewer, XamlUIElementHandle content);
+XAML_ISLANDS_API int xaml_scrollviewer_set_horizontal_scroll_mode(XamlScrollViewerHandle scrollviewer, int mode);
+XAML_ISLANDS_API int xaml_scrollviewer_set_vertical_scroll_mode(XamlScrollViewerHandle scrollviewer, int mode);
+XAML_ISLANDS_API int xaml_scrollviewer_set_horizontal_scroll_bar_visibility(XamlScrollViewerHandle scrollviewer, int visibility);
+XAML_ISLANDS_API int xaml_scrollviewer_set_vertical_scroll_bar_visibility(XamlScrollViewerHandle scrollviewer, int visibility);
+
 // ===== Generic XAML Source Content APIs =====
 XAML_ISLANDS_API int xaml_source_set_content_generic(XamlSourceHandle source, XamlUIElementHandle element);
 
@@ -145,6 +155,7 @@ XAML_ISLANDS_API XamlUIElementHandle xaml_textblock_as_uielement(XamlTextBlockHa
 XAML_ISLANDS_API XamlUIElementHandle xaml_textbox_as_uielement(XamlTextBoxHandle textbox);
 XAML_ISLANDS_API XamlUIElementHandle xaml_stackpanel_as_uielement(XamlStackPanelHandle panel);
 XAML_ISLANDS_API XamlUIElementHandle xaml_grid_as_uielement(XamlGridHandle grid);
+XAML_ISLANDS_API XamlUIElementHandle xaml_scrollviewer_as_uielement(XamlScrollViewerHandle scrollviewer);
 
 #ifdef __cplusplus
 }

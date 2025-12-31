@@ -623,3 +623,98 @@ impl Drop for XamlGrid {
 
 unsafe impl Send for XamlGrid {}
 unsafe impl Sync for XamlGrid {}
+
+// ===== ScrollViewer =====
+
+/// Represents a WinRT ScrollViewer control that provides scrollable content.
+pub struct XamlScrollViewer {
+    handle: ffi::XamlScrollViewerHandle,
+}
+
+/// Scroll mode for ScrollViewer
+pub enum ScrollMode {
+    Disabled = 0,
+    Enabled = 1,
+    Auto = 2,
+}
+
+/// Scroll bar visibility for ScrollViewer
+pub enum ScrollBarVisibility {
+    Disabled = 0,
+    Auto = 1,
+    Hidden = 2,
+    Visible = 3,
+}
+
+impl XamlScrollViewer {
+    /// Create a new WinRT ScrollViewer.
+    pub fn new() -> Result<Self> {
+        let handle = unsafe { ffi::xaml_scrollviewer_create() };
+        if handle.0.is_null() {
+            return Err(Error::control_creation("Failed to create ScrollViewer".to_string()));
+        }
+        Ok(XamlScrollViewer { handle })
+    }
+
+    /// Set the content of the ScrollViewer.
+    pub fn set_content(&self, content: &XamlUIElement) -> Result<()> {
+        let result = unsafe { ffi::xaml_scrollviewer_set_content(self.handle, content.handle) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set content".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the horizontal scroll mode.
+    pub fn set_horizontal_scroll_mode(&self, mode: ScrollMode) -> Result<()> {
+        let result = unsafe { ffi::xaml_scrollviewer_set_horizontal_scroll_mode(self.handle, mode as i32) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set horizontal scroll mode".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the vertical scroll mode.
+    pub fn set_vertical_scroll_mode(&self, mode: ScrollMode) -> Result<()> {
+        let result = unsafe { ffi::xaml_scrollviewer_set_vertical_scroll_mode(self.handle, mode as i32) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set vertical scroll mode".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the horizontal scroll bar visibility.
+    pub fn set_horizontal_scrollbar_visibility(&self, visibility: ScrollBarVisibility) -> Result<()> {
+        let result = unsafe { ffi::xaml_scrollviewer_set_horizontal_scroll_bar_visibility(self.handle, visibility as i32) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set horizontal scrollbar visibility".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the vertical scroll bar visibility.
+    pub fn set_vertical_scrollbar_visibility(&self, visibility: ScrollBarVisibility) -> Result<()> {
+        let result = unsafe { ffi::xaml_scrollviewer_set_vertical_scroll_bar_visibility(self.handle, visibility as i32) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set vertical scrollbar visibility".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Convert to a UIElement for use as content in other containers.
+    pub fn as_uielement(&self) -> XamlUIElement {
+        let handle = unsafe { ffi::xaml_scrollviewer_as_uielement(self.handle) };
+        XamlUIElement { handle }
+    }
+}
+
+impl Drop for XamlScrollViewer {
+    fn drop(&mut self) {
+        unsafe {
+            ffi::xaml_scrollviewer_destroy(self.handle);
+        }
+    }
+}
+
+unsafe impl Send for XamlScrollViewer {}
+unsafe impl Sync for XamlScrollViewer {}

@@ -70,6 +70,10 @@ path = "examples/winrt_counter.rs"
 name = "winrt_calculator_functional"
 path = "examples/winrt_calculator_functional.rs"
 
+[[example]]
+name = "scrollable_list"
+path = "examples/scrollable_list.rs"
+
 [[bin]]
 name = "memory_profile"
 path = "bin/memory_profile.rs"

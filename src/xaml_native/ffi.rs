@@ -48,6 +48,12 @@ unsafe impl Sync for XamlGridHandle {}
 
 #[repr(C)]
 #[derive(Clone, Copy)]
+pub struct XamlScrollViewerHandle(pub *mut c_void);
+unsafe impl Send for XamlScrollViewerHandle {}
+unsafe impl Sync for XamlScrollViewerHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
 pub struct XamlUIElementHandle(pub *mut c_void);
 unsafe impl Send for XamlUIElementHandle {}
 unsafe impl Sync for XamlUIElementHandle {}
@@ -93,6 +99,14 @@ extern "C" {
     pub fn xaml_grid_destroy(grid: XamlGridHandle);
     pub fn xaml_grid_add_child(grid: XamlGridHandle, child: XamlUIElementHandle) -> i32;
 
+    pub fn xaml_scrollviewer_create() -> XamlScrollViewerHandle;
+    pub fn xaml_scrollviewer_destroy(scrollviewer: XamlScrollViewerHandle);
+    pub fn xaml_scrollviewer_set_content(scrollviewer: XamlScrollViewerHandle, content: XamlUIElementHandle) -> i32;
+    pub fn xaml_scrollviewer_set_horizontal_scroll_mode(scrollviewer: XamlScrollViewerHandle, mode: i32) -> i32;
+    pub fn xaml_scrollviewer_set_vertical_scroll_mode(scrollviewer: XamlScrollViewerHandle, mode: i32) -> i32;
+    pub fn xaml_scrollviewer_set_horizontal_scroll_bar_visibility(scrollviewer: XamlScrollViewerHandle, visibility: i32) -> i32;
+    pub fn xaml_scrollviewer_set_vertical_scroll_bar_visibility(scrollviewer: XamlScrollViewerHandle, visibility: i32) -> i32;
+
     // Styling APIs
     pub fn xaml_button_set_background(button: XamlButtonHandle, color: u32) -> i32;
     pub fn xaml_button_set_foreground(button: XamlButtonHandle, color: u32) -> i32;
@@ -121,6 +135,7 @@ extern "C" {
     pub fn xaml_textbox_as_uielement(textbox: XamlTextBoxHandle) -> XamlUIElementHandle;
     pub fn xaml_stackpanel_as_uielement(panel: XamlStackPanelHandle) -> XamlUIElementHandle;
     pub fn xaml_grid_as_uielement(grid: XamlGridHandle) -> XamlUIElementHandle;
+    pub fn xaml_scrollviewer_as_uielement(scrollviewer: XamlScrollViewerHandle) -> XamlUIElementHandle;
 
     pub fn xaml_get_last_error() -> *const u16;
 }

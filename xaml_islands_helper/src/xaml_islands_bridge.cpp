@@ -590,6 +590,146 @@ int xaml_grid_add_child(XamlGridHandle grid, XamlUIElementHandle child) {
     }
 }
 
+// ===== ScrollViewer APIs =====
+XamlScrollViewerHandle xaml_scrollviewer_create() {
+    try {
+        auto scrollviewer = ScrollViewer();
+        auto* handle = new std::shared_ptr<ScrollViewer>(
+            std::make_shared<ScrollViewer>(scrollviewer)
+        );
+        return reinterpret_cast<XamlScrollViewerHandle>(handle);
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return nullptr;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_scrollviewer_create");
+        return nullptr;
+    }
+}
+
+void xaml_scrollviewer_destroy(XamlScrollViewerHandle scrollviewer) {
+    if (scrollviewer) {
+        auto* sv = reinterpret_cast<std::shared_ptr<ScrollViewer>*>(scrollviewer);
+        delete sv;
+    }
+}
+
+int xaml_scrollviewer_set_content(XamlScrollViewerHandle scrollviewer, XamlUIElementHandle content) {
+    if (!scrollviewer || !content) {
+        set_last_error(L"Invalid scrollviewer or content");
+        return -1;
+    }
+
+    try {
+        auto* sv = reinterpret_cast<std::shared_ptr<ScrollViewer>*>(scrollviewer);
+        auto* element = reinterpret_cast<std::shared_ptr<UIElement>*>(content);
+        (*sv)->Content(**element);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_scrollviewer_set_content");
+        return -1;
+    }
+}
+
+int xaml_scrollviewer_set_horizontal_scroll_mode(XamlScrollViewerHandle scrollviewer, int mode) {
+    if (!scrollviewer) {
+        set_last_error(L"Invalid scrollviewer handle");
+        return -1;
+    }
+
+    try {
+        auto* sv = reinterpret_cast<std::shared_ptr<ScrollViewer>*>(scrollviewer);
+        // Mode: 0 = Disabled, 1 = Enabled, 2 = Auto
+        auto scroll_mode = static_cast<ScrollMode>(mode);
+        (*sv)->HorizontalScrollMode(scroll_mode);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_scrollviewer_set_horizontal_scroll_mode");
+        return -1;
+    }
+}
+
+int xaml_scrollviewer_set_vertical_scroll_mode(XamlScrollViewerHandle scrollviewer, int mode) {
+    if (!scrollviewer) {
+        set_last_error(L"Invalid scrollviewer handle");
+        return -1;
+    }
+
+    try {
+        auto* sv = reinterpret_cast<std::shared_ptr<ScrollViewer>*>(scrollviewer);
+        // Mode: 0 = Disabled, 1 = Enabled, 2 = Auto
+        auto scroll_mode = static_cast<ScrollMode>(mode);
+        (*sv)->VerticalScrollMode(scroll_mode);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_scrollviewer_set_vertical_scroll_mode");
+        return -1;
+    }
+}
+
+int xaml_scrollviewer_set_horizontal_scroll_bar_visibility(XamlScrollViewerHandle scrollviewer, int visibility) {
+    if (!scrollviewer) {
+        set_last_error(L"Invalid scrollviewer handle");
+        return -1;
+    }
+
+    try {
+        auto* sv = reinterpret_cast<std::shared_ptr<ScrollViewer>*>(scrollviewer);
+        // Visibility: 0 = Disabled, 1 = Auto, 2 = Hidden, 3 = Visible
+        auto vis = static_cast<ScrollBarVisibility>(visibility);
+        (*sv)->HorizontalScrollBarVisibility(vis);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_scrollviewer_set_horizontal_scroll_bar_visibility");
+        return -1;
+    }
+}
+
+int xaml_scrollviewer_set_vertical_scroll_bar_visibility(XamlScrollViewerHandle scrollviewer, int visibility) {
+    if (!scrollviewer) {
+        set_last_error(L"Invalid scrollviewer handle");
+        return -1;
+    }
+
+    try {
+        auto* sv = reinterpret_cast<std::shared_ptr<ScrollViewer>*>(scrollviewer);
+        // Visibility: 0 = Disabled, 1 = Auto, 2 = Hidden, 3 = Visible
+        auto vis = static_cast<ScrollBarVisibility>(visibility);
+        (*sv)->VerticalScrollBarVisibility(vis);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_scrollviewer_set_vertical_scroll_bar_visibility");
+        return -1;
+    }
+}
+
 // ===== Generic Content API =====
 int xaml_source_set_content_generic(XamlSourceHandle source, XamlUIElementHandle element) {
     if (!source || !element) {
@@ -690,6 +830,22 @@ XamlUIElementHandle xaml_grid_as_uielement(XamlGridHandle grid) {
     }
     catch (...) {
         set_last_error(L"Error converting grid to UIElement");
+        return nullptr;
+    }
+}
+
+XamlUIElementHandle xaml_scrollviewer_as_uielement(XamlScrollViewerHandle scrollviewer) {
+    if (!scrollviewer) return nullptr;
+
+    try {
+        auto* sv = reinterpret_cast<std::shared_ptr<ScrollViewer>*>(scrollviewer);
+        auto* handle = new std::shared_ptr<UIElement>(
+            std::make_shared<UIElement>((*sv)->as<UIElement>())
+        );
+        return reinterpret_cast<XamlUIElementHandle>(handle);
+    }
+    catch (...) {
+        set_last_error(L"Error converting scrollviewer to UIElement");
         return nullptr;
     }
 }
