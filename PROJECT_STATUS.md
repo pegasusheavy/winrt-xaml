@@ -403,13 +403,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - [x] 15+ styled examples (100%)
 
 ### Version 0.2.0 Goals (Planned)
-- [ ] CheckBox, RadioButton controls (0%)
-- [ ] ComboBox/Dropdown (0%)
-- [ ] Slider, ProgressBar (0%)
+- [x] CheckBox control (100%) ✅
+- [x] ComboBox/Dropdown (100%) ✅
+- [x] Slider control (100%) ✅
+- [x] ProgressBar control (100%) ✅
+- [ ] RadioButton control (0%)
 - [ ] TextChanged events (0%)
 - [ ] Grid row/column definitions (0%)
 - [ ] Image control (0%)
-- [ ] Unit test suite (0%)
+- [ ] Unit test suite for new controls (0%)
 
 ### Version 0.3.0 Goals (Planned)
 - [ ] Data binding foundation (0%)
