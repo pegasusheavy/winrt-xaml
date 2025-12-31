@@ -27,6 +27,11 @@ typedef void* XamlComboBoxHandle;
 typedef void* XamlSliderHandle;
 typedef void* XamlProgressBarHandle;
 typedef void* XamlUIElementHandle;
+typedef void* XamlResourceDictionaryHandle;
+typedef void* XamlControlTemplateHandle;
+typedef void* XamlStoryboardHandle;
+typedef void* XamlDoubleAnimationHandle;
+typedef void* XamlColorAnimationHandle;
 
 // Initialize the XAML framework for the current thread
 // Returns a handle that must be kept alive
@@ -190,6 +195,114 @@ XAML_ISLANDS_API XamlUIElementHandle xaml_checkbox_as_uielement(XamlCheckBoxHand
 XAML_ISLANDS_API XamlUIElementHandle xaml_combobox_as_uielement(XamlComboBoxHandle combobox);
 XAML_ISLANDS_API XamlUIElementHandle xaml_slider_as_uielement(XamlSliderHandle slider);
 XAML_ISLANDS_API XamlUIElementHandle xaml_progressbar_as_uielement(XamlProgressBarHandle progressbar);
+
+// ============================================================================
+// Resource Dictionary APIs
+// ============================================================================
+
+XAML_ISLANDS_API XamlResourceDictionaryHandle xaml_resource_dictionary_create();
+XAML_ISLANDS_API void xaml_resource_dictionary_destroy(XamlResourceDictionaryHandle dict);
+XAML_ISLANDS_API int xaml_resource_dictionary_insert_color(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key,
+    unsigned int color
+);
+XAML_ISLANDS_API int xaml_resource_dictionary_insert_double(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key,
+    double value
+);
+XAML_ISLANDS_API int xaml_resource_dictionary_insert_string(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key,
+    const wchar_t* value
+);
+XAML_ISLANDS_API int xaml_resource_dictionary_has_key(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key
+);
+XAML_ISLANDS_API unsigned int xaml_resource_dictionary_get_color(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key
+);
+XAML_ISLANDS_API double xaml_resource_dictionary_get_double(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key
+);
+XAML_ISLANDS_API int xaml_resource_dictionary_remove(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key
+);
+XAML_ISLANDS_API void xaml_resource_dictionary_clear(XamlResourceDictionaryHandle dict);
+
+// Apply resource dictionary to a UI element
+XAML_ISLANDS_API int xaml_uielement_set_resources(
+    XamlUIElementHandle element,
+    XamlResourceDictionaryHandle dict
+);
+
+// ============================================================================
+// Control Template APIs
+// ============================================================================
+
+XAML_ISLANDS_API XamlControlTemplateHandle xaml_control_template_create();
+XAML_ISLANDS_API void xaml_control_template_destroy(XamlControlTemplateHandle template_handle);
+XAML_ISLANDS_API int xaml_control_template_set_content(
+    XamlControlTemplateHandle template_handle,
+    XamlUIElementHandle content
+);
+XAML_ISLANDS_API int xaml_button_set_template(
+    XamlButtonHandle button,
+    XamlControlTemplateHandle template_handle
+);
+
+// ============================================================================
+// Animation APIs
+// ============================================================================
+
+// Storyboard APIs
+XAML_ISLANDS_API XamlStoryboardHandle xaml_storyboard_create();
+XAML_ISLANDS_API void xaml_storyboard_destroy(XamlStoryboardHandle storyboard);
+XAML_ISLANDS_API int xaml_storyboard_add_animation(
+    XamlStoryboardHandle storyboard,
+    XamlDoubleAnimationHandle animation
+);
+XAML_ISLANDS_API int xaml_storyboard_add_color_animation(
+    XamlStoryboardHandle storyboard,
+    XamlColorAnimationHandle animation
+);
+XAML_ISLANDS_API int xaml_storyboard_begin(XamlStoryboardHandle storyboard);
+XAML_ISLANDS_API int xaml_storyboard_stop(XamlStoryboardHandle storyboard);
+XAML_ISLANDS_API int xaml_storyboard_pause(XamlStoryboardHandle storyboard);
+XAML_ISLANDS_API int xaml_storyboard_resume(XamlStoryboardHandle storyboard);
+XAML_ISLANDS_API int xaml_storyboard_set_target(
+    XamlStoryboardHandle storyboard,
+    XamlUIElementHandle target
+);
+
+// DoubleAnimation APIs
+XAML_ISLANDS_API XamlDoubleAnimationHandle xaml_double_animation_create();
+XAML_ISLANDS_API void xaml_double_animation_destroy(XamlDoubleAnimationHandle animation);
+XAML_ISLANDS_API int xaml_double_animation_set_from(XamlDoubleAnimationHandle animation, double from);
+XAML_ISLANDS_API int xaml_double_animation_set_to(XamlDoubleAnimationHandle animation, double to);
+XAML_ISLANDS_API int xaml_double_animation_set_duration(XamlDoubleAnimationHandle animation, int milliseconds);
+XAML_ISLANDS_API int xaml_double_animation_set_target_property(
+    XamlDoubleAnimationHandle animation,
+    XamlUIElementHandle target,
+    const wchar_t* property_path
+);
+
+// ColorAnimation APIs
+XAML_ISLANDS_API XamlColorAnimationHandle xaml_color_animation_create();
+XAML_ISLANDS_API void xaml_color_animation_destroy(XamlColorAnimationHandle animation);
+XAML_ISLANDS_API int xaml_color_animation_set_from(XamlColorAnimationHandle animation, unsigned int from);
+XAML_ISLANDS_API int xaml_color_animation_set_to(XamlColorAnimationHandle animation, unsigned int to);
+XAML_ISLANDS_API int xaml_color_animation_set_duration(XamlColorAnimationHandle animation, int milliseconds);
+XAML_ISLANDS_API int xaml_color_animation_set_target_property(
+    XamlColorAnimationHandle animation,
+    XamlUIElementHandle target,
+    const wchar_t* property_path
+);
 
 #ifdef __cplusplus
 }

@@ -4,6 +4,11 @@
 //! through a C++ bridge that handles the complex COM interop.
 
 pub mod ffi;
+mod resource_dictionary;
+mod animation;
+
+pub use resource_dictionary::*;
+pub use animation::*;
 
 use crate::error::{Error, Result};
 use windows::Win32::Foundation::HWND;

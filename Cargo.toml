@@ -96,6 +96,16 @@ path = "examples/xaml_compile_time_demo.rs"
 name = "xaml_serde_demo"
 path = "examples/xaml_serde_demo.rs"
 
+[[example]]
+name = "animations_demo"
+path = "examples/animations_demo.rs"
+required-features = ["xaml-islands"]
+
+[[example]]
+name = "resource_dictionary_demo"
+path = "examples/resource_dictionary_demo.rs"
+required-features = ["xaml-islands"]
+
 [[bin]]
 name = "memory_profile"
 path = "bin/memory_profile.rs"
