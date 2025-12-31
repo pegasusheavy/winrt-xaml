@@ -75,10 +75,6 @@ name = "scrollable_list"
 path = "examples/scrollable_list.rs"
 
 [[example]]
-name = "xaml_parser_demo"
-path = "examples/xaml_parser_demo.rs"
-
-[[example]]
 name = "xaml_compile_time_demo"
 path = "examples/xaml_compile_time_demo.rs"
 
@@ -104,11 +100,9 @@ windows = { version = "0.58", features = [
     "implement",
 ] }
 
-# For parsing XAML at runtime and compile-time
-# Using serde feature for struct-based deserialization
+# For serde-based XAML deserialization (only for xaml_serde_demo example)
+[target.'cfg(not(target_os = "none"))'.dev-dependencies]
 quick-xml = { version = "0.37", features = ["serialize"] }
-
-# For serde-based XAML deserialization
 serde = { version = "1.0", features = ["derive"] }
 
 # Compile-time XAML parsing macro
