@@ -28,17 +28,22 @@ fn main() -> Result<()> {
     }
 
     println!("\n╔═══════════════════════════════════════════════════════════════════════════╗");
-    println!("║      🚀 COMPILE-TIME XAML DEMO 🚀                                      ║");
+    println!("║                  ⚡ COMPILE-TIME XAML DEMO ⚡                          ║");
     println!("╚═══════════════════════════════════════════════════════════════════════════╝\n");
 
-    println!("This example uses the xaml! macro to parse XAML at COMPILE TIME!");
-    println!("All XAML is validated when you run 'cargo build'.\n");
+    println!("🎯 This demo showcases the xaml! macro:");
+    println!("   • XAML parsed at COMPILE TIME (not runtime!)");
+    println!("   • All syntax validated during 'cargo build'");
+    println!("   • Zero runtime parsing overhead");
+    println!("   • Full type safety and IDE support\n");
+    
+    println!("🔧 Creating UI from compile-time XAML...\n");
 
     // Initialize XAML
     let _manager = XamlManager::new()?;
 
     // Create host window
-    let hwnd = create_window("Compile-Time XAML Demo", 500, 700)?;
+    let hwnd = create_window("⚡ Compile-Time XAML Demo - WinRT", 550, 900)?;
 
     // Create XAML source
     let mut xaml_source = XamlSource::new()?;
@@ -70,90 +75,168 @@ fn main() -> Result<()> {
 fn create_ui(xaml_source: &XamlSource, hwnd: HWND) -> Result<()> {
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(15.0)?;
-    main_panel.set_background(0xFF1A1A1A)?;
-    main_panel.set_padding(20.0, 20.0, 20.0, 20.0)?;
+    main_panel.set_spacing(12.0)?;
+    main_panel.set_background(0xFF0D1117)?;
+    main_panel.set_padding(25.0, 25.0, 25.0, 25.0)?;
 
     // ============================================================
-    // COMPILE-TIME XAML EXAMPLES
+    // HEADER - COMPILE-TIME XAML DEMO
     // ============================================================
 
-    // Example 1: Button created at compile time
-    println!("📝 Example 1: Compile-time Button");
-    let button1 = xaml! {
-        r##"<Button Content="Compile-Time Button"
-                  Width="400"
-                  Height="60"
-                  Background="#FF0078D4"
-                  Foreground="#FFFFFFFF"
-                  CornerRadius="10" />"##
-    }?;
-    main_panel.add_child(&button1)?;
-    println!("   ✅ Created at compile time!\n");
-
-    // Example 2: TextBlock created at compile time
-    println!("📝 Example 2: Compile-time TextBlock");
-    let label = xaml! {
-        r##"<TextBlock Text="This UI was generated at compile time!"
-                     FontSize="18"
+    let title = xaml! {
+        r##"<TextBlock Text="⚡ Compile-Time XAML Demo ⚡"
+                     FontSize="32"
                      FontWeight="700"
-                     Foreground="#FF00D7FF" />"##
+                     Foreground="#FF58A6FF" />"##
     }?;
-    main_panel.add_child(&label)?;
-    println!("   ✅ Created at compile time!\n");
+    main_panel.add_child(&title)?;
 
-    // Example 3: TextBox created at compile time
-    println!("📝 Example 3: Compile-time TextBox");
-    let textbox = xaml! {
-        r##"<TextBox PlaceholderText="Enter text... (compile-time!)"
-                   Width="400"
-                   Height="56"
-                   Background="#FF2D2D2D"
-                   Foreground="#FFFFFFFF" />"##
+    let subtitle = xaml! {
+        r##"<TextBlock Text="All controls below were created from XAML at compile time!"
+                     FontSize="16"
+                     Foreground="#FF8B949E" />"##
     }?;
-    main_panel.add_child(&textbox)?;
-    println!("   ✅ Created at compile time!\n");
+    main_panel.add_child(&subtitle)?;
 
-    // Example 4: Styled button
-    println!("📝 Example 4: Styled Button");
-    let styled_button = xaml! {
-        r##"<Button Content="Green Success Button"
-                  Width="400"
-                  Height="60"
-                  Background="#FF28A745"
+    // Spacer
+    let spacer1 = xaml! {
+        r##"<TextBlock Text=" "
+                     FontSize="8" />"##
+    }?;
+    main_panel.add_child(&spacer1)?;
+
+    // ============================================================
+    // SECTION 1: INTERACTIVE BUTTONS
+    // ============================================================
+
+    let section1_title = xaml! {
+        r##"<TextBlock Text="🎯 Interactive Buttons (Compile-Time)"
+                     FontSize="20"
+                     FontWeight="700"
+                     Foreground="#FF7EE787" />"##
+    }?;
+    main_panel.add_child(&section1_title)?;
+
+    // Primary action button
+    let primary_btn = xaml! {
+        r##"<Button Content="Primary Action"
+                  Width="450"
+                  Height="50"
+                  Background="#FF238636"
                   Foreground="#FFFFFFFF"
-                  CornerRadius="12" />"##
+                  CornerRadius="6" />"##
     }?;
-    main_panel.add_child(&styled_button)?;
-    println!("   ✅ Created at compile time!\n");
+    main_panel.add_child(&primary_btn)?;
+    println!("✅ Created Primary Button from compile-time XAML");
 
-    // Example 5: Another styled button
-    println!("📝 Example 5: Warning Button");
-    let warning_button = xaml! {
-        r##"<Button Content="Warning Button"
-                  Width="400"
-                  Height="60"
-                  Background="#FFFFC107"
-                  Foreground="#FF000000"
-                  CornerRadius="8" />"##
+    // Secondary button
+    let secondary_btn = xaml! {
+        r##"<Button Content="Secondary Action"
+                  Width="450"
+                  Height="50"
+                  Background="#FF21262D"
+                  Foreground="#FFC9D1D9"
+                  CornerRadius="6" />"##
     }?;
-    main_panel.add_child(&warning_button)?;
-    println!("   ✅ Created at compile time!\n");
+    main_panel.add_child(&secondary_btn)?;
+    println!("✅ Created Secondary Button from compile-time XAML");
 
-    // Description
-    let desc = xaml! {
-        r##"<TextBlock Text="All controls above were created from XAML at compile time!"
+    // Danger button
+    let danger_btn = xaml! {
+        r##"<Button Content="Danger Zone"
+                  Width="450"
+                  Height="50"
+                  Background="#FFDA3633"
+                  Foreground="#FFFFFFFF"
+                  CornerRadius="6" />"##
+    }?;
+    main_panel.add_child(&danger_btn)?;
+    println!("✅ Created Danger Button from compile-time XAML");
+
+    // Spacer
+    main_panel.add_child(&spacer1)?;
+
+    // ============================================================
+    // SECTION 2: TEXT INPUT
+    // ============================================================
+
+    let section2_title = xaml! {
+        r##"<TextBlock Text="📝 Text Input (Compile-Time)"
+                     FontSize="20"
+                     FontWeight="700"
+                     Foreground="#FFF0883E" />"##
+    }?;
+    main_panel.add_child(&section2_title)?;
+
+    let username_input = xaml! {
+        r##"<TextBox PlaceholderText="Username..."
+                   Width="450"
+                   Height="40"
+                   Background="#FF0D1117"
+                   Foreground="#FFC9D1D9" />"##
+    }?;
+    main_panel.add_child(&username_input)?;
+    println!("✅ Created Username Input from compile-time XAML");
+
+    let password_input = xaml! {
+        r##"<TextBox PlaceholderText="Password..."
+                   Width="450"
+                   Height="40"
+                   Background="#FF0D1117"
+                   Foreground="#FFC9D1D9" />"##
+    }?;
+    main_panel.add_child(&password_input)?;
+    println!("✅ Created Password Input from compile-time XAML");
+
+    // Spacer
+    main_panel.add_child(&spacer1)?;
+
+    // ============================================================
+    // SECTION 3: STATUS INDICATORS
+    // ============================================================
+
+    let section3_title = xaml! {
+        r##"<TextBlock Text="📊 Status Indicators (Compile-Time)"
+                     FontSize="20"
+                     FontWeight="700"
+                     Foreground="#FFD29922" />"##
+    }?;
+    main_panel.add_child(&section3_title)?;
+
+    let success_msg = xaml! {
+        r##"<TextBlock Text="✅ Compile-time validation passed!"
+                     FontSize="16"
+                     Foreground="#FF7EE787" />"##
+    }?;
+    main_panel.add_child(&success_msg)?;
+
+    let info_msg = xaml! {
+        r##"<TextBlock Text="ℹ️ Zero runtime parsing overhead"
+                     FontSize="16"
+                     Foreground="#FF58A6FF" />"##
+    }?;
+    main_panel.add_child(&info_msg)?;
+
+    let perf_msg = xaml! {
+        r##"<TextBlock Text="⚡ Maximum performance achieved!"
+                     FontSize="16"
+                     Foreground="#FFFFA657" />"##
+    }?;
+    main_panel.add_child(&perf_msg)?;
+
+    // Spacer
+    main_panel.add_child(&spacer1)?;
+
+    // ============================================================
+    // FOOTER INFO
+    // ============================================================
+
+    let footer_info = xaml! {
+        r##"<TextBlock Text="All XAML above was validated at cargo build time"
                      FontSize="14"
-                     Foreground="#FFCCCCCC" />"##
+                     Foreground="#FF8B949E" />"##
     }?;
-    main_panel.add_child(&desc)?;
-
-    let desc2 = xaml! {
-        r##"<TextBlock Text="No runtime parsing overhead! ⚡"
-                     FontSize="14"
-                     Foreground="#FF00FF00" />"##
-    }?;
-    main_panel.add_child(&desc2)?;
+    main_panel.add_child(&footer_info)?;
 
     // Exit button
     let exit_btn = XamlButton::new()?;
@@ -196,8 +279,13 @@ fn create_ui(xaml_source: &XamlSource, hwnd: HWND) -> Result<()> {
         }
     }
 
-    println!("✨ UI loaded successfully!");
-    println!("💡 All controls were generated at COMPILE TIME!\n");
+    println!("\n╔═══════════════════════════════════════════════════════════════════════════╗");
+    println!("║                    ✨ UI LOADED SUCCESSFULLY! ✨                       ║");
+    println!("╚═══════════════════════════════════════════════════════════════════════════╝\n");
+
+    println!("🎉 All controls were created from XAML at COMPILE TIME!");
+    println!("⚡ Zero runtime parsing - maximum performance!");
+    println!("🔒 Type-safe and validated at build time\n");
 
     Ok(())
 }

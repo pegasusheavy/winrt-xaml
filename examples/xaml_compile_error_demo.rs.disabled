@@ -1,0 +1,38 @@
+//! This file demonstrates COMPILE-TIME error detection with the xaml! macro.
+//!
+//! To see the compile-time errors, rename this file to xaml_compile_error_demo.rs
+//! and try to build it:
+//!
+//!     cargo build --example xaml_compile_error_demo
+//!
+//! You'll see errors like:
+//! - "XAML parse error: Unsupported XAML element: InvalidElement"
+//! - "XAML parse error: Invalid hex color: invalid digit"
+//!
+//! This proves that XAML is validated at COMPILE TIME, not runtime!
+
+use winrt_xaml::xaml;
+use winrt_xaml::error::Result;
+
+fn main() -> Result<()> {
+    // ❌ ERROR 1: Invalid element name
+    // This will fail to compile with: "Unsupported XAML element: InvalidElement"
+    let _invalid_element = xaml! {
+        r##"<InvalidElement Content="This will not compile" />"##
+    }?;
+
+    // ❌ ERROR 2: Invalid color format
+    // This will fail to compile with: "Invalid hex color"
+    let _invalid_color = xaml! {
+        r##"<Button Content="Bad Color"
+                  Background="#GGGGGG" />"##
+    }?;
+
+    // ❌ ERROR 3: Unknown element
+    // This will fail to compile
+    let _unknown = xaml! {
+        r##"<CustomControl Property="Value" />"##
+    }?;
+
+    Ok(())
+}
