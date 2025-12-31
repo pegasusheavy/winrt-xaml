@@ -1,10 +1,14 @@
 [package]
 name = "winrt-xaml-macros"
-version = "0.1.0"
+version = "0.3.0"
 edition = "2021"
 authors = ["Pegasus Heavy Industries LLC"]
-description = "Procedural macros for compile-time XAML parsing"
+description = "Procedural macros for compile-time XAML parsing in winrt-xaml"
 license = "MIT OR Apache-2.0"
+repository = "https://github.com/pegasusheavy/winrt-xaml"
+documentation = "https://docs.rs/winrt-xaml-macros"
+readme = "README.md"
+rust-version = "1.70"
 
 [lib]
 proc-macro = true

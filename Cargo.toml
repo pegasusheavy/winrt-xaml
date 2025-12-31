@@ -1,14 +1,18 @@
 [package]
 name = "winrt-xaml"
-version = "0.1.0"
+version = "0.3.0"
 edition = "2021"
 authors = ["Pegasus Heavy Industries LLC"]
-description = "A Rust library for creating UIs using WinRT and XAML"
+description = "A Rust library for creating modern Windows UIs using WinRT and XAML with reactive data binding"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/example/winrt-xaml"
+repository = "https://github.com/pegasusheavy/winrt-xaml"
+documentation = "https://docs.rs/winrt-xaml"
+homepage = "https://github.com/pegasusheavy/winrt-xaml"
+readme = "README.md"
 keywords = ["winrt", "xaml", "ui", "windows", "gui"]
-categories = ["gui", "api-bindings"]
+categories = ["gui", "api-bindings", "os::windows-apis"]
 autobins = false
+rust-version = "1.70"
 
 [lib]
 name = "winrt_xaml"
