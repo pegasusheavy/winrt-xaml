@@ -196,7 +196,7 @@ mod xaml_ffi_tests {
     #[test]
     fn test_grid_add_multiple_row_definitions() {
         let grid = XamlGrid::new().unwrap();
-        
+
         for i in 0..10 {
             let result = grid.add_row_definition(50.0, false, false);
             assert!(result.is_ok(), "Failed to add row {}", i);
@@ -206,7 +206,7 @@ mod xaml_ffi_tests {
     #[test]
     fn test_grid_add_multiple_column_definitions() {
         let grid = XamlGrid::new().unwrap();
-        
+
         for i in 0..10 {
             let result = grid.add_column_definition(50.0, false, false);
             assert!(result.is_ok(), "Failed to add column {}", i);
@@ -328,7 +328,7 @@ mod xaml_ffi_tests {
         let buttons: Vec<_> = (0..100)
             .map(|_| XamlButton::new())
             .collect();
-        
+
         assert_eq!(buttons.len(), 100);
         assert!(buttons.iter().all(|b| b.is_ok()));
     }
@@ -337,13 +337,13 @@ mod xaml_ffi_tests {
     fn test_uielement_conversions() {
         let button = XamlButton::new().unwrap();
         let _elem = button.as_uielement();
-        
+
         let textblock = XamlTextBlock::new().unwrap();
         let _elem = textblock.as_uielement();
-        
+
         let textbox = XamlTextBox::new().unwrap();
         let _elem = textbox.as_uielement();
-        
+
         // All conversions successful
     }
 }
