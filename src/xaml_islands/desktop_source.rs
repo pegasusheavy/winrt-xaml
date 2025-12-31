@@ -2,7 +2,7 @@
 
 use crate::error::Result;
 use crate::winrt::{IInspectable, IActivationFactory};
-use windows::core::{IInspectable as CoreIInspectable, Interface, GUID};
+use windows::core::{IInspectable as CoreIInspectable, GUID};
 use windows::Win32::Foundation::HWND;
 use std::sync::Arc;
 use parking_lot::RwLock;
@@ -93,12 +93,12 @@ impl DesktopWindowXamlSource {
                 println!("   ⚠️  QueryInterface for IDesktopWindowXamlSourceNative failed: 0x{:08X}", hr as u32);
                 println!("   ℹ️  This is expected - we need the actual WinRT runtime support");
                 println!("   ℹ️  Falling back to placeholder for now");
-                return Ok(HWND(0x00000000 as *mut _));
+                return Ok(HWND(std::ptr::null_mut()));
             }
 
             if native_ptr.is_null() {
                 println!("   ⚠️  IDesktopWindowXamlSourceNative interface is null");
-                return Ok(HWND(0x00000000 as *mut _));
+                return Ok(HWND(std::ptr::null_mut()));
             }
 
             // Call AttachToWindow on the native interface
@@ -144,7 +144,7 @@ impl DesktopWindowXamlSource {
     }
 
     /// Set the XAML content to display.
-    pub fn set_content(&self, content: &IInspectable) -> Result<()> {
+    pub fn set_content(&self, _content: &IInspectable) -> Result<()> {
         // This would call the Content property setter on the DesktopWindowXamlSource
         // For now, we'll need to implement property access via WinRT
 

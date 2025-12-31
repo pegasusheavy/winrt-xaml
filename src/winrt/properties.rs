@@ -4,7 +4,6 @@
 
 use super::IInspectable;
 use crate::error::Result;
-use windows::core::{HSTRING, Interface};
 
 /// Helper trait for WinRT property access.
 pub trait PropertyAccess {

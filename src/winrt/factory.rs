@@ -1,8 +1,6 @@
 //! IActivationFactory interface for creating WinRT objects.
 
-use super::abi::{IID, iids};
 use super::inspectable::IInspectable;
-use super::hstring::HString;
 use windows::core::{IInspectable as CoreIInspectable, Interface, HSTRING};
 use windows::Win32::System::WinRT::RoGetActivationFactory;
 

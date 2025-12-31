@@ -10,6 +10,7 @@ use windows::Win32::UI::WindowsAndMessaging::{SetWindowPos, ShowWindow, SWP_NOAC
 #[derive(Clone)]
 pub struct XamlIslandHost {
     source: DesktopWindowXamlSource,
+    #[allow(dead_code)]
     parent_hwnd: isize,
     island_hwnd: isize,
 }

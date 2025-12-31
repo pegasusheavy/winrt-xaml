@@ -28,7 +28,7 @@ pub mod iids {
     pub const IID_IUNKNOWN: IID = IID::from_u128(0x00000000_0000_0000_C000_000000000046);
 
     /// IInspectable interface ID
-    pub const IID_IINSPECTABLE: IID = IID::from_u128(0xAF86E2E0_B12D_4c6a_9C5A_D7AA65101E90);
+    pub const IID_IINSPECTABLE: IID = IID::from_u128(0xAF86E2E0_B12D_4C6A_9C5A_D7AA65101E90);
 
     /// IActivationFactory interface ID
     pub const IID_IACTIVATION_FACTORY: IID = IID::from_u128(0x00000035_0000_0000_C000_000000000046);

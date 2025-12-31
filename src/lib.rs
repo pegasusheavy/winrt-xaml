@@ -92,7 +92,7 @@ pub mod prelude {
     pub use crate::media::*;
     pub use crate::resources::*;
     pub use crate::window::Window;
-    
+
     // Re-export WinRT XAML types
     #[cfg(feature = "xaml-islands")]
     pub use crate::xaml_native::{
@@ -101,7 +101,7 @@ pub mod prelude {
         XamlCheckBox, XamlComboBox, XamlSlider, XamlProgressBar,
         ScrollMode, ScrollBarVisibility,
     };
-    
+
     // Re-export reactive types
     #[cfg(any(feature = "xaml-islands", feature = "uwp"))]
     pub use crate::reactive::{Property, ObservableCollection, Computed, CollectionChange};

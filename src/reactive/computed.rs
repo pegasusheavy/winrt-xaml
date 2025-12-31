@@ -98,7 +98,7 @@ impl<T: Clone + PartialEq + Send + 'static> Computed<T> {
     {
         let source1_clone = source1.clone();
         let source2_clone = source2.clone();
-        
+
         let initial_value = map(&source1_clone.get(), &source2_clone.get());
         let property = Property::new(initial_value);
 

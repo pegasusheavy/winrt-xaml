@@ -27,9 +27,12 @@ impl EventToken {
 /// WinRT event handler.
 pub type WinRTEventHandler<TArgs> = Box<dyn Fn(&TArgs) + Send + Sync>;
 
+/// Event handler entry type.
+type EventHandlerEntry<TArgs> = (EventToken, WinRTEventHandler<TArgs>);
+
 /// WinRT event registration for a specific event type.
 pub struct WinRTEvent<TArgs> {
-    handlers: Arc<RwLock<Vec<(EventToken, WinRTEventHandler<TArgs>)>>>,
+    handlers: Arc<RwLock<Vec<EventHandlerEntry<TArgs>>>>,
     next_token: Arc<RwLock<u64>>,
 }
 

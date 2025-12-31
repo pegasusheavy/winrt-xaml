@@ -2,7 +2,7 @@
 
 use crate::winrt::{IInspectable, IActivationFactory};
 use crate::error::Result;
-use windows::core::{IInspectable as CoreIInspectable, Interface};
+use windows::core::IInspectable as CoreIInspectable;
 
 /// Windows.UI.Xaml.Application - The base class for UWP applications.
 #[derive(Clone)]

@@ -17,7 +17,9 @@ pub struct ToggleSwitch {
 struct ToggleSwitchInner {
     is_on: RwLock<bool>,
     header: RwLock<String>,
+    #[allow(dead_code)]
     on_content: RwLock<String>,
+    #[allow(dead_code)]
     off_content: RwLock<String>,
     toggled: EventHandler<CheckedEventArgs>,
 }

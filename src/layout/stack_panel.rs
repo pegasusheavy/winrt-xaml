@@ -108,6 +108,7 @@ impl StackPanel {
     }
 
     /// Perform layout calculations.
+    #[allow(dead_code)]
     pub(crate) fn layout(&self, _available_width: i32, _available_height: i32) {
         let orientation = self.orientation();
         let spacing = self.spacing();

@@ -3,9 +3,12 @@
 use parking_lot::RwLock;
 use std::sync::Arc;
 
+/// Event handler callback type.
+type EventCallback<T> = Box<dyn Fn(&T) + Send + Sync>;
+
 /// A type-safe event handler.
 pub struct EventHandler<T> {
-    handlers: Arc<RwLock<Vec<Box<dyn Fn(&T) + Send + Sync>>>>,
+    handlers: Arc<RwLock<Vec<EventCallback<T>>>>,
 }
 
 impl<T> std::fmt::Debug for EventHandler<T> {

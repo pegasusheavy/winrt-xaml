@@ -1,8 +1,6 @@
 //! IInspectable interface - base interface for all WinRT objects.
 
-use super::abi::{IID, TrustLevel, iids};
 use windows::core::{IInspectable as CoreIInspectable, Interface};
-use windows::Win32::System::Com::CoTaskMemFree;
 
 /// IInspectable is the base interface for all WinRT objects.
 ///

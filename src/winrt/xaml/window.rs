@@ -38,7 +38,7 @@ impl XamlWindow {
     }
 
     /// Set the window title.
-    pub fn set_title(&self, title: &str) -> Result<()> {
+    pub fn set_title(&self, _title: &str) -> Result<()> {
         // This would set the Title property via WinRT
         Ok(())
     }
