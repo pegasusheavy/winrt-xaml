@@ -500,7 +500,7 @@ impl XamlTextBox {
     {
         let boxed = Box::new(callback);
         let ptr = Box::into_raw(boxed);
-        
+
         extern "C" fn trampoline<F>(user_data: *mut std::ffi::c_void)
         where
             F: Fn() + Send + Sync + 'static,
@@ -510,14 +510,14 @@ impl XamlTextBox {
                 callback();
             }
         }
-        
+
         unsafe {
             ffi::xaml_textbox_on_text_changed(
                 self.handle,
                 std::mem::transmute(trampoline::<F> as *const ())
             );
         }
-        
+
         std::mem::forget(ptr);
         Ok(())
     }
@@ -1133,7 +1133,7 @@ impl XamlRadioButton {
     {
         let boxed = Box::new(callback);
         let ptr = Box::into_raw(boxed);
-        
+
         extern "C" fn trampoline<F>(user_data: *mut std::ffi::c_void)
         where
             F: Fn() + Send + Sync + 'static,
@@ -1143,14 +1143,14 @@ impl XamlRadioButton {
                 callback();
             }
         }
-        
+
         unsafe {
             ffi::xaml_radiobutton_on_checked(
                 self.handle,
                 std::mem::transmute(trampoline::<F> as *const ())
             );
         }
-        
+
         // Note: This leaks the callback. In production, you'd want proper cleanup.
         std::mem::forget(ptr);
         Ok(())
@@ -1163,7 +1163,7 @@ impl XamlRadioButton {
     {
         let boxed = Box::new(callback);
         let ptr = Box::into_raw(boxed);
-        
+
         extern "C" fn trampoline<F>(user_data: *mut std::ffi::c_void)
         where
             F: Fn() + Send + Sync + 'static,
@@ -1173,14 +1173,14 @@ impl XamlRadioButton {
                 callback();
             }
         }
-        
+
         unsafe {
             ffi::xaml_radiobutton_on_unchecked(
                 self.handle,
                 std::mem::transmute(trampoline::<F> as *const ())
             );
         }
-        
+
         std::mem::forget(ptr);
         Ok(())
     }
@@ -1235,7 +1235,7 @@ impl XamlImage {
     }
 
     /// Set the image source from a URI.
-    /// 
+    ///
     /// # Examples
     /// ```no_run
     /// # use winrt_xaml::xaml_native::XamlImage;
