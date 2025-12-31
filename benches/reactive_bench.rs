@@ -13,13 +13,13 @@ fn property_creation(c: &mut Criterion) {
 
 fn property_get_set(c: &mut Criterion) {
     let prop = Property::new(0);
-    
+
     c.bench_function("property_get", |b| {
         b.iter(|| {
             black_box(prop.get());
         });
     });
-    
+
     c.bench_function("property_set", |b| {
         let mut counter = 0;
         b.iter(|| {
@@ -31,13 +31,13 @@ fn property_get_set(c: &mut Criterion) {
 
 fn property_subscribe(c: &mut Criterion) {
     let prop = Property::new(0);
-    
+
     c.bench_function("property_subscribe_1", |b| {
         b.iter(|| {
             let _id = prop.subscribe(|_| {});
         });
     });
-    
+
     // Benchmark with multiple subscribers
     let mut group = c.benchmark_group("property_notify");
     for subscriber_count in [1, 5, 10, 50].iter() {
@@ -60,7 +60,7 @@ fn property_subscribe(c: &mut Criterion) {
 
 fn property_update(c: &mut Criterion) {
     let prop = Property::new(0);
-    
+
     c.bench_function("property_update", |b| {
         b.iter(|| {
             prop.update(|v| *v += 1);
@@ -74,7 +74,7 @@ fn collection_operations(c: &mut Criterion) {
             black_box(ObservableCollection::<i32>::new());
         });
     });
-    
+
     c.bench_function("collection_push", |b| {
         let col = ObservableCollection::new();
         let mut counter = 0;
@@ -83,7 +83,7 @@ fn collection_operations(c: &mut Criterion) {
             counter += 1;
         });
     });
-    
+
     c.bench_function("collection_get", |b| {
         let col = ObservableCollection::new();
         for i in 0..100 {
@@ -117,13 +117,13 @@ fn collection_subscribe(c: &mut Criterion) {
 
 fn computed_operations(c: &mut Criterion) {
     let prop = Property::new(5);
-    
+
     c.bench_function("computed_from_property", |b| {
         b.iter(|| {
             black_box(Computed::from_property(&prop, |n| n * 2));
         });
     });
-    
+
     c.bench_function("computed_get", |b| {
         let computed = Computed::from_property(&prop, |n| n * 2);
         b.iter(|| {
@@ -136,7 +136,7 @@ fn computed_update_propagation(c: &mut Criterion) {
     let prop1 = Property::new(3);
     let prop2 = Property::new(4);
     let sum = Computed::from_properties2(&prop1, &prop2, |a, b| a + b);
-    
+
     c.bench_function("computed_propagate", |b| {
         b.iter(|| {
             prop1.set(black_box(10));
