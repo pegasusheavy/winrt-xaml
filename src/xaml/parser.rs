@@ -32,7 +32,7 @@ impl XamlReader {
                     let name_bytes = e.name();
                     let element_name = str::from_utf8(name_bytes.as_ref())
                         .map_err(|e| Error::xaml_parse(format!("Invalid UTF-8: {}", e)))?;
-                    
+
                     return Self::parse_element(&e, element_name);
                 }
                 Ok(Event::Eof) => break,
@@ -59,7 +59,7 @@ impl XamlReader {
 
     fn parse_button(element: &BytesStart) -> Result<XamlUIElement> {
         let button = XamlButton::new()?;
-        
+
         let mut width: Option<f64> = None;
         let mut height: Option<f64> = None;
 
@@ -101,7 +101,7 @@ impl XamlReader {
                 }
             }
         }
-        
+
         // Set size if both width and height were specified
         if let (Some(w), Some(h)) = (width, height) {
             button.set_size(w, h)?;
@@ -146,7 +146,7 @@ impl XamlReader {
 
     fn parse_textbox(element: &BytesStart) -> Result<XamlUIElement> {
         let textbox = XamlTextBox::new()?;
-        
+
         let mut width: Option<f64> = None;
         let mut height: Option<f64> = None;
 
@@ -179,7 +179,7 @@ impl XamlReader {
                 _ => {}
             }
         }
-        
+
         // Set size if both width and height were specified
         if let (Some(w), Some(h)) = (width, height) {
             textbox.set_size(w, h)?;

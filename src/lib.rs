@@ -13,7 +13,8 @@
 //! - **Layout Panels**: Flexible layout system (StackPanel, Grid, Canvas)
 //! - **Event Handling**: Type-safe event subscription and handling
 //! - **Data Binding**: Reactive data binding support
-//! - **XAML Parsing**: Load UI from XAML markup strings or files
+//! - **XAML Parsing**: Runtime and compile-time XAML parsing
+//! - **Compile-Time XAML**: `xaml!` macro for zero-cost abstractions
 //! - **Styling**: Resource dictionaries and style management
 //!
 //! ## Example
@@ -95,3 +96,24 @@ pub mod prelude {
 /// Re-export of the Result type with our Error
 #[cfg(any(feature = "xaml-islands", feature = "uwp"))]
 pub type Result<T> = std::result::Result<T, error::Error>;
+
+// Re-export the compile-time XAML macro
+/// Compile-time XAML parsing macro.
+///
+/// Parses XAML at compile time and generates Rust code to create WinRT controls.
+///
+/// # Example
+///
+/// ```rust,ignore
+/// use winrt_xaml::xaml;
+///
+/// let button = xaml! {
+///     r#"<Button Content="Click Me"
+///               Width="200"
+///               Height="50"
+///               Background="#FF0078D4"
+///               Foreground="#FFFFFFFF"
+///               CornerRadius="8" />"#
+/// };
+/// ```
+pub use winrt_xaml_macros::xaml;

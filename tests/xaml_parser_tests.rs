@@ -47,12 +47,12 @@ fn test_xaml_reader_parse_invalid_xaml() {
 #[test]
 fn test_xaml_reader_api_exists() {
     // Compile-time checks that the API exists
-    
+
     fn _check_load() {
         fn _needs_method(_: fn(&str) -> Result<XamlUIElement, Error>) {}
         _needs_method(XamlReader::load);
     }
-    
+
     fn _check_parse() {
         fn _needs_method(_: fn(&str) -> Result<XamlUIElement, Error>) {}
         _needs_method(XamlReader::parse);

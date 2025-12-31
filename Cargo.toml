@@ -78,6 +78,10 @@ path = "examples/scrollable_list.rs"
 name = "xaml_parser_demo"
 path = "examples/xaml_parser_demo.rs"
 
+[[example]]
+name = "xaml_compile_time_demo"
+path = "examples/xaml_compile_time_demo.rs"
+
 [[bin]]
 name = "memory_profile"
 path = "bin/memory_profile.rs"
@@ -96,8 +100,11 @@ windows = { version = "0.58", features = [
     "implement",
 ] }
 
-# For parsing XAML
+# For parsing XAML at runtime
 quick-xml = "0.37"
+
+# Compile-time XAML parsing macro
+winrt-xaml-macros = { path = "winrt-xaml-macros" }
 
 # For async operations
 tokio = { version = "1", features = ["rt", "rt-multi-thread", "sync", "macros"] }

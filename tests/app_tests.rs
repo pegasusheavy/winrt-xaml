@@ -32,12 +32,12 @@ fn test_application_singleton() {
 fn test_application_current() {
     // Get or create an application
     let app = Application::current().or_else(|| Application::new().ok());
-    
+
     if let Some(app) = app {
         // Current should return the same application
         let current = Application::current();
         assert!(current.is_some());
-        
+
         // Just verify they refer to the same instance
         let current = Application::current().unwrap();
         assert_eq!(app.exit_code(), current.exit_code());

@@ -1,0 +1,19 @@
+[package]
+name = "winrt-xaml-macros"
+version = "0.1.0"
+edition = "2021"
+authors = ["Pegasus Heavy Industries LLC"]
+description = "Procedural macros for compile-time XAML parsing"
+license = "MIT OR Apache-2.0"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+# For procedural macros
+syn = { version = "2.0", features = ["full", "extra-traits"] }
+quote = "1.0"
+proc-macro2 = "1.0"
+
+# For XAML parsing at compile time
+quick-xml = "0.37"

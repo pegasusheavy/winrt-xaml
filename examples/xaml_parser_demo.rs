@@ -41,7 +41,7 @@ fn main() -> Result<()> {
     let button_xaml = r##"
         <Button Content="Parsed Button!" Width="300" Height="50" Background="#FF0078D4" Foreground="#FFFFFFFF" CornerRadius="8" />
     "##;
-    
+
     match XamlReader::parse(button_xaml) {
         Ok(element) => {
             println!("   ✅ Successfully parsed and created button from XAML");
@@ -57,7 +57,7 @@ fn main() -> Result<()> {
     let textblock_xaml = r##"
         <TextBlock Text="Hello from XAML!" FontSize="24" FontWeight="700" Foreground="#FF00D7FF" />
     "##;
-    
+
     match XamlReader::parse(textblock_xaml) {
         Ok(_) => println!("   ✅ Successfully parsed and created TextBlock from XAML"),
         Err(e) => println!("   ❌ Error: {}", e),
@@ -68,7 +68,7 @@ fn main() -> Result<()> {
     let panel_xaml = r##"
         <StackPanel Orientation="Vertical" Spacing="15" Background="#FF2D2D2D" />
     "##;
-    
+
     match XamlReader::parse(panel_xaml) {
         Ok(_) => println!("   ✅ Successfully parsed and created StackPanel from XAML"),
         Err(e) => println!("   ❌ Error: {}", e),
