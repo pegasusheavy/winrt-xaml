@@ -1,6 +1,6 @@
 [package]
 name = "winrt-xaml"
-version = "0.3.0"
+version = "1.0.0"
 edition = "2021"
 authors = ["Pegasus Heavy Industries LLC"]
 description = "A Rust library for creating modern Windows UIs using WinRT and XAML with reactive data binding"
