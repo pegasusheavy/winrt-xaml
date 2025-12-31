@@ -82,6 +82,10 @@ path = "examples/xaml_parser_demo.rs"
 name = "xaml_compile_time_demo"
 path = "examples/xaml_compile_time_demo.rs"
 
+[[example]]
+name = "xaml_serde_demo"
+path = "examples/xaml_serde_demo.rs"
+
 [[bin]]
 name = "memory_profile"
 path = "bin/memory_profile.rs"
@@ -100,8 +104,12 @@ windows = { version = "0.58", features = [
     "implement",
 ] }
 
-# For parsing XAML at runtime
-quick-xml = "0.37"
+# For parsing XAML at runtime and compile-time
+# Using serde feature for struct-based deserialization
+quick-xml = { version = "0.37", features = ["serialize"] }
+
+# For serde-based XAML deserialization
+serde = { version = "1.0", features = ["derive"] }
 
 # Compile-time XAML parsing macro
 winrt-xaml-macros = { path = "winrt-xaml-macros" }

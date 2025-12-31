@@ -36,7 +36,7 @@ fn main() -> Result<()> {
     println!("   • All syntax validated during 'cargo build'");
     println!("   • Zero runtime parsing overhead");
     println!("   • Full type safety and IDE support\n");
-    
+
     println!("🔧 Creating UI from compile-time XAML...\n");
 
     // Initialize XAML
