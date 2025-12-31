@@ -74,6 +74,10 @@ path = "examples/winrt_calculator_functional.rs"
 name = "scrollable_list"
 path = "examples/scrollable_list.rs"
 
+[[example]]
+name = "xaml_parser_demo"
+path = "examples/xaml_parser_demo.rs"
+
 [[bin]]
 name = "memory_profile"
 path = "bin/memory_profile.rs"

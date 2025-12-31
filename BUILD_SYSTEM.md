@@ -78,7 +78,7 @@ cmake --build . --config Release
 1. **Embed Application Manifest**:
    ```rust
    use winres::WindowsResource;
-   
+
    WindowsResource::new()
        .set_manifest_file("winrt-xaml.manifest")
        .compile()?;
@@ -359,7 +359,7 @@ Error: LINK : fatal error LNK1181: cannot open input file 'xaml_islands_helper.l
 **5. XAML Islands Initialization Error**
 
 ```
-Error: WindowsXamlManager and DesktopWindowXamlSource are supported for apps 
+Error: WindowsXamlManager and DesktopWindowXamlSource are supported for apps
 targeting Windows version 10.0.18226.0 and later.
 ```
 
@@ -408,15 +408,15 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      
+
       - name: Install CMake
         run: choco install cmake
-      
+
       - name: Build C++ Helper
         run: |
           cd xaml_islands_helper
@@ -424,10 +424,10 @@ jobs:
           cd build
           cmake ..
           cmake --build . --config Debug
-      
+
       - name: Build Rust
         run: cargo build --all-targets
-      
+
       - name: Run Tests
         run: cargo test --tests
 ```
@@ -454,7 +454,7 @@ jobs:
    ```powershell
    # Cargo parallel builds (automatic)
    cargo build -j 8
-   
+
    # CMake parallel builds
    cmake --build . --config Debug -- /m:8
    ```
@@ -468,7 +468,7 @@ jobs:
    [profile.dev]
    opt-level = 0        # No optimization
    debug = true         # Include debug symbols
-   
+
    [profile.release]
    opt-level = 3        # Maximum optimization
    lto = true           # Link-time optimization

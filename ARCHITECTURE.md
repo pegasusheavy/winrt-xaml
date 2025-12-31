@@ -116,8 +116,8 @@ impl Drop for XamlButton {
 ```rust
 pub fn set_content(&self, content: &str) -> Result<()> {
     let content_wide = content.encode_utf16().chain(once(0)).collect::<Vec<_>>();
-    let result = unsafe { 
-        ffi::xaml_button_set_content(self.handle, content_wide.as_ptr()) 
+    let result = unsafe {
+        ffi::xaml_button_set_content(self.handle, content_wide.as_ptr())
     };
     if result != 0 {
         return Err(Error::control_creation("Failed to set content".to_string()));
@@ -316,7 +316,7 @@ int xaml_button_set_content(XamlButtonHandle button, const wchar_t* content) {
 
 ### 1. Opaque Handle Pattern
 
-**Problem**: Cannot expose C++ types directly to Rust  
+**Problem**: Cannot expose C++ types directly to Rust
 **Solution**: Use opaque `void*` handles
 
 ```rust
@@ -334,7 +334,7 @@ auto* real_button = reinterpret_cast<std::shared_ptr<Button>*>(handle);
 
 ### 2. Result-Based Error Handling
 
-**Problem**: C++ exceptions don't cross FFI boundary  
+**Problem**: C++ exceptions don't cross FFI boundary
 **Solution**: Return error codes, store error messages
 
 ```cpp
@@ -366,7 +366,7 @@ pub fn some_operation(&self) -> Result<()> {
 
 ### 3. RAII Lifetime Management
 
-**Problem**: WinRT uses COM reference counting  
+**Problem**: WinRT uses COM reference counting
 **Solution**: Wrap in `std::shared_ptr`, tie to Rust Drop trait
 
 ```cpp
@@ -389,7 +389,7 @@ impl Drop for XamlButton {
 
 ### 4. Method Chaining
 
-**Problem**: Ergonomic API for property setting  
+**Problem**: Ergonomic API for property setting
 **Solution**: Return `&self` from setters
 
 ```rust
@@ -406,7 +406,7 @@ impl XamlButton {
 
 ### 5. Thread-Safe Handles
 
-**Problem**: WinRT objects may need cross-thread access  
+**Problem**: WinRT objects may need cross-thread access
 **Solution**: Implement Send + Sync for handle types
 
 ```rust
@@ -535,8 +535,8 @@ unsafe {
 
 ### Thread Safety
 
-**Handle Types**: Send + Sync (opaque pointers)  
-**Actual Objects**: STA-bound (WinRT requirement)  
+**Handle Types**: Send + Sync (opaque pointers)
+**Actual Objects**: STA-bound (WinRT requirement)
 **Event Callbacks**: Executed on UI thread
 
 ## Security Considerations

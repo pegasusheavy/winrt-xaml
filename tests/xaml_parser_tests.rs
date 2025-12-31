@@ -7,7 +7,7 @@ use winrt_xaml::error::Error;
 fn test_xaml_reader_load_not_implemented() {
     let result = XamlReader::load("<Button Content='Click Me' />");
     assert!(result.is_err());
-    
+
     match result {
         Err(e) => {
             let msg = e.to_string();
@@ -21,7 +21,7 @@ fn test_xaml_reader_load_not_implemented() {
 fn test_xaml_reader_parse_not_implemented() {
     let result = XamlReader::parse("<StackPanel><Button /></StackPanel>");
     assert!(result.is_err());
-    
+
     match result {
         Err(e) => {
             let msg = e.to_string();
@@ -58,13 +58,13 @@ fn test_xaml_reader_parse_invalid_xaml() {
 #[test]
 fn test_xaml_reader_api_exists() {
     // Compile-time checks that the API exists
-    
+
     fn _check_load() {
         use winrt_xaml::controls::UIElement;
         fn _needs_method(_: fn(&str) -> Result<UIElement, Error>) {}
         _needs_method(XamlReader::load);
     }
-    
+
     fn _check_parse() {
         use winrt_xaml::controls::UIElement;
         fn _needs_method(_: fn(&str) -> Result<UIElement, Error>) {}
@@ -153,7 +153,7 @@ fn test_xaml_reader_parse_nested() {
 #[ignore]
 fn test_xaml_reader_parse_with_properties() {
     let xaml = r##"
-        <Button 
+        <Button
             Content="Click Me"
             Width="200"
             Height="50"
