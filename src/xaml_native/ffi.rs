@@ -78,9 +78,57 @@ unsafe impl Sync for XamlProgressBarHandle {}
 
 #[repr(C)]
 #[derive(Clone, Copy)]
+pub struct XamlRadioButtonHandle(pub *mut c_void);
+unsafe impl Send for XamlRadioButtonHandle {}
+unsafe impl Sync for XamlRadioButtonHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct XamlImageHandle(pub *mut c_void);
+unsafe impl Send for XamlImageHandle {}
+unsafe impl Sync for XamlImageHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct XamlListViewHandle(pub *mut c_void);
+unsafe impl Send for XamlListViewHandle {}
+unsafe impl Sync for XamlListViewHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
 pub struct XamlUIElementHandle(pub *mut c_void);
 unsafe impl Send for XamlUIElementHandle {}
 unsafe impl Sync for XamlUIElementHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct XamlResourceDictionaryHandle(pub *mut c_void);
+unsafe impl Send for XamlResourceDictionaryHandle {}
+unsafe impl Sync for XamlResourceDictionaryHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct XamlControlTemplateHandle(pub *mut c_void);
+unsafe impl Send for XamlControlTemplateHandle {}
+unsafe impl Sync for XamlControlTemplateHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct XamlStoryboardHandle(pub *mut c_void);
+unsafe impl Send for XamlStoryboardHandle {}
+unsafe impl Sync for XamlStoryboardHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct XamlDoubleAnimationHandle(pub *mut c_void);
+unsafe impl Send for XamlDoubleAnimationHandle {}
+unsafe impl Sync for XamlDoubleAnimationHandle {}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct XamlColorAnimationHandle(pub *mut c_void);
+unsafe impl Send for XamlColorAnimationHandle {}
+unsafe impl Sync for XamlColorAnimationHandle {}
 
 // Raw FFI functions
 #[link(name = "xaml_islands_helper", kind = "dylib")]
@@ -191,6 +239,96 @@ extern "C" {
     pub fn xaml_combobox_as_uielement(combobox: XamlComboBoxHandle) -> XamlUIElementHandle;
     pub fn xaml_slider_as_uielement(slider: XamlSliderHandle) -> XamlUIElementHandle;
     pub fn xaml_progressbar_as_uielement(progressbar: XamlProgressBarHandle) -> XamlUIElementHandle;
+
+    // RadioButton APIs
+    pub fn xaml_radiobutton_create() -> XamlRadioButtonHandle;
+    pub fn xaml_radiobutton_destroy(radiobutton: XamlRadioButtonHandle);
+    pub fn xaml_radiobutton_set_content(radiobutton: XamlRadioButtonHandle, content: *const u16) -> i32;
+    pub fn xaml_radiobutton_set_is_checked(radiobutton: XamlRadioButtonHandle, is_checked: i32) -> i32;
+    pub fn xaml_radiobutton_get_is_checked(radiobutton: XamlRadioButtonHandle) -> i32;
+    pub fn xaml_radiobutton_set_group_name(radiobutton: XamlRadioButtonHandle, group_name: *const u16) -> i32;
+    pub fn xaml_radiobutton_on_checked(radiobutton: XamlRadioButtonHandle, callback_ptr: *mut c_void);
+    pub fn xaml_radiobutton_on_unchecked(radiobutton: XamlRadioButtonHandle, callback_ptr: *mut c_void);
+    pub fn xaml_radiobutton_as_uielement(radiobutton: XamlRadioButtonHandle) -> XamlUIElementHandle;
+
+    // Image APIs
+    pub fn xaml_image_create() -> XamlImageHandle;
+    pub fn xaml_image_destroy(image: XamlImageHandle);
+    pub fn xaml_image_set_source(image: XamlImageHandle, uri: *const u16) -> i32;
+    pub fn xaml_image_set_stretch(image: XamlImageHandle, stretch_mode: i32) -> i32;
+    pub fn xaml_image_set_size(image: XamlImageHandle, width: f64, height: f64) -> i32;
+    pub fn xaml_image_as_uielement(image: XamlImageHandle) -> XamlUIElementHandle;
+
+    // Grid row/column definition APIs
+    pub fn xaml_grid_add_row_definition(grid: XamlGridHandle, height: f64, is_auto: i32, is_star: i32) -> i32;
+    pub fn xaml_grid_add_column_definition(grid: XamlGridHandle, width: f64, is_auto: i32, is_star: i32) -> i32;
+    pub fn xaml_grid_set_child_row(child: XamlUIElementHandle, row: i32) -> i32;
+    pub fn xaml_grid_set_child_column(child: XamlUIElementHandle, column: i32) -> i32;
+    pub fn xaml_grid_set_child_row_span(child: XamlUIElementHandle, row_span: i32) -> i32;
+    pub fn xaml_grid_set_child_column_span(child: XamlUIElementHandle, column_span: i32) -> i32;
+
+    // TextBox TextChanged event
+    pub fn xaml_textbox_on_text_changed(textbox: XamlTextBoxHandle, callback_ptr: *mut c_void);
+
+    // ListView APIs
+    pub fn xaml_listview_create() -> XamlListViewHandle;
+    pub fn xaml_listview_destroy(listview: XamlListViewHandle);
+    pub fn xaml_listview_add_item(listview: XamlListViewHandle, item: *const u16) -> i32;
+    pub fn xaml_listview_remove_item(listview: XamlListViewHandle, index: i32) -> i32;
+    pub fn xaml_listview_clear_items(listview: XamlListViewHandle) -> i32;
+    pub fn xaml_listview_get_item_count(listview: XamlListViewHandle) -> i32;
+    pub fn xaml_listview_get_selected_index(listview: XamlListViewHandle) -> i32;
+    pub fn xaml_listview_set_selected_index(listview: XamlListViewHandle, index: i32) -> i32;
+    pub fn xaml_listview_get_item(listview: XamlListViewHandle, index: i32, buffer: *mut u16, buffer_size: i32) -> i32;
+    pub fn xaml_listview_on_selection_changed(listview: XamlListViewHandle, callback_ptr: *mut c_void);
+    pub fn xaml_listview_set_selection_mode(listview: XamlListViewHandle, mode: i32) -> i32;
+    pub fn xaml_listview_as_uielement(listview: XamlListViewHandle) -> XamlUIElementHandle;
+
+    // Resource Dictionary APIs
+    pub fn xaml_resource_dictionary_create() -> XamlResourceDictionaryHandle;
+    pub fn xaml_resource_dictionary_destroy(dict: XamlResourceDictionaryHandle);
+    pub fn xaml_resource_dictionary_insert_color(dict: XamlResourceDictionaryHandle, key: *const u16, color: u32) -> i32;
+    pub fn xaml_resource_dictionary_insert_double(dict: XamlResourceDictionaryHandle, key: *const u16, value: f64) -> i32;
+    pub fn xaml_resource_dictionary_insert_string(dict: XamlResourceDictionaryHandle, key: *const u16, value: *const u16) -> i32;
+    pub fn xaml_resource_dictionary_has_key(dict: XamlResourceDictionaryHandle, key: *const u16) -> i32;
+    pub fn xaml_resource_dictionary_get_color(dict: XamlResourceDictionaryHandle, key: *const u16) -> u32;
+    pub fn xaml_resource_dictionary_get_double(dict: XamlResourceDictionaryHandle, key: *const u16) -> f64;
+    pub fn xaml_resource_dictionary_remove(dict: XamlResourceDictionaryHandle, key: *const u16) -> i32;
+    pub fn xaml_resource_dictionary_clear(dict: XamlResourceDictionaryHandle);
+    pub fn xaml_uielement_set_resources(element: XamlUIElementHandle, dict: XamlResourceDictionaryHandle) -> i32;
+
+    // Control Template APIs
+    pub fn xaml_control_template_create() -> XamlControlTemplateHandle;
+    pub fn xaml_control_template_destroy(template_handle: XamlControlTemplateHandle);
+    pub fn xaml_control_template_set_content(template_handle: XamlControlTemplateHandle, content: XamlUIElementHandle) -> i32;
+    pub fn xaml_button_set_template(button: XamlButtonHandle, template_handle: XamlControlTemplateHandle) -> i32;
+
+    // Animation APIs - Storyboard
+    pub fn xaml_storyboard_create() -> XamlStoryboardHandle;
+    pub fn xaml_storyboard_destroy(storyboard: XamlStoryboardHandle);
+    pub fn xaml_storyboard_add_animation(storyboard: XamlStoryboardHandle, animation: XamlDoubleAnimationHandle) -> i32;
+    pub fn xaml_storyboard_add_color_animation(storyboard: XamlStoryboardHandle, animation: XamlColorAnimationHandle) -> i32;
+    pub fn xaml_storyboard_begin(storyboard: XamlStoryboardHandle) -> i32;
+    pub fn xaml_storyboard_stop(storyboard: XamlStoryboardHandle) -> i32;
+    pub fn xaml_storyboard_pause(storyboard: XamlStoryboardHandle) -> i32;
+    pub fn xaml_storyboard_resume(storyboard: XamlStoryboardHandle) -> i32;
+    pub fn xaml_storyboard_set_target(storyboard: XamlStoryboardHandle, target: XamlUIElementHandle) -> i32;
+
+    // Animation APIs - DoubleAnimation
+    pub fn xaml_double_animation_create() -> XamlDoubleAnimationHandle;
+    pub fn xaml_double_animation_destroy(animation: XamlDoubleAnimationHandle);
+    pub fn xaml_double_animation_set_from(animation: XamlDoubleAnimationHandle, from: f64) -> i32;
+    pub fn xaml_double_animation_set_to(animation: XamlDoubleAnimationHandle, to: f64) -> i32;
+    pub fn xaml_double_animation_set_duration(animation: XamlDoubleAnimationHandle, milliseconds: i32) -> i32;
+    pub fn xaml_double_animation_set_target_property(animation: XamlDoubleAnimationHandle, target: XamlUIElementHandle, property_path: *const u16) -> i32;
+
+    // Animation APIs - ColorAnimation
+    pub fn xaml_color_animation_create() -> XamlColorAnimationHandle;
+    pub fn xaml_color_animation_destroy(animation: XamlColorAnimationHandle);
+    pub fn xaml_color_animation_set_from(animation: XamlColorAnimationHandle, from: u32) -> i32;
+    pub fn xaml_color_animation_set_to(animation: XamlColorAnimationHandle, to: u32) -> i32;
+    pub fn xaml_color_animation_set_duration(animation: XamlColorAnimationHandle, milliseconds: i32) -> i32;
+    pub fn xaml_color_animation_set_target_property(animation: XamlColorAnimationHandle, target: XamlUIElementHandle, property_path: *const u16) -> i32;
 
     pub fn xaml_get_last_error() -> *const u16;
 }

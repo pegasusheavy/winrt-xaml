@@ -1,6 +1,6 @@
 [package]
 name = "winrt-xaml-macros"
-version = "0.3.0"
+version = "1.0.0"
 edition = "2021"
 authors = ["Pegasus Heavy Industries LLC"]
 description = "Procedural macros for compile-time XAML parsing in winrt-xaml"

@@ -114,7 +114,7 @@ Production-ready Rust library for creating modern Windows UIs using WinRT and XA
 
 #### Reactive Data Binding System
 - **Property<T>**: Observable values with subscriber notifications
-- **ObservableCollection<T>**: Reactive collections with change tracking  
+- **ObservableCollection<T>**: Reactive collections with change tracking
 - **Computed<T>**: Derived values that automatically update
 - Thread-safe reactive primitives using Arc<Mutex<_>>
 

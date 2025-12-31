@@ -1,6 +1,6 @@
 [package]
 name = "winrt-xaml"
-version = "0.3.0"
+version = "1.0.0"
 edition = "2021"
 authors = ["Pegasus Heavy Industries LLC"]
 description = "A Rust library for creating modern Windows UIs using WinRT and XAML with reactive data binding"
@@ -84,6 +84,16 @@ path = "examples/controls_showcase.rs"
 required-features = ["xaml-islands"]
 
 [[example]]
+name = "advanced_controls_demo"
+path = "examples/advanced_controls_demo.rs"
+required-features = ["xaml-islands"]
+
+[[example]]
+name = "listview_demo"
+path = "examples/listview_demo.rs"
+required-features = ["xaml-islands"]
+
+[[example]]
 name = "reactive_binding_simple"
 path = "examples/reactive_binding_simple.rs"
 required-features = ["xaml-islands"]
@@ -95,6 +105,16 @@ path = "examples/xaml_compile_time_demo.rs"
 [[example]]
 name = "xaml_serde_demo"
 path = "examples/xaml_serde_demo.rs"
+
+[[example]]
+name = "animations_demo"
+path = "examples/animations_demo.rs"
+required-features = ["xaml-islands"]
+
+[[example]]
+name = "resource_dictionary_demo"
+path = "examples/resource_dictionary_demo.rs"
+required-features = ["xaml-islands"]
 
 [[bin]]
 name = "memory_profile"

@@ -26,7 +26,15 @@ typedef void* XamlCheckBoxHandle;
 typedef void* XamlComboBoxHandle;
 typedef void* XamlSliderHandle;
 typedef void* XamlProgressBarHandle;
+typedef void* XamlRadioButtonHandle;
+typedef void* XamlImageHandle;
+typedef void* XamlListViewHandle;
 typedef void* XamlUIElementHandle;
+typedef void* XamlResourceDictionaryHandle;
+typedef void* XamlControlTemplateHandle;
+typedef void* XamlStoryboardHandle;
+typedef void* XamlDoubleAnimationHandle;
+typedef void* XamlColorAnimationHandle;
 
 // Initialize the XAML framework for the current thread
 // Returns a handle that must be kept alive
@@ -179,6 +187,34 @@ XAML_ISLANDS_API int xaml_progressbar_set_maximum(XamlProgressBarHandle handle, 
 XAML_ISLANDS_API int xaml_progressbar_set_value(XamlProgressBarHandle handle, double value);
 XAML_ISLANDS_API int xaml_progressbar_set_is_indeterminate(XamlProgressBarHandle handle, bool is_indeterminate);
 
+// ===== RadioButton APIs =====
+XAML_ISLANDS_API XamlRadioButtonHandle xaml_radiobutton_create();
+XAML_ISLANDS_API void xaml_radiobutton_destroy(XamlRadioButtonHandle radiobutton);
+XAML_ISLANDS_API int xaml_radiobutton_set_content(XamlRadioButtonHandle radiobutton, const wchar_t* content);
+XAML_ISLANDS_API int xaml_radiobutton_set_is_checked(XamlRadioButtonHandle radiobutton, int is_checked);
+XAML_ISLANDS_API int xaml_radiobutton_get_is_checked(XamlRadioButtonHandle radiobutton);
+XAML_ISLANDS_API int xaml_radiobutton_set_group_name(XamlRadioButtonHandle radiobutton, const wchar_t* group_name);
+XAML_ISLANDS_API void xaml_radiobutton_on_checked(XamlRadioButtonHandle radiobutton, void* callback_ptr);
+XAML_ISLANDS_API void xaml_radiobutton_on_unchecked(XamlRadioButtonHandle radiobutton, void* callback_ptr);
+
+// ===== Image APIs =====
+XAML_ISLANDS_API XamlImageHandle xaml_image_create();
+XAML_ISLANDS_API void xaml_image_destroy(XamlImageHandle image);
+XAML_ISLANDS_API int xaml_image_set_source(XamlImageHandle image, const wchar_t* uri);
+XAML_ISLANDS_API int xaml_image_set_stretch(XamlImageHandle image, int stretch_mode);
+XAML_ISLANDS_API int xaml_image_set_size(XamlImageHandle image, double width, double height);
+
+// ===== Grid Row/Column Definition APIs =====
+XAML_ISLANDS_API int xaml_grid_add_row_definition(XamlGridHandle grid, double height, int is_auto, int is_star);
+XAML_ISLANDS_API int xaml_grid_add_column_definition(XamlGridHandle grid, double width, int is_auto, int is_star);
+XAML_ISLANDS_API int xaml_grid_set_child_row(XamlUIElementHandle child, int row);
+XAML_ISLANDS_API int xaml_grid_set_child_column(XamlUIElementHandle child, int column);
+XAML_ISLANDS_API int xaml_grid_set_child_row_span(XamlUIElementHandle child, int row_span);
+XAML_ISLANDS_API int xaml_grid_set_child_column_span(XamlUIElementHandle child, int column_span);
+
+// ===== TextBox TextChanged Event =====
+XAML_ISLANDS_API void xaml_textbox_on_text_changed(XamlTextBoxHandle textbox, void* callback_ptr);
+
 // ===== Type Conversion APIs =====
 XAML_ISLANDS_API XamlUIElementHandle xaml_button_as_uielement(XamlButtonHandle button);
 XAML_ISLANDS_API XamlUIElementHandle xaml_textblock_as_uielement(XamlTextBlockHandle textblock);
@@ -190,6 +226,133 @@ XAML_ISLANDS_API XamlUIElementHandle xaml_checkbox_as_uielement(XamlCheckBoxHand
 XAML_ISLANDS_API XamlUIElementHandle xaml_combobox_as_uielement(XamlComboBoxHandle combobox);
 XAML_ISLANDS_API XamlUIElementHandle xaml_slider_as_uielement(XamlSliderHandle slider);
 XAML_ISLANDS_API XamlUIElementHandle xaml_progressbar_as_uielement(XamlProgressBarHandle progressbar);
+XAML_ISLANDS_API XamlUIElementHandle xaml_radiobutton_as_uielement(XamlRadioButtonHandle radiobutton);
+XAML_ISLANDS_API XamlUIElementHandle xaml_image_as_uielement(XamlImageHandle image);
+
+// ============================================================================
+// ListView APIs
+// ============================================================================
+
+XAML_ISLANDS_API XamlListViewHandle xaml_listview_create();
+XAML_ISLANDS_API void xaml_listview_destroy(XamlListViewHandle listview);
+XAML_ISLANDS_API int xaml_listview_add_item(XamlListViewHandle listview, const wchar_t* item);
+XAML_ISLANDS_API int xaml_listview_remove_item(XamlListViewHandle listview, int index);
+XAML_ISLANDS_API int xaml_listview_clear_items(XamlListViewHandle listview);
+XAML_ISLANDS_API int xaml_listview_get_item_count(XamlListViewHandle listview);
+XAML_ISLANDS_API int xaml_listview_get_selected_index(XamlListViewHandle listview);
+XAML_ISLANDS_API int xaml_listview_set_selected_index(XamlListViewHandle listview, int index);
+XAML_ISLANDS_API int xaml_listview_get_item(XamlListViewHandle listview, int index, wchar_t* buffer, int buffer_size);
+XAML_ISLANDS_API void xaml_listview_on_selection_changed(XamlListViewHandle listview, void* callback_ptr);
+XAML_ISLANDS_API int xaml_listview_set_selection_mode(XamlListViewHandle listview, int mode); // 0: None, 1: Single, 2: Multiple, 3: Extended
+XAML_ISLANDS_API XamlUIElementHandle xaml_listview_as_uielement(XamlListViewHandle listview);
+
+// ============================================================================
+// Resource Dictionary APIs
+// ============================================================================
+
+XAML_ISLANDS_API XamlResourceDictionaryHandle xaml_resource_dictionary_create();
+XAML_ISLANDS_API void xaml_resource_dictionary_destroy(XamlResourceDictionaryHandle dict);
+XAML_ISLANDS_API int xaml_resource_dictionary_insert_color(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key,
+    unsigned int color
+);
+XAML_ISLANDS_API int xaml_resource_dictionary_insert_double(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key,
+    double value
+);
+XAML_ISLANDS_API int xaml_resource_dictionary_insert_string(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key,
+    const wchar_t* value
+);
+XAML_ISLANDS_API int xaml_resource_dictionary_has_key(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key
+);
+XAML_ISLANDS_API unsigned int xaml_resource_dictionary_get_color(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key
+);
+XAML_ISLANDS_API double xaml_resource_dictionary_get_double(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key
+);
+XAML_ISLANDS_API int xaml_resource_dictionary_remove(
+    XamlResourceDictionaryHandle dict,
+    const wchar_t* key
+);
+XAML_ISLANDS_API void xaml_resource_dictionary_clear(XamlResourceDictionaryHandle dict);
+
+// Apply resource dictionary to a UI element
+XAML_ISLANDS_API int xaml_uielement_set_resources(
+    XamlUIElementHandle element,
+    XamlResourceDictionaryHandle dict
+);
+
+// ============================================================================
+// Control Template APIs
+// ============================================================================
+
+XAML_ISLANDS_API XamlControlTemplateHandle xaml_control_template_create();
+XAML_ISLANDS_API void xaml_control_template_destroy(XamlControlTemplateHandle template_handle);
+XAML_ISLANDS_API int xaml_control_template_set_content(
+    XamlControlTemplateHandle template_handle,
+    XamlUIElementHandle content
+);
+XAML_ISLANDS_API int xaml_button_set_template(
+    XamlButtonHandle button,
+    XamlControlTemplateHandle template_handle
+);
+
+// ============================================================================
+// Animation APIs
+// ============================================================================
+
+// Storyboard APIs
+XAML_ISLANDS_API XamlStoryboardHandle xaml_storyboard_create();
+XAML_ISLANDS_API void xaml_storyboard_destroy(XamlStoryboardHandle storyboard);
+XAML_ISLANDS_API int xaml_storyboard_add_animation(
+    XamlStoryboardHandle storyboard,
+    XamlDoubleAnimationHandle animation
+);
+XAML_ISLANDS_API int xaml_storyboard_add_color_animation(
+    XamlStoryboardHandle storyboard,
+    XamlColorAnimationHandle animation
+);
+XAML_ISLANDS_API int xaml_storyboard_begin(XamlStoryboardHandle storyboard);
+XAML_ISLANDS_API int xaml_storyboard_stop(XamlStoryboardHandle storyboard);
+XAML_ISLANDS_API int xaml_storyboard_pause(XamlStoryboardHandle storyboard);
+XAML_ISLANDS_API int xaml_storyboard_resume(XamlStoryboardHandle storyboard);
+XAML_ISLANDS_API int xaml_storyboard_set_target(
+    XamlStoryboardHandle storyboard,
+    XamlUIElementHandle target
+);
+
+// DoubleAnimation APIs
+XAML_ISLANDS_API XamlDoubleAnimationHandle xaml_double_animation_create();
+XAML_ISLANDS_API void xaml_double_animation_destroy(XamlDoubleAnimationHandle animation);
+XAML_ISLANDS_API int xaml_double_animation_set_from(XamlDoubleAnimationHandle animation, double from);
+XAML_ISLANDS_API int xaml_double_animation_set_to(XamlDoubleAnimationHandle animation, double to);
+XAML_ISLANDS_API int xaml_double_animation_set_duration(XamlDoubleAnimationHandle animation, int milliseconds);
+XAML_ISLANDS_API int xaml_double_animation_set_target_property(
+    XamlDoubleAnimationHandle animation,
+    XamlUIElementHandle target,
+    const wchar_t* property_path
+);
+
+// ColorAnimation APIs
+XAML_ISLANDS_API XamlColorAnimationHandle xaml_color_animation_create();
+XAML_ISLANDS_API void xaml_color_animation_destroy(XamlColorAnimationHandle animation);
+XAML_ISLANDS_API int xaml_color_animation_set_from(XamlColorAnimationHandle animation, unsigned int from);
+XAML_ISLANDS_API int xaml_color_animation_set_to(XamlColorAnimationHandle animation, unsigned int to);
+XAML_ISLANDS_API int xaml_color_animation_set_duration(XamlColorAnimationHandle animation, int milliseconds);
+XAML_ISLANDS_API int xaml_color_animation_set_target_property(
+    XamlColorAnimationHandle animation,
+    XamlUIElementHandle target,
+    const wchar_t* property_path
+);
 
 #ifdef __cplusplus
 }

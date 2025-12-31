@@ -6,7 +6,7 @@ This release brings major new features including a Rust-idiomatic reactive data 
 
 #### Reactive Data Binding System
 - **Property<T>**: Observable values with subscriber notifications
-- **ObservableCollection<T>**: Reactive collections with change tracking  
+- **ObservableCollection<T>**: Reactive collections with change tracking
 - **Computed<T>**: Derived values that automatically update
 - Thread-safe reactive primitives using Arc<Mutex<_>>
 
