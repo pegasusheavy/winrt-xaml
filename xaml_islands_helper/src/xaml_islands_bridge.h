@@ -26,6 +26,8 @@ typedef void* XamlCheckBoxHandle;
 typedef void* XamlComboBoxHandle;
 typedef void* XamlSliderHandle;
 typedef void* XamlProgressBarHandle;
+typedef void* XamlRadioButtonHandle;
+typedef void* XamlImageHandle;
 typedef void* XamlUIElementHandle;
 typedef void* XamlResourceDictionaryHandle;
 typedef void* XamlControlTemplateHandle;
@@ -184,6 +186,34 @@ XAML_ISLANDS_API int xaml_progressbar_set_maximum(XamlProgressBarHandle handle, 
 XAML_ISLANDS_API int xaml_progressbar_set_value(XamlProgressBarHandle handle, double value);
 XAML_ISLANDS_API int xaml_progressbar_set_is_indeterminate(XamlProgressBarHandle handle, bool is_indeterminate);
 
+// ===== RadioButton APIs =====
+XAML_ISLANDS_API XamlRadioButtonHandle xaml_radiobutton_create();
+XAML_ISLANDS_API void xaml_radiobutton_destroy(XamlRadioButtonHandle radiobutton);
+XAML_ISLANDS_API int xaml_radiobutton_set_content(XamlRadioButtonHandle radiobutton, const wchar_t* content);
+XAML_ISLANDS_API int xaml_radiobutton_set_is_checked(XamlRadioButtonHandle radiobutton, int is_checked);
+XAML_ISLANDS_API int xaml_radiobutton_get_is_checked(XamlRadioButtonHandle radiobutton);
+XAML_ISLANDS_API int xaml_radiobutton_set_group_name(XamlRadioButtonHandle radiobutton, const wchar_t* group_name);
+XAML_ISLANDS_API void xaml_radiobutton_on_checked(XamlRadioButtonHandle radiobutton, void* callback_ptr);
+XAML_ISLANDS_API void xaml_radiobutton_on_unchecked(XamlRadioButtonHandle radiobutton, void* callback_ptr);
+
+// ===== Image APIs =====
+XAML_ISLANDS_API XamlImageHandle xaml_image_create();
+XAML_ISLANDS_API void xaml_image_destroy(XamlImageHandle image);
+XAML_ISLANDS_API int xaml_image_set_source(XamlImageHandle image, const wchar_t* uri);
+XAML_ISLANDS_API int xaml_image_set_stretch(XamlImageHandle image, int stretch_mode);
+XAML_ISLANDS_API int xaml_image_set_size(XamlImageHandle image, double width, double height);
+
+// ===== Grid Row/Column Definition APIs =====
+XAML_ISLANDS_API int xaml_grid_add_row_definition(XamlGridHandle grid, double height, int is_auto, int is_star);
+XAML_ISLANDS_API int xaml_grid_add_column_definition(XamlGridHandle grid, double width, int is_auto, int is_star);
+XAML_ISLANDS_API int xaml_grid_set_child_row(XamlUIElementHandle child, int row);
+XAML_ISLANDS_API int xaml_grid_set_child_column(XamlUIElementHandle child, int column);
+XAML_ISLANDS_API int xaml_grid_set_child_row_span(XamlUIElementHandle child, int row_span);
+XAML_ISLANDS_API int xaml_grid_set_child_column_span(XamlUIElementHandle child, int column_span);
+
+// ===== TextBox TextChanged Event =====
+XAML_ISLANDS_API void xaml_textbox_on_text_changed(XamlTextBoxHandle textbox, void* callback_ptr);
+
 // ===== Type Conversion APIs =====
 XAML_ISLANDS_API XamlUIElementHandle xaml_button_as_uielement(XamlButtonHandle button);
 XAML_ISLANDS_API XamlUIElementHandle xaml_textblock_as_uielement(XamlTextBlockHandle textblock);
@@ -195,6 +225,8 @@ XAML_ISLANDS_API XamlUIElementHandle xaml_checkbox_as_uielement(XamlCheckBoxHand
 XAML_ISLANDS_API XamlUIElementHandle xaml_combobox_as_uielement(XamlComboBoxHandle combobox);
 XAML_ISLANDS_API XamlUIElementHandle xaml_slider_as_uielement(XamlSliderHandle slider);
 XAML_ISLANDS_API XamlUIElementHandle xaml_progressbar_as_uielement(XamlProgressBarHandle progressbar);
+XAML_ISLANDS_API XamlUIElementHandle xaml_radiobutton_as_uielement(XamlRadioButtonHandle radiobutton);
+XAML_ISLANDS_API XamlUIElementHandle xaml_image_as_uielement(XamlImageHandle image);
 
 // ============================================================================
 // Resource Dictionary APIs

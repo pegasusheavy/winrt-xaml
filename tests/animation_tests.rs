@@ -44,7 +44,7 @@ mod animation_tests {
             .to(100.0)
             .duration_ms(300)
             .build();
-        
+
         assert!(animation.is_ok(), "Should build animation with builder pattern");
     }
 
@@ -82,7 +82,7 @@ mod animation_tests {
             .to(0xFF00FF00)
             .duration_ms(400)
             .build();
-        
+
         assert!(animation.is_ok(), "Should build color animation with builder pattern");
     }
 
@@ -90,7 +90,7 @@ mod animation_tests {
     fn test_storyboard_add_animation() {
         let storyboard = XamlStoryboard::new().unwrap();
         let animation = XamlDoubleAnimation::new().unwrap();
-        
+
         let result = storyboard.add_animation(&animation);
         assert!(result.is_ok(), "Should add animation to storyboard");
     }
@@ -99,7 +99,7 @@ mod animation_tests {
     fn test_storyboard_add_color_animation() {
         let storyboard = XamlStoryboard::new().unwrap();
         let animation = XamlColorAnimation::new().unwrap();
-        
+
         let result = storyboard.add_color_animation(&animation);
         assert!(result.is_ok(), "Should add color animation to storyboard");
     }
@@ -107,7 +107,7 @@ mod animation_tests {
     #[test]
     fn test_default_storyboard() {
         let storyboard = XamlStoryboard::default();
-        
+
         // Should be able to use the default storyboard
         let animation = XamlDoubleAnimation::new().unwrap();
         let result = storyboard.add_animation(&animation);
@@ -117,7 +117,7 @@ mod animation_tests {
     #[test]
     fn test_default_double_animation() {
         let animation = XamlDoubleAnimation::default();
-        
+
         // Should be able to configure the default animation
         let result = animation.set_from(0.0);
         assert!(result.is_ok(), "Default animation should be usable");
@@ -126,7 +126,7 @@ mod animation_tests {
     #[test]
     fn test_default_color_animation() {
         let animation = XamlColorAnimation::default();
-        
+
         // Should be able to configure the default animation
         let result = animation.set_from(0xFFFFFFFF);
         assert!(result.is_ok(), "Default color animation should be usable");
@@ -135,21 +135,21 @@ mod animation_tests {
     #[test]
     fn test_multiple_animations_in_storyboard() {
         let storyboard = XamlStoryboard::new().unwrap();
-        
+
         let anim1 = XamlDoubleAnimation::builder()
             .from(0.0)
             .to(100.0)
             .duration_ms(300)
             .build()
             .unwrap();
-        
+
         let anim2 = XamlDoubleAnimation::builder()
             .from(1.0)
             .to(0.0)
             .duration_ms(500)
             .build()
             .unwrap();
-        
+
         assert!(storyboard.add_animation(&anim1).is_ok());
         assert!(storyboard.add_animation(&anim2).is_ok());
     }

@@ -78,7 +78,7 @@ fn main() -> Result<()> {
         root.set_orientation(Orientation::Vertical)?;
         root.set_spacing(theme.get_double("StandardSpacing").unwrap_or(20.0))?;
         root.as_uielement().set_padding(30.0, 30.0, 30.0, 30.0)?;
-        
+
         // Apply theme to root
         if let Some(bg_color) = theme.get_color("BackgroundColor") {
             root.as_uielement().set_background(bg_color)?;

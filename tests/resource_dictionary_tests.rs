@@ -13,7 +13,7 @@ mod resource_dictionary_tests {
     #[test]
     fn test_insert_and_get_color() {
         let dict = XamlResourceDictionary::new().unwrap();
-        
+
         let result = dict.insert_color("PrimaryColor", 0xFF0078D4);
         assert!(result.is_ok(), "Should insert color");
 
@@ -24,7 +24,7 @@ mod resource_dictionary_tests {
     #[test]
     fn test_insert_and_get_double() {
         let dict = XamlResourceDictionary::new().unwrap();
-        
+
         let result = dict.insert_double("Spacing", 20.0);
         assert!(result.is_ok(), "Should insert double");
 
@@ -35,7 +35,7 @@ mod resource_dictionary_tests {
     #[test]
     fn test_insert_and_get_string() {
         let dict = XamlResourceDictionary::new().unwrap();
-        
+
         let result = dict.insert_string("AppName", "Test App");
         assert!(result.is_ok(), "Should insert string");
     }
@@ -43,9 +43,9 @@ mod resource_dictionary_tests {
     #[test]
     fn test_has_key() {
         let dict = XamlResourceDictionary::new().unwrap();
-        
+
         dict.insert_color("TestColor", 0xFFFF0000).unwrap();
-        
+
         assert!(dict.has_key("TestColor"), "Should find existing key");
         assert!(!dict.has_key("NonExistent"), "Should not find non-existent key");
     }
@@ -53,26 +53,26 @@ mod resource_dictionary_tests {
     #[test]
     fn test_remove_resource() {
         let dict = XamlResourceDictionary::new().unwrap();
-        
+
         dict.insert_color("TempColor", 0xFF00FF00).unwrap();
         assert!(dict.has_key("TempColor"), "Key should exist before removal");
-        
+
         let result = dict.remove("TempColor");
         assert!(result.is_ok(), "Should remove resource");
-        
+
         assert!(!dict.has_key("TempColor"), "Key should not exist after removal");
     }
 
     #[test]
     fn test_clear_resources() {
         let dict = XamlResourceDictionary::new().unwrap();
-        
+
         dict.insert_color("Color1", 0xFFFF0000).unwrap();
         dict.insert_color("Color2", 0xFF00FF00).unwrap();
         dict.insert_double("Value1", 10.0).unwrap();
-        
+
         dict.clear();
-        
+
         assert!(!dict.has_key("Color1"), "Dictionary should be empty after clear");
         assert!(!dict.has_key("Color2"), "Dictionary should be empty after clear");
         assert!(!dict.has_key("Value1"), "Dictionary should be empty after clear");
@@ -81,13 +81,13 @@ mod resource_dictionary_tests {
     #[test]
     fn test_multiple_resources() {
         let dict = XamlResourceDictionary::new().unwrap();
-        
+
         dict.insert_color("Primary", 0xFF0078D4).unwrap();
         dict.insert_color("Secondary", 0xFF107C10).unwrap();
         dict.insert_double("Spacing", 20.0).unwrap();
         dict.insert_double("FontSize", 14.0).unwrap();
         dict.insert_string("Title", "App Title").unwrap();
-        
+
         assert_eq!(dict.get_color("Primary"), Some(0xFF0078D4));
         assert_eq!(dict.get_color("Secondary"), Some(0xFF107C10));
         assert_eq!(dict.get_double("Spacing"), Some(20.0));
@@ -97,7 +97,7 @@ mod resource_dictionary_tests {
     #[test]
     fn test_get_nonexistent_resource() {
         let dict = XamlResourceDictionary::new().unwrap();
-        
+
         assert_eq!(dict.get_color("NonExistent"), None);
         assert_eq!(dict.get_double("NonExistent"), None);
     }
@@ -105,7 +105,7 @@ mod resource_dictionary_tests {
     #[test]
     fn test_default_resource_dictionary() {
         let dict = XamlResourceDictionary::default();
-        
+
         // Should be able to use the default dictionary
         let result = dict.insert_color("TestColor", 0xFFFFFFFF);
         assert!(result.is_ok(), "Default dictionary should be usable");

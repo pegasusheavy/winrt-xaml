@@ -7,6 +7,7 @@
 #include <winrt/Windows.UI.Xaml.Hosting.h>
 #include <winrt/Windows.UI.Xaml.Media.h>
 #include <winrt/Windows.UI.Xaml.Media.Animation.h>
+#include <winrt/Windows.UI.Xaml.Media.Imaging.h>
 #include <Windows.UI.Xaml.Hosting.DesktopWindowXamlSource.h>
 #include <string>
 #include <memory>
@@ -19,6 +20,7 @@ using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Hosting;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Media::Animation;
+using namespace Windows::UI::Xaml::Media::Imaging;
 
 // Thread-local error message
 thread_local std::wstring g_last_error;
@@ -1530,15 +1532,15 @@ int xaml_resource_dictionary_insert_color(
 
     try {
         auto& dict_ptr = *reinterpret_cast<std::shared_ptr<ResourceDictionary>*>(dict);
-        
+
         uint8_t a = (color >> 24) & 0xFF;
         uint8_t r = (color >> 16) & 0xFF;
         uint8_t g = (color >> 8) & 0xFF;
         uint8_t b = color & 0xFF;
-        
+
         auto winrt_color = Color{ a, r, g, b };
         auto brush = SolidColorBrush(winrt_color);
-        
+
         dict_ptr->Insert(box_value(key), brush);
         return 0;
     }
@@ -1633,7 +1635,7 @@ unsigned int xaml_resource_dictionary_get_color(
         auto value = dict_ptr->Lookup(box_value(key));
         auto brush = value.as<SolidColorBrush>();
         auto color = brush.Color();
-        
+
         return (color.A << 24) | (color.R << 16) | (color.G << 8) | color.B;
     }
     catch (const hresult_error& e) {
@@ -1720,7 +1722,7 @@ int xaml_uielement_set_resources(
     try {
         auto& elem_ptr = *reinterpret_cast<std::shared_ptr<UIElement>*>(element);
         auto& dict_ptr = *reinterpret_cast<std::shared_ptr<ResourceDictionary>*>(dict);
-        
+
         auto frameworkElement = elem_ptr->as<FrameworkElement>();
         frameworkElement.Resources(*dict_ptr);
         return 0;
@@ -1801,7 +1803,7 @@ int xaml_button_set_template(
     try {
         auto& btn_ptr = *reinterpret_cast<std::shared_ptr<Button>*>(button);
         auto& tmpl_ptr = *reinterpret_cast<std::shared_ptr<ControlTemplate>*>(template_handle);
-        
+
         btn_ptr->Template(*tmpl_ptr);
         return 0;
     }
@@ -1856,7 +1858,7 @@ int xaml_storyboard_add_animation(
     try {
         auto& sb_ptr = *reinterpret_cast<std::shared_ptr<Storyboard>*>(storyboard);
         auto& anim_ptr = *reinterpret_cast<std::shared_ptr<DoubleAnimation>*>(animation);
-        
+
         sb_ptr->Children().Append(*anim_ptr);
         return 0;
     }
@@ -1882,7 +1884,7 @@ int xaml_storyboard_add_color_animation(
     try {
         auto& sb_ptr = *reinterpret_cast<std::shared_ptr<Storyboard>*>(storyboard);
         auto& anim_ptr = *reinterpret_cast<std::shared_ptr<ColorAnimation>*>(animation);
-        
+
         sb_ptr->Children().Append(*anim_ptr);
         return 0;
     }
@@ -1992,7 +1994,7 @@ int xaml_storyboard_set_target(
     try {
         auto& sb_ptr = *reinterpret_cast<std::shared_ptr<Storyboard>*>(storyboard);
         auto& target_ptr = *reinterpret_cast<std::shared_ptr<UIElement>*>(target);
-        
+
         // Set target for all animations in the storyboard
         for (auto& timeline : sb_ptr->Children()) {
             Storyboard::SetTarget(timeline, *target_ptr);
@@ -2112,7 +2114,7 @@ int xaml_double_animation_set_target_property(
     try {
         auto& anim_ptr = *reinterpret_cast<std::shared_ptr<DoubleAnimation>*>(animation);
         auto& target_ptr = *reinterpret_cast<std::shared_ptr<UIElement>*>(target);
-        
+
         Storyboard::SetTarget(*anim_ptr, *target_ptr);
         Storyboard::SetTargetProperty(*anim_ptr, hstring(property_path));
         return 0;
@@ -2160,12 +2162,12 @@ int xaml_color_animation_set_from(XamlColorAnimationHandle animation, unsigned i
 
     try {
         auto& anim_ptr = *reinterpret_cast<std::shared_ptr<ColorAnimation>*>(animation);
-        
+
         uint8_t a = (from >> 24) & 0xFF;
         uint8_t r = (from >> 16) & 0xFF;
         uint8_t g = (from >> 8) & 0xFF;
         uint8_t b = from & 0xFF;
-        
+
         anim_ptr->From(Color{ a, r, g, b });
         return 0;
     }
@@ -2187,12 +2189,12 @@ int xaml_color_animation_set_to(XamlColorAnimationHandle animation, unsigned int
 
     try {
         auto& anim_ptr = *reinterpret_cast<std::shared_ptr<ColorAnimation>*>(animation);
-        
+
         uint8_t a = (to >> 24) & 0xFF;
         uint8_t r = (to >> 16) & 0xFF;
         uint8_t g = (to >> 8) & 0xFF;
         uint8_t b = to & 0xFF;
-        
+
         anim_ptr->To(Color{ a, r, g, b });
         return 0;
     }
@@ -2242,7 +2244,7 @@ int xaml_color_animation_set_target_property(
     try {
         auto& anim_ptr = *reinterpret_cast<std::shared_ptr<ColorAnimation>*>(animation);
         auto& target_ptr = *reinterpret_cast<std::shared_ptr<UIElement>*>(target);
-        
+
         Storyboard::SetTarget(*anim_ptr, *target_ptr);
         Storyboard::SetTargetProperty(*anim_ptr, hstring(property_path));
         return 0;
@@ -2256,4 +2258,426 @@ int xaml_color_animation_set_target_property(
         return -1;
     }
 }
+
+// ============================================================================
+// RadioButton Implementation
+// ============================================================================
+
+XamlRadioButtonHandle xaml_radiobutton_create() {
+    try {
+        auto radiobutton = RadioButton();
+        auto* handle = new std::shared_ptr<RadioButton>(
+            std::make_shared<RadioButton>(radiobutton)
+        );
+        return reinterpret_cast<XamlRadioButtonHandle>(handle);
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return nullptr;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_radiobutton_create");
+        return nullptr;
+    }
+}
+
+void xaml_radiobutton_destroy(XamlRadioButtonHandle radiobutton) {
+    if (radiobutton) {
+        auto* ptr = reinterpret_cast<std::shared_ptr<RadioButton>*>(radiobutton);
+        delete ptr;
+    }
+}
+
+int xaml_radiobutton_set_content(XamlRadioButtonHandle radiobutton, const wchar_t* content) {
+    if (!radiobutton || !content) {
+        set_last_error(L"Invalid handle or content");
+        return -1;
+    }
+
+    try {
+        auto& rb_ptr = *reinterpret_cast<std::shared_ptr<RadioButton>*>(radiobutton);
+        rb_ptr->Content(box_value(hstring(content)));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_radiobutton_set_content");
+        return -1;
+    }
+}
+
+int xaml_radiobutton_set_is_checked(XamlRadioButtonHandle radiobutton, int is_checked) {
+    if (!radiobutton) {
+        set_last_error(L"Invalid handle");
+        return -1;
+    }
+
+    try {
+        auto& rb_ptr = *reinterpret_cast<std::shared_ptr<RadioButton>*>(radiobutton);
+        rb_ptr->IsChecked(is_checked != 0);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_radiobutton_set_is_checked");
+        return -1;
+    }
+}
+
+int xaml_radiobutton_get_is_checked(XamlRadioButtonHandle radiobutton) {
+    if (!radiobutton) {
+        return 0;
+    }
+
+    try {
+        auto& rb_ptr = *reinterpret_cast<std::shared_ptr<RadioButton>*>(radiobutton);
+        auto checked = rb_ptr->IsChecked();
+        return (checked && checked.Value()) ? 1 : 0;
+    }
+    catch (...) {
+        return 0;
+    }
+}
+
+int xaml_radiobutton_set_group_name(XamlRadioButtonHandle radiobutton, const wchar_t* group_name) {
+    if (!radiobutton || !group_name) {
+        set_last_error(L"Invalid handle or group name");
+        return -1;
+    }
+
+    try {
+        auto& rb_ptr = *reinterpret_cast<std::shared_ptr<RadioButton>*>(radiobutton);
+        rb_ptr->GroupName(hstring(group_name));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_radiobutton_set_group_name");
+        return -1;
+    }
+}
+
+void xaml_radiobutton_on_checked(XamlRadioButtonHandle radiobutton, void* callback_ptr) {
+    if (!radiobutton || !callback_ptr) {
+        return;
+    }
+
+    try {
+        auto& rb_ptr = *reinterpret_cast<std::shared_ptr<RadioButton>*>(radiobutton);
+        auto callback = reinterpret_cast<void(*)()>(callback_ptr);
+        
+        rb_ptr->Checked([callback](auto&&, auto&&) {
+            callback();
+        });
+    }
+    catch (...) {
+        // Silently ignore errors in event registration
+    }
+}
+
+void xaml_radiobutton_on_unchecked(XamlRadioButtonHandle radiobutton, void* callback_ptr) {
+    if (!radiobutton || !callback_ptr) {
+        return;
+    }
+
+    try {
+        auto& rb_ptr = *reinterpret_cast<std::shared_ptr<RadioButton>*>(radiobutton);
+        auto callback = reinterpret_cast<void(*)()>(callback_ptr);
+        
+        rb_ptr->Unchecked([callback](auto&&, auto&&) {
+            callback();
+        });
+    }
+    catch (...) {
+        // Silently ignore errors in event registration
+    }
+}
+
+XamlUIElementHandle xaml_radiobutton_as_uielement(XamlRadioButtonHandle radiobutton) {
+    return reinterpret_cast<XamlUIElementHandle>(radiobutton);
+}
+
+// ============================================================================
+// Image Implementation
+// ============================================================================
+
+XamlImageHandle xaml_image_create() {
+    try {
+        auto image = Image();
+        auto* handle = new std::shared_ptr<Image>(
+            std::make_shared<Image>(image)
+        );
+        return reinterpret_cast<XamlImageHandle>(handle);
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return nullptr;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_image_create");
+        return nullptr;
+    }
+}
+
+void xaml_image_destroy(XamlImageHandle image) {
+    if (image) {
+        auto* ptr = reinterpret_cast<std::shared_ptr<Image>*>(image);
+        delete ptr;
+    }
+}
+
+int xaml_image_set_source(XamlImageHandle image, const wchar_t* uri) {
+    if (!image || !uri) {
+        set_last_error(L"Invalid handle or URI");
+        return -1;
+    }
+
+    try {
+        auto& img_ptr = *reinterpret_cast<std::shared_ptr<Image>*>(image);
+        auto bitmap = BitmapImage(Uri(hstring(uri)));
+        img_ptr->Source(bitmap);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_image_set_source");
+        return -1;
+    }
+}
+
+int xaml_image_set_stretch(XamlImageHandle image, int stretch_mode) {
+    if (!image) {
+        set_last_error(L"Invalid handle");
+        return -1;
+    }
+
+    try {
+        auto& img_ptr = *reinterpret_cast<std::shared_ptr<Image>*>(image);
+        img_ptr->Stretch(static_cast<Stretch>(stretch_mode));
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_image_set_stretch");
+        return -1;
+    }
+}
+
+int xaml_image_set_size(XamlImageHandle image, double width, double height) {
+    if (!image) {
+        set_last_error(L"Invalid handle");
+        return -1;
+    }
+
+    try {
+        auto& img_ptr = *reinterpret_cast<std::shared_ptr<Image>*>(image);
+        img_ptr->Width(width);
+        img_ptr->Height(height);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_image_set_size");
+        return -1;
+    }
+}
+
+XamlUIElementHandle xaml_image_as_uielement(XamlImageHandle image) {
+    return reinterpret_cast<XamlUIElementHandle>(image);
+}
+
+// ============================================================================
+// Grid Row/Column Definition Implementation
+// ============================================================================
+
+int xaml_grid_add_row_definition(XamlGridHandle grid, double height, int is_auto, int is_star) {
+    if (!grid) {
+        set_last_error(L"Invalid handle");
+        return -1;
+    }
+
+    try {
+        auto& grid_ptr = *reinterpret_cast<std::shared_ptr<Grid>*>(grid);
+        auto rowDef = RowDefinition();
+        
+        if (is_auto) {
+            rowDef.Height(GridLengthHelper::Auto());
+        } else if (is_star) {
+            rowDef.Height(GridLengthHelper::FromValueAndType(height, GridUnitType::Star));
+        } else {
+            rowDef.Height(GridLengthHelper::FromPixels(height));
+        }
+        
+        grid_ptr->RowDefinitions().Append(rowDef);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_grid_add_row_definition");
+        return -1;
+    }
+}
+
+int xaml_grid_add_column_definition(XamlGridHandle grid, double width, int is_auto, int is_star) {
+    if (!grid) {
+        set_last_error(L"Invalid handle");
+        return -1;
+    }
+
+    try {
+        auto& grid_ptr = *reinterpret_cast<std::shared_ptr<Grid>*>(grid);
+        auto colDef = ColumnDefinition();
+        
+        if (is_auto) {
+            colDef.Width(GridLengthHelper::Auto());
+        } else if (is_star) {
+            colDef.Width(GridLengthHelper::FromValueAndType(width, GridUnitType::Star));
+        } else {
+            colDef.Width(GridLengthHelper::FromPixels(width));
+        }
+        
+        grid_ptr->ColumnDefinitions().Append(colDef);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_grid_add_column_definition");
+        return -1;
+    }
+}
+
+int xaml_grid_set_child_row(XamlUIElementHandle child, int row) {
+    if (!child) {
+        set_last_error(L"Invalid handle");
+        return -1;
+    }
+
+    try {
+        auto& child_ptr = *reinterpret_cast<std::shared_ptr<UIElement>*>(child);
+        auto frameworkElement = child_ptr->as<FrameworkElement>();
+        Grid::SetRow(frameworkElement, row);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_grid_set_child_row");
+        return -1;
+    }
+}
+
+int xaml_grid_set_child_column(XamlUIElementHandle child, int column) {
+    if (!child) {
+        set_last_error(L"Invalid handle");
+        return -1;
+    }
+
+    try {
+        auto& child_ptr = *reinterpret_cast<std::shared_ptr<UIElement>*>(child);
+        auto frameworkElement = child_ptr->as<FrameworkElement>();
+        Grid::SetColumn(frameworkElement, column);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_grid_set_child_column");
+        return -1;
+    }
+}
+
+int xaml_grid_set_child_row_span(XamlUIElementHandle child, int row_span) {
+    if (!child) {
+        set_last_error(L"Invalid handle");
+        return -1;
+    }
+
+    try {
+        auto& child_ptr = *reinterpret_cast<std::shared_ptr<UIElement>*>(child);
+        auto frameworkElement = child_ptr->as<FrameworkElement>();
+        Grid::SetRowSpan(frameworkElement, row_span);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_grid_set_child_row_span");
+        return -1;
+    }
+}
+
+int xaml_grid_set_child_column_span(XamlUIElementHandle child, int column_span) {
+    if (!child) {
+        set_last_error(L"Invalid handle");
+        return -1;
+    }
+
+    try {
+        auto& child_ptr = *reinterpret_cast<std::shared_ptr<UIElement>*>(child);
+        auto frameworkElement = child_ptr->as<FrameworkElement>();
+        Grid::SetColumnSpan(frameworkElement, column_span);
+        return 0;
+    }
+    catch (const hresult_error& e) {
+        set_last_error(e.message().c_str());
+        return -1;
+    }
+    catch (...) {
+        set_last_error(L"Unknown error in xaml_grid_set_child_column_span");
+        return -1;
+    }
+}
+
+// ============================================================================
+// TextBox TextChanged Event Implementation
+// ============================================================================
+
+void xaml_textbox_on_text_changed(XamlTextBoxHandle textbox, void* callback_ptr) {
+    if (!textbox || !callback_ptr) {
+        return;
+    }
+
+    try {
+        auto& tb_ptr = *reinterpret_cast<std::shared_ptr<TextBox>*>(textbox);
+        auto callback = reinterpret_cast<void(*)()>(callback_ptr);
+        
+        tb_ptr->TextChanged([callback](auto&&, auto&&) {
+            callback();
+        });
+    }
+    catch (...) {
+        // Silently ignore errors in event registration
+    }
+}
+
 
