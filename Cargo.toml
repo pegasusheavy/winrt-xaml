@@ -80,6 +80,11 @@ path = "examples/controls_showcase.rs"
 required-features = ["xaml-islands"]
 
 [[example]]
+name = "reactive_binding_simple"
+path = "examples/reactive_binding_simple.rs"
+required-features = ["xaml-islands"]
+
+[[example]]
 name = "xaml_compile_time_demo"
 path = "examples/xaml_compile_time_demo.rs"
 

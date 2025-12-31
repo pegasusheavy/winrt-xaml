@@ -73,6 +73,10 @@ pub mod resources;
 #[cfg(any(feature = "xaml-islands", feature = "uwp"))]
 pub mod window;
 
+/// Reactive state management and data binding.
+#[cfg(any(feature = "xaml-islands", feature = "uwp"))]
+pub mod reactive;
+
 // Re-export windows crate for advanced usage
 #[cfg(any(feature = "xaml-islands", feature = "uwp"))]
 pub use windows;
@@ -97,6 +101,10 @@ pub mod prelude {
         XamlCheckBox, XamlComboBox, XamlSlider, XamlProgressBar,
         ScrollMode, ScrollBarVisibility,
     };
+    
+    // Re-export reactive types
+    #[cfg(any(feature = "xaml-islands", feature = "uwp"))]
+    pub use crate::reactive::{Property, ObservableCollection, Computed, CollectionChange};
 }
 
 /// Re-export of the Result type with our Error
