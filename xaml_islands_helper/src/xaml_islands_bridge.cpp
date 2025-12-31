@@ -1231,3 +1231,256 @@ int xaml_grid_set_corner_radius(XamlGridHandle grid, double radius) {
     }
 }
 
+
+// ===== CheckBox Implementation =====
+
+XamlCheckBoxHandle xaml_checkbox_create() {
+    try {
+        auto* checkbox = new std::shared_ptr<CheckBox>(std::make_shared<CheckBox>());
+        return checkbox;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return nullptr;
+    }
+}
+
+int xaml_checkbox_set_content(XamlCheckBoxHandle handle, const wchar_t* content) {
+    if (!handle || !content) return -1;
+    try {
+        auto* checkbox = reinterpret_cast<std::shared_ptr<CheckBox>*>(handle);
+        (*checkbox)->Content(box_value(content));
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+int xaml_checkbox_set_is_checked(XamlCheckBoxHandle handle, bool is_checked) {
+    if (!handle) return -1;
+    try {
+        auto* checkbox = reinterpret_cast<std::shared_ptr<CheckBox>*>(handle);
+        (*checkbox)->IsChecked(is_checked);
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+bool xaml_checkbox_get_is_checked(XamlCheckBoxHandle handle) {
+    if (!handle) return false;
+    try {
+        auto* checkbox = reinterpret_cast<std::shared_ptr<CheckBox>*>(handle);
+        auto checked = (*checkbox)->IsChecked();
+        return checked ? checked.Value() : false;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return false;
+    }
+}
+
+// ===== ComboBox Implementation =====
+
+XamlComboBoxHandle xaml_combobox_create() {
+    try {
+        auto* combobox = new std::shared_ptr<ComboBox>(std::make_shared<ComboBox>());
+        return combobox;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return nullptr;
+    }
+}
+
+int xaml_combobox_add_item(XamlComboBoxHandle handle, const wchar_t* item) {
+    if (!handle || !item) return -1;
+    try {
+        auto* combobox = reinterpret_cast<std::shared_ptr<ComboBox>*>(handle);
+        auto combobox_item = ComboBoxItem();
+        combobox_item.Content(box_value(item));
+        (*combobox)->Items().Append(combobox_item);
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+int xaml_combobox_set_selected_index(XamlComboBoxHandle handle, int index) {
+    if (!handle) return -1;
+    try {
+        auto* combobox = reinterpret_cast<std::shared_ptr<ComboBox>*>(handle);
+        (*combobox)->SelectedIndex(index);
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+int xaml_combobox_get_selected_index(XamlComboBoxHandle handle) {
+    if (!handle) return -1;
+    try {
+        auto* combobox = reinterpret_cast<std::shared_ptr<ComboBox>*>(handle);
+        return (*combobox)->SelectedIndex();
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+// ===== Slider Implementation =====
+
+XamlSliderHandle xaml_slider_create() {
+    try {
+        auto* slider = new std::shared_ptr<Slider>(std::make_shared<Slider>());
+        return slider;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return nullptr;
+    }
+}
+
+int xaml_slider_set_minimum(XamlSliderHandle handle, double minimum) {
+    if (!handle) return -1;
+    try {
+        auto* slider = reinterpret_cast<std::shared_ptr<Slider>*>(handle);
+        (*slider)->Minimum(minimum);
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+int xaml_slider_set_maximum(XamlSliderHandle handle, double maximum) {
+    if (!handle) return -1;
+    try {
+        auto* slider = reinterpret_cast<std::shared_ptr<Slider>*>(handle);
+        (*slider)->Maximum(maximum);
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+int xaml_slider_set_value(XamlSliderHandle handle, double value) {
+    if (!handle) return -1;
+    try {
+        auto* slider = reinterpret_cast<std::shared_ptr<Slider>*>(handle);
+        (*slider)->Value(value);
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+double xaml_slider_get_value(XamlSliderHandle handle) {
+    if (!handle) return 0.0;
+    try {
+        auto* slider = reinterpret_cast<std::shared_ptr<Slider>*>(handle);
+        return (*slider)->Value();
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return 0.0;
+    }
+}
+
+// ===== ProgressBar Implementation =====
+
+XamlProgressBarHandle xaml_progressbar_create() {
+    try {
+        auto* progressbar = new std::shared_ptr<ProgressBar>(std::make_shared<ProgressBar>());
+        return progressbar;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return nullptr;
+    }
+}
+
+int xaml_progressbar_set_minimum(XamlProgressBarHandle handle, double minimum) {
+    if (!handle) return -1;
+    try {
+        auto* progressbar = reinterpret_cast<std::shared_ptr<ProgressBar>*>(handle);
+        (*progressbar)->Minimum(minimum);
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+int xaml_progressbar_set_maximum(XamlProgressBarHandle handle, double maximum) {
+    if (!handle) return -1;
+    try {
+        auto* progressbar = reinterpret_cast<std::shared_ptr<ProgressBar>*>(handle);
+        (*progressbar)->Maximum(maximum);
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+int xaml_progressbar_set_value(XamlProgressBarHandle handle, double value) {
+    if (!handle) return -1;
+    try {
+        auto* progressbar = reinterpret_cast<std::shared_ptr<ProgressBar>*>(handle);
+        (*progressbar)->Value(value);
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+int xaml_progressbar_set_is_indeterminate(XamlProgressBarHandle handle, bool is_indeterminate) {
+    if (!handle) return -1;
+    try {
+        auto* progressbar = reinterpret_cast<std::shared_ptr<ProgressBar>*>(handle);
+        (*progressbar)->IsIndeterminate(is_indeterminate);
+        return 0;
+    }
+    catch (const hresult_error& ex) {
+        set_last_error(ex.message().c_str());
+        return -1;
+    }
+}
+
+// ===== Type Conversion for New Controls =====
+
+XamlUIElementHandle xaml_checkbox_as_uielement(XamlCheckBoxHandle checkbox) {
+    return reinterpret_cast<XamlUIElementHandle>(checkbox);
+}
+
+XamlUIElementHandle xaml_combobox_as_uielement(XamlComboBoxHandle combobox) {
+    return reinterpret_cast<XamlUIElementHandle>(combobox);
+}
+
+XamlUIElementHandle xaml_slider_as_uielement(XamlSliderHandle slider) {
+    return reinterpret_cast<XamlUIElementHandle>(slider);
+}
+
+XamlUIElementHandle xaml_progressbar_as_uielement(XamlProgressBarHandle progressbar) {
+    return reinterpret_cast<XamlUIElementHandle>(progressbar);
+}
+

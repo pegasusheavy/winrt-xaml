@@ -28,9 +28,6 @@ pub use self::textbox::TextBox;
 pub use self::toggle::ToggleSwitch;
 pub use self::uielement::UIElement;
 
-// Re-export orientation type (needed for XAML compatibility)
-pub use SliderOrientation as Orientation;
-
 /// Trait for controls that can be created as Win32 windows.
 ///
 /// This trait allows polymorphic handling of different control types,

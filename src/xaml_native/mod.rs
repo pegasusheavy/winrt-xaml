@@ -499,6 +499,12 @@ impl XamlStackPanel {
         Ok(())
     }
 
+    /// Set the orientation using the Orientation enum.
+    pub fn set_orientation(&self, orientation: crate::layout::Orientation) -> Result<()> {
+        use crate::layout::Orientation;
+        self.set_vertical(orientation == Orientation::Vertical)
+    }
+
     /// Set the spacing between children.
     pub fn set_spacing(&self, spacing: f64) -> Result<()> {
         let result = unsafe { ffi::xaml_stackpanel_set_spacing(self.handle, spacing) };
@@ -718,3 +724,228 @@ impl Drop for XamlScrollViewer {
 
 unsafe impl Send for XamlScrollViewer {}
 unsafe impl Sync for XamlScrollViewer {}
+
+// ===== CheckBox =====
+
+/// A WinRT CheckBox control.
+pub struct XamlCheckBox {
+    handle: ffi::XamlCheckBoxHandle,
+}
+
+impl XamlCheckBox {
+    /// Create a new CheckBox.
+    pub fn new() -> Result<Self> {
+        let handle = unsafe { ffi::xaml_checkbox_create() };
+        if handle.0.is_null() {
+            return Err(Error::control_creation("Failed to create CheckBox".to_string()));
+        }
+        Ok(XamlCheckBox { handle })
+    }
+
+    /// Set the content/label of the checkbox.
+    pub fn set_content(&self, content: &str) -> Result<()> {
+        let wide_content = to_wide_string(content);
+        let result = unsafe { ffi::xaml_checkbox_set_content(self.handle, wide_content.as_ptr()) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set checkbox content".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set whether the checkbox is checked.
+    pub fn set_is_checked(&self, is_checked: bool) -> Result<()> {
+        let result = unsafe { ffi::xaml_checkbox_set_is_checked(self.handle, is_checked) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set checkbox state".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Get whether the checkbox is checked.
+    pub fn is_checked(&self) -> bool {
+        unsafe { ffi::xaml_checkbox_get_is_checked(self.handle) }
+    }
+
+    /// Convert to a UIElement for use as content in other containers.
+    pub fn as_uielement(&self) -> XamlUIElement {
+        let handle = unsafe { ffi::xaml_checkbox_as_uielement(self.handle) };
+        XamlUIElement { handle }
+    }
+}
+
+unsafe impl Send for XamlCheckBox {}
+unsafe impl Sync for XamlCheckBox {}
+
+// ===== ComboBox =====
+
+/// A WinRT ComboBox control.
+pub struct XamlComboBox {
+    handle: ffi::XamlComboBoxHandle,
+}
+
+impl XamlComboBox {
+    /// Create a new ComboBox.
+    pub fn new() -> Result<Self> {
+        let handle = unsafe { ffi::xaml_combobox_create() };
+        if handle.0.is_null() {
+            return Err(Error::control_creation("Failed to create ComboBox".to_string()));
+        }
+        Ok(XamlComboBox { handle })
+    }
+
+    /// Add an item to the combobox.
+    pub fn add_item(&self, item: &str) -> Result<()> {
+        let wide_item = to_wide_string(item);
+        let result = unsafe { ffi::xaml_combobox_add_item(self.handle, wide_item.as_ptr()) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to add combobox item".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the selected index.
+    pub fn set_selected_index(&self, index: i32) -> Result<()> {
+        let result = unsafe { ffi::xaml_combobox_set_selected_index(self.handle, index) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set selected index".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Get the selected index.
+    pub fn get_selected_index(&self) -> i32 {
+        unsafe { ffi::xaml_combobox_get_selected_index(self.handle) }
+    }
+
+    /// Convert to a UIElement for use as content in other containers.
+    pub fn as_uielement(&self) -> XamlUIElement {
+        let handle = unsafe { ffi::xaml_combobox_as_uielement(self.handle) };
+        XamlUIElement { handle }
+    }
+}
+
+unsafe impl Send for XamlComboBox {}
+unsafe impl Sync for XamlComboBox {}
+
+// ===== Slider =====
+
+/// A WinRT Slider control.
+pub struct XamlSlider {
+    handle: ffi::XamlSliderHandle,
+}
+
+impl XamlSlider {
+    /// Create a new Slider.
+    pub fn new() -> Result<Self> {
+        let handle = unsafe { ffi::xaml_slider_create() };
+        if handle.0.is_null() {
+            return Err(Error::control_creation("Failed to create Slider".to_string()));
+        }
+        Ok(XamlSlider { handle })
+    }
+
+    /// Set the minimum value.
+    pub fn set_minimum(&self, minimum: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_slider_set_minimum(self.handle, minimum) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set slider minimum".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the maximum value.
+    pub fn set_maximum(&self, maximum: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_slider_set_maximum(self.handle, maximum) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set slider maximum".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the current value.
+    pub fn set_value(&self, value: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_slider_set_value(self.handle, value) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set slider value".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Get the current value.
+    pub fn get_value(&self) -> f64 {
+        unsafe { ffi::xaml_slider_get_value(self.handle) }
+    }
+
+    /// Convert to a UIElement for use as content in other containers.
+    pub fn as_uielement(&self) -> XamlUIElement {
+        let handle = unsafe { ffi::xaml_slider_as_uielement(self.handle) };
+        XamlUIElement { handle }
+    }
+}
+
+unsafe impl Send for XamlSlider {}
+unsafe impl Sync for XamlSlider {}
+
+// ===== ProgressBar =====
+
+/// A WinRT ProgressBar control.
+pub struct XamlProgressBar {
+    handle: ffi::XamlProgressBarHandle,
+}
+
+impl XamlProgressBar {
+    /// Create a new ProgressBar.
+    pub fn new() -> Result<Self> {
+        let handle = unsafe { ffi::xaml_progressbar_create() };
+        if handle.0.is_null() {
+            return Err(Error::control_creation("Failed to create ProgressBar".to_string()));
+        }
+        Ok(XamlProgressBar { handle })
+    }
+
+    /// Set the minimum value.
+    pub fn set_minimum(&self, minimum: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_progressbar_set_minimum(self.handle, minimum) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set progressbar minimum".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the maximum value.
+    pub fn set_maximum(&self, maximum: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_progressbar_set_maximum(self.handle, maximum) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set progressbar maximum".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set the current value.
+    pub fn set_value(&self, value: f64) -> Result<()> {
+        let result = unsafe { ffi::xaml_progressbar_set_value(self.handle, value) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set progressbar value".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Set whether the progress bar is indeterminate (animated).
+    pub fn set_is_indeterminate(&self, is_indeterminate: bool) -> Result<()> {
+        let result = unsafe { ffi::xaml_progressbar_set_is_indeterminate(self.handle, is_indeterminate) };
+        if result != 0 {
+            return Err(Error::control_creation("Failed to set progressbar indeterminate state".to_string()));
+        }
+        Ok(())
+    }
+
+    /// Convert to a UIElement for use as content in other containers.
+    pub fn as_uielement(&self) -> XamlUIElement {
+        let handle = unsafe { ffi::xaml_progressbar_as_uielement(self.handle) };
+        XamlUIElement { handle }
+    }
+}
+
+unsafe impl Send for XamlProgressBar {}
+unsafe impl Sync for XamlProgressBar {}
+

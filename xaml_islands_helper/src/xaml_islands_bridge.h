@@ -22,6 +22,10 @@ typedef void* XamlTextBoxHandle;
 typedef void* XamlStackPanelHandle;
 typedef void* XamlGridHandle;
 typedef void* XamlScrollViewerHandle;
+typedef void* XamlCheckBoxHandle;
+typedef void* XamlComboBoxHandle;
+typedef void* XamlSliderHandle;
+typedef void* XamlProgressBarHandle;
 typedef void* XamlUIElementHandle;
 
 // Initialize the XAML framework for the current thread
@@ -149,6 +153,32 @@ XAML_ISLANDS_API int xaml_grid_set_background(XamlGridHandle grid, unsigned int 
 XAML_ISLANDS_API int xaml_grid_set_padding(XamlGridHandle grid, double left, double top, double right, double bottom);
 XAML_ISLANDS_API int xaml_grid_set_corner_radius(XamlGridHandle grid, double radius);
 
+// ===== CheckBox APIs =====
+XAML_ISLANDS_API XamlCheckBoxHandle xaml_checkbox_create();
+XAML_ISLANDS_API int xaml_checkbox_set_content(XamlCheckBoxHandle handle, const wchar_t* content);
+XAML_ISLANDS_API int xaml_checkbox_set_is_checked(XamlCheckBoxHandle handle, bool is_checked);
+XAML_ISLANDS_API bool xaml_checkbox_get_is_checked(XamlCheckBoxHandle handle);
+
+// ===== ComboBox APIs =====
+XAML_ISLANDS_API XamlComboBoxHandle xaml_combobox_create();
+XAML_ISLANDS_API int xaml_combobox_add_item(XamlComboBoxHandle handle, const wchar_t* item);
+XAML_ISLANDS_API int xaml_combobox_set_selected_index(XamlComboBoxHandle handle, int index);
+XAML_ISLANDS_API int xaml_combobox_get_selected_index(XamlComboBoxHandle handle);
+
+// ===== Slider APIs =====
+XAML_ISLANDS_API XamlSliderHandle xaml_slider_create();
+XAML_ISLANDS_API int xaml_slider_set_minimum(XamlSliderHandle handle, double minimum);
+XAML_ISLANDS_API int xaml_slider_set_maximum(XamlSliderHandle handle, double maximum);
+XAML_ISLANDS_API int xaml_slider_set_value(XamlSliderHandle handle, double value);
+XAML_ISLANDS_API double xaml_slider_get_value(XamlSliderHandle handle);
+
+// ===== ProgressBar APIs =====
+XAML_ISLANDS_API XamlProgressBarHandle xaml_progressbar_create();
+XAML_ISLANDS_API int xaml_progressbar_set_minimum(XamlProgressBarHandle handle, double minimum);
+XAML_ISLANDS_API int xaml_progressbar_set_maximum(XamlProgressBarHandle handle, double maximum);
+XAML_ISLANDS_API int xaml_progressbar_set_value(XamlProgressBarHandle handle, double value);
+XAML_ISLANDS_API int xaml_progressbar_set_is_indeterminate(XamlProgressBarHandle handle, bool is_indeterminate);
+
 // ===== Type Conversion APIs =====
 XAML_ISLANDS_API XamlUIElementHandle xaml_button_as_uielement(XamlButtonHandle button);
 XAML_ISLANDS_API XamlUIElementHandle xaml_textblock_as_uielement(XamlTextBlockHandle textblock);
@@ -156,6 +186,10 @@ XAML_ISLANDS_API XamlUIElementHandle xaml_textbox_as_uielement(XamlTextBoxHandle
 XAML_ISLANDS_API XamlUIElementHandle xaml_stackpanel_as_uielement(XamlStackPanelHandle panel);
 XAML_ISLANDS_API XamlUIElementHandle xaml_grid_as_uielement(XamlGridHandle grid);
 XAML_ISLANDS_API XamlUIElementHandle xaml_scrollviewer_as_uielement(XamlScrollViewerHandle scrollviewer);
+XAML_ISLANDS_API XamlUIElementHandle xaml_checkbox_as_uielement(XamlCheckBoxHandle checkbox);
+XAML_ISLANDS_API XamlUIElementHandle xaml_combobox_as_uielement(XamlComboBoxHandle combobox);
+XAML_ISLANDS_API XamlUIElementHandle xaml_slider_as_uielement(XamlSliderHandle slider);
+XAML_ISLANDS_API XamlUIElementHandle xaml_progressbar_as_uielement(XamlProgressBarHandle progressbar);
 
 #ifdef __cplusplus
 }

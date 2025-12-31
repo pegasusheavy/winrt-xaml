@@ -84,10 +84,19 @@ pub mod prelude {
     pub use crate::controls::*;
     pub use crate::error::{Error, Result};
     pub use crate::events::*;
-    pub use crate::layout::*;
+    pub use crate::layout::{self, *};
     pub use crate::media::*;
     pub use crate::resources::*;
     pub use crate::window::Window;
+    
+    // Re-export WinRT XAML types
+    #[cfg(feature = "xaml-islands")]
+    pub use crate::xaml_native::{
+        XamlManager, XamlSource, XamlButton, XamlTextBlock, XamlTextBox,
+        XamlStackPanel, XamlGrid, XamlScrollViewer, XamlUIElement,
+        XamlCheckBox, XamlComboBox, XamlSlider, XamlProgressBar,
+        ScrollMode, ScrollBarVisibility,
+    };
 }
 
 /// Re-export of the Result type with our Error
