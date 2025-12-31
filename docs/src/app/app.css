@@ -277,9 +277,19 @@ code {
   border-left: 4px solid var(--primary-color);
 }
 
+.example-card.highlight {
+  background: linear-gradient(135deg, #f0f7ff, #fff);
+  border-left: 6px solid var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.2);
+}
+
 .example-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
+}
+
+.example-card.highlight:hover {
+  box-shadow: 0 6px 20px rgba(0, 120, 212, 0.3);
 }
 
 .example-card h3 {
