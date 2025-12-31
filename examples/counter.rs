@@ -83,18 +83,27 @@ fn main() -> Result<()> {
     // Create main layout panel
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(20.0)?;
+    main_panel.set_spacing(25.0)?;
+    main_panel.set_background(0xFF1A1A1A)?; // Dark theme
+    main_panel.set_padding(35.0, 35.0, 35.0, 35.0)?;
+    main_panel.set_corner_radius(14.0)?;
 
-    // Title
+    // Title with modern styling
     let title = XamlTextBlock::new()?;
-    title.set_text("Counter Application")?;
-    title.set_font_size(28.0)?;
+    title.set_text("🔢 Counter")?;
+    title.set_font_size(32.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White
+    title.set_margin(0.0, 0.0, 0.0, 15.0)?;
     main_panel.add_child(&title.as_uielement())?;
 
-    // Counter display
+    // Counter display with modern styling
     let display = Arc::new(XamlTextBlock::new()?);
     display.set_text("Count: 0")?;
-    display.set_font_size(36.0)?;
+    display.set_font_size(48.0)?;
+    display.set_font_weight(600)?; // SemiBold
+    display.set_foreground(0xFF00D4FF)?; // Bright cyan
+    display.set_margin(0.0, 20.0, 0.0, 30.0)?;
     main_panel.add_child(&display.as_uielement())?;
 
     // Increment/Decrement row
@@ -102,10 +111,14 @@ fn main() -> Result<()> {
     inc_dec_row.set_vertical(false)?;
     inc_dec_row.set_spacing(10.0)?;
 
-    // Decrement button
+    // Decrement button with styling
     let dec_button = XamlButton::new()?;
-    dec_button.set_content("-")?;
-    dec_button.set_size(100.0, 50.0)?;
+    dec_button.set_content("➖")?;
+    dec_button.set_size(110.0, 58.0)?;
+    dec_button.set_background(0xFFE74856)?; // Red
+    dec_button.set_foreground(0xFFFFFFFF)?;
+    dec_button.set_corner_radius(10.0)?;
+    dec_button.set_padding(14.0, 10.0, 14.0, 10.0)?;
 
     let counter_clone = counter.clone();
     let display_clone = Arc::clone(&display);
@@ -117,10 +130,14 @@ fn main() -> Result<()> {
 
     inc_dec_row.add_child(&dec_button.as_uielement())?;
 
-    // Increment button
+    // Increment button with styling
     let inc_button = XamlButton::new()?;
-    inc_button.set_content("+")?;
-    inc_button.set_size(100.0, 50.0)?;
+    inc_button.set_content("➕")?;
+    inc_button.set_size(110.0, 58.0)?;
+    inc_button.set_background(0xFF107C10)?; // Green
+    inc_button.set_foreground(0xFFFFFFFF)?;
+    inc_button.set_corner_radius(10.0)?;
+    inc_button.set_padding(14.0, 10.0, 14.0, 10.0)?;
 
     let counter_clone = counter.clone();
     let display_clone = Arc::clone(&display);
@@ -139,10 +156,14 @@ fn main() -> Result<()> {
     reset_double_row.set_vertical(false)?;
     reset_double_row.set_spacing(10.0)?;
 
-    // Reset button
+    // Reset button with styling
     let reset_button = XamlButton::new()?;
-    reset_button.set_content("Reset")?;
-    reset_button.set_size(100.0, 50.0)?;
+    reset_button.set_content("🔄 Reset")?;
+    reset_button.set_size(110.0, 58.0)?;
+    reset_button.set_background(0xFF0078D4)?; // Blue
+    reset_button.set_foreground(0xFFFFFFFF)?;
+    reset_button.set_corner_radius(10.0)?;
+    reset_button.set_padding(14.0, 10.0, 14.0, 10.0)?;
 
     let counter_clone = counter.clone();
     let display_clone = Arc::clone(&display);
@@ -154,10 +175,14 @@ fn main() -> Result<()> {
 
     reset_double_row.add_child(&reset_button.as_uielement())?;
 
-    // Double button
+    // Double button with styling
     let double_button = XamlButton::new()?;
-    double_button.set_content("Double")?;
-    double_button.set_size(100.0, 50.0)?;
+    double_button.set_content("✖️ Double")?;
+    double_button.set_size(110.0, 58.0)?;
+    double_button.set_background(0xFFFF8C00)?; // Orange
+    double_button.set_foreground(0xFFFFFFFF)?;
+    double_button.set_corner_radius(10.0)?;
+    double_button.set_padding(14.0, 10.0, 14.0, 10.0)?;
 
     let counter_clone = counter.clone();
     let display_clone = Arc::clone(&display);

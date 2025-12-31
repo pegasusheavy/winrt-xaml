@@ -89,18 +89,27 @@ fn main() -> Result<()> {
     // Create main layout panel
     let main_panel = XamlStackPanel::new()?;
     main_panel.set_vertical(true)?;
-    main_panel.set_spacing(20.0)?;
+    main_panel.set_spacing(22.0)?;
+    main_panel.set_background(0xFF1C1C1C)?; // Dark theme
+    main_panel.set_padding(32.0, 32.0, 32.0, 32.0)?;
+    main_panel.set_corner_radius(12.0)?;
 
-    // Title
+    // Title with modern styling
     let title = XamlTextBlock::new()?;
-    title.set_text("Simple Counter")?;
-    title.set_font_size(24.0)?;
+    title.set_text("⚡ Simple Counter")?;
+    title.set_font_size(30.0)?;
+    title.set_font_weight(700)?; // Bold
+    title.set_foreground(0xFFFFFFFF)?; // White
+    title.set_margin(0.0, 0.0, 0.0, 12.0)?;
     main_panel.add_child(&title.as_uielement())?;
 
-    // Create display label
+    // Display label with modern styling
     let label = Arc::new(XamlTextBlock::new()?);
     label.set_text("Count: 0")?;
-    label.set_font_size(32.0)?;
+    label.set_font_size(44.0)?;
+    label.set_font_weight(600)?; // SemiBold
+    label.set_foreground(0xFF00FF9F)?; // Bright green
+    label.set_margin(0.0, 18.0, 0.0, 25.0)?;
     main_panel.add_child(&label.as_uielement())?;
 
     // Button row
@@ -108,10 +117,14 @@ fn main() -> Result<()> {
     button_row.set_vertical(false)?;
     button_row.set_spacing(10.0)?;
 
-    // Create increment button
+    // Increment button with styling
     let inc_button = XamlButton::new()?;
-    inc_button.set_content("Increment")?;
-    inc_button.set_size(120.0, 50.0)?;
+    inc_button.set_content("➕ Increment")?;
+    inc_button.set_size(140.0, 56.0)?;
+    inc_button.set_background(0xFF107C10)?; // Green
+    inc_button.set_foreground(0xFFFFFFFF)?;
+    inc_button.set_corner_radius(10.0)?;
+    inc_button.set_padding(16.0, 12.0, 16.0, 12.0)?;
 
     let counter_clone = counter.clone();
     let label_clone = Arc::clone(&label);
@@ -124,10 +137,14 @@ fn main() -> Result<()> {
 
     button_row.add_child(&inc_button.as_uielement())?;
 
-    // Create decrement button
+    // Decrement button with styling
     let dec_button = XamlButton::new()?;
-    dec_button.set_content("Decrement")?;
-    dec_button.set_size(120.0, 50.0)?;
+    dec_button.set_content("➖ Decrement")?;
+    dec_button.set_size(140.0, 56.0)?;
+    dec_button.set_background(0xFFE74856)?; // Red
+    dec_button.set_foreground(0xFFFFFFFF)?;
+    dec_button.set_corner_radius(10.0)?;
+    dec_button.set_padding(16.0, 12.0, 16.0, 12.0)?;
 
     let counter_clone = counter.clone();
     let label_clone = Arc::clone(&label);

@@ -27,10 +27,6 @@ name = "controls_demo"
 path = "examples/controls_demo.rs"
 
 [[example]]
-name = "data_binding"
-path = "examples/data_binding.rs"
-
-[[example]]
 name = "todo_app"
 path = "examples/todo_app.rs"
 
@@ -55,26 +51,6 @@ name = "color_picker"
 path = "examples/color_picker.rs"
 
 [[example]]
-name = "timer_stopwatch"
-path = "examples/timer_stopwatch.rs"
-
-[[example]]
-name = "image_gallery"
-path = "examples/image_gallery.rs"
-
-[[example]]
-name = "music_player"
-path = "examples/music_player.rs"
-
-[[example]]
-name = "weather_dashboard"
-path = "examples/weather_dashboard.rs"
-
-[[example]]
-name = "shopping_cart"
-path = "examples/shopping_cart.rs"
-
-[[example]]
 name = "chat_interface"
 path = "examples/chat_interface.rs"
 
@@ -83,22 +59,16 @@ name = "counter_simple"
 path = "examples/counter_simple.rs"
 
 [[example]]
-name = "pure_winrt_button"
-
-[[example]]
 name = "winrt_controls_demo"
+path = "examples/winrt_controls_demo.rs"
 
 [[example]]
 name = "winrt_counter"
-
-[[example]]
-name = "winrt_simple_window"
-
-[[example]]
-name = "winrt_calculator"
+path = "examples/winrt_counter.rs"
 
 [[example]]
 name = "winrt_calculator_functional"
+path = "examples/winrt_calculator_functional.rs"
 
 [[bin]]
 name = "memory_profile"
