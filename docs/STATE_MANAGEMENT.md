@@ -26,13 +26,13 @@ use winrt_xaml::prelude::*;
 fn create_counter() -> Result<()> {
     // Shared state
     let count = Arc::new(Mutex::new(0));
-    
+
     let text = XamlTextBlock::new()?;
     text.set_text("Count: 0")?;
-    
+
     let button = XamlButton::new()?;
     button.set_content("Increment")?;
-    
+
     // Manual update on click
     button.on_click({
         let count = count.clone();
@@ -44,7 +44,7 @@ fn create_counter() -> Result<()> {
             Ok(())
         }
     })?;
-    
+
     Ok(())
 }
 ```
@@ -72,11 +72,11 @@ use signals::Signal;
 fn create_counter() -> Result<()> {
     // Reactive state
     let count = Signal::new(0);
-    
+
     // Text automatically updates when count changes
     let text = XamlTextBlock::new()?;
     text.bind_text(count.map(|c| format!("Count: {}", c)));
-    
+
     let button = XamlButton::new()?;
     button.on_click({
         let count = count.clone();
@@ -85,7 +85,7 @@ fn create_counter() -> Result<()> {
             Ok(())
         }
     })?;
-    
+
     Ok(())
 }
 ```
@@ -163,10 +163,10 @@ impl TodoApp {
             input: Signal::new(String::new()),
         }
     }
-    
+
     fn create_ui(&self) -> Result<()> {
         let input = XamlTextBox::new()?;
-        
+
         // Bind input changes
         input.on_text_changed({
             let input_signal = self.input.clone();
@@ -175,7 +175,7 @@ impl TodoApp {
                 Ok(())
             }
         })?;
-        
+
         let button = XamlButton::new()?;
         button.on_click({
             let todos = self.todos.clone();
@@ -189,7 +189,7 @@ impl TodoApp {
                 Ok(())
             }
         })?;
-        
+
         // List automatically updates when todos change
         let list = XamlStackPanel::new()?;
         self.todos.for_each({
@@ -201,7 +201,7 @@ impl TodoApp {
                 Ok(())
             }
         })?;
-        
+
         Ok(())
     }
 }
